@@ -1,0 +1,113 @@
+#include <Aurora/Graphics/Image.h>
+
+#define STB_IMAGE_WRITE_IMPLEMENTATION
+#include "stb_image.h"
+
+namespace Aurora
+{
+	namespace Graphics
+	{
+		Image::Image()
+		{
+			_width = 0;
+			_height = 0;
+			_textureHeight = 0;
+			_textureWidth = 0;
+			_id = 0;
+			_pixels = 0;
+
+			_fileName = "";
+		}
+
+		Image::~Image()
+		{
+			if(_pixels != 0)
+			{
+				delete [] _pixels;
+			}
+		}
+
+		unsigned int Image::getColour(int x,int y)
+		{
+			unsigned char r = _pixels[(x * 4) + ((y * (_width*4)))];
+			unsigned char g = _pixels[(1+(x * 4)) + ((y * (_width*4)))];
+			unsigned char b = _pixels[(2+(x * 4)) + ((y * (_width*4)))];
+			unsigned char a = _pixels[(3+(x * 4)) + ((y * (_width*4)))];
+
+			return (r) | (g << 8) | (b << 16) | (a << 24);
+		}
+
+		bool Image::loadImageFromFile(std::string fileName)
+		{
+			_fileName = fileName;
+
+			if(_pixels != 0)
+			{
+				delete [] _pixels;
+			}
+
+			int imgWidth, imgHeight, imgChannels;
+			unsigned char* ptr = stbi_load(fileName.c_str(), &imgWidth, &imgHeight, &imgChannels, STBI_rgb_alpha);
+
+			if (ptr && imgWidth && imgHeight)
+			{
+				// Assign the image properties
+				_width  = imgWidth;
+				_height = imgHeight;
+
+				// Copy the loaded pixels to the pixel buffer
+				_pixels = new unsigned char[_width * _height * 4];
+				memcpy(_pixels, ptr, _width * _height * 4);
+
+				// Free the loaded pixels (they are now in our own pixel buffer)
+				stbi_image_free(ptr);
+
+				return true;
+			}
+			else
+			{
+				return false;//error
+			}
+		}
+
+		bool Image::loadImageFromMemory(std::string newName,void *data,std::size_t size)
+		{
+			if (data && size)
+			{
+				_fileName = newName;
+
+				if(_pixels != 0)
+				{
+					delete [] _pixels;
+				}
+
+				// Load the image and get a pointer to the pixels in memory
+				int imgWidth, imgHeight, imgChannels;
+				const unsigned char* buffer = static_cast<const unsigned char*>(data);
+				unsigned char* ptr = stbi_load_from_memory(buffer, static_cast<int>(size), &imgWidth, &imgHeight, &imgChannels, STBI_rgb_alpha);
+
+				if (ptr && imgWidth && imgHeight)
+				{
+					// Assign the image properties
+					_width  = imgWidth;
+					_height = imgHeight;
+
+					// Copy the loaded pixels to the pixel buffer
+					_pixels = new unsigned char[_width * _height * 4];
+					memcpy(_pixels, ptr, _width * _height * 4);
+
+					// Free the loaded pixels (they are now in our own pixel buffer)
+					stbi_image_free(ptr);
+
+					return true;
+				}
+				else
+				{
+					return false;//error
+				}
+			}
+
+			return false;
+		}
+	}
+}

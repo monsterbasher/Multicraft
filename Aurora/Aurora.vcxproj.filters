@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Aurora">
+      <UniqueIdentifier>{76b0d7db-6b1a-4494-9905-4495140d4128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Aurora\Utils">
+      <UniqueIdentifier>{a0e9a4af-863b-4895-a280-cabd092c389b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aurora">
+      <UniqueIdentifier>{4904baae-49f9-40ce-8705-2735b30e4fe5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aurora\Utils">
+      <UniqueIdentifier>{ec78c668-f669-4c9a-930a-bf9055b1e70c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Aurora\Graphics">
+      <UniqueIdentifier>{bb2ecac5-26d2-43f9-9fa5-6f2a1a5e0a7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aurora\Graphics">
+      <UniqueIdentifier>{a709e76b-e2dd-4bdc-9b16-a3302de12463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aurora\Math">
+      <UniqueIdentifier>{fe42fe9d-8bcf-4c17-9a5a-93db2d9969d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Aurora\Math">
+      <UniqueIdentifier>{045beb0a-f9a4-4265-bb77-58cb8ef7ec33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Aurora\Graphics\win">
+      <UniqueIdentifier>{f2e4d2eb-07c5-4bc1-942e-517cb97bed11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aurora\Graphics\win">
+      <UniqueIdentifier>{36806960-d5cd-4055-baa2-6aea35a0345a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Aurora\Utils\win">
+      <UniqueIdentifier>{bb890c1c-7f9c-4705-a37e-cd43788f9c7c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aurora\Utils\win">
+      <UniqueIdentifier>{4f79f2e6-80de-4a7b-ba5d-4b26ea7ef9dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Aurora\System">
+      <UniqueIdentifier>{fcc8acfc-9e80-46de-909a-0be48a5691f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aurora\System">
+      <UniqueIdentifier>{7dd024e2-adfd-4b14-b9e8-9038b14a28bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Aurora\System\pc">
+      <UniqueIdentifier>{354734dd-b14a-4e5b-8080-80fada4bc1ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Aurora\System\pc">
+      <UniqueIdentifier>{a18fdb07-c41c-42e5-b089-35f2471f1bf2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Multicraft">
+      <UniqueIdentifier>{c31d32b1-43af-4fa9-b308-bcf8d4bf908f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Aurora\Math\BoundingBox.cpp">
+      <Filter>Source Files\Aurora\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Math\BoundingSphere.cpp">
+      <Filter>Source Files\Aurora\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Math\Frustum.cpp">
+      <Filter>Source Files\Aurora\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Math\MathLib.cpp">
+      <Filter>Source Files\Aurora\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Math\Matrix3.cpp">
+      <Filter>Source Files\Aurora\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Math\Matrix4.cpp">
+      <Filter>Source Files\Aurora\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Math\Plane.cpp">
+      <Filter>Source Files\Aurora\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Math\Polygon.cpp">
+      <Filter>Source Files\Aurora\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Math\Quaternion.cpp">
+      <Filter>Source Files\Aurora\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Math\Ray.cpp">
+      <Filter>Source Files\Aurora\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Graphics\Camera.cpp">
+      <Filter>Source Files\Aurora\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Graphics\TextureManager.cpp">
+      <Filter>Source Files\Aurora\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Graphics\RenderManager.cpp">
+      <Filter>Source Files\Aurora\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Graphics\win\OpengGLRenderManager.cpp">
+      <Filter>Source Files\Aurora\Graphics\win</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Graphics\Image.cpp">
+      <Filter>Source Files\Aurora\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Utils\GameManager.cpp">
+      <Filter>Source Files\Aurora\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Utils\GameLoader.cpp">
+      <Filter>Source Files\Aurora\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Starter.cpp" />
+    <ClCompile Include="src\Aurora\Utils\win\WinGameLoader.cpp">
+      <Filter>Source Files\Aurora\Utils\win</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Graphics\Sprite.cpp">
+      <Filter>Source Files\Aurora\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Graphics\TrueTypeFont.cpp">
+      <Filter>Source Files\Aurora\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\System\SystemManager.cpp">
+      <Filter>Source Files\Aurora\System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\System\pc\PcSystemManager.cpp">
+      <Filter>Source Files\Aurora\System\pc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\System\pc\Clock.cpp">
+      <Filter>Source Files\Aurora\System\pc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Graphics\SplashScreen.cpp">
+      <Filter>Source Files\Aurora\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Aurora\Graphics\Sprite3D.cpp">
+      <Filter>Source Files\Aurora\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="ExampleGame.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="incl\Aurora\Utils\GameState.h">
+      <Filter>Header Files\Aurora\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\BoundingBox.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\BoundingSphere.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\Frustum.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\MathLib.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\Matrix3.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\Matrix4.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\Plane.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\Polygon.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\Quaternion.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\Ray.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\Vector2.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\Vector3.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\Vector4.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Graphics\Camera.h">
+      <Filter>Header Files\Aurora\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Math\Math.h">
+      <Filter>Header Files\Aurora\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Graphics\TextureManager.h">
+      <Filter>Header Files\Aurora\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Graphics\RenderManager.h">
+      <Filter>Header Files\Aurora\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Graphics\win\OpenGLRenderManager.h">
+      <Filter>Header Files\Aurora\Graphics\win</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Utils\PlatformConfigurator.h">
+      <Filter>Header Files\Aurora\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Graphics\Image.h">
+      <Filter>Header Files\Aurora\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Aurora\Graphics\stb_image.h">
+      <Filter>Source Files\Aurora\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Utils\GameManager.h">
+      <Filter>Header Files\Aurora\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Utils\GameLoader.h">
+      <Filter>Header Files\Aurora\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ExampleGame.h" />
+    <ClInclude Include="incl\Aurora\Utils\win\WinGameLoader.h">
+      <Filter>Header Files\Aurora\Utils\win</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Graphics\Sprite.h">
+      <Filter>Header Files\Aurora\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Graphics\Vertex.h">
+      <Filter>Header Files\Aurora\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Graphics\TrueTypeFont.h">
+      <Filter>Header Files\Aurora\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\System\Clock.h">
+      <Filter>Header Files\Aurora\System</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\System\SystemManager.h">
+      <Filter>Header Files\Aurora\System</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\System\pc\PcSystemManager.h">
+      <Filter>Header Files\Aurora\System\pc</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Graphics\SplashScreen.h">
+      <Filter>Header Files\Aurora\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="incl\Aurora\Graphics\Sprite3D.h">
+      <Filter>Header Files\Aurora\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Aurora\Graphics\stb_truetype.h">
+      <Filter>Source Files\Aurora\Graphics</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
