@@ -13,7 +13,7 @@ namespace Aurora
 		{
 		private:
 
-			unsigned int __attribute__((aligned(64))) _list[262144];
+			//unsigned int __attribute__((aligned(64))) _list[262144];
 
 			void* _fbp0;
 			void* _fbp1;

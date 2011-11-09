@@ -8,13 +8,23 @@
 #include <pspdisplay.h>
 #include <pspctrl.h>
 #include <psputils.h>
+#include <pspkernel.h>
+#include <pspdebug.h>
 
 #include <stdio.h>
 #include <stdlib.h>
 
-#define BUF_WIDTH (512)
-#define SCR_WIDTH (480)
-#define SCR_HEIGHT (272)
+#define SCREEN_WIDTH 			480
+#define SCREEN_HEIGHT 			272
+#define SCREEN_WIDTH_F 			480.0f
+#define SCREEN_HEIGHT_F			272.0f
+#define	BUFFER_FORMAT			GU_PSM_8888
+#define BUF_WIDTH 512
+#define SCR_WIDTH 480
+#define SCR_HEIGHT 272
+#define PIXEL_SIZE				4
+#define	FRAME_BUFFER_WIDTH 		512
+#define FRAME_BUFFER_SIZE		FRAME_BUFFER_WIDTH*SCR_HEIGHT*PIXEL_SIZE
 
 typedef struct
 {
@@ -23,56 +33,63 @@ typedef struct
 char x, y, z;
 }__attribute__((packed)) Vertex8;
 
-Vertex8 vertices8[12*3] =
+struct Vertex32
 {
-{-63,-63, 63}, // 0
-{-63, 63, 63}, // 4
-{ 63, 63, 63}, // 5
-
-{-63,-63, 63}, // 0
-{ 63, 63, 63}, // 5
-{ 63,-63, 63}, // 1
-
-{-63,-63,-63}, // 3
-{ 63,-63,-63}, // 2
-{ 63, 63,-63}, // 6
-
-{-63,-63,-63}, // 3
-{ 63, 63,-63}, // 6
-{-63, 63,-63}, // 7
-
-{ 63,-63,-63}, // 0
-{ 63,-63, 63}, // 3
-{ 63, 63, 63}, // 7
-
-{ 63,-63,-63}, // 0
-{ 63, 63, 63}, // 7
-{ 63, 63,-63}, // 4
-
-{-63,-63,-63}, // 0
-{-63, 63,-63}, // 3
-{-63, 63, 63}, // 7
-
-{-63,-63,-63}, // 0
-{-63, 63, 63}, // 7
-{-63,-63, 63}, // 4
-
-{-63, 63,-63}, // 0
-{ 63, 63,-63}, // 1
-{ 63, 63, 63}, // 2
-
-{-63, 63,-63}, // 0
-{ 63, 63, 63}, // 2
-{-63, 63, 63}, // 3
-
-{-63,-63,-63}, // 4
-{-63,-63, 63}, // 7
-{ 63,-63, 63}, // 6
-
-{-63,-63,-63}, // 4
-{ 63,-63, 63}, // 6
-{ 63,-63,-63}, // 5
+	float x,y,z;
 };
+
+struct Vertex32 __attribute__((aligned(16))) _cubeVertices[12*3] =
+{
+	{-0.5f,-0.5f, 0.5f}, // 0
+	{-0.5f, 0.5f, 0.5f}, // 4
+	{ 0.5f, 0.5f, 0.5f}, // 5
+
+	{-0.5f,-0.5f, 0.5f}, // 0
+	{ 0.5f, 0.5f, 0.5f}, // 5
+	{ 0.5f,-0.5f, 0.5f}, // 0.5f
+
+	{-0.5f,-0.5f,-0.5f}, // 3
+	{ 0.5f,-0.5f,-0.5f}, // 2
+	{ 0.5f, 0.5f,-0.5f}, // 6
+
+	{-0.5f,-0.5f,-0.5f}, // 3
+	{ 0.5f, 0.5f,-0.5f}, // 6
+	{-0.5f, 0.5f,-0.5f}, // 7
+
+	{ 0.5f,-0.5f,-0.5f}, // 0
+	{ 0.5f,-0.5f, 0.5f}, // 3
+	{ 0.5f, 0.5f, 0.5f}, // 7
+
+	{ 0.5f,-0.5f,-0.5f}, // 0
+	{ 0.5f, 0.5f, 0.5f}, // 7
+	{ 0.5f, 0.5f,-0.5f}, // 4
+
+	{-0.5f,-0.5f,-0.5f}, // 0
+	{-0.5f, 0.5f,-0.5f}, // 3
+	{-0.5f, 0.5f, 0.5f}, // 7
+
+	{-0.5f,-0.5f,-0.5f}, // 0
+	{-0.5f, 0.5f, 0.5f}, // 7
+	{-0.5f,-0.5f, 0.5f}, // 4
+
+	{-0.5f, 0.5f,-0.5f}, // 0
+	{ 0.5f, 0.5f,-0.5f}, // 0.5f
+	{ 0.5f, 0.5f, 0.5f}, // 2
+
+	{-0.5f, 0.5f,-0.5f}, // 0
+	{ 0.5f, 0.5f, 0.5f}, // 2
+	{-0.5f, 0.5f, 0.5f}, // 3
+
+	{-0.5f,-0.5f,-0.5f}, // 4
+	{-0.5f,-0.5f, 0.5f}, // 7
+	{ 0.5f,-0.5f, 0.5f}, // 6
+
+	{-0.5f,-0.5f,-0.5f}, // 4
+	{ 0.5f,-0.5f, 0.5f}, // 6
+	{ 0.5f,-0.5f,-0.5f}, // 5
+};
+
+static unsigned int __attribute__((aligned(16))) _list[262144];
 
 namespace Aurora
 {
@@ -101,17 +118,25 @@ namespace Aurora
 
 		void GuRenderManager::Init()
 		{
-			_fbp0 = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
-			_fbp1 = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
-			_zbp = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_4444);
+			//_fbp0 = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
+			//_fbp1 = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
+			//_zbp = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_4444);
 
 			sceGuInit();
+			
+			_fbp0 = ( u32* ) valloc ( FRAME_BUFFER_SIZE ) ;
+			_fbp1 = ( u32* ) valloc ( FRAME_BUFFER_SIZE );
+			_zbp = ( u16* )  valloc ( FRAME_BUFFER_WIDTH*SCREEN_HEIGHT*2);
 
 			sceGuStart(GU_DIRECT,_list);
 
-			sceGuDrawBuffer(GU_PSM_8888,_fbp0,BUF_WIDTH);
-			sceGuDispBuffer(SCR_WIDTH,SCR_HEIGHT,_fbp1,BUF_WIDTH);
-			sceGuDepthBuffer(_zbp,BUF_WIDTH);
+			//sceGuDrawBuffer(GU_PSM_8888,_fbp0,BUF_WIDTH);
+			//sceGuDispBuffer(SCR_WIDTH,SCR_HEIGHT,_fbp1,BUF_WIDTH);
+			//sceGuDepthBuffer(_zbp,BUF_WIDTH);
+			
+			sceGuDrawBuffer(BUFFER_FORMAT, vrelptr (_fbp0), FRAME_BUFFER_WIDTH);
+			sceGuDispBuffer(SCREEN_WIDTH, SCREEN_HEIGHT, vrelptr (_fbp1), FRAME_BUFFER_WIDTH);
+			sceGuDepthBuffer(vrelptr (_zbp), FRAME_BUFFER_WIDTH);
 
 			sceGuOffset(2048 - (SCR_WIDTH/2),2048 - (SCR_HEIGHT/2));
 			sceGuViewport(2048,2048,SCR_WIDTH,SCR_HEIGHT);
@@ -420,7 +445,7 @@ namespace Aurora
 
 			sceGuColor(GU_RGBA(color&0xff, (color>>8)&0xff, (color>>16)&0xff, (color>>24)&0xff));
 
-			sceGumDrawArray(GU_TRIANGLES,GU_VERTEX_8BIT|GU_TRANSFORM_3D,12*3, 0,vertices8);
+			sceGumDrawArray(GU_TRIANGLES,GU_VERTEX_32BITF|GU_TRANSFORM_3D,12*3, 0,_cubeVertices);
 
 			sceGuColor(0xffffffff);
 			sceGumPopMatrix();

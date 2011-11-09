@@ -1,31 +1,54 @@
-#ifndef common_vram_h
-#define common_vram_h
+/*
+ * Helper for use with the PSP Software Development Kit - http://www.pspdev.org
+ * -----------------------------------------------------------------------
+ * Licensed under GPL
+ *
+ * vram.c - Standard C high performance VRAM allocation routines.
+ *
+ * Copyright (c) 2007 Alexander Berl 'Raphael' <raphael@fx-world.org>
+ * http://wordpress.fx-world.org
+ *
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+ */
+#ifndef vram_h__
+#define vram_h__
+
+#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/*
-	The following are a few helperfunctions to help manage vram in gu-examples.
-	Do not use for your own code, it's better you manage it in your own way.
-*/
+void* vrelptr( void *ptr );		// make a pointer relative to memory base address (ATTENTION: A NULL rel ptr is not illegal/invalid!)
+void* vabsptr( void *ptr );		// make a pointer absolute (default return type of valloc)
 
-/* make a static allocation of vram memory and return pointer relative to vram start */
-void* getStaticVramBuffer(unsigned int width, unsigned int height, unsigned int psm);
-/* make a static allocation of vram memory and return absolute pointer */
-void* getStaticVramTexture(unsigned int width, unsigned int height, unsigned int psm);
+void* valloc( size_t size );
+void vfree( void* ptr );
+size_t vmemavail();
+size_t vlargestblock();
 
-// the following is not yet implemented
-/*
-void beginDynamicVramFrame();
-void endDynamicVramFrame();
 
-void* getDynamicVramBuffer(unsigned int width, unsigned int height, unsigned int psm);
-void* getDynamicVramTexture(unsigned int width, unsigned int height, unsigned int psm);
-*/
+#ifdef _DEBUG
+// Debug printf (to stdout) a trace of the current Memblocks
+void __memwalk();
+#endif
+
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif
+#endif  // ifdef vram_h__
