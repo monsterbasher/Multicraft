@@ -39,6 +39,9 @@ namespace Aurora
 
 				_window.Display();
 			}
+
+			_gameManager->CleanUp();
 		}
+
 	}
 }

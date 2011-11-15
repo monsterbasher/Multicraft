@@ -195,8 +195,8 @@ namespace Aurora
 			glColor4f(1.0f, 1.0f, 1.0f,1.0f);
 
 			TexturedVertex *vertices = new TexturedVertex[4];
-			vertices[0].u = 0.0f;vertices[0].v = 0.0f;vertices[0].x = 0;vertices[0].y = 0;vertices[0].z = 0.0f;
-			vertices[1].u = 0.0f;vertices[1].v = 1.0f;vertices[1].x = 0;vertices[1].y = image->_height;vertices[1].z = 0.0f;
+			vertices[0].u = 0.0f;vertices[0].v = 0.0f;vertices[0].x = 0.0f;vertices[0].y = 0.0f;vertices[0].z = 0.0f;
+			vertices[1].u = 0.0f;vertices[1].v = 1.0f;vertices[1].x = 0.0f;vertices[1].y = image->_height;vertices[1].z = 0.0f;
 			vertices[2].u = 1.0f;vertices[2].v = 0.0f;vertices[2].x = image->_width;vertices[2].y = 0;vertices[2].z = 0.0f;
 			vertices[3].u = 1.0f;vertices[3].v = 1.0f;vertices[3].x = image->_width = image->_height;vertices[3].z = 0.0f;
 

@@ -46,7 +46,7 @@ namespace Aurora
 
 			if (req_comp == img_n) return data;
 
-			good = (unsigned char *) malloc(req_comp * x * y);
+			good = new unsigned char[req_comp * x * y];//(unsigned char *) malloc(req_comp * x * y);
 			if (good == NULL)
 			{
 				free(data);

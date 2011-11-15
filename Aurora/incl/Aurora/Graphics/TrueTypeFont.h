@@ -22,9 +22,7 @@ namespace Aurora
 			ALIGN_LEFT,
 			ALIGN_CENTER,
 			ALIGN_RIGHT,
-		};			
-
-		
+		};		
 
 		class TrueTypeFont
 		{
@@ -44,7 +42,6 @@ namespace Aurora
 			bool loadFont(const char *fontFileName,float fontSize);		
 			void getBakedQuad(stbtt_bakedchar2 *chardata, int pw, int ph, int char_index,float *xpos, float *ypos, stbtt_aligned_quad2 *q);
 			float getTextLength(stbtt_bakedchar2 *chardata, const char* text);
-
 		};
 	}
 }

@@ -6,7 +6,6 @@ void ExampleState::Init()
 	_renderManager = RenderManager::Instance();
 	_systemManager = SystemManager::Instance();
 
-	mojang = TextureManager::Instance()->loadImageFromFile("Assets/Minecraft/title/mojang.png");
 	itemImage = TextureManager::Instance()->loadImageFromFile("Assets/Minecraft/gui/items.png");
 
 	spriteX = spriteY = 50;
@@ -33,7 +32,9 @@ void ExampleState::Enter()
 
 void ExampleState::CleanUp()
 {
-
+	delete itemSprite;
+	delete sprite3d;
+	//delete font;
 }
 
 void ExampleState::Pause()
@@ -81,28 +82,30 @@ void ExampleState::Draw(GameManager* sManager)
 {
 	RenderManager::Instance()->StartFrame();
 
+	//set depth min and max for perspective
 	RenderManager::Instance()->setZminMax(0.1f,100.0f);
 	RenderManager::Instance()->SetPerspective();
 
+	//draw 3d model
 	RenderManager::Instance()->drawSprite3D(sprite3d);
 
+	//change back to ortho
 	RenderManager::Instance()->setZminMax(-10,10);
 	RenderManager::Instance()->SetOrtho();
 
-	//RenderManager::Instance()->drawImage(mojang,0,0,480,272);
+	//draw single image 
 	RenderManager::Instance()->drawSprite(itemSprite);
 
+	//change ortho for text
 	RenderManager::Instance()->SetTextOrtho();
 	RenderManager::Instance()->drawText(font,1,267,"Multicraft",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
-
+	//draw mouse position
 	char controlPos[30];
-	if(_systemManager->isPlatformPC())
-		sprintf(controlPos,"x: %d y: %d",mouseX,mouseY);
-	else if(_systemManager->isPlatformPSP())
-		sprintf(controlPos,"x: %f y: %f",analogX,analogY);
+	_systemManager->isPlatformPC() == true ? sprintf(controlPos,"x: %d y: %d",mouseX,mouseY) : sprintf(controlPos,"x: %f y: %f",analogX,analogY);
 	RenderManager::Instance()->drawText(font,1,12,controlPos,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
+	//draw fps
 	char deltaTime[30];
 	sprintf(deltaTime,"dt: %f",dt);
 	RenderManager::Instance()->drawText(font,1,27,deltaTime,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
@@ -128,6 +131,7 @@ void ExampleGameManager::Init()
 
 void ExampleGameManager::CleanUp()
 {
+	exampleState->CleanUp();
 	delete exampleState;
 }
 

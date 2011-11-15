@@ -19,7 +19,6 @@ class ExampleState : public GameState
 {
 private:
 
-	Image* mojang;
 	Image* itemImage;
 
 	Sprite3D* sprite3d;
