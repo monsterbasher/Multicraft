@@ -2,7 +2,7 @@
 #include <Aurora/Utils/PlatformConfigurator.h>
 
 #ifdef AURORA_PC
-#include <Aurora/Utils/win/WinGameLoader.h>
+#include <Aurora/Utils/pc/WinGameLoader.h>
 #endif
 
 #ifdef AURORA_PSP

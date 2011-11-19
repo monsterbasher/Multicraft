@@ -2,7 +2,7 @@
 #include <Aurora/Utils/PlatformConfigurator.h>
 
 #ifdef AURORA_PC
-#include <Aurora/Graphics/win/OpenGLRenderManager.h>
+#include <Aurora/Graphics/pc/OpenGLRenderManager.h>
 #endif
 
 #ifdef AURORA_PSP

@@ -2,7 +2,6 @@
 #define WINGAMELOADER_H
 
 #include <Aurora/Utils/GameLoader.h>
-
 #include <SFML/Window.hpp>
 
 namespace Aurora
