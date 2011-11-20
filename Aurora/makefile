@@ -1,35 +1,35 @@
 TARGET = Aurora
-OBJS = src/Aurora/Math/MathLib.o \
-src/Aurora/Math/Matrix3.o \
-src/Aurora/Math/Matrix4.o \
-src/Aurora/Math/Quaternion.o \
-src/Aurora/Math/BoundingBox.o \
-src/Aurora/Math/BoundingSphere.o \
-src/Aurora/Math/Plane.o \
-src/Aurora/Math/Ray.o \
-src/Aurora/Math/Frustum.o \
-src/Aurora/Math/Polygon.o \
-src/Aurora/Graphics/RenderManager.o \
-src/Aurora/Graphics/psp/vram.o \
-src/Aurora/Graphics/psp/GuRenderManager.o \
-src/Aurora/Graphics/TextureManager.o \
-src/Aurora/Graphics/Camera.o \
-src/Aurora/Graphics/Image.o \
-src/Aurora/Graphics/Sprite.o \
-src/Aurora/Graphics/Sprite3D.o \
-src/Aurora/Graphics/TrueTypeFont.o \
-src/Aurora/System/SystemManager.o \
-src/Aurora/System/psp/Clock.o \
-src/Aurora/System/psp/PspSystemManager.o \
-src/Aurora/Utils/GameLoader.o \
-src/Aurora/Utils/GameManager.o \
-src/Aurora/Utils/psp/PspCommon.o \
-src/Aurora/Utils/psp/PspGameLoader.o \
+OBJS = Aurora/Math/MathLib.o \
+Aurora/Math/Matrix3.o \
+Aurora/Math/Matrix4.o \
+Aurora/Math/Quaternion.o \
+Aurora/Math/BoundingBox.o \
+Aurora/Math/BoundingSphere.o \
+Aurora/Math/Plane.o \
+Aurora/Math/Ray.o \
+Aurora/Math/Frustum.o \
+Aurora/Math/Polygon.o \
+Aurora/Graphics/RenderManager.o \
+Aurora/Graphics/psp/vram.o \
+Aurora/Graphics/psp/GuRenderManager.o \
+Aurora/Graphics/TextureManager.o \
+Aurora/Graphics/Camera.o \
+Aurora/Graphics/Image.o \
+Aurora/Graphics/Sprite.o \
+Aurora/Graphics/Sprite3D.o \
+Aurora/Graphics/TrueTypeFont.o \
+Aurora/System/SystemManager.o \
+Aurora/System/psp/Clock.o \
+Aurora/System/psp/PspSystemManager.o \
+Aurora/Utils/GameLoader.o \
+Aurora/Utils/GameManager.o \
+Aurora/Utils/psp/PspCommon.o \
+Aurora/Utils/psp/PspGameLoader.o \
 ExampleGame.o \
 Starter.o
 
 INCDIR = $(PSPPATH)/include
-INCDIR += ./incl ./src 
+INCDIR += ./
 CFLAGS = -g -G0 -Wall -mpreferred-stack-boundary=4 #-enable-newlib-hw-fp -ffast-math
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
