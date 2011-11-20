@@ -50,7 +50,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\libs\sfml\include;.\libs\glew\include\GL;.\incl;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\libs\sfml\include;.\libs\glew\include\GL;.\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -80,70 +80,70 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Aurora\Graphics\Camera.cpp" />
+    <ClCompile Include="Aurora\Graphics\Image.cpp" />
+    <ClCompile Include="Aurora\Graphics\pc\OpengGLRenderManager.cpp" />
+    <ClCompile Include="Aurora\Graphics\RenderManager.cpp" />
+    <ClCompile Include="Aurora\Graphics\SplashScreen.cpp" />
+    <ClCompile Include="Aurora\Graphics\Sprite.cpp" />
+    <ClCompile Include="Aurora\Graphics\Sprite3D.cpp" />
+    <ClCompile Include="Aurora\Graphics\TextureManager.cpp" />
+    <ClCompile Include="Aurora\Graphics\TrueTypeFont.cpp" />
+    <ClCompile Include="Aurora\Math\BoundingBox.cpp" />
+    <ClCompile Include="Aurora\Math\BoundingSphere.cpp" />
+    <ClCompile Include="Aurora\Math\Frustum.cpp" />
+    <ClCompile Include="Aurora\Math\MathLib.cpp" />
+    <ClCompile Include="Aurora\Math\Matrix3.cpp" />
+    <ClCompile Include="Aurora\Math\Matrix4.cpp" />
+    <ClCompile Include="Aurora\Math\Plane.cpp" />
+    <ClCompile Include="Aurora\Math\Polygon.cpp" />
+    <ClCompile Include="Aurora\Math\Quaternion.cpp" />
+    <ClCompile Include="Aurora\Math\Ray.cpp" />
+    <ClCompile Include="Aurora\System\pc\Clock.cpp" />
+    <ClCompile Include="Aurora\System\pc\PcSystemManager.cpp" />
+    <ClCompile Include="Aurora\System\SystemManager.cpp" />
+    <ClCompile Include="Aurora\Utils\GameLoader.cpp" />
+    <ClCompile Include="Aurora\Utils\GameManager.cpp" />
+    <ClCompile Include="Aurora\Utils\pc\WinGameLoader.cpp" />
     <ClCompile Include="ExampleGame.cpp" />
-    <ClCompile Include="src\Aurora\Graphics\Camera.cpp" />
-    <ClCompile Include="src\Aurora\Graphics\Image.cpp" />
-    <ClCompile Include="src\Aurora\Graphics\RenderManager.cpp" />
-    <ClCompile Include="src\Aurora\Graphics\SplashScreen.cpp" />
-    <ClCompile Include="src\Aurora\Graphics\Sprite.cpp" />
-    <ClCompile Include="src\Aurora\Graphics\Sprite3D.cpp" />
-    <ClCompile Include="src\Aurora\Graphics\TextureManager.cpp" />
-    <ClCompile Include="src\Aurora\Graphics\TrueTypeFont.cpp" />
-    <ClCompile Include="src\Aurora\Graphics\win\OpengGLRenderManager.cpp" />
-    <ClCompile Include="src\Aurora\Math\BoundingBox.cpp" />
-    <ClCompile Include="src\Aurora\Math\BoundingSphere.cpp" />
-    <ClCompile Include="src\Aurora\Math\Frustum.cpp" />
-    <ClCompile Include="src\Aurora\Math\MathLib.cpp" />
-    <ClCompile Include="src\Aurora\Math\Matrix3.cpp" />
-    <ClCompile Include="src\Aurora\Math\Matrix4.cpp" />
-    <ClCompile Include="src\Aurora\Math\Plane.cpp" />
-    <ClCompile Include="src\Aurora\Math\Polygon.cpp" />
-    <ClCompile Include="src\Aurora\Math\Quaternion.cpp" />
-    <ClCompile Include="src\Aurora\Math\Ray.cpp" />
-    <ClCompile Include="src\Aurora\System\pc\Clock.cpp" />
-    <ClCompile Include="src\Aurora\System\pc\PcSystemManager.cpp" />
-    <ClCompile Include="src\Aurora\System\SystemManager.cpp" />
-    <ClCompile Include="src\Aurora\Utils\GameLoader.cpp" />
-    <ClCompile Include="src\Aurora\Utils\GameManager.cpp" />
-    <ClCompile Include="src\Aurora\Utils\win\WinGameLoader.cpp" />
     <ClCompile Include="Starter.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aurora\Graphics\Camera.h" />
+    <ClInclude Include="Aurora\Graphics\Image.h" />
+    <ClInclude Include="Aurora\Graphics\pc\OpenGLRenderManager.h" />
+    <ClInclude Include="Aurora\Graphics\RenderManager.h" />
+    <ClInclude Include="Aurora\Graphics\SplashScreen.h" />
+    <ClInclude Include="Aurora\Graphics\Sprite.h" />
+    <ClInclude Include="Aurora\Graphics\Sprite3D.h" />
+    <ClInclude Include="Aurora\Graphics\stb_image.h" />
+    <ClInclude Include="Aurora\Graphics\stb_truetype.h" />
+    <ClInclude Include="Aurora\Graphics\TextureManager.h" />
+    <ClInclude Include="Aurora\Graphics\TrueTypeFont.h" />
+    <ClInclude Include="Aurora\Graphics\Vertex.h" />
+    <ClInclude Include="Aurora\Math\BoundingBox.h" />
+    <ClInclude Include="Aurora\Math\BoundingSphere.h" />
+    <ClInclude Include="Aurora\Math\Frustum.h" />
+    <ClInclude Include="Aurora\Math\Math.h" />
+    <ClInclude Include="Aurora\Math\MathLib.h" />
+    <ClInclude Include="Aurora\Math\Matrix3.h" />
+    <ClInclude Include="Aurora\Math\Matrix4.h" />
+    <ClInclude Include="Aurora\Math\Plane.h" />
+    <ClInclude Include="Aurora\Math\Polygon.h" />
+    <ClInclude Include="Aurora\Math\Quaternion.h" />
+    <ClInclude Include="Aurora\Math\Ray.h" />
+    <ClInclude Include="Aurora\Math\Vector2.h" />
+    <ClInclude Include="Aurora\Math\Vector3.h" />
+    <ClInclude Include="Aurora\Math\Vector4.h" />
+    <ClInclude Include="Aurora\System\Clock.h" />
+    <ClInclude Include="Aurora\System\pc\PcSystemManager.h" />
+    <ClInclude Include="Aurora\System\SystemManager.h" />
+    <ClInclude Include="Aurora\Utils\GameLoader.h" />
+    <ClInclude Include="Aurora\Utils\GameManager.h" />
+    <ClInclude Include="Aurora\Utils\GameState.h" />
+    <ClInclude Include="Aurora\Utils\pc\WinGameLoader.h" />
+    <ClInclude Include="Aurora\Utils\PlatformConfigurator.h" />
     <ClInclude Include="ExampleGame.h" />
-    <ClInclude Include="incl\Aurora\Graphics\Camera.h" />
-    <ClInclude Include="incl\Aurora\Graphics\Image.h" />
-    <ClInclude Include="incl\Aurora\Graphics\RenderManager.h" />
-    <ClInclude Include="incl\Aurora\Graphics\SplashScreen.h" />
-    <ClInclude Include="incl\Aurora\Graphics\Sprite.h" />
-    <ClInclude Include="incl\Aurora\Graphics\Sprite3D.h" />
-    <ClInclude Include="incl\Aurora\Graphics\TextureManager.h" />
-    <ClInclude Include="incl\Aurora\Graphics\TrueTypeFont.h" />
-    <ClInclude Include="incl\Aurora\Graphics\Vertex.h" />
-    <ClInclude Include="incl\Aurora\Graphics\win\OpenGLRenderManager.h" />
-    <ClInclude Include="incl\Aurora\Math\BoundingBox.h" />
-    <ClInclude Include="incl\Aurora\Math\BoundingSphere.h" />
-    <ClInclude Include="incl\Aurora\Math\Frustum.h" />
-    <ClInclude Include="incl\Aurora\Math\Math.h" />
-    <ClInclude Include="incl\Aurora\Math\MathLib.h" />
-    <ClInclude Include="incl\Aurora\Math\Matrix3.h" />
-    <ClInclude Include="incl\Aurora\Math\Matrix4.h" />
-    <ClInclude Include="incl\Aurora\Math\Plane.h" />
-    <ClInclude Include="incl\Aurora\Math\Polygon.h" />
-    <ClInclude Include="incl\Aurora\Math\Quaternion.h" />
-    <ClInclude Include="incl\Aurora\Math\Ray.h" />
-    <ClInclude Include="incl\Aurora\Math\Vector2.h" />
-    <ClInclude Include="incl\Aurora\Math\Vector3.h" />
-    <ClInclude Include="incl\Aurora\Math\Vector4.h" />
-    <ClInclude Include="incl\Aurora\System\Clock.h" />
-    <ClInclude Include="incl\Aurora\System\pc\PcSystemManager.h" />
-    <ClInclude Include="incl\Aurora\System\SystemManager.h" />
-    <ClInclude Include="incl\Aurora\Utils\GameLoader.h" />
-    <ClInclude Include="incl\Aurora\Utils\GameState.h" />
-    <ClInclude Include="incl\Aurora\Utils\PlatformConfigurator.h" />
-    <ClInclude Include="incl\Aurora\Utils\GameManager.h" />
-    <ClInclude Include="incl\Aurora\Utils\win\WinGameLoader.h" />
-    <ClInclude Include="src\Aurora\Graphics\stb_image.h" />
-    <ClInclude Include="src\Aurora\Graphics\stb_truetype.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
