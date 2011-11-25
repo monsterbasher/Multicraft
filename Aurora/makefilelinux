@@ -1,0 +1,47 @@
+DEBUGFLAGS = -O2 -DNDEBUG
+CC       = g++
+CFLAGS   = -Wall -I./ -I./libs/glew/include/GL $(DEBUGFLAGS)
+LDFLAGS  = 
+EXECPATH = ./
+
+EXEC = aurora
+OBJS  = Aurora/Math/MathLib.o \
+Aurora/Math/Vector2.o \
+Aurora/Math/Vector3.o \
+Aurora/Math/Vector4.o \
+Aurora/Math/Matrix3.o \
+Aurora/Math/Matrix4.o \
+Aurora/Math/Quaternion.o \
+Aurora/Math/BoundingBox.o \
+Aurora/Math/BoundingSphere.o \
+Aurora/Math/Plane.o \
+Aurora/Math/Ray.o \
+Aurora/Math/Frustum.o \
+Aurora/Math/Polygon.o \
+Aurora/Graphics/RenderManager.o \
+Aurora/Graphics/pc/OpengGLRenderManager.o \
+Aurora/Graphics/TextureManager.o \
+Aurora/Graphics/Camera.o \
+Aurora/Graphics/Image.o \
+Aurora/Graphics/Sprite.o \
+Aurora/Graphics/Sprite3D.o \
+Aurora/Graphics/TrueTypeFont.o \
+Aurora/System/SystemManager.o \
+Aurora/System/pc/Clock.o \
+Aurora/System/pc/PcSystemManager.o \
+Aurora/Utils/GameLoader.o \
+Aurora/Utils/GameManager.o \
+Aurora/Utils/pc/WinGameLoader.o \
+ExampleGame.o \
+Starter.o
+
+all: $(EXEC)
+
+aurora: $(OBJS)
+	$(CC) $(LDFLAGS) -o $(EXECPATH)/$@ $(OBJS) -lsfml-graphics -lsfml-window -lsfml-system -lGLU -lGL
+
+%.o: %.cpp
+	$(CC) -o $@ -c $< $(CFLAGS)
+
+clean:
+	@rm -rf *.o
