@@ -11,3 +11,9 @@ Compilation under Windows:
 - open Aurora.sln with VS2010
 - check if in incl\Aurora\Utils\PlatformConfigurator.h #define AURORA_PSP is commented and #define AURORA_PC is uncommented
 - run Build from Build menu
+
+Compilation under Linux(i'm using Ubuntu)
+- apt-get build-dep libsfml
+- apt-get install libglew-dev
+- check if in incl\Aurora\Utils\PlatformConfigurator.h #define AURORA_PSP is commented and #define AURORA_PC is uncommented
+- make -f makefilelinux
