@@ -4,6 +4,8 @@
 #include <Aurora/System/SystemManager.h>
 #include <SFML/Window/Input.hpp>
 
+using namespace Key;
+
 namespace Aurora
 {
 	namespace System
@@ -12,7 +14,7 @@ namespace Aurora
 		{
 		private:
 
-			bool _keyStates[Key::Code::Count];
+			bool _keyStates[Key::Count];
 
 		public:
 

@@ -1,5 +1,5 @@
 #include "ExampleGame.h"
-
+#include <stdio.h>
 
 void ExampleState::Init()
 {

@@ -12,7 +12,7 @@ namespace Aurora
 
 			void PcSystemManager::Update()
 			{
-				for(int i = 0;i < Key::Code::Count;i++)
+				for(int i = 0;i < Key::Count;i++)
 				{
 					if(!_input->IsKeyDown((sf::Key::Code)i))
 						_keyStates[(sf::Key::Code)i] = false;

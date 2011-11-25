@@ -3,6 +3,7 @@
 #include "../stb_truetype.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define GLEW_STATIC
 #include <glew.h>
