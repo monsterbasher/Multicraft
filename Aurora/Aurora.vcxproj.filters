@@ -108,6 +108,15 @@
     <ClCompile Include="Aurora\System\pc\PcSystemManager.cpp">
       <Filter>Aurora\System\pc</Filter>
     </ClCompile>
+    <ClCompile Include="Aurora\Math\Vector2.cpp">
+      <Filter>Aurora\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\Math\Vector3.cpp">
+      <Filter>Aurora\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\Math\Vector4.cpp">
+      <Filter>Aurora\Math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleGame.h" />

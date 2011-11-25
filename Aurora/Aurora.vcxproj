@@ -99,6 +99,9 @@
     <ClCompile Include="Aurora\Math\Polygon.cpp" />
     <ClCompile Include="Aurora\Math\Quaternion.cpp" />
     <ClCompile Include="Aurora\Math\Ray.cpp" />
+    <ClCompile Include="Aurora\Math\Vector2.cpp" />
+    <ClCompile Include="Aurora\Math\Vector3.cpp" />
+    <ClCompile Include="Aurora\Math\Vector4.cpp" />
     <ClCompile Include="Aurora\System\pc\Clock.cpp" />
     <ClCompile Include="Aurora\System\pc\PcSystemManager.cpp" />
     <ClCompile Include="Aurora\System\SystemManager.cpp" />
