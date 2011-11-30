@@ -127,7 +127,6 @@
     <ClInclude Include="Aurora\Math\BoundingBox.h" />
     <ClInclude Include="Aurora\Math\BoundingSphere.h" />
     <ClInclude Include="Aurora\Math\Frustum.h" />
-    <ClInclude Include="Aurora\Math\Math.h" />
     <ClInclude Include="Aurora\Math\MathLib.h" />
     <ClInclude Include="Aurora\Math\Matrix3.h" />
     <ClInclude Include="Aurora\Math\Matrix4.h" />

@@ -1,5 +1,8 @@
 TARGET = Aurora
 OBJS = Aurora/Math/MathLib.o \
+Aurora/Math/Vector2.o \
+Aurora/Math/Vector3.o \
+Aurora/Math/Vector4.o \
 Aurora/Math/Matrix3.o \
 Aurora/Math/Matrix4.o \
 Aurora/Math/Quaternion.o \

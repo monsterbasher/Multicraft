@@ -165,9 +165,6 @@
     <ClInclude Include="Aurora\Math\Frustum.h">
       <Filter>Aurora\Math</Filter>
     </ClInclude>
-    <ClInclude Include="Aurora\Math\Math.h">
-      <Filter>Aurora\Math</Filter>
-    </ClInclude>
     <ClInclude Include="Aurora\Math\MathLib.h">
       <Filter>Aurora\Math</Filter>
     </ClInclude>
