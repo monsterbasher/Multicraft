@@ -57,11 +57,11 @@ void ExampleState::HandleEvents(GameManager* sManager)
 	analogX = _systemManager->getAnalogX();
 	analogY = _systemManager->getAlanogY();
 
-	if(_systemManager->isPlatformPC())
+	if(_systemManager->platformUseMouse())
 	{
 		spriteX = mouseX;
 		spriteY = mouseY;
-	}else if(_systemManager->isPlatformPSP())
+	}else if(_systemManager->platformUseJoypad())
 	{
 		//if(analogX > 0.3f || analogX < -0.3f)
 		//	spriteX += (analogX * 100) * dt;
@@ -102,7 +102,7 @@ void ExampleState::Draw(GameManager* sManager)
 
 	//draw mouse position
 	char controlPos[30];
-	_systemManager->isPlatformPC() == true ? sprintf(controlPos,"x: %d y: %d",mouseX,mouseY) : sprintf(controlPos,"x: %f y: %f",analogX,analogY);
+	_systemManager->platformUseMouse() == true ? sprintf(controlPos,"x: %d y: %d",mouseX,mouseY) : sprintf(controlPos,"x: %f y: %f",analogX,analogY);
 	RenderManager::Instance()->drawText(font,1,12,controlPos,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
 	//draw fps

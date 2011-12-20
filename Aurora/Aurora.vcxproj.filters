@@ -117,6 +117,18 @@
     <ClCompile Include="Aurora\Math\Vector4.cpp">
       <Filter>Aurora\Math</Filter>
     </ClCompile>
+    <ClCompile Include="Aurora\System\Mouse.cpp">
+      <Filter>Aurora\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\System\Keyboard.cpp">
+      <Filter>Aurora\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\System\Joypad.cpp">
+      <Filter>Aurora\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\System\InputManager.cpp">
+      <Filter>Aurora\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleGame.h" />
@@ -218,6 +230,18 @@
     </ClInclude>
     <ClInclude Include="Aurora\System\pc\PcSystemManager.h">
       <Filter>Aurora\System\pc</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\System\Mouse.h">
+      <Filter>Aurora\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\System\Keyboard.h">
+      <Filter>Aurora\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\System\Joypad.h">
+      <Filter>Aurora\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\System\InputManager.h">
+      <Filter>Aurora\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

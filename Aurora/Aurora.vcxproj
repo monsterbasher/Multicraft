@@ -102,6 +102,10 @@
     <ClCompile Include="Aurora\Math\Vector2.cpp" />
     <ClCompile Include="Aurora\Math\Vector3.cpp" />
     <ClCompile Include="Aurora\Math\Vector4.cpp" />
+    <ClCompile Include="Aurora\System\InputManager.cpp" />
+    <ClCompile Include="Aurora\System\Joypad.cpp" />
+    <ClCompile Include="Aurora\System\Keyboard.cpp" />
+    <ClCompile Include="Aurora\System\Mouse.cpp" />
     <ClCompile Include="Aurora\System\pc\Clock.cpp" />
     <ClCompile Include="Aurora\System\pc\PcSystemManager.cpp" />
     <ClCompile Include="Aurora\System\SystemManager.cpp" />
@@ -138,6 +142,10 @@
     <ClInclude Include="Aurora\Math\Vector3.h" />
     <ClInclude Include="Aurora\Math\Vector4.h" />
     <ClInclude Include="Aurora\System\Clock.h" />
+    <ClInclude Include="Aurora\System\InputManager.h" />
+    <ClInclude Include="Aurora\System\Joypad.h" />
+    <ClInclude Include="Aurora\System\Keyboard.h" />
+    <ClInclude Include="Aurora\System\Mouse.h" />
     <ClInclude Include="Aurora\System\pc\PcSystemManager.h" />
     <ClInclude Include="Aurora\System\SystemManager.h" />
     <ClInclude Include="Aurora\Utils\GameLoader.h" />

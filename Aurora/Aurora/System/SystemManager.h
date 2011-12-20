@@ -157,9 +157,9 @@ namespace Aurora
 
 			SystemManager();
 
-			bool isPlatformPC();
-			bool isPlatformPSP();
-			bool isPlatformPS3();
+			bool platformUseKeyboard();
+			bool platformUseMouse();
+			bool platformUseJoypad();
 
 			PlatformType getPlatformType();
 			void setPlatformType(PlatformType type);
