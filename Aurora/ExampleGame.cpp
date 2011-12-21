@@ -1,6 +1,9 @@
 #include "ExampleGame.h"
 #include <stdio.h>
 
+#include <Aurora/Utils/ScriptManager.h>
+#include <Aurora/Graphics/Sprite.h>
+
 void ExampleState::Init()
 {
 	_renderManager = RenderManager::Instance();
@@ -10,8 +13,8 @@ void ExampleState::Init()
 
 	spriteX = spriteY = 50;
 	itemSprite = new Sprite("Assets/Minecraft/gui/items.png",0,0,16,16);
-	itemSprite->Scale(3.0f,3.0f);
-	itemSprite->SetPosition(spriteX,spriteY);
+	//itemSprite->Scale(3.0f,3.0f);
+	//itemSprite->SetPosition(spriteX,spriteY);
 
 	sprite3d = new Sprite3D("Assets/Minecraft/gui/items.png",16*3,16*4,16*4,16*5);
 	sprite3d->setPosition(0,0,-20);
@@ -22,6 +25,27 @@ void ExampleState::Init()
 	analogX = analogY = 0.0f;
 
 	dt = 0.0f;
+
+	lua_State* _luaState = lua_open();
+	luabind::open(_luaState);
+
+	luabind::module(_luaState)
+		[
+			luabind::class_<Aurora::Graphics::Sprite>("Sprite")
+			.def(luabind::constructor<const char*,int,int,int,int>())
+			.def("setScale", &Aurora::Graphics::Sprite::Scale)
+			.def("setPosition", &Aurora::Graphics::Sprite::SetPosition)
+		];
+
+	luabind::globals(_luaState)["itemSprite"] = itemSprite;
+
+	luaL_dostring(
+		_luaState,
+		"itemSprite:setScale(3,3)\n"
+		"itemSprite:setPosition(200,200)\n"
+		);
+
+	lua_close(_luaState);
 }
 
 void ExampleState::Enter()
