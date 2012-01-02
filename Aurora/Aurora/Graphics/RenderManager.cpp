@@ -36,6 +36,7 @@ namespace Aurora
 		RenderManager::RenderManager()
 		{
 			_currentTexture = -1;
+			_currentCam = 0;
 		}
 
 		void RenderManager::setPov(float pov)
@@ -47,6 +48,12 @@ namespace Aurora
 		{
 			_zMin = zmin;
 			_zMax = zmax;
+		}
+
+		void RenderManager::setOrthoZminMax(float zmin,float zmax)
+		{
+			_zOtrhoMin = zmin;
+			_zOtrhoMax = zmax;
 		}
 
 		void RenderManager::setSesize(int width,int height)
@@ -63,6 +70,11 @@ namespace Aurora
 		void RenderManager::setVSync(bool state)
 		{
 			_vSync = state;
+		}
+
+		void RenderManager::setCurrentCam(Camera *cam)
+		{
+			_currentCam = cam;
 		}
 	}
 }

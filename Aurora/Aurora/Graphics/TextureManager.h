@@ -30,6 +30,8 @@ namespace Aurora
 
 			Image* loadImageFromFile(std::string fileName);
 			Image* loadImageFromMemory(std::string newName,void *data,std::size_t size);
+			
+			Image* createEmptyImage(std::string name,int width,int height,ImageLocation location);
 
 			Image* getImage(std::string fileName);
 			bool removeImage(std::string fileName);

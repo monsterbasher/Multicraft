@@ -17,16 +17,16 @@ namespace Aurora
 				
 				switch(keyCode)
 				{
-					case Up:
+					case W:
 					button = PSP_CTRL_UP;
 					break;
-					case Down:
+					case S:
 					button = PSP_CTRL_DOWN;
 					break;
-					case Left:
+					case A:
 					button = PSP_CTRL_LEFT;
 					break;
-					case Right:
+					case D:
 					button = PSP_CTRL_RIGHT;
 					break;
 					
@@ -37,16 +37,16 @@ namespace Aurora
 					button = PSP_CTRL_START;
 					break;
 					
-					case W:
+					case Up:
 					button = PSP_CTRL_TRIANGLE;
 					break;
-					case A:
-					button = PSP_CTRL_SQUARE;
-					break;
-					case S:
+					case Down:
 					button = PSP_CTRL_CROSS;
 					break;
-					case D:
+					case Left:
+					button = PSP_CTRL_SQUARE;
+					break;
+					case Right:
 					button = PSP_CTRL_CIRCLE;
 					break;
 					

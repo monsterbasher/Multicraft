@@ -1,8 +1,8 @@
 #include "ExampleGame.h"
 #include <stdio.h>
 
-#include <Aurora/Utils/ScriptManager.h>
 #include <Aurora/Graphics/Sprite.h>
+#include <Aurora/Graphics/Image.h>
 
 void ExampleState::Init()
 {
@@ -10,42 +10,28 @@ void ExampleState::Init()
 	_systemManager = SystemManager::Instance();
 
 	itemImage = TextureManager::Instance()->loadImageFromFile("Assets/Minecraft/gui/items.png");
+	renderToImage = TextureManager::Instance()->createEmptyImage("renderToImage",256,256,Vram);
 
 	spriteX = spriteY = 50;
 	itemSprite = new Sprite("Assets/Minecraft/gui/items.png",0,0,16,16);
-	//itemSprite->Scale(3.0f,3.0f);
-	//itemSprite->SetPosition(spriteX,spriteY);
+	itemSprite->Scale(3.0f,3.0f);
+	itemSprite->SetPosition(spriteX,spriteY);
 
 	sprite3d = new Sprite3D("Assets/Minecraft/gui/items.png",16*3,16*4,16*4,16*5);
-	sprite3d->setPosition(0,0,-20);
+	sprite3d->setPosition(0,0,-2.5f);
+	sprite3d->setscale(0.1f,0.1f,0.1f);
 
 	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
+
+	cam = new Camera();
+	cam->PositionCamera(0,0,0,0,0,-5,0,1,0);
+
+	_renderManager->setCurrentCam(cam);
 
 	mouseX = mouseY = 0;
 	analogX = analogY = 0.0f;
 
 	dt = 0.0f;
-
-	lua_State* _luaState = lua_open();
-	luabind::open(_luaState);
-
-	luabind::module(_luaState)
-		[
-			luabind::class_<Aurora::Graphics::Sprite>("Sprite")
-			.def(luabind::constructor<const char*,int,int,int,int>())
-			.def("setScale", &Aurora::Graphics::Sprite::Scale)
-			.def("setPosition", &Aurora::Graphics::Sprite::SetPosition)
-		];
-
-	luabind::globals(_luaState)["itemSprite"] = itemSprite;
-
-	luaL_dostring(
-		_luaState,
-		"itemSprite:setScale(3,3)\n"
-		"itemSprite:setPosition(200,200)\n"
-		);
-
-	lua_close(_luaState);
 }
 
 void ExampleState::Enter()
@@ -94,6 +80,43 @@ void ExampleState::HandleEvents(GameManager* sManager)
 		//	spriteY += (analogY * 100) * dt;
 	}
 
+	//camera
+	//rotate
+	if(_systemManager->keyHold(Key::Left))
+	{
+		cam->RotateView(2.0f * dt,0,1,0);
+	}
+	if(_systemManager->keyHold(Key::Right))
+	{
+		cam->RotateView(-(2.0f * dt),0,1,0);
+	}
+	if(_systemManager->keyHold(Key::Up))
+	{
+		cam->PitchView(2.0f * dt);
+	}
+	if(_systemManager->keyHold(Key::Down))
+	{
+		cam->PitchView(-(2.0f * dt));
+	}
+
+	//move
+	if(_systemManager->keyHold(Key::W))
+	{
+		cam->Move(6.0f * dt);
+	}
+	if(_systemManager->keyHold(Key::S))
+	{
+		cam->Move(-(6.0f * dt));
+	}
+	if(_systemManager->keyHold(Key::A))
+	{
+		cam->Strafe(-(6.0f * dt));
+	}
+	if(_systemManager->keyHold(Key::D))
+	{
+		cam->Strafe(6.0f * dt);
+	}
+
 	itemSprite->SetPosition(spriteX,spriteY);
 	sprite3d->rotationY+=(50.0f * dt);
 }
@@ -106,15 +129,24 @@ void ExampleState::Draw(GameManager* sManager)
 {
 	RenderManager::Instance()->StartFrame();
 
-	//set depth min and max for perspective
-	RenderManager::Instance()->setZminMax(0.1f,100.0f);
-	RenderManager::Instance()->SetPerspective();
+	RenderManager::Instance()->StartRenderToTexture(renderToImage);
+	RenderManager::Instance()->SetPerspective(53,renderToImage->_width/renderToImage->_height,0.1f,256.0f);
+	RenderManager::Instance()->ClearScreen();
 
-	//draw 3d model
 	RenderManager::Instance()->drawSprite3D(sprite3d);
 
+	RenderManager::Instance()->EndRenderToTexture(renderToImage);
+
+	RenderManager::Instance()->RenderToScreen();
+	RenderManager::Instance()->ClearScreen();
+
+	RenderManager::Instance()->UpdateCurrentCamera();
+
+	//draw 3d model
+	//RenderManager::Instance()->drawSprite3D(sprite3d);
+	RenderManager::Instance()->DrawCubeTextured(renderToImage,Vector3(0,0,-3),Vector3(1,1,1),Vector3(0,0,0));
+
 	//change back to ortho
-	RenderManager::Instance()->setZminMax(-10,10);
 	RenderManager::Instance()->SetOrtho();
 
 	//draw single image 
@@ -141,7 +173,6 @@ void ExampleGameManager::Configure()
 {
 	//init render manager properties
 	RenderManager::Instance()->setSesize(480,272);
-	RenderManager::Instance()->setZminMax(-10,10);
 }
 
 void ExampleGameManager::Init()

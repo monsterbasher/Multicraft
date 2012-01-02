@@ -1,3 +1,4 @@
+#include <Aurora/Graphics/Camera.h>
 #include <Aurora/Graphics/TextureManager.h>
 #include <Aurora/Graphics/RenderManager.h>
 #include <Aurora/Graphics/Image.h>
@@ -20,12 +21,15 @@ class ExampleState : public GameState
 private:
 
 	Image* itemImage;
+	Image* renderToImage;
 
 	Sprite3D* sprite3d;
 	Sprite* itemSprite;
 	float spriteX,spriteY;
 
 	TrueTypeFont* font;
+
+	Camera *cam;
 
 	RenderManager* _renderManager;
 	SystemManager* _systemManager;

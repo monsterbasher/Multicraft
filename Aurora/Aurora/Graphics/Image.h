@@ -7,9 +7,15 @@ namespace Aurora
 {
 	namespace Graphics
 	{
+		enum ImageLocation
+		{
+			Ram,
+			Vram
+		};
+
 		class Image
 		{
-		public:
+		public:			
 
 			int _width;
 			int _height;

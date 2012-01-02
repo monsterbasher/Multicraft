@@ -46,12 +46,16 @@ namespace Aurora
 
 		void Sprite3D::setscale(float x,float y,float z)
 		{
-
+			scaleX = x;
+			scaleY = y;
+			scaleZ = z;
 		}
 
 		void Sprite3D::setRotation(float x,float y,float z)
 		{
-
+			rotationX = x;
+			rotationY = y;
+			rotationZ = z;
 		}
 
 

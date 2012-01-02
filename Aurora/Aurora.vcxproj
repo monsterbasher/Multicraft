@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClCompile Include="Aurora\Graphics\Camera.cpp" />
     <ClCompile Include="Aurora\Graphics\Image.cpp" />
+    <ClCompile Include="Aurora\Graphics\ModelObj.cpp" />
     <ClCompile Include="Aurora\Graphics\pc\OpengGLRenderManager.cpp" />
     <ClCompile Include="Aurora\Graphics\RenderManager.cpp" />
     <ClCompile Include="Aurora\Graphics\SplashScreen.cpp" />
@@ -108,7 +109,6 @@
     <ClCompile Include="Aurora\Utils\GameLoader.cpp" />
     <ClCompile Include="Aurora\Utils\GameManager.cpp" />
     <ClCompile Include="Aurora\Utils\pc\WinGameLoader.cpp" />
-    <ClCompile Include="Aurora\Utils\ScriptManager.cpp" />
     <ClCompile Include="ExampleGame.cpp" />
     <ClCompile Include="libs\lua-5.1.4\src\lapi.c" />
     <ClCompile Include="libs\lua-5.1.4\src\lauxlib.c" />
@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="Aurora\Graphics\Camera.h" />
     <ClInclude Include="Aurora\Graphics\Image.h" />
+    <ClInclude Include="Aurora\Graphics\ModelObj.h" />
     <ClInclude Include="Aurora\Graphics\pc\OpenGLRenderManager.h" />
     <ClInclude Include="Aurora\Graphics\RenderManager.h" />
     <ClInclude Include="Aurora\Graphics\SplashScreen.h" />
@@ -196,7 +197,6 @@
     <ClInclude Include="Aurora\Utils\GameState.h" />
     <ClInclude Include="Aurora\Utils\pc\WinGameLoader.h" />
     <ClInclude Include="Aurora\Utils\PlatformConfigurator.h" />
-    <ClInclude Include="Aurora\Utils\ScriptManager.h" />
     <ClInclude Include="ExampleGame.h" />
     <ClInclude Include="libs\lua-5.1.4\src\lapi.h" />
     <ClInclude Include="libs\lua-5.1.4\src\lauxlib.h" />

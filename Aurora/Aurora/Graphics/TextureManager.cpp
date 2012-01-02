@@ -60,6 +60,27 @@ namespace Aurora
 			return images[newName];
 		}
 
+		Image* TextureManager::createEmptyImage(std::string name,int width,int height,ImageLocation location)
+		{
+			if(images.find(name) == images.end())
+			{
+				Image* image = new Image();
+
+				image->_fileName = name;
+				image->_width = width;
+				image->_height = height;
+
+				RenderManager::Instance()->_createEmptyTexture(image,location);
+
+				//add to collection
+				images.insert(std::pair<std::string,Image*>(name,image));
+
+				return image;
+			}
+
+			return 0;
+		}
+
 		Image* TextureManager::getImage(std::string fileName)
 		{
 			if(images.find(fileName) == images.end())

@@ -276,8 +276,8 @@
     <ClCompile Include="libs\luabind\src\wrapper_base.cpp">
       <Filter>Libs\LuaBind</Filter>
     </ClCompile>
-    <ClCompile Include="Aurora\Utils\ScriptManager.cpp">
-      <Filter>Aurora\Utils</Filter>
+    <ClCompile Include="Aurora\Graphics\ModelObj.cpp">
+      <Filter>Aurora\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -693,8 +693,8 @@
     <ClInclude Include="libs\luabind\luabind\detail\yes_no.hpp">
       <Filter>Libs\LuaBind</Filter>
     </ClInclude>
-    <ClInclude Include="Aurora\Utils\ScriptManager.h">
-      <Filter>Aurora\Utils</Filter>
+    <ClInclude Include="Aurora\Graphics\ModelObj.h">
+      <Filter>Aurora\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

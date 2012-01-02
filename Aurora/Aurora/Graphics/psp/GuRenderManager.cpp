@@ -38,6 +38,63 @@ struct Vertex32
 	float x,y,z;
 };
 
+struct TextureVertex
+{
+	float u, v;
+	float x,y,z;
+};
+
+struct TextureVertex __attribute__((aligned(16))) _texturedCube[12*3] =
+{
+	{0, 0, -1,-1, 1}, // 0
+	{1, 0, -1, 1, 1}, // 4
+	{1, 1,  1, 1, 1}, // 5
+
+	{0, 0, -1,-1, 1}, // 0
+	{1, 1, 1, 1, 1}, // 5
+	{0, 1, 1,-1, 1}, // 1
+
+	{0, 0, -1,-1,-1}, // 3
+	{1, 0,  1,-1,-1}, // 2
+	{1, 1,  1, 1,-1}, // 6
+
+	{0, 0, -1,-1,-1}, // 3
+	{1, 1,  1, 1,-1}, // 6
+	{0, 1, -1, 1,-1}, // 7
+
+	{0, 0,  1,-1,-1}, // 0
+	{1, 0,  1,-1, 1}, // 3
+	{1, 1,  1, 1, 1}, // 7
+
+	{0, 0,  1,-1,-1}, // 0
+	{1, 1,  1, 1, 1}, // 7
+	{0, 1,  1, 1,-1}, // 4
+
+	{0, 0, -1,-1,-1}, // 0
+	{1, 0, -1, 1,-1}, // 3
+	{1, 1, -1, 1, 1}, // 7
+
+	{0, 0, -1,-1,-1}, // 0
+	{1, 1, -1, 1, 1}, // 7
+	{0, 1, -1,-1, 1}, // 4
+
+	{0, 0, -1, 1,-1}, // 0
+	{1, 0,  1, 1,-1}, // 1
+	{1, 1,  1, 1, 1}, // 2
+
+	{0, 0, -1, 1,-1}, // 0
+	{1, 1,  1, 1, 1}, // 2
+	{0, 1, -1, 1, 1}, // 3
+
+	{0, 0, -1,-1,-1}, // 4
+	{1, 0, -1,-1, 1}, // 7
+	{1, 1,  1,-1, 1}, // 6
+
+	{0, 0, -1,-1,-1}, // 4
+	{1, 1,  1,-1, 1}, // 6
+	{0, 1,  1,-1,-1}, // 5
+};
+
 struct Vertex32 __attribute__((aligned(16))) _cubeVertices[12*3] =
 {
 	{-0.5f,-0.5f, 0.5f}, // 0
@@ -46,7 +103,7 @@ struct Vertex32 __attribute__((aligned(16))) _cubeVertices[12*3] =
 
 	{-0.5f,-0.5f, 0.5f}, // 0
 	{ 0.5f, 0.5f, 0.5f}, // 5
-	{ 0.5f,-0.5f, 0.5f}, // 0.5f
+	{ 0.5f,-0.5f, 0.5f}, // 1
 
 	{-0.5f,-0.5f,-0.5f}, // 3
 	{ 0.5f,-0.5f,-0.5f}, // 2
@@ -73,7 +130,7 @@ struct Vertex32 __attribute__((aligned(16))) _cubeVertices[12*3] =
 	{-0.5f,-0.5f, 0.5f}, // 4
 
 	{-0.5f, 0.5f,-0.5f}, // 0
-	{ 0.5f, 0.5f,-0.5f}, // 0.5f
+	{ 0.5f, 0.5f,-0.5f}, // 1
 	{ 0.5f, 0.5f, 0.5f}, // 2
 
 	{-0.5f, 0.5f,-0.5f}, // 0
@@ -103,6 +160,8 @@ namespace Aurora
 			_pov = 53;
 			_vSync = true;
 			_fullScreen = false;
+			_zOtrhoMin = -10.0f;
+			_zOtrhoMax = 10.0f;
 			_zMin = 0.1f;
 			_zMax = 256.0f;
 
@@ -118,22 +177,16 @@ namespace Aurora
 
 		void GuRenderManager::Init()
 		{
-			//_fbp0 = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
-			//_fbp1 = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_8888);
-			//_zbp = getStaticVramBuffer(BUF_WIDTH,SCR_HEIGHT,GU_PSM_4444);
-
 			sceGuInit();
 			
 			_fbp0 = ( u32* ) valloc ( FRAME_BUFFER_SIZE ) ;
 			_fbp1 = ( u32* ) valloc ( FRAME_BUFFER_SIZE );
 			_zbp = ( u16* )  valloc ( FRAME_BUFFER_WIDTH*SCREEN_HEIGHT*2);
 
+			_frameBuffer = vabsptr(vrelptr (_fbp0));
+
 			sceGuStart(GU_DIRECT,_list);
 
-			//sceGuDrawBuffer(GU_PSM_8888,_fbp0,BUF_WIDTH);
-			//sceGuDispBuffer(SCR_WIDTH,SCR_HEIGHT,_fbp1,BUF_WIDTH);
-			//sceGuDepthBuffer(_zbp,BUF_WIDTH);
-			
 			sceGuDrawBuffer(BUFFER_FORMAT, vrelptr (_fbp0), FRAME_BUFFER_WIDTH);
 			sceGuDispBuffer(SCREEN_WIDTH, SCREEN_HEIGHT, vrelptr (_fbp1), FRAME_BUFFER_WIDTH);
 			sceGuDepthBuffer(vrelptr (_zbp), FRAME_BUFFER_WIDTH);
@@ -154,7 +207,9 @@ namespace Aurora
 			sceGuFinish();
 			sceGuSync(0,0);
 
-			sceDisplayWaitVblankStart();
+			//sceDisplayWaitVblankStart();
+			sceDisplayWaitVblankStartCB();
+			_frameBuffer = vabsptr(sceGuSwapBuffers());
 			sceGuDisplay(GU_TRUE);
 
 			sceCtrlSetSamplingCycle(0);
@@ -168,7 +223,7 @@ namespace Aurora
 		{
 			sceGumMatrixMode(GU_PROJECTION);
 			sceGumLoadIdentity();
-			sceGumOrtho(0, _width, _height, 0, _zMin, _zMax);
+			sceGumOrtho(0, _width, _height, 0, _zOtrhoMin,_zOtrhoMax);
 
 			sceGumMatrixMode(GU_VIEW);
 			sceGumLoadIdentity();
@@ -181,7 +236,7 @@ namespace Aurora
 		{
 			sceGumMatrixMode(GU_PROJECTION);
 			sceGumLoadIdentity();
-			sceGumOrtho(0, _width, 0, _height, _zMin, _zMax);
+			sceGumOrtho(0, _width, 0, _height, _zOtrhoMin,_zOtrhoMax);
 
 			sceGumMatrixMode(GU_VIEW);
 			sceGumLoadIdentity();
@@ -229,13 +284,20 @@ namespace Aurora
 			sceGumLoadIdentity();
 		}
 
+		void GuRenderManager::ClearScreen()
+		{
+			sceGuClearColor(0xff554433);
+			sceGuClearDepth(0);
+			sceGuClear(GU_COLOR_BUFFER_BIT|GU_DEPTH_BUFFER_BIT);
+		}
+
 		void GuRenderManager::StartFrame()
 		{
 			sceGuStart(GU_DIRECT,_list);
 
-			sceGuClearColor(0xff554433);
-			sceGuClearDepth(0);
-			sceGuClear(GU_COLOR_BUFFER_BIT|GU_DEPTH_BUFFER_BIT);
+			//sceGuClearColor(0xff554433);
+			//sceGuClearDepth(0);
+			//sceGuClear(GU_COLOR_BUFFER_BIT|GU_DEPTH_BUFFER_BIT);
 		}
 
 		void GuRenderManager::EndFrame()
@@ -244,7 +306,61 @@ namespace Aurora
 			sceGuSync(0,0);
 
 			sceDisplayWaitVblankStart();
-			sceGuSwapBuffers();
+			_frameBuffer = vabsptr(sceGuSwapBuffers());
+		}
+
+		void GuRenderManager::StartRenderToTexture(Image* texture)
+		{
+			sceGuSync(0, 2);
+
+			sceKernelDcacheWritebackAll();
+
+			sceGuDrawBufferList(GU_PSM_8888, vrelptr(texture->_pixels), texture->_width);
+
+			sceGuOffset(2048 - (texture->_width>>1), 2048 - (texture->_height>>1));
+			sceGuViewport(2048, 2048, texture->_width, texture->_height);
+			sceGuScissor(0, 0, texture->_width, texture->_height);
+		}
+
+		void GuRenderManager::EndRenderToTexture(Image* texture)
+		{
+
+		}
+
+		void GuRenderManager::RenderToScreen()
+		{
+			sceGuSync(0, 2);
+
+			sceKernelDcacheWritebackAll();
+
+			sceGuDrawBufferList(GU_PSM_8888, vrelptr(_frameBuffer), FRAME_BUFFER_WIDTH);
+
+			sceGuOffset(2048 - (SCR_WIDTH/2),2048 - (SCR_HEIGHT/2));
+			sceGuViewport(2048,2048,SCR_WIDTH,SCR_HEIGHT);
+			sceGuScissor(0, 0, SCR_WIDTH, SCR_HEIGHT);
+		}
+
+		void GuRenderManager::UpdateCurrentCamera()
+		{
+			if(_currentCam != 0)
+			{
+				sceGumMatrixMode(GU_PROJECTION);
+				sceGumLoadIdentity();
+				sceGumPerspective(_pov,(float)_width/(float)_height,_zMin,_zMax);
+
+				sceGumMatrixMode(GU_VIEW);
+				sceGumLoadIdentity();
+
+				ScePspFVector3 pos = {_currentCam->m_vPosition.x + _currentCam->m_vOffset.x,_currentCam->m_vPosition.y + _currentCam->m_vOffset.y,_currentCam->m_vPosition.z + _currentCam->m_vOffset.z};
+				ScePspFVector3 eye = {_currentCam->m_vView.x,_currentCam->m_vView.y,_currentCam->m_vView.z};
+				ScePspFVector3 up = {_currentCam->m_vUpVector.x,_currentCam->m_vUpVector.y,_currentCam->m_vUpVector.z};
+
+				sceGumLookAt(&pos, &eye, &up);
+				//sceGumStoreMatrix(&view);
+
+				sceGumMatrixMode(GU_MODEL);
+				sceGumLoadIdentity();
+			}
 		}
 
 		void GuRenderManager::_createTexture(Image* image)
@@ -260,6 +376,15 @@ namespace Aurora
 		{
 			texId = _imageIdCounter;
 			_imageIdCounter++;
+		}
+
+		void GuRenderManager::_createEmptyTexture( Image* image, ImageLocation location )
+		{
+			image->_id = _imageIdCounter;
+			_imageIdCounter++;
+
+			int size = image->_width * image->_height * 4;
+			image->_pixels = (unsigned char*)valloc(size);
 		}
 
 		void GuRenderManager::bindTexture(Image* image)
@@ -451,15 +576,38 @@ namespace Aurora
 			sceGumPopMatrix();
 		}
 
+		void GuRenderManager::DrawCubeTextured(Image* texture,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation)
+		{
+			sceGumPushMatrix();
+
+			ScePspFVector3 rot = {Aurora::Math::Math::degreesToRadians(rotation.x),Aurora::Math::Math::degreesToRadians(rotation.y),Aurora::Math::Math::degreesToRadians(rotation.z)};
+			sceGumRotateXYZ(&rot);
+
+			ScePspFVector3 loc = {position.x,position.y,position.z};
+			sceGumTranslate(&loc);
+
+			sceGuColor(GU_RGBA(255, 255, 255, 255));
+			bindTexture(texture);
+			sceGuEnable(GU_TEXTURE_2D);
+
+			sceGumDrawArray(GU_TRIANGLES,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D,12*3, 0,_texturedCube);
+			sceGuDisable(GU_TEXTURE_2D);
+
+			sceGuColor(0xffffffff);
+			sceGumPopMatrix();
+		}
+
 		void GuRenderManager::drawSprite3D(Sprite3D* sprite)
 		{
 			sceGumPushMatrix();
 
 			ScePspFVector3 loc = {sprite->posX,sprite->posY,sprite->posZ};
 			ScePspFVector3 rot = {Aurora::Math::Math::degreesToRadians(sprite->rotationX),Aurora::Math::Math::degreesToRadians(sprite->rotationY),Aurora::Math::Math::degreesToRadians(sprite->rotationZ)};
+			ScePspFVector3 sca = {sprite->scaleX,sprite->scaleY,sprite->scaleZ};
 
 			sceGumTranslate(&loc);
 			sceGumRotateXYZ(&rot);
+			sceGumScale(&sca);
 
 			int posx = 0;
 			int posy = 0;

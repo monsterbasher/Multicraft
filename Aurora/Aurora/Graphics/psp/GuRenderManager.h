@@ -18,6 +18,7 @@ namespace Aurora
 			void* _fbp0;
 			void* _fbp1;
 			void* _zbp;
+			void* _frameBuffer;
 
 			int _imageIdCounter;
 
@@ -25,6 +26,7 @@ namespace Aurora
 
 			void _createTexture(Image* image);
 			void _createTexture(unsigned char* pixels,int width,int height,unsigned int &texId);
+			void _createEmptyTexture( Image* image, ImageLocation location );
 
 		public:
 
@@ -37,6 +39,7 @@ namespace Aurora
 			void SetPerspective();			
 			void SetPerspective(float pov,float aspect,float zmin,float zmax);
 
+			void ClearScreen();
 			void StartFrame();
 			void EndFrame();
 
@@ -53,8 +56,16 @@ namespace Aurora
 			void SetTextOrtho();
 			void drawText(TrueTypeFont* font,float x, float y, const char *text, int align, unsigned int col);
 
+			//render to texture
+			void StartRenderToTexture(Image* texture);
+			void EndRenderToTexture(Image* texture);
+			void RenderToScreen();
+
+			void UpdateCurrentCamera();
+
 			//shapes
 			void drawCube(unsigned int color,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation);
+			void DrawCubeTextured(Image* texture,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation);
 
 		};
 	}

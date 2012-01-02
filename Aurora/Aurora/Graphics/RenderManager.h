@@ -1,6 +1,7 @@
 #ifndef RenderManager_H
 #define RenderManager_H
 
+#include <Aurora/Graphics/Camera.h>
 #include <Aurora/Graphics/Image.h>
 #include <Aurora/Graphics/Sprite.h>
 #include <Aurora/Graphics/Sprite3D.h>
@@ -24,10 +25,14 @@ namespace Aurora
 			bool _fullScreen;
 			bool _vSync;
 			float _pov;
+
+			float _zOtrhoMin;
+			float _zOtrhoMax;
 			float _zMin;
 			float _zMax;
 
 			int _currentTexture;
+			Camera *_currentCam;
 
 			static RenderManager *_renderManager;
 		
@@ -35,6 +40,7 @@ namespace Aurora
 
 			virtual void _createTexture(Image* image) = 0;
 			virtual void _createTexture(unsigned char* pixels,int width,int height,unsigned int &texId) = 0;
+			virtual void _createEmptyTexture( Image* image, ImageLocation location ) = 0;
 
 		public:
 
@@ -44,10 +50,13 @@ namespace Aurora
 
 			void setPov(float pov);
 			void setZminMax(float zmin,float zmax);
+			void setOrthoZminMax(float zmin,float zmax);
 			void setSesize(int width,int height);
 			void setFulscreen(bool state);
 			void setVSync(bool state);
 
+			void setCurrentCam(Camera *cam);
+			
 			inline float getPov() { return _pov; }
 			inline float getZmin() { return _zMin; }
 			inline float getZmax() { return _zMax; }
@@ -75,6 +84,7 @@ namespace Aurora
 			virtual void SetPerspective() = 0;			
 			virtual void SetPerspective(float pov,float aspect,float zmin,float zmax) = 0;
 
+			virtual void ClearScreen() = 0;
 			virtual void StartFrame() = 0;
 			virtual void EndFrame() = 0;
 
@@ -91,8 +101,17 @@ namespace Aurora
 			virtual void SetTextOrtho() = 0;
 			virtual void drawText(TrueTypeFont* font,float x, float y, const char *text, int align, unsigned int col) = 0;
 
+			//render to texture
+			virtual void StartRenderToTexture(Image* texture) = 0;
+			virtual void EndRenderToTexture(Image* texture) = 0;
+			virtual void RenderToScreen() = 0;
+
+			virtual void UpdateCurrentCamera() = 0;
+
 			//shapes
 			virtual void drawCube(unsigned int color,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation) = 0;
+			virtual void DrawCubeTextured(Image* texture,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation) = 0;
+
 		};
 	}
 }

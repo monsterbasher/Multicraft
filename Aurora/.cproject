@@ -34,7 +34,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="src/Aurora/Utils/win|src/Aurora/Graphics/win|libs|Aurora.vcxproj.user|Aurora.vcxproj.filters|Aurora.vcxproj" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry excluding="Aurora-Prefix.pch|Aurora-Info.plist|Aurora/System/pc|Aurora/Graphics/pc|src/Aurora/Utils/win|src/Aurora/Graphics/win|libs|Aurora.vcxproj.user|Aurora.vcxproj.filters|Aurora.vcxproj" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>
@@ -205,6 +205,8 @@
 </scannerConfigBuildInfo>
 </storageModule>
 <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
+<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
 </cconfiguration>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">

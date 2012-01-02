@@ -27,6 +27,21 @@ namespace Aurora
 			-0.500000f, -0.500000f, 0.500000f,  0.500000f, 0.500000f, 0.500000f,  -0.500000f, 0.500000f, 0.500000f,
 		};
 
+		float cubeST[] = {
+			1.000000f, 0.000000f,  1.000000f, 1.000000f,  0.000000f, 1.000000f, 
+			1.000000f, 0.000000f,  0.000000f, 1.000000f,  0.000000f, 0.000000f, 
+			0.000000f, 0.000000f,  1.000000f, 0.000000f,  1.000000f, 1.000000f, 
+			0.000000f, 0.000000f,  1.000000f, 1.000000f,  0.000000f, 1.000000f, 
+			0.000000f, 0.000000f,  1.000000f, 0.000000f,  1.000000f, 1.000000f, 
+			0.000000f, 0.000000f,  1.000000f, 1.000000f,  0.000000f, 1.000000f, 
+			1.000000f, 0.000000f,  1.000000f, 1.000000f,  0.000000f, 1.000000f, 
+			1.000000f, 0.000000f,  0.000000f, 1.000000f,  0.000000f, 0.000000f, 
+			0.000000f, 1.000000f,  0.000000f, 0.000000f,  1.000000f, 0.000000f, 
+			0.000000f, 1.000000f,  1.000000f, 0.000000f,  1.000000f, 1.000000f, 
+			0.000000f, 0.000000f,  1.000000f, 0.000000f,  1.000000f, 1.000000f, 
+			0.000000f, 0.000000f,  1.000000f, 1.000000f,  0.000000f, 1.000000f, 
+		};
+
 		OpengGLRenderManager::OpengGLRenderManager()
 		{
 			// default values
@@ -35,6 +50,8 @@ namespace Aurora
 			_pov = 53;
 			_vSync = true;
 			_fullScreen = false;
+			_zOtrhoMin = -10;
+			_zOtrhoMax = 10;
 			_zMin = 0.1f;
 			_zMax = 256.0f;
 		}
@@ -67,7 +84,7 @@ namespace Aurora
 			glMatrixMode(GL_PROJECTION);	
 			glLoadIdentity();
 
-			glOrtho(0, _width, _height, 0, _zMin, _zMax);
+			glOrtho(0, _width, _height, 0, _zOtrhoMin, _zOtrhoMax);
 
 			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
@@ -80,7 +97,7 @@ namespace Aurora
 			glMatrixMode(GL_PROJECTION);	
 			glLoadIdentity();
 
-			glOrtho(0, _width, 0, _height, _zMin, _zMax);
+			glOrtho(0, _width, 0, _height, _zOtrhoMin, _zOtrhoMax);
 
 			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
@@ -93,7 +110,7 @@ namespace Aurora
 			glMatrixMode(GL_PROJECTION);	
 			glLoadIdentity();
 
-			glOrtho(left, right, bottom, top, zmin, zmax);
+			glOrtho(left, right, bottom, top, _zOtrhoMin, _zOtrhoMax);
 
 			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
@@ -143,11 +160,26 @@ namespace Aurora
 			}
 		}
 
+		void OpengGLRenderManager::UpdateCurrentCamera()
+		{
+			if(_currentCam != 0)
+			{
+				gluLookAt(_currentCam->m_vPosition.x + _currentCam->m_vOffset.x,_currentCam->m_vPosition.y + _currentCam->m_vOffset.y,_currentCam->m_vPosition.z + _currentCam->m_vOffset.z,
+					_currentCam->m_vView.x,_currentCam->m_vView.y,_currentCam->m_vView.z,
+					_currentCam->m_vUpVector.x,_currentCam->m_vUpVector.y,_currentCam->m_vUpVector.z);
+			}
+		}
+
+		void OpengGLRenderManager::ClearScreen()
+		{
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			glLoadIdentity();
+		}
+
 		void OpengGLRenderManager::StartFrame()
 		{
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glLoadIdentity();
-
 		}
 
 		void OpengGLRenderManager::EndFrame()
@@ -185,6 +217,21 @@ namespace Aurora
 
 				delete [] pixels;
 				pixels = 0;
+			}
+		}
+
+		void OpengGLRenderManager::_createEmptyTexture( Image* image, ImageLocation location )
+		{
+			if (image != 0)
+			{
+				glGenTextures(1, &image->_id);
+				glBindTexture(GL_TEXTURE_2D, image->_id);
+				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image->_width,image->_height, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+				glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 			}
 		}
 
@@ -313,6 +360,7 @@ namespace Aurora
 			glRotatef(sprite->rotationX,1.0f,0.0f,0.0f);
 			glRotatef(sprite->rotationY,0.0f,1.0f,0.0f);
 			glRotatef(sprite->rotationZ,0.0f,0.0f,1.0f);
+			glScalef(sprite->scaleX,sprite->scaleY,sprite->scaleZ);
 
 			int posx = 0;
 			int posy = 0;
@@ -406,6 +454,42 @@ namespace Aurora
 			delete [] vertices;
 		}
 
+		void OpengGLRenderManager::StartRenderToTexture(Image* texture)
+		{
+			glViewport(0, 0, texture->_width, texture->_height);
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+
+			gluPerspective(_pov, texture->_width/texture->_height,_zMin,_zMax);
+
+			glMatrixMode(GL_MODELVIEW);	
+			glLoadIdentity();
+
+			// for GL_DRAW_BUFFER and GL_READ_BUFFER
+			glPushAttrib(GL_COLOR_BUFFER_BIT | GL_PIXEL_MODE_BIT); 
+			glDrawBuffer(GL_BACK);
+			glReadBuffer(GL_BACK);
+
+			//now render all stuff you want
+		}
+
+		void OpengGLRenderManager::EndRenderToTexture(Image* texture)
+		{
+			// copy the frame buffer pixels to a texture
+			glBindTexture(GL_TEXTURE_2D, texture->_id);
+			glCopyTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, 0, 0,texture->_width, texture->_height);
+			glBindTexture(GL_TEXTURE_2D, 0);
+
+			// GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT
+			glPopAttrib();
+		}
+
+		void OpengGLRenderManager::RenderToScreen()
+		{
+			//in opegl case just set again perspective
+			SetPerspective();
+		}
+
 		//shapes
 		void OpengGLRenderManager::drawCube(unsigned int color,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation)
 		{
@@ -425,6 +509,36 @@ namespace Aurora
 
 			glDisableClientState(GL_VERTEX_ARRAY);
 						
+			glPopMatrix();
+		}
+
+		void OpengGLRenderManager::DrawCubeTextured(Image* texture,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation)
+		{
+			glPushMatrix();
+
+			glRotatef(rotation.x,1.0f,0.0f,0.0f);
+			glRotatef(rotation.y,0.0f,1.0f,0.0f);
+			glRotatef(rotation.z,0.0f,0.0f,1.0f);
+			glTranslatef(position.x,position.y,position.z);
+
+			glColor4ub(255, 255, 255, 255);
+
+			glBindTexture(GL_TEXTURE_2D, texture->_id);
+			glEnable(GL_TEXTURE_2D);
+
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+			glTexCoordPointer(2,GL_FLOAT,0, cubeST);
+			glVertexPointer(3, GL_FLOAT, 0, cubeVert);
+
+			glDrawArrays(GL_TRIANGLES,0,36);
+
+			glDisableClientState(GL_VERTEX_ARRAY);
+			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+			glDisable(GL_TEXTURE_2D);
+
 			glPopMatrix();
 		}
 	}
