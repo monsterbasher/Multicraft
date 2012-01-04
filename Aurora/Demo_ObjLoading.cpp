@@ -1,0 +1,139 @@
+#include "Demo_ObjLoading.h"
+#include <stdio.h>
+
+#include <Aurora/Graphics/Sprite.h>
+#include <Aurora/Graphics/Image.h>
+
+void Demo_ObjLoading::Init()
+{
+	_renderManager = RenderManager::Instance();
+	_systemManager = SystemManager::Instance();
+
+	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
+
+	cam = new Camera();
+	cam->PositionCamera(0,0,0,0,0,-5,0,1,0);
+
+	_renderManager->setCurrentCam(cam);
+
+
+	//load model
+
+	objModel  = new ObjModel();
+	objModel->LoadObj("Assets/Models/Obj/companion_cube/companion_cube.obj");
+
+
+	dt = 0.0f;
+}
+
+void Demo_ObjLoading::Enter()
+{
+	RenderManager::Instance()->SetOrtho();
+	_clock.Reset();
+}
+
+void Demo_ObjLoading::CleanUp()
+{
+	//delete font;
+}
+
+void Demo_ObjLoading::Pause()
+{
+
+}
+
+void Demo_ObjLoading::Resume()
+{
+
+}
+
+void Demo_ObjLoading::HandleEvents(GameManager* sManager)
+{
+	_systemManager->Update();
+
+	//camera
+	//rotate
+	if(_systemManager->keyHold(Key::Left))
+	{
+		cam->RotateView(2.0f * dt,0,1,0);
+	}
+	if(_systemManager->keyHold(Key::Right))
+	{
+		cam->RotateView(-(2.0f * dt),0,1,0);
+	}
+	if(_systemManager->keyHold(Key::Up))
+	{
+		cam->PitchView(2.0f * dt);
+	}
+	if(_systemManager->keyHold(Key::Down))
+	{
+		cam->PitchView(-(2.0f * dt));
+	}
+
+	//move
+	if(_systemManager->keyHold(Key::W))
+	{
+		cam->Move(6.0f * dt);
+	}
+	if(_systemManager->keyHold(Key::S))
+	{
+		cam->Move(-(6.0f * dt));
+	}
+	if(_systemManager->keyHold(Key::A))
+	{
+		cam->Strafe(-(6.0f * dt));
+	}
+	if(_systemManager->keyHold(Key::D))
+	{
+		cam->Strafe(6.0f * dt);
+	}
+}
+void Demo_ObjLoading::Update(GameManager* sManager)
+{
+	dt = _clock.getTime();
+	_clock.Reset();
+}
+void Demo_ObjLoading::Draw(GameManager* sManager)
+{
+	RenderManager::Instance()->StartFrame();
+	RenderManager::Instance()->SetPerspective();
+	RenderManager::Instance()->ClearScreen();
+
+	RenderManager::Instance()->UpdateCurrentCamera();
+
+	//draw 3d model
+
+
+	//change ortho for text
+	RenderManager::Instance()->SetTextOrtho();
+	RenderManager::Instance()->drawText(font,1,267,"Multicraft",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+
+	//draw fps
+	char deltaTime[30];
+	sprintf(deltaTime,"dt: %f",dt);
+	RenderManager::Instance()->drawText(font,1,27,deltaTime,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+
+	RenderManager::Instance()->EndFrame();
+}
+
+void Demo_ObjLoadingGameManager::Configure()
+{
+	//init render manager properties
+	RenderManager::Instance()->setSesize(480,272);
+}
+
+void Demo_ObjLoadingGameManager::Init()
+{
+	//init whatever you need
+	exampleState = new Demo_ObjLoading();
+	exampleState->Init();
+
+	ChangeState(exampleState);
+}
+
+void Demo_ObjLoadingGameManager::CleanUp()
+{
+	exampleState->CleanUp();
+	delete exampleState;
+}
+

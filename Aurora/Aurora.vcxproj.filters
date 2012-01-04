@@ -279,6 +279,7 @@
     <ClCompile Include="Aurora\Graphics\ModelObj.cpp">
       <Filter>Aurora\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="Demo_ObjLoading.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExampleGame.h" />
@@ -696,5 +697,6 @@
     <ClInclude Include="Aurora\Graphics\ModelObj.h">
       <Filter>Aurora\Graphics</Filter>
     </ClInclude>
+    <ClInclude Include="Demo_ObjLoading.h" />
   </ItemGroup>
 </Project>

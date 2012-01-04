@@ -1,0 +1,28 @@
+# 3ds Max Wavefront OBJ Exporter v0.97b - (c)2007 guruware
+# File Created: 21.08.2011 13:47:55
+
+newmtl COG_APCBody_CP_Mat
+Ns 10.000
+Ni 1.500
+d 1.000
+Tr 0.000
+Tf 1.000 1.000 1.000 
+illum 2
+Ka 0.588 0.588 0.588
+Kd 0.588 0.588 0.588
+Ks 0.000 0.000 0.000
+Ke 0.000 0.000 0.000
+map_Kd COG_APCBody_CP_Tex2.png
+
+newmtl COG_APCWheels_CP_Mat
+Ns 10.000
+Ni 1.500
+d 1.000
+Tr 0.000
+Tf 1.000 1.000 1.000 
+illum 2
+Ka 0.588 0.588 0.588
+Kd 0.588 0.588 0.588
+Ks 0.000 0.000 0.000
+Ke 0.000 0.000 0.000
+map_Kd COG_APCWheels_CP_Tex2.png

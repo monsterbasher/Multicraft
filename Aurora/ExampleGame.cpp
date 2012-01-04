@@ -129,8 +129,8 @@ void ExampleState::Draw(GameManager* sManager)
 {
 	RenderManager::Instance()->StartFrame();
 
-	RenderManager::Instance()->StartRenderToTexture(renderToImage);
 	RenderManager::Instance()->SetPerspective(53,renderToImage->_width/renderToImage->_height,0.1f,256.0f);
+	RenderManager::Instance()->StartRenderToTexture(renderToImage);	
 	RenderManager::Instance()->ClearScreen();
 
 	RenderManager::Instance()->drawSprite3D(sprite3d);

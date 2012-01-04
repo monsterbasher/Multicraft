@@ -109,6 +109,7 @@
     <ClCompile Include="Aurora\Utils\GameLoader.cpp" />
     <ClCompile Include="Aurora\Utils\GameManager.cpp" />
     <ClCompile Include="Aurora\Utils\pc\WinGameLoader.cpp" />
+    <ClCompile Include="Demo_ObjLoading.cpp" />
     <ClCompile Include="ExampleGame.cpp" />
     <ClCompile Include="libs\lua-5.1.4\src\lapi.c" />
     <ClCompile Include="libs\lua-5.1.4\src\lauxlib.c" />
@@ -197,6 +198,7 @@
     <ClInclude Include="Aurora\Utils\GameState.h" />
     <ClInclude Include="Aurora\Utils\pc\WinGameLoader.h" />
     <ClInclude Include="Aurora\Utils\PlatformConfigurator.h" />
+    <ClInclude Include="Demo_ObjLoading.h" />
     <ClInclude Include="ExampleGame.h" />
     <ClInclude Include="libs\lua-5.1.4\src\lapi.h" />
     <ClInclude Include="libs\lua-5.1.4\src\lauxlib.h" />
