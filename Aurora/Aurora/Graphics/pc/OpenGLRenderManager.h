@@ -56,7 +56,7 @@ namespace Aurora
 			//shapes
 			void drawCube(unsigned int color,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation);
 			void DrawCubeTextured(Image* texture,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation);
-			void DrawModejObj(ModelObj *model);
+			void DrawModejObj(ModelObj *model,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation);
 		};
 	}
 }

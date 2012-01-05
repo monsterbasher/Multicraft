@@ -728,9 +728,17 @@ namespace Aurora
 			model->allUVMap.clear();
 		}
 
-		void OpengGLRenderManager::DrawModejObj(ModelObj *model)
+		void OpengGLRenderManager::DrawModejObj(ModelObj *model,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation)
 		{
 			glColor4ub(255, 255, 255, 255);
+
+			glPushMatrix();
+
+			glRotatef(rotation.x,1.0f,0.0f,0.0f);
+			glRotatef(rotation.y,0.0f,1.0f,0.0f);
+			glRotatef(rotation.z,0.0f,0.0f,1.0f);
+			glTranslatef(position.x,position.y,position.z);
+			glScalef(scale.x,scale.y,scale.z);
 
 			for (unsigned int i = 0; i < model->mMeshes.size();i++)
 			{
@@ -789,6 +797,8 @@ namespace Aurora
 				glDisableClientState(GL_VERTEX_ARRAY);
 				glDisableClientState(GL_TEXTURE_COORD_ARRAY);*/
 			}
+
+			glPopMatrix();
 		}
 	}
 }

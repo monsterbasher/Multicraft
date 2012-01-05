@@ -18,7 +18,10 @@ void Demo_ObjLoading::Init()
 
 	//load model
 	objModel  = new ModelObj();
-	objModel->LoadObj("Assets/Models/Obj/companion_cube/companion_cube.obj");
+	//objModel->LoadObj("Assets/Models/Obj/companion_cube/companion_cube.obj");
+	objModel->LoadObj("Assets/Models/Obj/apc_obj/apc.obj");
+	//objModel->LoadObj("Assets/Models/Obj/tanker_obj/tanker.obj");
+	//objModel->LoadObj("Assets/Models/Obj/portal_gun/portal_gun.obj");
 
 	dt = 0.0f;
 }
@@ -99,7 +102,7 @@ void Demo_ObjLoading::Draw(GameManager* sManager)
 	RenderManager::Instance()->UpdateCurrentCamera();
 
 	//draw 3d model
-	RenderManager::Instance()->DrawModejObj(objModel);
+	RenderManager::Instance()->DrawModejObj(objModel,Vector3(0,0,-3),Vector3(0.05f,0.05f,0.05f),Vector3(0,0,0));
 	
 
 	//change ortho for text
