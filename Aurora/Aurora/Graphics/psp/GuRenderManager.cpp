@@ -1,5 +1,4 @@
 #include <Aurora/Graphics/psp/GuRenderManager.h>
-
 #include <Aurora/Graphics/TextureManager.h>
 
 #include <pspge.h>
@@ -13,6 +12,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <malloc.h>
 
 #define SCREEN_WIDTH 			480
 #define SCREEN_HEIGHT 			272
@@ -207,7 +207,6 @@ namespace Aurora
 			sceGuFinish();
 			sceGuSync(0,0);
 
-			//sceDisplayWaitVblankStart();
 			sceDisplayWaitVblankStartCB();
 			_frameBuffer = vabsptr(sceGuSwapBuffers());
 			sceGuDisplay(GU_TRUE);
@@ -387,6 +386,71 @@ namespace Aurora
 			image->_pixels = (unsigned char*)valloc(size);
 		}
 
+		void GuRenderManager::_createModelObjVertices(ModelObj* model)
+		{
+			for (unsigned int i = 0; i < model->mMeshes.size();i++)
+			{
+				ObjMesh *mesh = model->mMeshes[i];
+
+				//build mesh vertices
+				mesh->meshVertices =  (TexturesPSPVertex*)memalign(16,( mesh->mFace.size() * 3) * sizeof(TexturesPSPVertex));
+				mesh->triangleCount = mesh->mFace.size();
+				mesh->vertexCount = mesh->mFace.size() * 3;
+
+				int j =0;
+
+				for(unsigned int f = 0;f < mesh->mFace.size();f++)
+				{
+					TexturesPSPVertex vert1;
+					vert1.u = model->allUVMap[mesh->mUVFace[f].x].u;
+					vert1.v = model->allUVMap[mesh->mUVFace[f].x].v;
+					vert1.x = model->allVertex[mesh->mFace[f].x].x;
+					vert1.y = model->allVertex[mesh->mFace[f].x].y;
+					vert1.z = model->allVertex[mesh->mFace[f].x].z;
+					memcpy(&mesh->meshVertices[j],&vert1,sizeof(TexturesPSPVertex));
+
+					mesh->aabb.expandToInclude(model->allVertex[mesh->mFace[f].x]);
+					j++;
+
+					TexturesPSPVertex vert2;
+					vert2.u = model->allUVMap[mesh->mUVFace[f].y].u;
+					vert2.v = model->allUVMap[mesh->mUVFace[f].y].v;
+					vert2.x = model->allVertex[mesh->mFace[f].y].x;
+					vert2.y = model->allVertex[mesh->mFace[f].y].y;
+					vert2.z = model->allVertex[mesh->mFace[f].y].z;
+					memcpy(&mesh->meshVertices[j],&vert2,sizeof(TexturesPSPVertex));
+
+					mesh->aabb.expandToInclude(model->allVertex[mesh->mFace[f].y]);
+					j++;
+
+					TexturesPSPVertex vert3;
+					vert3.u = model->allUVMap[mesh->mUVFace[f].z].u;
+					vert3.v = model->allUVMap[mesh->mUVFace[f].z].v;
+					vert3.x = model->allVertex[mesh->mFace[f].z].x;
+					vert3.y = model->allVertex[mesh->mFace[f].z].y;
+					vert3.z = model->allVertex[mesh->mFace[f].z].z;
+					memcpy(&mesh->meshVertices[j],&vert3,sizeof(TexturesPSPVertex));
+
+					mesh->aabb.expandToInclude(model->allVertex[mesh->mFace[f].z]);
+					j++;
+
+				}
+				mesh->mUVFace.clear();
+				mesh->mFace.clear();
+				mesh->mNormalFace.clear();
+
+				//clear the cache or there will be some errors
+				//sceKernelDcacheWritebackInvalidateRange(mesh->meshVertices,( mesh->mFace.size() * 3) * sizeof(TexturesPSPVertex));
+				sceKernelDcacheWritebackInvalidateAll();
+			}
+
+			model->allVertex.clear();
+			model->allNormal.clear();
+			model->allUVMap.clear();
+
+			sceKernelDcacheWritebackInvalidateAll();
+		}
+
 		void GuRenderManager::bindTexture(Image* image)
 		{
 			if(image->_id != _currentTexture)
@@ -413,12 +477,17 @@ namespace Aurora
 				sceGuTexImage(0,image->_width,image->_height,image->_width,image->_pixels);
 
 				sceGuTexFunc(GU_TFX_REPLACE,GU_TCC_RGBA);
-				sceGuTexFilter(GU_NEAREST,GU_NEAREST);
+				sceGuTexFilter(GU_LINEAR,GU_LINEAR);//GU_NEAREST
 				sceGuTexOffset( 0.0f, 0.0f );
 				sceGuTexWrap(GU_REPEAT,GU_REPEAT);
 
 				_currentTexture = image->_id;
 			}
+		}
+
+		void GuRenderManager::bindTexture(int id)
+		{
+			//implement this
 		}
 
 		void GuRenderManager::drawImage(Image* image)
@@ -624,6 +693,60 @@ namespace Aurora
 				posx = 0;
 				posy++;
 			}
+
+			sceGumPopMatrix();
+		}
+
+		void GuRenderManager::DrawModelObj(ModelObj *model,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation)
+		{
+			sceGumPushMatrix();
+
+			ScePspFVector3 loc = {position.x,position.y,position.z};
+			ScePspFVector3 rot = {Aurora::Math::Math::degreesToRadians(rotation.x),Aurora::Math::Math::degreesToRadians(rotation.y),Aurora::Math::Math::degreesToRadians(rotation.z)};
+			ScePspFVector3 sca = {scale.x,scale.y,scale.z};
+
+			sceGumTranslate(&loc);
+			sceGumRotateXYZ(&rot);
+			sceGumScale(&sca);
+
+			sceGuColor(0xffffffff);
+			sceGuEnable(GU_TEXTURE_2D);
+
+			unsigned int count = model->mMeshes.size();
+
+			for(unsigned int i = 0;i < count;i++)
+			{
+				ObjMesh *mesh = model->mMeshes[i];
+
+				if(mesh->mMaterial != -1)
+				{
+					ObjMaterial *material = model->mMaterials[mesh->mMaterial];
+
+					bindTexture(material->colorMapFilename);
+
+					/*if(material->mipmapping)
+					{
+						TextureManager::Instance()->SetMipMapsTextures(material->texturID,material->mipmap1,material->mipmap2,material->mipmap3);
+
+					}else
+					{
+						TextureManager::Instance()->SetTexture(material->texturID,GU_NEAREST,GU_NEAREST);
+					}*/
+				}
+
+				if (mesh->mMaterial != -1 && model->mMaterials[mesh->mMaterial]->lightmapping)
+				{
+					//ObjMaterial *material = model->mMaterials[mesh->mMaterial];
+					//TextureManager::Instance()->SetTexture(material->lightMapID);
+				}
+
+				//if(mesh->triangles)
+					sceGumDrawArray(GU_TRIANGLES,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D,mesh->vertexCount,0,mesh->meshVertices);
+				//else
+				//	sceGumDrawArray(GU_TRIANGLE_STRIP,GU_TEXTURE_32BITF|GU_VERTEX_32BITF|GU_TRANSFORM_3D,mesh->indicesCount,0,mesh->meshVertices);
+			}
+
+			sceGuDisable(GU_TEXTURE_2D);
 
 			sceGumPopMatrix();
 		}

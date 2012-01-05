@@ -120,7 +120,7 @@ namespace Aurora
 			virtual void drawCube(unsigned int color,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation) = 0;
 			virtual void DrawCubeTextured(Image* texture,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation) = 0;
 
-			virtual void DrawModejObj(ModelObj *model,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation) = 0;
+			virtual void DrawModelObj(ModelObj *model,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation) = 0;
 
 		};
 	}

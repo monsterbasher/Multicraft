@@ -21,6 +21,7 @@ Aurora/Graphics/Image.o \
 Aurora/Graphics/Sprite.o \
 Aurora/Graphics/Sprite3D.o \
 Aurora/Graphics/TrueTypeFont.o \
+Aurora/Graphics/ModelObj.o \
 Aurora/System/SystemManager.o \
 Aurora/System/psp/Clock.o \
 Aurora/System/psp/PspSystemManager.o \
@@ -29,6 +30,7 @@ Aurora/Utils/GameManager.o \
 Aurora/Utils/psp/PspCommon.o \
 Aurora/Utils/psp/PspGameLoader.o \
 ExampleGame.o \
+Demo_ObjLoading.o \
 Starter.o
 
 INCDIR = $(PSPPATH)/include

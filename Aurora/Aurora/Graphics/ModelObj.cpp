@@ -129,14 +129,14 @@ namespace Aurora
 							fgets(buffer, sizeof(buffer), fp);
 							sscanf(buffer, "%s %s", buffer, buffer);
 
-							//newMaterial->colorMapFilename =  "Assets/Obj/";
-							newMaterial->colorMapFilename = buffer;
+							//newMaterial->colorMapFilename = buffer;
 
 							std::string pathName(Filname);
 							size_t found = pathName.find_last_of("/");
 							pathName = pathName.substr(0,found)+ "/" + buffer;
 
 							newMaterial->texturID  = TextureManager::Instance()->loadImageFromFile(pathName)->_id;
+							newMaterial->colorMapFilename = pathName;
 
 							newMat = true;
 

@@ -9,19 +9,20 @@ void Demo_ObjLoading::Init()
 	_renderManager = RenderManager::Instance();
 	_systemManager = SystemManager::Instance();
 
+	//load model
+	objModel  = new ModelObj();
+	//objModel->LoadObj("Assets/Models/Obj/companion_cube/companion_cube.obj");
+	//objModel->LoadObj("Assets/Models/Obj/apc_obj/apc.obj");
+	//objModel->LoadObj("Assets/Models/Obj/tanker_obj/tanker.obj");
+	objModel->LoadObj("Assets/Models/Obj/portal_gun/portal_gun.obj");
+	//objModel->LoadObj("Assets/Models/Obj/room1/room1.obj");
+
 	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
 
 	cam = new Camera();
 	cam->PositionCamera(0,0,0,0,0,-5,0,1,0);
 
 	_renderManager->setCurrentCam(cam);
-
-	//load model
-	objModel  = new ModelObj();
-	//objModel->LoadObj("Assets/Models/Obj/companion_cube/companion_cube.obj");
-	objModel->LoadObj("Assets/Models/Obj/apc_obj/apc.obj");
-	//objModel->LoadObj("Assets/Models/Obj/tanker_obj/tanker.obj");
-	//objModel->LoadObj("Assets/Models/Obj/portal_gun/portal_gun.obj");
 
 	dt = 0.0f;
 }
@@ -102,10 +103,11 @@ void Demo_ObjLoading::Draw(GameManager* sManager)
 	RenderManager::Instance()->UpdateCurrentCamera();
 
 	//draw 3d model
-	RenderManager::Instance()->DrawModejObj(objModel,Vector3(0,0,-3),Vector3(0.05f,0.05f,0.05f),Vector3(0,0,0));
+	RenderManager::Instance()->DrawModelObj(objModel,Vector3(0,0,-3),Vector3(1,1,1),Vector3(0,0,0));
 	
 
 	//change ortho for text
+	RenderManager::Instance()->SetOrtho();
 	RenderManager::Instance()->SetTextOrtho();
 	RenderManager::Instance()->drawText(font,1,267,"Multicraft",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 

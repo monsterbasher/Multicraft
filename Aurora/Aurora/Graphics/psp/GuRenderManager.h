@@ -27,6 +27,7 @@ namespace Aurora
 			void _createTexture(Image* image);
 			void _createTexture(unsigned char* pixels,int width,int height,unsigned int &texId);
 			void _createEmptyTexture( Image* image, ImageLocation location );
+			void _createModelObjVertices(ModelObj* model);
 
 		public:
 
@@ -43,6 +44,7 @@ namespace Aurora
 			void StartFrame();
 			void EndFrame();
 
+			void bindTexture(int id);
 			void bindTexture(Image* image);
 			void bindTexture(std::string filename);
 
@@ -66,7 +68,7 @@ namespace Aurora
 			//shapes
 			void drawCube(unsigned int color,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation);
 			void DrawCubeTextured(Image* texture,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation);
-
+			void DrawModelObj(ModelObj *model,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation);
 		};
 	}
 }

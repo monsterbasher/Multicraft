@@ -728,7 +728,7 @@ namespace Aurora
 			model->allUVMap.clear();
 		}
 
-		void OpengGLRenderManager::DrawModejObj(ModelObj *model,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation)
+		void OpengGLRenderManager::DrawModelObj(ModelObj *model,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation)
 		{
 			glColor4ub(255, 255, 255, 255);
 

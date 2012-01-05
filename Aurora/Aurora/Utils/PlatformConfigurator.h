@@ -1,7 +1,7 @@
 #ifndef PLATFORMCONFIGURATOR_H 
 #define PLATFORMCONFIGURATOR_H
 
-#define AURORA_PC
-//#define AURORA_PSP
+//#define AURORA_PC
+#define AURORA_PSP
 
 #endif
