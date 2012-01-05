@@ -147,7 +147,7 @@ namespace Aurora
 			}
 		};
 
-		class ObjModel
+		class ModelObj
 		{
 		public:
 			std::vector<ObjMesh*>	mMeshes;
@@ -162,8 +162,7 @@ namespace Aurora
 			//meshes count
 			int meshCount;
 
-
-			ObjModel()
+			ModelObj()
 			{
 				meshCount = 0;
 			}
@@ -171,13 +170,11 @@ namespace Aurora
 			void LoadMaterials(const char *Filname);
 			void LoadObj(const char *FileName);
 			void Optimize();
-			void Optimize2();
 
 			void SaveOptimized(const char *FileName);
 			void LoadOptimized(const char *FileName);
 
 			void FindLightMaps();
-			void Render2();
 
 		private:
 

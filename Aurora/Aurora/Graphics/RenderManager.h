@@ -6,6 +6,8 @@
 #include <Aurora/Graphics/Sprite.h>
 #include <Aurora/Graphics/Sprite3D.h>
 #include <Aurora/Graphics/TrueTypeFont.h>
+#include <Aurora/Graphics/ModelObj.h>
+
 #include <Aurora/Math/Vector3.h>
 #include <Aurora/Math/Vector2.h>
 
@@ -41,6 +43,7 @@ namespace Aurora
 			virtual void _createTexture(Image* image) = 0;
 			virtual void _createTexture(unsigned char* pixels,int width,int height,unsigned int &texId) = 0;
 			virtual void _createEmptyTexture( Image* image, ImageLocation location ) = 0;
+			virtual void _createModelObjVertices(ModelObj* model) = 0;
 
 		public:
 
@@ -67,6 +70,7 @@ namespace Aurora
 
 			friend class TextureManager;
 			friend class TrueTypeFont;
+			friend class ModelObj;
 
 		public:
 
@@ -81,6 +85,7 @@ namespace Aurora
 
 			virtual void SetOrtho() = 0;
 			virtual void SetOrtho(float left,float right,float bottom,float top,float zmin,float zmax) = 0;
+			virtual void SetTextOrtho() = 0;
 			virtual void SetPerspective() = 0;			
 			virtual void SetPerspective(float pov,float aspect,float zmin,float zmax) = 0;
 
@@ -88,29 +93,34 @@ namespace Aurora
 			virtual void StartFrame() = 0;
 			virtual void EndFrame() = 0;
 
+			virtual void bindTexture(int id) = 0;
 			virtual void bindTexture(Image* image) = 0;
-			virtual void bindTexture(std::string filename) = 0;
-
-			virtual void drawImage(Image* image) = 0;
-			virtual void drawImage(Image* image,int posx,int posy) = 0;
-			virtual void drawImage(Image* image,int posx,int posy,int width,int height) = 0;
-
-			virtual void drawSprite(Sprite* sprite) = 0;
-			virtual void drawSprite3D(Sprite3D* sprite) = 0;
-
-			virtual void SetTextOrtho() = 0;
-			virtual void drawText(TrueTypeFont* font,float x, float y, const char *text, int align, unsigned int col) = 0;
+			virtual void bindTexture(std::string filename) = 0;				
 
 			//render to texture
 			virtual void StartRenderToTexture(Image* texture) = 0;
 			virtual void EndRenderToTexture(Image* texture) = 0;
 			virtual void RenderToScreen() = 0;
 
+			//camera
 			virtual void UpdateCurrentCamera() = 0;
 
-			//shapes
+			//2D drawing
+			virtual void drawImage(Image* image) = 0;
+			virtual void drawImage(Image* image,int posx,int posy) = 0;
+			virtual void drawImage(Image* image,int posx,int posy,int width,int height) = 0;
+
+			virtual void drawSprite(Sprite* sprite) = 0;
+
+			virtual void drawText(TrueTypeFont* font,float x, float y, const char *text, int align, unsigned int col) = 0;
+
+			//3D drawing
+			virtual void drawSprite3D(Sprite3D* sprite) = 0;
+
 			virtual void drawCube(unsigned int color,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation) = 0;
 			virtual void DrawCubeTextured(Image* texture,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation) = 0;
+
+			virtual void DrawModejObj(ModelObj *model) = 0;
 
 		};
 	}

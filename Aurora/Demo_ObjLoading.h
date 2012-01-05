@@ -18,7 +18,7 @@ class Demo_ObjLoading : public GameState
 {
 private:
 
-	ObjModel* objModel;
+	ModelObj* objModel;
 
 	TrueTypeFont* font;
 

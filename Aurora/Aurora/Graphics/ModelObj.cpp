@@ -1,12 +1,13 @@
 #include <Aurora/Graphics/ModelObj.h>
 #include <Aurora/Graphics/TextureManager.h>
+#include <Aurora/Graphics/RenderManager.h>
 
 namespace Aurora
 {
 	namespace Graphics
 	{
 
-		void ObjModel::LoadMaterials(const char *Filname)
+		void ModelObj::LoadMaterials(const char *Filname)
 		{
 			FILE *fp = fopen(Filname,"r");
 
@@ -135,8 +136,7 @@ namespace Aurora
 							size_t found = pathName.find_last_of("/");
 							pathName = pathName.substr(0,found)+ "/" + buffer;
 
-//							TextureManager::Instance()->LoadTextureFromFile(pathName);
-//							newMaterial->texturID = TextureManager::Instance()->GetTextureNumber(pathName);
+							newMaterial->texturID  = TextureManager::Instance()->loadImageFromFile(pathName)->_id;
 
 							newMat = true;
 
@@ -167,8 +167,7 @@ namespace Aurora
 							size_t found = pathName.find_last_of("/");
 							pathName = pathName.substr(0,found)+ "/" + buffer;
 
-//							TextureManager::Instance()->LoadTextureFromFile(pathName);
-//							newMaterial->lightMapID = TextureManager::Instance()->GetTextureNumber(pathName);
+							newMaterial->lightMapID  = TextureManager::Instance()->loadImageFromFile(pathName)->_id;
 							newMaterial->lightmapping = true;
 						}
 						else
@@ -189,7 +188,7 @@ namespace Aurora
 			fclose(fp);
 		}
 
-		void ObjModel::LoadObj(const char *FileName)
+		void ModelObj::LoadObj(const char *FileName)
 		{
 			FILE *fp = fopen(FileName,"r");
 
@@ -421,9 +420,12 @@ namespace Aurora
 			mMeshes.push_back(newMesh);
 
 			fclose(fp);
+
+			//now build vertices in proper way for each platform
+			RenderManager::Instance()->_createModelObjVertices(this);
 		}
 
-		void ObjModel::FindLightMaps()
+		void ModelObj::FindLightMaps()
 		{
 			for (unsigned int i = 0; i < mMeshes.size();i++)
 			{
@@ -443,8 +445,7 @@ namespace Aurora
 						size_t found = pathName.find_last_of("/");
 						pathName = pathName.substr(0,found) + "/" + mesh->name + "LightingMap.png";
 
-//						TextureManager::Instance()->LoadTextureFromFile(pathName);
-						int lightMap;// = TextureManager::Instance()->GetTextureNumber(pathName);
+						int lightMap = TextureManager::Instance()->loadImageFromFile(pathName)->_id;
 
 						if (lightMap != -1)
 						{
@@ -460,9 +461,8 @@ namespace Aurora
 					//lest see if there is a lightmap with the same name as object
 					size_t found = pathName.find_last_of("/");
 					pathName = pathName.substr(0,found) + "/" + mesh->name + "LightingMap.png";
-
-//					TextureManager::Instance()->LoadTextureFromFile(pathName);
-					int lightMap;//= TextureManager::Instance()->GetTextureNumber(pathName);
+										
+					int lightMap = TextureManager::Instance()->loadImageFromFile(pathName)->_id;
 
 					if (lightMap != -1)
 					{
@@ -478,182 +478,9 @@ namespace Aurora
 			}
 		}
 
-		void ObjModel::Optimize2()
+		void ModelObj::Optimize()
 		{
-			for (unsigned int i = 0; i < mMeshes.size();i++)
-			{
-				ObjMesh *mesh = mMeshes[i];
-
-				std::vector<TexturesPSPVertex> temp;
-				std::vector<int> tempIndices;
-
-				for(unsigned int f = 0;f < mesh->mFace.size();f++)
-				{
-					//create temp vertex
-					TexturesPSPVertex vert;
-					vert.u = allUVMap[mesh->mUVFace[f].x].u;
-					vert.v = allUVMap[mesh->mUVFace[f].x].v;
-					vert.x = allVertex[mesh->mFace[f].x].x;
-					vert.y = allVertex[mesh->mFace[f].x].y;
-					vert.z = allVertex[mesh->mFace[f].x].z;
-
-					//check if exist
-					bool found = false;
-					for(unsigned int t = 0;t < temp.size();t++)
-					{
-						if(temp[t].u == vert.u && temp[t].v == vert.v && temp[t].x == vert.x && temp[t].y == vert.y && temp[t].z == vert.z)
-						{
-							found = true;
-							tempIndices.push_back(t);
-							break;
-						}
-					}
-
-					if (found == false)
-					{
-						mesh->aabb.expandToInclude(allVertex[mesh->mFace[f].x]);
-						temp.push_back(vert);
-						tempIndices.push_back(temp.size()-1);
-					}
-
-					//////////////////////////////////////////////////////////////////////////
-					vert.u = allUVMap[mesh->mUVFace[f].y].u;
-					vert.v = allUVMap[mesh->mUVFace[f].y].v;
-					vert.x = allVertex[mesh->mFace[f].y].x;
-					vert.y = allVertex[mesh->mFace[f].y].y;
-					vert.z = allVertex[mesh->mFace[f].y].z;
-
-					//check if exist
-					found = false;
-					for(unsigned int t = 0;t < temp.size();t++)
-					{
-						if(temp[t].u == vert.u && temp[t].v == vert.v && temp[t].x == vert.x && temp[t].y == vert.y && temp[t].z == vert.z)
-						{
-							found = true;
-							tempIndices.push_back(t);
-							break;
-						}
-					}
-
-					if (found == false)
-					{
-						mesh->aabb.expandToInclude(allVertex[mesh->mFace[f].y]);
-						temp.push_back(vert);
-						tempIndices.push_back(temp.size()-1);
-					}
-
-					//////////////////////////////////////////////////////////////////////////
-					vert.u = allUVMap[mesh->mUVFace[f].z].u;
-					vert.v = allUVMap[mesh->mUVFace[f].z].v;
-					vert.x = allVertex[mesh->mFace[f].z].x;
-					vert.y = allVertex[mesh->mFace[f].z].y;
-					vert.z = allVertex[mesh->mFace[f].z].z;
-
-					//check if exist
-					found = false;
-					for(unsigned int t = 0;t < temp.size();t++)
-					{
-						if(temp[t].u == vert.u && temp[t].v == vert.v && temp[t].x == vert.x && temp[t].y == vert.y && temp[t].z == vert.z)
-						{
-							found = true;
-							tempIndices.push_back(t);
-							break;
-						}
-					}
-
-					if (found == false)
-					{
-						mesh->aabb.expandToInclude(allVertex[mesh->mFace[f].z]);
-						temp.push_back(vert);
-						tempIndices.push_back(temp.size()-1);
-					}
-				}
-
-				//copy temp vertices and indieces
-				mesh->meshVertices = new TexturesPSPVertex[temp.size()];
-				for(int v = 0;v < temp.size();v++)
-				{
-					memcpy(&mesh->meshVertices[v],&temp[v],sizeof(TexturesPSPVertex));
-				}
-
-				mesh->indices = new int[tempIndices.size()];
-				for(int v = 0;v < tempIndices.size();v++)
-				{
-					memcpy(&mesh->indices[v],&tempIndices[v],sizeof(int));
-				}
-
-				mesh->triangleCount = mesh->mFace.size();
-				mesh->vertexCount = temp.size();
-				mesh->indicesCount = tempIndices.size();
-
-				//try optimize indieces for cashe misses
-				/*VertexCache vertex_cache;
-				VertexCacheOptimizer vco;
-
-				int misses = vertex_cache.GetCacheMissCount(mesh->indices,mesh->triangleCount);
-
-				VertexCacheOptimizer::Result res = vco.Optimize(mesh->indices,mesh->triangleCount);
-				int misses2 = vertex_cache.GetCacheMissCount(mesh->indices,mesh->triangleCount);*/
-
-				//create triangle strips :D
-				/*STRIPERCREATE sc;
-
-				sc.DFaces			= (unsigned int*)mesh->indices;
-				sc.NbFaces			= mesh->triangleCount;
-				sc.AskForWords		= true;
-				sc.ConnectAllStrips	= true;
-				sc.OneSided			= true;
-				sc.SGIAlgorithm		= true;
-
-				Striper Strip;
-				Strip.Init(sc);
-
-				STRIPERRESULT sr;
-				Strip.Compute(sr);
-
-				std::vector<unsigned int> testor;
-
-				uword* Refs = (uword*)sr.StripRuns;
-				for(udword i=0;i<sr.NbStrips;i++)
-				{
-					udword NbRefs = sr.StripLengths[i];
-					for(udword j=0;j<NbRefs;j++)
-					{
-						//fprintf(stdout, "%d ", *Refs++);
-						testor.push_back(*Refs++);
-					}
-				}
-
-				delete [] mesh->indices;
-
-				mesh->indices = new int[testor.size()];
-				for(int v = 0;v < testor.size();v++)
-				{
-					memcpy(&mesh->indices[v],&testor[v],sizeof(int));
-				}
-
-				mesh->indicesCount = testor.size();*/
-
-				//end
-
-				temp.clear();
-				tempIndices.clear();
-
-				mesh->mUVFace.clear();
-				mesh->mFace.clear();
-				mesh->mNormalFace.clear();
-
-			}
-
-			allVertex.clear();
-			allNormal.clear();
-			allUVMap.clear();
-
-		}
-
-		void ObjModel::Optimize()
-		{
-			for (unsigned int i = 0; i < mMeshes.size();i++)
+			/*for (unsigned int i = 0; i < mMeshes.size();i++)
 			{
 				ObjMesh *mesh = mMeshes[i];
 
@@ -710,58 +537,10 @@ namespace Aurora
 
 			allVertex.clear();
 			allNormal.clear();
-			allUVMap.clear();
+			allUVMap.clear();*/
 		}
 
-		void  ObjModel::Render2()
-		{
-			/*for (unsigned int i = 0; i < mMeshes.size();i++)
-			{
-				ObjMesh *mesh = mMeshes[i];
-
-				glColor3f(1,1,1);
-
-				glEnableClientState(GL_VERTEX_ARRAY);
-				glVertexPointer(3, GL_FLOAT, GLsizei(sizeof(TexturesPSPVertex)), &mesh->meshVertices[0].x);
-				
-				if(mesh->mMaterial != -1)
-				{
-					//texture
-					glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-					glActiveTexture(GL_TEXTURE0);
-					glClientActiveTexture(GL_TEXTURE0);
-
-					glEnable(GL_TEXTURE_2D);
-					glBindTexture(GL_TEXTURE_2D, mMaterials[mesh->mMaterial]->texturID);
-					glTexCoordPointer(2, GL_FLOAT, GLsizei(sizeof(TexturesPSPVertex)), &mesh->meshVertices[0].u);
-				}
-		
-
-				if (mesh->mMaterial != -1 && mMaterials[mesh->mMaterial]->lightmapping)
-				{
-					glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-					glActiveTexture(GL_TEXTURE1);
-					glClientActiveTexture(GL_TEXTURE1);
-
-					glEnable(GL_TEXTURE_2D);
-					glBindTexture(GL_TEXTURE_2D, mMaterials[mesh->mMaterial]->lightMapID);
-					glTexCoordPointer(2, GL_FLOAT, GLsizei(sizeof(TexturesPSPVertex)), &mesh->meshVertices[0].u);
-
-					glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-				}
-
-				//glDrawElements(GL_TRIANGLE_STRIP, GLsizei(mesh->indicesCount), GL_UNSIGNED_INT, &mesh->indices[0]);
-				glDrawElements(GL_TRIANGLES, GLsizei(mesh->indicesCount), GL_UNSIGNED_INT, &mesh->indices[0]);
-
-				glDisable(GL_TEXTURE_2D);
-				glDisableClientState(GL_VERTEX_ARRAY);
-				glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-
-				glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-			}*/
-		}
-
-		void ObjModel::SaveOptimized(const char *FileName)
+		void ModelObj::SaveOptimized(const char *FileName)
 		{
 			FILE *binaryFile;
 			binaryFile = fopen (FileName, "wb");
@@ -826,7 +605,7 @@ namespace Aurora
 			fclose(binaryFile);
 		}
 
-		void ObjModel::LoadOptimized(const char *FileName)
+		void ModelObj::LoadOptimized(const char *FileName)
 		{
 			FILE *binaryFile;
 			binaryFile = fopen (FileName, "rb");

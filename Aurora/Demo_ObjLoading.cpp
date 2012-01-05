@@ -16,12 +16,9 @@ void Demo_ObjLoading::Init()
 
 	_renderManager->setCurrentCam(cam);
 
-
 	//load model
-
-	objModel  = new ObjModel();
+	objModel  = new ModelObj();
 	objModel->LoadObj("Assets/Models/Obj/companion_cube/companion_cube.obj");
-
 
 	dt = 0.0f;
 }
@@ -102,7 +99,8 @@ void Demo_ObjLoading::Draw(GameManager* sManager)
 	RenderManager::Instance()->UpdateCurrentCamera();
 
 	//draw 3d model
-
+	RenderManager::Instance()->DrawModejObj(objModel);
+	
 
 	//change ortho for text
 	RenderManager::Instance()->SetTextOrtho();
@@ -111,7 +109,7 @@ void Demo_ObjLoading::Draw(GameManager* sManager)
 	//draw fps
 	char deltaTime[30];
 	sprintf(deltaTime,"dt: %f",dt);
-	RenderManager::Instance()->drawText(font,1,27,deltaTime,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+	RenderManager::Instance()->drawText(font,1,13,deltaTime,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
 	RenderManager::Instance()->EndFrame();
 }

@@ -140,6 +140,15 @@ namespace Aurora
 			glLoadIdentity();
 		}
 
+		void OpengGLRenderManager::bindTexture(int id)
+		{
+			if(id != _currentTexture)
+			{
+				glBindTexture(GL_TEXTURE_2D, id);
+				_currentTexture = id;
+			}
+		}
+
 		void OpengGLRenderManager::bindTexture(Image* image)
 		{
 			if(image->_id != _currentTexture)
@@ -194,10 +203,15 @@ namespace Aurora
 				glGenTextures(1, &image->_id);
 				glBindTexture(GL_TEXTURE_2D, image->_id);
 				gluBuild2DMipmaps(GL_TEXTURE_2D, GL_RGBA, image->_width, image->_height, GL_RGBA, GL_UNSIGNED_BYTE, image->_pixels);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);//GL_LINEAR
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);//GL_LINEAR
+
+				//clamp dong like 3d models
+				//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+				//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);//GL_LINEAR
+				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);//GL_NEAREST
 				glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 			}
 		}
@@ -540,6 +554,241 @@ namespace Aurora
 			glDisable(GL_TEXTURE_2D);
 
 			glPopMatrix();
+		}
+
+		void OpengGLRenderManager::_createModelObjVertices(ModelObj* model)
+		{
+			for (unsigned int i = 0; i < model->mMeshes.size();i++)
+			{
+				ObjMesh *mesh = model->mMeshes[i];
+
+				std::vector<TexturesPSPVertex> temp;
+				std::vector<int> tempIndices;
+
+				for(unsigned int f = 0;f < mesh->mFace.size();f++)
+				{
+					//create temp vertex
+					TexturesPSPVertex vert;
+					vert.u = model->allUVMap[mesh->mUVFace[f].x].u;
+					vert.v = model->allUVMap[mesh->mUVFace[f].x].v;
+					vert.x = model->allVertex[mesh->mFace[f].x].x;
+					vert.y = model->allVertex[mesh->mFace[f].x].y;
+					vert.z = model->allVertex[mesh->mFace[f].x].z;
+
+					//check if exist
+					bool found = false;
+					for(unsigned int t = 0;t < temp.size();t++)
+					{
+						if(temp[t].u == vert.u && temp[t].v == vert.v && temp[t].x == vert.x && temp[t].y == vert.y && temp[t].z == vert.z)
+						{
+							found = true;
+							tempIndices.push_back(t);
+							break;
+						}
+					}
+
+					if (found == false)
+					{
+						mesh->aabb.expandToInclude(model->allVertex[mesh->mFace[f].x]);
+						temp.push_back(vert);
+						tempIndices.push_back(temp.size()-1);
+					}
+
+					//////////////////////////////////////////////////////////////////////////
+					vert.u = model->allUVMap[mesh->mUVFace[f].y].u;
+					vert.v = model->allUVMap[mesh->mUVFace[f].y].v;
+					vert.x = model->allVertex[mesh->mFace[f].y].x;
+					vert.y = model->allVertex[mesh->mFace[f].y].y;
+					vert.z = model->allVertex[mesh->mFace[f].y].z;
+
+					//check if exist
+					found = false;
+					for(unsigned int t = 0;t < temp.size();t++)
+					{
+						if(temp[t].u == vert.u && temp[t].v == vert.v && temp[t].x == vert.x && temp[t].y == vert.y && temp[t].z == vert.z)
+						{
+							found = true;
+							tempIndices.push_back(t);
+							break;
+						}
+					}
+
+					if (found == false)
+					{
+						mesh->aabb.expandToInclude(model->allVertex[mesh->mFace[f].y]);
+						temp.push_back(vert);
+						tempIndices.push_back(temp.size()-1);
+					}
+
+					//////////////////////////////////////////////////////////////////////////
+					vert.u = model->allUVMap[mesh->mUVFace[f].z].u;
+					vert.v = model->allUVMap[mesh->mUVFace[f].z].v;
+					vert.x = model->allVertex[mesh->mFace[f].z].x;
+					vert.y = model->allVertex[mesh->mFace[f].z].y;
+					vert.z = model->allVertex[mesh->mFace[f].z].z;
+
+					//check if exist
+					found = false;
+					for(unsigned int t = 0;t < temp.size();t++)
+					{
+						if(temp[t].u == vert.u && temp[t].v == vert.v && temp[t].x == vert.x && temp[t].y == vert.y && temp[t].z == vert.z)
+						{
+							found = true;
+							tempIndices.push_back(t);
+							break;
+						}
+					}
+
+					if (found == false)
+					{
+						mesh->aabb.expandToInclude(model->allVertex[mesh->mFace[f].z]);
+						temp.push_back(vert);
+						tempIndices.push_back(temp.size()-1);
+					}
+				}
+
+				//copy temp vertices and indieces
+				mesh->meshVertices = new TexturesPSPVertex[temp.size()];
+				for(int v = 0;v < temp.size();v++)
+				{
+					memcpy(&mesh->meshVertices[v],&temp[v],sizeof(TexturesPSPVertex));
+				}
+
+				mesh->indices = new int[tempIndices.size()];
+				for(int v = 0;v < tempIndices.size();v++)
+				{
+					memcpy(&mesh->indices[v],&tempIndices[v],sizeof(int));
+				}
+
+				mesh->triangleCount = mesh->mFace.size();
+				mesh->vertexCount = temp.size();
+				mesh->indicesCount = tempIndices.size();
+
+				//try optimize indieces for cashe misses
+				/*VertexCache vertex_cache;
+				VertexCacheOptimizer vco;
+
+				int misses = vertex_cache.GetCacheMissCount(mesh->indices,mesh->triangleCount);
+
+				VertexCacheOptimizer::Result res = vco.Optimize(mesh->indices,mesh->triangleCount);
+				int misses2 = vertex_cache.GetCacheMissCount(mesh->indices,mesh->triangleCount);*/
+
+				//create triangle strips :D
+				/*STRIPERCREATE sc;
+
+				sc.DFaces			= (unsigned int*)mesh->indices;
+				sc.NbFaces			= mesh->triangleCount;
+				sc.AskForWords		= true;
+				sc.ConnectAllStrips	= true;
+				sc.OneSided			= true;
+				sc.SGIAlgorithm		= true;
+
+				Striper Strip;
+				Strip.Init(sc);
+
+				STRIPERRESULT sr;
+				Strip.Compute(sr);
+
+				std::vector<unsigned int> testor;
+
+				uword* Refs = (uword*)sr.StripRuns;
+				for(udword i=0;i<sr.NbStrips;i++)
+				{
+					udword NbRefs = sr.StripLengths[i];
+					for(udword j=0;j<NbRefs;j++)
+					{
+						//fprintf(stdout, "%d ", *Refs++);
+						testor.push_back(*Refs++);
+					}
+				}
+
+				delete [] mesh->indices;
+
+				mesh->indices = new int[testor.size()];
+				for(int v = 0;v < testor.size();v++)
+				{
+					memcpy(&mesh->indices[v],&testor[v],sizeof(int));
+				}
+
+				mesh->indicesCount = testor.size();*/
+
+				//end
+
+				temp.clear();
+				tempIndices.clear();
+
+				mesh->mUVFace.clear();
+				mesh->mFace.clear();
+				mesh->mNormalFace.clear();
+
+			}
+
+			model->allVertex.clear();
+			model->allNormal.clear();
+			model->allUVMap.clear();
+		}
+
+		void OpengGLRenderManager::DrawModejObj(ModelObj *model)
+		{
+			glColor4ub(255, 255, 255, 255);
+
+			for (unsigned int i = 0; i < model->mMeshes.size();i++)
+			{
+				ObjMesh *mesh = model->mMeshes[i];
+
+				glBindTexture(GL_TEXTURE_2D, model->mMaterials[mesh->mMaterial]->texturID);
+				glEnable(GL_TEXTURE_2D);
+								
+				glEnableClientState(GL_VERTEX_ARRAY);
+				glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+				glTexCoordPointer(2, GL_FLOAT, GLsizei(sizeof(TexturesPSPVertex)), &mesh->meshVertices[0].u);
+				glVertexPointer(3, GL_FLOAT, GLsizei(sizeof(TexturesPSPVertex)), &mesh->meshVertices[0].x);
+
+				glDrawElements(GL_TRIANGLES, GLsizei(mesh->indicesCount), GL_UNSIGNED_INT, &mesh->indices[0]);
+
+				glDisableClientState(GL_VERTEX_ARRAY);
+				glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+				glDisable(GL_TEXTURE_2D);
+
+				/*glEnableClientState(GL_VERTEX_ARRAY);
+				glVertexPointer(3, GL_FLOAT, GLsizei(sizeof(TexturesPSPVertex)), &mesh->meshVertices[0].x);
+
+				if(mesh->mMaterial != -1)
+				{
+					//texture
+					glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+					//glActiveTexture(GL_TEXTURE0);
+					//glClientActiveTexture(GL_TEXTURE0);
+
+					bindTexture(model->mMaterials[mesh->mMaterial]->texturID);
+					glEnable(GL_TEXTURE_2D);			
+					
+					glTexCoordPointer(2, GL_FLOAT, GLsizei(sizeof(TexturesPSPVertex)), &mesh->meshVertices[0].u);
+				}
+
+
+				if (mesh->mMaterial != -1 && model->mMaterials[mesh->mMaterial]->lightmapping)
+				{
+					glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+					glActiveTexture(GL_TEXTURE1);
+					glClientActiveTexture(GL_TEXTURE1);
+
+					glEnable(GL_TEXTURE_2D);
+					glBindTexture(GL_TEXTURE_2D, model->mMaterials[mesh->mMaterial]->lightMapID);
+					glTexCoordPointer(2, GL_FLOAT, GLsizei(sizeof(TexturesPSPVertex)), &mesh->meshVertices[0].u);
+
+					glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+				}
+
+				//glDrawElements(GL_TRIANGLE_STRIP, GLsizei(mesh->indicesCount), GL_UNSIGNED_INT, &mesh->indices[0]);
+				glDrawElements(GL_TRIANGLES, GLsizei(mesh->indicesCount), GL_UNSIGNED_INT, &mesh->indices[0]);
+
+				glDisable(GL_TEXTURE_2D);
+				glDisableClientState(GL_VERTEX_ARRAY);
+				glDisableClientState(GL_TEXTURE_COORD_ARRAY);*/
+			}
 		}
 	}
 }

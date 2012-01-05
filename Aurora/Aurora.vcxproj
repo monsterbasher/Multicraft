@@ -50,7 +50,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\libs\sfml\include;.\libs\glew\include\GL;.\;G:\projekty\Multicraft2\Multicraft\Aurora\libs\lua-5.1.4\src;G:\projekty\Multicraft2\Multicraft\Aurora\libs\boost-1.39.0;G:\projekty\Multicraft2\Multicraft\Aurora\libs\luabind;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\libs\sfml\include;.\libs\glew\include\GL;.\;.\libs\lua-5.1.4\src;.\libs\boost-1.39.0;.\libs\luabind;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
