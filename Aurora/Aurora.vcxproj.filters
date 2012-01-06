@@ -34,6 +34,9 @@
     <Filter Include="Tests">
       <UniqueIdentifier>{4c8b2134-cf64-472b-bc7f-8937cb6749ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Aurora\Network\pc">
+      <UniqueIdentifier>{cbc257d7-5c93-47d9-a47e-2feec9a8cccc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Starter.cpp" />
@@ -150,6 +153,18 @@
     </ClCompile>
     <ClCompile Include="Tests\ExampleGame.cpp">
       <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\ServerTest.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\ClientTest.cpp">
+      <Filter>Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\Network\NetworkManager.cpp">
+      <Filter>Aurora\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\Network\pc\PcNetworkManager.cpp">
+      <Filter>Aurora\Network\pc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -287,6 +302,18 @@
     </ClInclude>
     <ClInclude Include="Tests\ExampleGame.h">
       <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\ServerTest.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\ClientTest.h">
+      <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Network\NetworkManager.h">
+      <Filter>Aurora\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Network\pc\PcNetworkManager.h">
+      <Filter>Aurora\Network\pc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
