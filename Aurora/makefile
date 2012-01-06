@@ -22,6 +22,13 @@ Aurora/Graphics/Sprite.o \
 Aurora/Graphics/Sprite3D.o \
 Aurora/Graphics/TrueTypeFont.o \
 Aurora/Graphics/ModelObj.o \
+Aurora/Network/Unix/SocketHelper.o \
+Aurora/Network/Http.o \
+Aurora/Network/IPAddress.o \
+Aurora/Network/Packet.o \
+Aurora/Network/SelectorBase.o \
+Aurora/Network/SocketTCP.o \
+Aurora/Network/SocketUDP.o \
 Aurora/System/SystemManager.o \
 Aurora/System/psp/Clock.o \
 Aurora/System/psp/PspSystemManager.o \
