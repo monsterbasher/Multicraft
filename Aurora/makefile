@@ -36,8 +36,8 @@ Aurora/Utils/GameLoader.o \
 Aurora/Utils/GameManager.o \
 Aurora/Utils/psp/PspCommon.o \
 Aurora/Utils/psp/PspGameLoader.o \
-ExampleGame.o \
-Demo_ObjLoading.o \
+Tests/ExampleGame.o \
+Tests/Demo_ObjLoading.o \
 Starter.o
 
 INCDIR = $(PSPPATH)/include

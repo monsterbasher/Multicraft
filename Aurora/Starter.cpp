@@ -1,6 +1,6 @@
 #include <Aurora/Utils/GameLoader.h>
-#include "ExampleGame.h"
-#include "Demo_ObjLoading.h"
+#include "Tests/ExampleGame.h"
+#include "Tests/Demo_ObjLoading.h"
 
 int main()
 {
