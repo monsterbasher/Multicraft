@@ -3,6 +3,7 @@
 
 #include <Aurora/Graphics/Sprite.h>
 #include <Aurora/Graphics/Image.h>
+#include <Aurora/Network/NetworkManager.h>
 
 void ClientTest::Init()
 {
@@ -23,6 +24,7 @@ void ClientTest::Init()
 	serverConnected = false;
 	serverMessage = "";
 
+	Network::NetworkManager::Instance()->Init();
 
 	enet_initialize ();
 		
@@ -37,7 +39,7 @@ void ClientTest::Init()
 	{
 		 ENetEvent event;
 
-		enet_address_set_host (& address, "");
+		enet_address_set_host (& address, "192.168.1.102");
 		address.port = 2573;
 
 		/* Initiate the connection, allocating the two channels 0 and 1. */

@@ -3,6 +3,7 @@
 
 #include <Aurora/Graphics/Sprite.h>
 #include <Aurora/Graphics/Image.h>
+#include <Aurora/Network/NetworkManager.h>
 
 void ServerTest::Init()
 {
@@ -22,6 +23,8 @@ void ServerTest::Init()
 	listening = false;
 	clientConnected = false;
 	clientMessage = "";
+
+	Network::NetworkManager::Instance()->Init();
 
 
 	if (enet_initialize () == 0)
@@ -122,7 +125,7 @@ void ServerTest::Update(GameManager* sManager)
 					event.peer -> address.port);
 
 				/* Store any relevant client information here. */
-				event.peer -> data = "Client information";
+				//event.peer -> data = "Client information";
 
 				clientConnected = true;
 

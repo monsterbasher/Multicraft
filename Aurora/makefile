@@ -23,6 +23,8 @@ Aurora/Graphics/Sprite3D.o \
 Aurora/Graphics/TrueTypeFont.o \
 Aurora/Graphics/ModelObj.o \
 Aurora/Network/Unix/SocketHelper.o \
+Aurora/Network/psp/PspNetworkManager.o \
+Aurora/Network/NetworkManager.o \
 Aurora/Network/Http.o \
 Aurora/Network/IPAddress.o \
 Aurora/Network/Packet.o \
@@ -38,6 +40,8 @@ Aurora/Utils/psp/PspCommon.o \
 Aurora/Utils/psp/PspGameLoader.o \
 Tests/ExampleGame.o \
 Tests/Demo_ObjLoading.o \
+Tests/ServerTest.o \
+Tests/ClientTest.o \
 Starter.o
 
 INCDIR = $(PSPPATH)/include
@@ -52,7 +56,7 @@ PSP_LARGE_MEMORY = 1
 
 LIBDIR += 
 LDFLAGS =
-LIBS= -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower
+LIBS= -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpspnet -lEnet
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Aurora

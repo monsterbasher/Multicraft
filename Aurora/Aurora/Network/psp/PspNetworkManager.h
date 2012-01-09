@@ -1,29 +1,43 @@
-#ifndef NetworkManager_H
-#define NetworkManager_H
+#ifndef PspNetworkManager_H
+#define PspNetworkManager_H
+
+#include <Aurora/Network/NetworkManager.h>
+
+#include <malloc.h>
+#include <pspkernel.h>
+#include <pspctrl.h>
+#include <psputility.h>
+#include <pspkernel.h>
+#include <pspdebug.h>
+#include <pspsdk.h>
+#include <pspnet.h>
+#include <pspnet_inet.h>
+#include <pspnet_apctl.h>
+#include <pspnet_resolver.h>
+#include <string.h>
 
 namespace Aurora
 {
 	namespace Network
 	{
-		class NetworkManager
+		class  PspNetworkManager : public NetworkManager
 		{
+
 		private:
 
-			bool _connectionActive;
+			//dialog params
+			pspUtilityMsgDialogParams dialog;
+			pspUtilityNetconfData networkData;
+			//void ConfigureDialog(pspUtilityMsgDialogParams *dialog, size_t dialog_size);
 
-			static NetworkManager *_networkManager;
-
-			NetworkManager();
-
-		public:
-
-			static NetworkManager* Instance();
-
-			bool isConnectionActive();
+			bool InitPSPNetwork();
+			bool ShowNetworkDialog();
 
 		public:
 
-			virtual bool Init() = 0;
+			PspNetworkManager();
+
+			bool Init();
 		};
 	}
 }

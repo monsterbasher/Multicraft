@@ -10,6 +10,15 @@
 #include <sys/types.h>
 #include <netinet/in.h>
 #include <unistd.h>
+//#include <pspkernel.h>
+//#include <pspdebug.h>
+//#include <pspsdk.h>
+#include <pspnet.h>
+//#include <pspnet_inet.h>
+//#include <pspnet_apctl.h>
+//#include <pspnet_resolver.h>
+#include <sys/fd_set.h>
+//#include <sys/select.h>
 
 typedef int ENetSocket;
 
