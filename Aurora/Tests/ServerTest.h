@@ -6,16 +6,13 @@
 #include <Aurora/System/SystemManager.h>
 #include <Aurora/System/Clock.h>
 
-#include <Aurora/Network/IPAddress.hpp>
-#include <Aurora/Network/Selector.hpp>
-#include <Aurora/Network/SocketTCP.hpp>
-#include <Aurora/Network/Packet.hpp>
-
 using namespace Aurora;
 using namespace Aurora::Graphics;
 using namespace Aurora::Utils;
 using namespace Aurora::System;
 using namespace Aurora::Math;
+
+#include <enet/enet.h>
 
 class ServerTest : public GameState
 {
@@ -33,11 +30,11 @@ private:
 
 	//network variables
 	bool listening;
-	Network::SocketTCP _listener;
-	Network::SelectorTCP _selector;
-
 	bool clientConnected;
 	std::string clientMessage;
+
+	ENetAddress address;
+	ENetHost * server;
 
 public:
 

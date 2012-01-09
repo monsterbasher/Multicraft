@@ -50,13 +50,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\libs\sfml\include;.\libs\glew\include\GL;.\;.\libs\lua-5.1.4\src;.\libs\boost-1.39.0;.\libs\luabind;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\libs\sfml\include;.\libs\glew\include\GL;.\;.\libs\lua-5.1.4\src;.\libs\boost-1.39.0;.\libs\luabind;.\libs\enet;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>.\libs\sfml\lib;.\libs\glew\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-main-d.lib;glu32.lib;opengl32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\libs\sfml\lib;.\libs\glew\lib;.\libs\enet;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-main-d.lib;glu32.lib;opengl32.lib;ws2_32.lib;enetd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

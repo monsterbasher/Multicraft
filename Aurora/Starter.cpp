@@ -6,7 +6,8 @@
 
 int main()
 {
-	ClientTestGameManager* exampleGame = new ClientTestGameManager();
+	ServerTestGameManager* exampleGame = new ServerTestGameManager();
+	//ClientTestGameManager* exampleGame = new ClientTestGameManager();
 
 	GameLoader* loader = GameLoader::getGameLoader(exampleGame);
 	loader->Run();
