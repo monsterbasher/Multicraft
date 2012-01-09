@@ -12,7 +12,7 @@ class ExampleGameManager : public GameManager
 {
 private:
 
-	SimpleTest* exampleState;
+	ServerTest* exampleState;
 
 public:
 
@@ -25,7 +25,7 @@ public:
 	void Init()
 	{
 		//init whatever you need
-		exampleState = new SimpleTest();
+		exampleState = new ServerTest();
 		exampleState->Init();
 
 		ChangeState(exampleState);

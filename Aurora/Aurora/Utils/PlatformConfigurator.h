@@ -3,8 +3,8 @@
 
 #include <climits>
 
-//#define AURORA_PC
-#define AURORA_PSP
+#define AURORA_PC
+//#define AURORA_PSP
 
 // 8 bits integer types
 #if UCHAR_MAX == 0xFF

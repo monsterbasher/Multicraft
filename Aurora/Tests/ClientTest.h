@@ -36,6 +36,7 @@ class ClientTest : public GameState
 	Network::SocketTCP _socket;
 	bool serverConnected;
 	std::string serverMessage;
+	float sendingTimeCounter;
 
 	public:
 

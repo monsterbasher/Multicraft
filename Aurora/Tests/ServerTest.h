@@ -5,6 +5,8 @@
 #include <Aurora/Utils/GameState.h>
 #include <Aurora/System/SystemManager.h>
 #include <Aurora/System/Clock.h>
+#include <Aurora/Math/Vector3.h>
+#include <Aurora/Graphics/ModelObj.h>
 
 #include <Aurora/Network/IPAddress.hpp>
 #include <Aurora/Network/Selector.hpp>
@@ -19,35 +21,36 @@ using namespace Aurora::Math;
 
 class ServerTest : public GameState
 {
-private:
+	private:
 
-TrueTypeFont* font;
+	TrueTypeFont* font;
+	ModelObj* objModel;
 
-Camera *cam;
+	Camera *cam;
 
-RenderManager* _renderManager;
-SystemManager* _systemManager;
+	RenderManager* _renderManager;
+	SystemManager* _systemManager;
 
-Clock _clock;
-float dt;
+	Clock _clock;
+	float dt;
 
-//network variables
-bool listening;
-Network::SocketTCP _listener;
-Network::SelectorTCP _selector;
+	//network variables
+	bool listening;
+	Network::SocketTCP _listener;
+	Network::SelectorTCP _selector;
 
-bool clientConnected;
-std::string clientMessage;
+	bool clientConnected;
+	std::string clientMessage;
 
-public:
+	public:
 
-void Init();
-void Enter();
-void CleanUp();
-void Pause();
-void Resume();
-void HandleEvents(GameManager* sManager);
-void Update(GameManager* sManager);
-void Draw(GameManager* sManager);
+	void Init();
+	void Enter();
+	void CleanUp();
+	void Pause();
+	void Resume();
+	void HandleEvents(GameManager* sManager);
+	void Update(GameManager* sManager);
+	void Draw(GameManager* sManager);
 };
 

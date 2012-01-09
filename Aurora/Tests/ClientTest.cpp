@@ -10,8 +10,6 @@ void ClientTest::Init()
 	_renderManager = RenderManager::Instance();
 	_systemManager = SystemManager::Instance();
 
-	Sprite *itemSprite = new Sprite("Assets/Minecraft/gui/items.png",0,0,16,16);
-
 	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
 
 	cam = new Camera();
@@ -29,11 +27,12 @@ void ClientTest::Init()
 
 	//init connection
 	if (_socket.Connect(2435, _serverAddress) == Network::Socket::Done)
-	serverConnected = true;
+		serverConnected = true;
 	else
-	serverConnected = false;
+		serverConnected = false;
 
 	serverMessage = "";
+	sendingTimeCounter = 0.0f;
 }
 
 void ClientTest::Enter()
@@ -44,7 +43,7 @@ void ClientTest::Enter()
 
 void ClientTest::CleanUp()
 {
-//delete font;
+	//delete font;
 }
 
 void ClientTest::Pause()
@@ -61,61 +60,69 @@ void ClientTest::HandleEvents(GameManager* sManager)
 {
 	_systemManager->Update();
 
+	serverMessage = "";
+
 	//camera
 	//rotate
 	if(_systemManager->keyHold(Key::Left))
 	{
-	serverMessage = "Left";
+		serverMessage = "Left";
 	}
 	if(_systemManager->keyHold(Key::Right))
 	{
-	serverMessage = "Right";
+		serverMessage = "Right";
 	}
 	if(_systemManager->keyHold(Key::Up))
 	{
-	serverMessage = "Up";
+		serverMessage = "Up";
 	}
 	if(_systemManager->keyHold(Key::Down))
 	{
-	serverMessage = "Down";
+		serverMessage = "Down";
 	}
 
 	//move
 	if(_systemManager->keyHold(Key::W))
 	{
-	serverMessage = "W";
+		serverMessage = "W";
 	}
 	if(_systemManager->keyHold(Key::S))
 	{
-	serverMessage = "S";
+		serverMessage = "S";
 	}
 	if(_systemManager->keyHold(Key::A))
 	{
-	serverMessage = "A";
+		serverMessage = "A";
 	}
 	if(_systemManager->keyHold(Key::D))
 	{
-	serverMessage = "D";
+		serverMessage = "D";
 	}
-	}
+}
+
 void ClientTest::Update(GameManager* sManager)
 {
 	//network shit
 	if (serverConnected)
 	{
-		if (serverMessage != "")
-		{
-			Network::Packet newPacket;
-			newPacket << serverMessage;
-			_socket.Send(newPacket);
+		//if (serverMessage != "")
+		//{
+			sendingTimeCounter += dt;
+			if (sendingTimeCounter > 0.04f)//25fps
+			{
+				Network::Packet newPacket;
+				newPacket << serverMessage;
+				_socket.Send(newPacket);
 
-			serverMessage = "";
-		}
+				serverMessage = "";
+				sendingTimeCounter = 0.0f;
+			}			
+		//}
 	}
 
 	//delta time
 	dt = _clock.getTime();
-	_clock.Reset();
+	_clock.Reset();	
 }
 void ClientTest::Draw(GameManager* sManager)
 {
