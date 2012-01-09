@@ -7,54 +7,47 @@
 
 void ServerTest::Init()
 {
-	_renderManager = RenderManager::Instance();
-	_systemManager = SystemManager::Instance();
+_renderManager = RenderManager::Instance();
+_systemManager = SystemManager::Instance();
 
-	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
+font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
 
-	cam = new Camera();
-	cam->PositionCamera(0,0,0,0,0,-5,0,1,0);
+cam = new Camera();
+cam->PositionCamera(0,0,0,0,0,-5,0,1,0);
 
-	_renderManager->setCurrentCam(cam);
+_renderManager->setCurrentCam(cam);
 
-	dt = 0.0f;
+dt = 0.0f;
 
-	//
-	listening = false;
-	clientConnected = false;
-	clientMessage = "";
+Network::NetworkManager::Instance()->Init();
 
-	Network::NetworkManager::Instance()->Init();
+//my address
+Network::IPAddress Address = Network::IPAddress::GetLocalAddress();
+std::string IP = Address.ToString();
+//192.168.1.102
 
+//init listener
+listening = _listener.Listen(2435);
 
-	if (enet_initialize () == 0)
-	{
-		listening = true;
+if (listening)
+{
+//add selector
+_selector.Add(_listener);
+}
 
-		address.host = ENET_HOST_ANY;
-		address.port = 2573;
-
-		server = enet_host_create (& address /* the address to bind the server host to */, 
-									32      /* allow up to 32 clients and/or outgoing connections */,
-									2      /* allow up to 2 channels to be used, 0 and 1 */,
-									0      /* assume any amount of incoming bandwidth */,
-									0      /* assume any amount of outgoing bandwidth */);
-		if (server == NULL)
-		{
-			listening = false;
-		}
-	}
+clientConnected = false;
+clientMessage = "";
 }
 
 void ServerTest::Enter()
 {
-	RenderManager::Instance()->SetOrtho();
-	_clock.Reset();
+RenderManager::Instance()->SetOrtho();
+_clock.Reset();
 }
 
 void ServerTest::CleanUp()
 {
-	//delete font;
+//delete font;
 }
 
 void ServerTest::Pause()
@@ -69,91 +62,79 @@ void ServerTest::Resume()
 
 void ServerTest::HandleEvents(GameManager* sManager)
 {
-	_systemManager->Update();
+_systemManager->Update();
 
-	//camera
-	//rotate
-	if(_systemManager->keyHold(Key::Left))
-	{
-		cam->RotateView(2.0f * dt,0,1,0);
-	}
-	if(_systemManager->keyHold(Key::Right))
-	{
-		cam->RotateView(-(2.0f * dt),0,1,0);
-	}
-	if(_systemManager->keyHold(Key::Up))
-	{
-		cam->PitchView(2.0f * dt);
-	}
-	if(_systemManager->keyHold(Key::Down))
-	{
-		cam->PitchView(-(2.0f * dt));
-	}
+//camera
+//rotate
+if(_systemManager->keyHold(Key::Left))
+{
+cam->RotateView(2.0f * dt,0,1,0);
+}
+if(_systemManager->keyHold(Key::Right))
+{
+cam->RotateView(-(2.0f * dt),0,1,0);
+}
+if(_systemManager->keyHold(Key::Up))
+{
+cam->PitchView(2.0f * dt);
+}
+if(_systemManager->keyHold(Key::Down))
+{
+cam->PitchView(-(2.0f * dt));
+}
 
-	//move
-	if(_systemManager->keyHold(Key::W))
-	{
-		cam->Move(6.0f * dt);
-	}
-	if(_systemManager->keyHold(Key::S))
-	{
-		cam->Move(-(6.0f * dt));
-	}
-	if(_systemManager->keyHold(Key::A))
-	{
-		cam->Strafe(-(6.0f * dt));
-	}
-	if(_systemManager->keyHold(Key::D))
-	{
-		cam->Strafe(6.0f * dt);
-	}
+//move
+if(_systemManager->keyHold(Key::W))
+{
+cam->Move(6.0f * dt);
+}
+if(_systemManager->keyHold(Key::S))
+{
+cam->Move(-(6.0f * dt));
+}
+if(_systemManager->keyHold(Key::A))
+{
+cam->Strafe(-(6.0f * dt));
+}
+if(_systemManager->keyHold(Key::D))
+{
+cam->Strafe(6.0f * dt);
+}
 }
 void ServerTest::Update(GameManager* sManager)
 {
 	//network shit
 	if (listening)
 	{
-		ENetEvent event;
+		unsigned int NbSockets = _selector.Wait(0.016f);
 
-		while (enet_host_service (server, & event, 15) > 0)
+		// We can read from each returned socket
+		for (unsigned int i = 0; i < NbSockets; ++i)
 		{
-			switch (event.type)
+			// Get the current socket
+			Network::SocketTCP readySocket = _selector.GetSocketReady(i);
+
+			if (readySocket == _listener)//meaning if our main socket have some connection?
 			{
-			case ENET_EVENT_TYPE_CONNECT:
-				printf ("A new client connected from %x:%u.\n", 
-					event.peer -> address.host,
-					event.peer -> address.port);
+			//add new client
+			Network::IPAddress clientAddress;
+			Network::SocketTCP clientSocket;
+			_listener.Accept(clientSocket, &clientAddress);
 
-				/* Store any relevant client information here. */
-				//event.peer -> data = "Client information";
+			clientConnected = true;
 
-				clientConnected = true;
-
-				break;
-
-			case ENET_EVENT_TYPE_RECEIVE:
-				printf ("A packet of length %u containing %s was received from %s on channel %u.\n",
-					event.packet -> dataLength,
-					event.packet -> data,
-					event.peer -> data,
-					event.channelID);
-
-				char message[20];
-				sprintf(message,"%s",event.packet->data);
-				clientMessage = message;
-
-				/* Clean up the packet now that we're done using it. */
-				enet_packet_destroy (event.packet);
-
-				break;
-
-			case ENET_EVENT_TYPE_DISCONNECT:
-				printf ("%s disconected.\n", event.peer -> data);
-
-				/* Reset the peer's client information. */
-
-				event.peer -> data = NULL;
+			// Add it to the selector
+			_selector.Add(clientSocket);
+			}else
+			{
+				Network::Packet newPacket;
+				if (readySocket.Receive(newPacket) == Network::Socket::Done)
+				{
+					// Extract the message and display it
+					newPacket >> clientMessage;
+				}
 			}
+
 		}
 	}
 
@@ -163,57 +144,54 @@ void ServerTest::Update(GameManager* sManager)
 }
 void ServerTest::Draw(GameManager* sManager)
 {
-	RenderManager::Instance()->StartFrame();
-	RenderManager::Instance()->SetPerspective();
-	RenderManager::Instance()->ClearScreen();
+RenderManager::Instance()->StartFrame();
+RenderManager::Instance()->SetPerspective();
+RenderManager::Instance()->ClearScreen();
 
-	RenderManager::Instance()->UpdateCurrentCamera();
+RenderManager::Instance()->UpdateCurrentCamera();
 
-	//change ortho for text
-	RenderManager::Instance()->SetOrtho();
-	RenderManager::Instance()->SetTextOrtho();
-	RenderManager::Instance()->drawText(font,1,267,"Multicraft",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+//change ortho for text
+RenderManager::Instance()->SetOrtho();
+RenderManager::Instance()->SetTextOrtho();
+RenderManager::Instance()->drawText(font,1,267,"Multicraft",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
-	//draw fps
-	char deltaTime[30];
-	sprintf(deltaTime,"dt: %f",dt);
-	RenderManager::Instance()->drawText(font,1,13,deltaTime,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+//draw fps
+char deltaTime[30];
+sprintf(deltaTime,"dt: %f",dt);
+RenderManager::Instance()->drawText(font,1,13,deltaTime,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
-	//draw client message
-	if (clientConnected)
-	{
-		RenderManager::Instance()->drawText(font,1,30,"Client Connected",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+//draw client message
+if (clientConnected)
+{
+if (clientMessage != "")
+{
+RenderManager::Instance()->drawText(font,1,30,clientMessage.c_str(),Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+}
+}
 
-		if (clientMessage != "")
-		{
-			RenderManager::Instance()->drawText(font,1,45,clientMessage.c_str(),Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
-		}
-	}
-
-	//netork info
+//netork info
 
 
-	RenderManager::Instance()->EndFrame();
+RenderManager::Instance()->EndFrame();
 }
 
 void ServerTestGameManager::Configure()
 {
-	//init render manager properties
-	RenderManager::Instance()->setSesize(480,272);
+//init render manager properties
+RenderManager::Instance()->setSesize(480,272);
 }
 
 void ServerTestGameManager::Init()
 {
-	//init whatever you need
-	exampleState = new ServerTest();
-	exampleState->Init();
+//init whatever you need
+exampleState = new ServerTest();
+exampleState->Init();
 
-	ChangeState(exampleState);
+ChangeState(exampleState);
 }
 
 void ServerTestGameManager::CleanUp()
 {
-	exampleState->CleanUp();
-	delete exampleState;
+exampleState->CleanUp();
+delete exampleState;
 }
-

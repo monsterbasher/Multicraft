@@ -10,6 +10,8 @@ void ClientTest::Init()
 	_renderManager = RenderManager::Instance();
 	_systemManager = SystemManager::Instance();
 
+	Sprite *itemSprite = new Sprite("Assets/Minecraft/gui/items.png",0,0,16,16);
+
 	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
 
 	cam = new Camera();
@@ -19,54 +21,19 @@ void ClientTest::Init()
 
 	dt = 0.0f;
 
-	//server address
-	//192.168.1.102
-	serverConnected = false;
-	serverMessage = "";
-
 	Network::NetworkManager::Instance()->Init();
 
-	enet_initialize ();
-		
+	//server address
+	//192.168.1.102
+	_serverAddress = Network::IPAddress("192.168.1.102");
 
-	client = enet_host_create (NULL /* create a client host */,
-		1 /* only allow 1 outgoing connection */,
-		2 /* allow up 2 channels to be used, 0 and 1 */,
-		57600 / 8 /* 56K modem with 56 Kbps downstream bandwidth */,
-		14400 / 8 /* 56K modem with 14 Kbps upstream bandwidth */);
+	//init connection
+	if (_socket.Connect(2435, _serverAddress) == Network::Socket::Done)
+	serverConnected = true;
+	else
+	serverConnected = false;
 
-	if (client != NULL)
-	{
-		 ENetEvent event;
-
-		enet_address_set_host (& address, "192.168.1.102");
-		address.port = 2573;
-
-		/* Initiate the connection, allocating the two channels 0 and 1. */
-		peer = enet_host_connect (client, & address, 2, 0);    
-
-		if (peer == NULL)
-		{
-			fprintf (stderr,"No available peers for initiating an ENet connection.\n");
-			exit (EXIT_FAILURE);
-		}
-
-		/* Wait up to 5 seconds for the connection attempt to succeed. */
-		if (enet_host_service (client, & event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT)
-		{
-			puts ("Connection to some.server.net:1234 succeeded.");
-			serverConnected = true;
-		}
-		else
-		{
-			/* Either the 5 seconds are up or a disconnect event was */
-			/* received. Reset the peer in the event the 5 seconds   */
-			/* had run out without any significant event.            */
-			enet_peer_reset (peer);
-
-			puts ("Connection to some.server.net:1234 failed.");
-		}
-	}
+	serverMessage = "";
 }
 
 void ClientTest::Enter()
@@ -77,7 +44,7 @@ void ClientTest::Enter()
 
 void ClientTest::CleanUp()
 {
-	//delete font;
+//delete font;
 }
 
 void ClientTest::Pause()
@@ -98,39 +65,39 @@ void ClientTest::HandleEvents(GameManager* sManager)
 	//rotate
 	if(_systemManager->keyHold(Key::Left))
 	{
-		serverMessage = "Left";
+	serverMessage = "Left";
 	}
 	if(_systemManager->keyHold(Key::Right))
 	{
-		serverMessage = "Right";
+	serverMessage = "Right";
 	}
 	if(_systemManager->keyHold(Key::Up))
 	{
-		serverMessage = "Up";
+	serverMessage = "Up";
 	}
 	if(_systemManager->keyHold(Key::Down))
 	{
-		serverMessage = "Down";
+	serverMessage = "Down";
 	}
 
 	//move
 	if(_systemManager->keyHold(Key::W))
 	{
-		serverMessage = "W";
+	serverMessage = "W";
 	}
 	if(_systemManager->keyHold(Key::S))
 	{
-		serverMessage = "S";
+	serverMessage = "S";
 	}
 	if(_systemManager->keyHold(Key::A))
 	{
-		serverMessage = "A";
+	serverMessage = "A";
 	}
 	if(_systemManager->keyHold(Key::D))
 	{
-		serverMessage = "D";
+	serverMessage = "D";
 	}
-}
+	}
 void ClientTest::Update(GameManager* sManager)
 {
 	//network shit
@@ -138,19 +105,12 @@ void ClientTest::Update(GameManager* sManager)
 	{
 		if (serverMessage != "")
 		{
-			//Network::Packet newPacket;
-			//newPacket << serverMessage;
-			//_socket.Send(newPacket);
-
-			if (client != NULL)
-			{
-				   ENetPacket * packet = enet_packet_create(serverMessage.c_str(),strlen(serverMessage.c_str()) + 1, ENET_PACKET_FLAG_RELIABLE);
-				   enet_peer_send (peer, 0, packet);
-				   enet_host_flush (client);
-			}
+			Network::Packet newPacket;
+			newPacket << serverMessage;
+			_socket.Send(newPacket);
 
 			serverMessage = "";
-		}		 
+		}
 	}
 
 	//delta time
@@ -163,7 +123,7 @@ void ClientTest::Draw(GameManager* sManager)
 	RenderManager::Instance()->SetPerspective();
 	RenderManager::Instance()->ClearScreen();
 
-	RenderManager::Instance()->UpdateCurrentCamera();
+	//RenderManager::Instance()->UpdateCurrentCamera();
 
 	//change ortho for text
 	RenderManager::Instance()->SetOrtho();
@@ -184,30 +144,26 @@ void ClientTest::Draw(GameManager* sManager)
 		RenderManager::Instance()->drawText(font,1,30,"Not connected to server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 	}
 
-	//netork info
-
-
 	RenderManager::Instance()->EndFrame();
 }
 
 void ClientTestGameManager::Configure()
 {
-	//init render manager properties
-	RenderManager::Instance()->setSesize(480,272);
+//init render manager properties
+RenderManager::Instance()->setSesize(480,272);
 }
 
 void ClientTestGameManager::Init()
 {
-	//init whatever you need
-	exampleState = new ClientTest();
-	exampleState->Init();
+//init whatever you need
+exampleState = new ClientTest();
+exampleState->Init();
 
-	ChangeState(exampleState);
+ChangeState(exampleState);
 }
 
 void ClientTestGameManager::CleanUp()
 {
-	exampleState->CleanUp();
-	delete exampleState;
+exampleState->CleanUp();
+delete exampleState;
 }
-

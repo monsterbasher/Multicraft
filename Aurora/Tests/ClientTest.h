@@ -6,17 +6,20 @@
 #include <Aurora/System/SystemManager.h>
 #include <Aurora/System/Clock.h>
 
+#include <Aurora/Network/IPAddress.hpp>
+#include <Aurora/Network/Selector.hpp>
+#include <Aurora/Network/SocketTCP.hpp>
+#include <Aurora/Network/Packet.hpp>
+
 using namespace Aurora;
 using namespace Aurora::Graphics;
 using namespace Aurora::Utils;
 using namespace Aurora::System;
 using namespace Aurora::Math;
 
-#include <enet/enet.h>
-
 class ClientTest : public GameState
 {
-private:
+	private:
 
 	TrueTypeFont* font;
 
@@ -29,13 +32,12 @@ private:
 	float dt;
 
 	//network variables
+	Network::IPAddress _serverAddress;
+	Network::SocketTCP _socket;
 	bool serverConnected;
 	std::string serverMessage;
-	ENetAddress address;
-	ENetHost * client;
-	ENetPeer *peer;
 
-public:
+	public:
 
 	void Init();
 	void Enter();
@@ -49,11 +51,11 @@ public:
 
 class ClientTestGameManager : public GameManager
 {
-private:
+	private:
 
 	ClientTest* exampleState;
 
-public:	
+	public:
 
 	void Configure();
 	void Init();

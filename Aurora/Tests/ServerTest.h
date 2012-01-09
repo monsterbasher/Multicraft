@@ -6,57 +6,60 @@
 #include <Aurora/System/SystemManager.h>
 #include <Aurora/System/Clock.h>
 
+#include <Aurora/Network/IPAddress.hpp>
+#include <Aurora/Network/Selector.hpp>
+#include <Aurora/Network/SocketTCP.hpp>
+#include <Aurora/Network/Packet.hpp>
+
 using namespace Aurora;
 using namespace Aurora::Graphics;
 using namespace Aurora::Utils;
 using namespace Aurora::System;
 using namespace Aurora::Math;
 
-#include <enet/enet.h>
-
 class ServerTest : public GameState
 {
 private:
 
-	TrueTypeFont* font;
+TrueTypeFont* font;
 
-	Camera *cam;
+Camera *cam;
 
-	RenderManager* _renderManager;
-	SystemManager* _systemManager;
+RenderManager* _renderManager;
+SystemManager* _systemManager;
 
-	Clock _clock;
-	float dt;
+Clock _clock;
+float dt;
 
-	//network variables
-	bool listening;
-	bool clientConnected;
-	std::string clientMessage;
+//network variables
+bool listening;
+Network::SocketTCP _listener;
+Network::SelectorTCP _selector;
 
-	ENetAddress address;
-	ENetHost * server;
+bool clientConnected;
+std::string clientMessage;
 
 public:
 
-	void Init();
-	void Enter();
-	void CleanUp();
-	void Pause();
-	void Resume();
-	void HandleEvents(GameManager* sManager);
-	void Update(GameManager* sManager);
-	void Draw(GameManager* sManager);
+void Init();
+void Enter();
+void CleanUp();
+void Pause();
+void Resume();
+void HandleEvents(GameManager* sManager);
+void Update(GameManager* sManager);
+void Draw(GameManager* sManager);
 };
 
 class ServerTestGameManager : public GameManager
 {
 private:
 
-	ServerTest* exampleState;
+ServerTest* exampleState;
 
-public:	
+public:
 
-	void Configure();
-	void Init();
-	void CleanUp();
+void Configure();
+void Init();
+void CleanUp();
 };
