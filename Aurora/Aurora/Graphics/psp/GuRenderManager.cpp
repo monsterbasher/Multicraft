@@ -204,6 +204,10 @@ namespace Aurora
 
 			sceGuBlendFunc(GU_ADD, GU_SRC_ALPHA, GU_ONE_MINUS_SRC_ALPHA, 0, 0);
 
+			unsigned int test = 0;
+			unsigned char* aa;
+			_createTexture(aa,0,0,test);
+
 			sceGuFinish();
 			sceGuSync(0,0);
 

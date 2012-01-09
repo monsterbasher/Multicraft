@@ -118,25 +118,3 @@ void Demo_ObjLoading::Draw(GameManager* sManager)
 
 	RenderManager::Instance()->EndFrame();
 }
-
-void Demo_ObjLoadingGameManager::Configure()
-{
-	//init render manager properties
-	RenderManager::Instance()->setSesize(480,272);
-}
-
-void Demo_ObjLoadingGameManager::Init()
-{
-	//init whatever you need
-	exampleState = new Demo_ObjLoading();
-	exampleState->Init();
-
-	ChangeState(exampleState);
-}
-
-void Demo_ObjLoadingGameManager::CleanUp()
-{
-	exampleState->CleanUp();
-	delete exampleState;
-}
-

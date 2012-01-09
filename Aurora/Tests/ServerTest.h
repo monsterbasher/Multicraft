@@ -51,15 +51,3 @@ void Update(GameManager* sManager);
 void Draw(GameManager* sManager);
 };
 
-class ServerTestGameManager : public GameManager
-{
-private:
-
-ServerTest* exampleState;
-
-public:
-
-void Configure();
-void Init();
-void CleanUp();
-};

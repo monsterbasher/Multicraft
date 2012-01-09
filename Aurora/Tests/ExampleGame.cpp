@@ -169,24 +169,3 @@ void ExampleState::Draw(GameManager* sManager)
 	RenderManager::Instance()->EndFrame();
 }
 
-void ExampleGameManager::Configure()
-{
-	//init render manager properties
-	RenderManager::Instance()->setSesize(480,272);
-}
-
-void ExampleGameManager::Init()
-{
-	//init whatever you need
-	exampleState = new ExampleState();
-	exampleState->Init();
-
-	ChangeState(exampleState);
-}
-
-void ExampleGameManager::CleanUp()
-{
-	exampleState->CleanUp();
-	delete exampleState;
-}
-

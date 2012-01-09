@@ -42,6 +42,7 @@ Tests/ExampleGame.o \
 Tests/Demo_ObjLoading.o \
 Tests/ServerTest.o \
 Tests/ClientTest.o \
+Tests/SimpleTest.o \
 Starter.o
 
 INCDIR = $(PSPPATH)/include

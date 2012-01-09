@@ -175,23 +175,3 @@ RenderManager::Instance()->drawText(font,1,30,clientMessage.c_str(),Aurora::Grap
 RenderManager::Instance()->EndFrame();
 }
 
-void ServerTestGameManager::Configure()
-{
-//init render manager properties
-RenderManager::Instance()->setSesize(480,272);
-}
-
-void ServerTestGameManager::Init()
-{
-//init whatever you need
-exampleState = new ServerTest();
-exampleState->Init();
-
-ChangeState(exampleState);
-}
-
-void ServerTestGameManager::CleanUp()
-{
-exampleState->CleanUp();
-delete exampleState;
-}

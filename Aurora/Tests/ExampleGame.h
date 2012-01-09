@@ -52,15 +52,3 @@ public:
 	void Draw(GameManager* sManager);
 };
 
-class ExampleGameManager : public GameManager
-{
-private:
-
-	ExampleState* exampleState;
-
-public:	
-
-	void Configure();
-	void Init();
-	void CleanUp();
-};

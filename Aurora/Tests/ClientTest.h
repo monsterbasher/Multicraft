@@ -49,15 +49,3 @@ class ClientTest : public GameState
 	void Draw(GameManager* sManager);
 };
 
-class ClientTestGameManager : public GameManager
-{
-	private:
-
-	ClientTest* exampleState;
-
-	public:
-
-	void Configure();
-	void Init();
-	void CleanUp();
-};

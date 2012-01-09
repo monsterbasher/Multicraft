@@ -1,16 +1,15 @@
-#include "ClientTest.h"
+#include "SimpleTest.h"
 #include <stdio.h>
 
 #include <Aurora/Graphics/Sprite.h>
 #include <Aurora/Graphics/Image.h>
-#include <Aurora/Network/NetworkManager.h>
 
-void ClientTest::Init()
+void SimpleTest::Init()
 {
 	_renderManager = RenderManager::Instance();
 	_systemManager = SystemManager::Instance();
 
-	Sprite *itemSprite = new Sprite("Assets/Minecraft/gui/items.png",0,0,16,16);
+	//Sprite *itemSprite = new Sprite("Assets/Minecraft/gui/items.png",0,0,16,16);
 
 	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
 
@@ -20,44 +19,30 @@ void ClientTest::Init()
 	_renderManager->setCurrentCam(cam);
 
 	dt = 0.0f;
-
-	Network::NetworkManager::Instance()->Init();
-
-	//server address
-	//192.168.1.102
-	_serverAddress = Network::IPAddress("192.168.1.102");
-
-	//init connection
-	if (_socket.Connect(2435, _serverAddress) == Network::Socket::Done)
-	serverConnected = true;
-	else
-	serverConnected = false;
-
-	serverMessage = "";
 }
 
-void ClientTest::Enter()
+void SimpleTest::Enter()
 {
 	RenderManager::Instance()->SetOrtho();
 	_clock.Reset();
 }
 
-void ClientTest::CleanUp()
+void SimpleTest::CleanUp()
 {
 //delete font;
 }
 
-void ClientTest::Pause()
+void SimpleTest::Pause()
 {
 
 }
 
-void ClientTest::Resume()
+void SimpleTest::Resume()
 {
 
 }
 
-void ClientTest::HandleEvents(GameManager* sManager)
+void SimpleTest::HandleEvents(GameManager* sManager)
 {
 	_systemManager->Update();
 
@@ -65,65 +50,51 @@ void ClientTest::HandleEvents(GameManager* sManager)
 	//rotate
 	if(_systemManager->keyHold(Key::Left))
 	{
-	serverMessage = "Left";
+	
 	}
 	if(_systemManager->keyHold(Key::Right))
 	{
-	serverMessage = "Right";
+	
 	}
 	if(_systemManager->keyHold(Key::Up))
 	{
-	serverMessage = "Up";
+	
 	}
 	if(_systemManager->keyHold(Key::Down))
 	{
-	serverMessage = "Down";
+	
 	}
 
 	//move
 	if(_systemManager->keyHold(Key::W))
 	{
-	serverMessage = "W";
+	
 	}
 	if(_systemManager->keyHold(Key::S))
 	{
-	serverMessage = "S";
+	
 	}
 	if(_systemManager->keyHold(Key::A))
 	{
-	serverMessage = "A";
+	
 	}
 	if(_systemManager->keyHold(Key::D))
 	{
-	serverMessage = "D";
+	
 	}
-	}
-void ClientTest::Update(GameManager* sManager)
+}
+
+void SimpleTest::Update(GameManager* sManager)
 {
-	//network shit
-	if (serverConnected)
-	{
-		if (serverMessage != "")
-		{
-			Network::Packet newPacket;
-			newPacket << serverMessage;
-			_socket.Send(newPacket);
-
-			serverMessage = "";
-		}
-	}
-
 	//delta time
 	dt = _clock.getTime();
 	_clock.Reset();
 }
-void ClientTest::Draw(GameManager* sManager)
+void SimpleTest::Draw(GameManager* sManager)
 {
 	RenderManager::Instance()->StartFrame();
 	RenderManager::Instance()->SetPerspective();
 	RenderManager::Instance()->ClearScreen();
-
-	//RenderManager::Instance()->UpdateCurrentCamera();
 
 	//change ortho for text
 	RenderManager::Instance()->SetOrtho();
@@ -134,15 +105,6 @@ void ClientTest::Draw(GameManager* sManager)
 	char deltaTime[30];
 	sprintf(deltaTime,"dt: %f",dt);
 	RenderManager::Instance()->drawText(font,1,13,deltaTime,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
-
-	//draw client message
-	if (serverConnected)
-	{
-		RenderManager::Instance()->drawText(font,1,30,"Connected to server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
-	}else
-	{
-		RenderManager::Instance()->drawText(font,1,30,"Not connected to server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
-	}
 
 	RenderManager::Instance()->EndFrame();
 }
