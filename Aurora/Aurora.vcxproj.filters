@@ -169,6 +169,9 @@
     <ClCompile Include="Tests\SimpleTest.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
+    <ClCompile Include="Aurora\Network\NetworkInputServer.cpp">
+      <Filter>Aurora\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aurora\Graphics\Vertex.h">
@@ -320,6 +323,9 @@
     </ClInclude>
     <ClInclude Include="Tests\SimpleTest.h">
       <Filter>Tests</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Network\NetworkInputServer.h">
+      <Filter>Aurora\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
