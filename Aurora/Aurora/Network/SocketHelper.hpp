@@ -56,11 +56,17 @@ namespace Aurora
 
 
 #ifdef AURORA_PC
-#include <Aurora/Network/Win32/SocketHelper.hpp>
+
+    #ifdef AURORA_UNIX_MAC
+        #include <Aurora/Network/Unix/SocketHelper.hpp>
+    #else
+        #include <Aurora/Network/Win32/SocketHelper.hpp>
+    #endif
+
 #endif
 
 #ifdef AURORA_PSP
-#include <Aurora/Network/Unix/SocketHelper.hpp>
+    #include <Aurora/Network/Unix/SocketHelper.hpp>
 #endif
 
 #endif // SFML_SOCKETHELPER_HPP
