@@ -26,7 +26,7 @@ void ClientTest::Init()
 	_serverAddress = Network::IPAddress("192.168.1.102");
 
 	//init connection
-	if (_socket.Connect(2435, _serverAddress) == Network::Socket::Done)
+	if (_serverAddress.IsValid())
 		serverConnected = true;
 	else
 		serverConnected = false;
@@ -112,7 +112,7 @@ void ClientTest::Update(GameManager* sManager)
 			{
 				Network::Packet newPacket;
 				newPacket << serverMessage;
-				_socket.Send(newPacket);
+				_socket.Send(newPacket,_serverAddress,2435);
 
 				serverMessage = "";
 				sendingTimeCounter = 0.0f;

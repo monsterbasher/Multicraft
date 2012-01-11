@@ -30,14 +30,9 @@ void ServerTest::Init()
 	//192.168.1.102
 
 	//init listener
-	listening = _listener.Listen(2435);
-
-	if (listening)
-	{
-		//add selector
-		_selector.Add(_listener);
-	}
-
+	_listener.SetBlocking(false);
+	listening = _listener.Bind(2435);
+	
 	clientConnected = false;
 	clientMessage = "";
 }
@@ -109,35 +104,20 @@ void ServerTest::Update(GameManager* sManager)
 	//network shit
 	if (listening)
 	{
-		unsigned int NbSockets = _selector.Wait(0.010f);
 
-		// We can read from each returned socket
-		for (unsigned int i = 0; i < NbSockets; ++i)
+		//add new client
+		Network::IPAddress clientAddress;
+		unsigned short port;
+
+		clientConnected = true;
+
+		Network::Packet newPacket;
+		if (_listener.Receive(newPacket,clientAddress,port) == Network::Socket::Done)
 		{
-			// Get the current socket
-			Network::SocketTCP readySocket = _selector.GetSocketReady(i);
-
-			if (readySocket == _listener)//meaning if our main socket have some connection?
-			{
-				//add new client
-				Network::IPAddress clientAddress;
-				Network::SocketTCP clientSocket;
-				_listener.Accept(clientSocket, &clientAddress);
-
-				clientConnected = true;
-
-				// Add it to the selector
-				_selector.Add(clientSocket);
-			}else
-			{
-				Network::Packet newPacket;
-				if (readySocket.Receive(newPacket) == Network::Socket::Done)
-				{
-					// Extract the message and display it
-					newPacket >> clientMessage;
-				}
-			}
+			// Extract the message and display it
+			newPacket >> clientMessage;
 		}
+	
 	}
 
 	//delta time

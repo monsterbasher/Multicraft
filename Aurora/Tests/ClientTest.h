@@ -7,8 +7,7 @@
 #include <Aurora/System/Clock.h>
 
 #include <Aurora/Network/IPAddress.hpp>
-#include <Aurora/Network/Selector.hpp>
-#include <Aurora/Network/SocketTCP.hpp>
+#include <Aurora/Network/SocketUDP.hpp>
 #include <Aurora/Network/Packet.hpp>
 
 using namespace Aurora;
@@ -33,7 +32,7 @@ class ClientTest : public GameState
 
 	//network variables
 	Network::IPAddress _serverAddress;
-	Network::SocketTCP _socket;
+	Network::SocketUDP _socket;
 	bool serverConnected;
 	std::string serverMessage;
 	float sendingTimeCounter;

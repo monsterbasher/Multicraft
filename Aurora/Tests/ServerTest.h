@@ -9,8 +9,7 @@
 #include <Aurora/Graphics/ModelObj.h>
 
 #include <Aurora/Network/IPAddress.hpp>
-#include <Aurora/Network/Selector.hpp>
-#include <Aurora/Network/SocketTCP.hpp>
+#include <Aurora/Network/SocketUDP.hpp>
 #include <Aurora/Network/Packet.hpp>
 
 using namespace Aurora;
@@ -36,9 +35,7 @@ class ServerTest : public GameState
 
 	//network variables
 	bool listening;
-	Network::SocketTCP _listener;
-	Network::SelectorTCP _selector;
-
+	Network::SocketUDP _listener;
 	bool clientConnected;
 	std::string clientMessage;
 
