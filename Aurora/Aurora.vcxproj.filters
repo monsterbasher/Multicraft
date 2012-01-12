@@ -37,6 +37,15 @@
     <Filter Include="Aurora\Network\pc">
       <UniqueIdentifier>{cbc257d7-5c93-47d9-a47e-2feec9a8cccc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\Enet">
+      <UniqueIdentifier>{36012380-d05b-4df3-915b-ae5179ff8489}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Sockets">
+      <UniqueIdentifier>{12c7ed1f-5452-4f77-a2ae-af60d9dc788d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Pgraphics">
+      <UniqueIdentifier>{5c3469d2-0451-4cf7-bc78-168685495b38}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Starter.cpp" />
@@ -148,18 +157,6 @@
     <ClCompile Include="Aurora\Network\Http.cpp">
       <Filter>Aurora\Network</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\Demo_ObjLoading.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\ExampleGame.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\ServerTest.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\ClientTest.cpp">
-      <Filter>Tests</Filter>
-    </ClCompile>
     <ClCompile Include="Aurora\Network\NetworkManager.cpp">
       <Filter>Aurora\Network</Filter>
     </ClCompile>
@@ -169,8 +166,23 @@
     <ClCompile Include="Tests\SimpleTest.cpp">
       <Filter>Tests</Filter>
     </ClCompile>
-    <ClCompile Include="Aurora\Network\NetworkInputServer.cpp">
-      <Filter>Aurora\Network</Filter>
+    <ClCompile Include="Tests\ClientTest.cpp">
+      <Filter>Tests\Sockets</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\ServerTest.cpp">
+      <Filter>Tests\Sockets</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\Demo_ObjLoading.cpp">
+      <Filter>Tests\Pgraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\ExampleGame.cpp">
+      <Filter>Tests\Pgraphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\EnetClientTest.cpp">
+      <Filter>Tests\Enet</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\EnetServerTest.cpp">
+      <Filter>Tests\Enet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -303,18 +315,6 @@
     <ClInclude Include="Aurora\Network\Http.hpp">
       <Filter>Aurora\Network</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\Demo_ObjLoading.h">
-      <Filter>Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\ExampleGame.h">
-      <Filter>Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\ServerTest.h">
-      <Filter>Tests</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\ClientTest.h">
-      <Filter>Tests</Filter>
-    </ClInclude>
     <ClInclude Include="Aurora\Network\NetworkManager.h">
       <Filter>Aurora\Network</Filter>
     </ClInclude>
@@ -324,8 +324,23 @@
     <ClInclude Include="Tests\SimpleTest.h">
       <Filter>Tests</Filter>
     </ClInclude>
-    <ClInclude Include="Aurora\Network\NetworkInputServer.h">
-      <Filter>Aurora\Network</Filter>
+    <ClInclude Include="Tests\ClientTest.h">
+      <Filter>Tests\Sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\ServerTest.h">
+      <Filter>Tests\Sockets</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\Demo_ObjLoading.h">
+      <Filter>Tests\Pgraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\ExampleGame.h">
+      <Filter>Tests\Pgraphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\EnetServerTest.h">
+      <Filter>Tests\Enet</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\EnetClientTest.h">
+      <Filter>Tests\Enet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

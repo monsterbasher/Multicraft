@@ -4,7 +4,7 @@
 #include <climits>
 
 #define AURORA_PC
-#define AURORA_UNIX_MAC
+//#define AURORA_UNIX_MAC
 //#define AURORA_PSP
 
 // 8 bits integer types

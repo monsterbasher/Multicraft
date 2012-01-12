@@ -6,6 +6,8 @@
 #include "Tests/ServerTest.h"
 #include "Tests/ClientTest.h"
 #include "Tests/SimpleTest.h"
+#include "Tests/EnetServerTest.h"
+#include "Tests/EnetClientTest.h"
 
 
 class ExampleGameManager : public GameManager
