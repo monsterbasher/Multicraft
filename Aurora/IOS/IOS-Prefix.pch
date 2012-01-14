@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'IOSSupport' target in the 'IOSSupport' project
+// Prefix header for all source files of the 'IOS' target in the 'IOS' project
 //
 
 #import <Availability.h>

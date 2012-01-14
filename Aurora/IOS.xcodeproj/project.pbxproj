@@ -1,0 +1,368 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FABE24F314C0FD10005D99E8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABE24F214C0FD10005D99E8 /* UIKit.framework */; };
+		FABE24F514C0FD10005D99E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABE24F414C0FD10005D99E8 /* Foundation.framework */; };
+		FABE24F714C0FD10005D99E8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABE24F614C0FD10005D99E8 /* CoreGraphics.framework */; };
+		FABE24FD14C0FD10005D99E8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FABE24FB14C0FD10005D99E8 /* InfoPlist.strings */; };
+		FABE24FF14C0FD10005D99E8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE24FE14C0FD10005D99E8 /* main.m */; };
+		FABE250314C0FD10005D99E8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FABE250214C0FD10005D99E8 /* AppDelegate.m */; };
+		FABE262F14C0FE0A005D99E8 /* BoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE25D014C0FE0A005D99E8 /* BoundingBox.cpp */; };
+		FABE263014C0FE0A005D99E8 /* BoundingSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE25D214C0FE0A005D99E8 /* BoundingSphere.cpp */; };
+		FABE263114C0FE0A005D99E8 /* Frustum.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE25D414C0FE0A005D99E8 /* Frustum.cpp */; };
+		FABE263214C0FE0A005D99E8 /* MathLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE25D614C0FE0A005D99E8 /* MathLib.cpp */; };
+		FABE263314C0FE0A005D99E8 /* Matrix3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE25D814C0FE0A005D99E8 /* Matrix3.cpp */; };
+		FABE263414C0FE0A005D99E8 /* Matrix4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE25DA14C0FE0A005D99E8 /* Matrix4.cpp */; };
+		FABE263514C0FE0A005D99E8 /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE25DC14C0FE0A005D99E8 /* Plane.cpp */; };
+		FABE263614C0FE0A005D99E8 /* Polygon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE25DE14C0FE0A005D99E8 /* Polygon.cpp */; };
+		FABE263714C0FE0A005D99E8 /* Quaternion.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE25E014C0FE0A005D99E8 /* Quaternion.cpp */; };
+		FABE263914C0FE0A005D99E8 /* Vector2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE25E414C0FE0A005D99E8 /* Vector2.cpp */; };
+		FABE263A14C0FE0A005D99E8 /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE25E614C0FE0A005D99E8 /* Vector3.cpp */; };
+		FABE263B14C0FE0A005D99E8 /* Vector4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE25E814C0FE0A005D99E8 /* Vector4.cpp */; };
+		FABE265414C0FE5A005D99E8 /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = FABE265314C0FE5A005D99E8 /* GLView.mm */; };
+		FABE265814C0FF1B005D99E8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABE265714C0FF1B005D99E8 /* OpenGLES.framework */; };
+		FABE265E14C0FF68005D99E8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABE265D14C0FF68005D99E8 /* QuartzCore.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FABE24EE14C0FD10005D99E8 /* IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FABE24F214C0FD10005D99E8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FABE24F414C0FD10005D99E8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FABE24F614C0FD10005D99E8 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FABE24FA14C0FD10005D99E8 /* IOS-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IOS-Info.plist"; sourceTree = "<group>"; };
+		FABE24FC14C0FD10005D99E8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FABE24FE14C0FD10005D99E8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FABE250014C0FD10005D99E8 /* IOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "IOS-Prefix.pch"; sourceTree = "<group>"; };
+		FABE250114C0FD10005D99E8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FABE250214C0FD10005D99E8 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FABE25D014C0FE0A005D99E8 /* BoundingBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoundingBox.cpp; sourceTree = "<group>"; };
+		FABE25D114C0FE0A005D99E8 /* BoundingBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoundingBox.h; sourceTree = "<group>"; };
+		FABE25D214C0FE0A005D99E8 /* BoundingSphere.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoundingSphere.cpp; sourceTree = "<group>"; };
+		FABE25D314C0FE0A005D99E8 /* BoundingSphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BoundingSphere.h; sourceTree = "<group>"; };
+		FABE25D414C0FE0A005D99E8 /* Frustum.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Frustum.cpp; sourceTree = "<group>"; };
+		FABE25D514C0FE0A005D99E8 /* Frustum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Frustum.h; sourceTree = "<group>"; };
+		FABE25D614C0FE0A005D99E8 /* MathLib.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MathLib.cpp; sourceTree = "<group>"; };
+		FABE25D714C0FE0A005D99E8 /* MathLib.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MathLib.h; sourceTree = "<group>"; };
+		FABE25D814C0FE0A005D99E8 /* Matrix3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix3.cpp; sourceTree = "<group>"; };
+		FABE25D914C0FE0A005D99E8 /* Matrix3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix3.h; sourceTree = "<group>"; };
+		FABE25DA14C0FE0A005D99E8 /* Matrix4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Matrix4.cpp; sourceTree = "<group>"; };
+		FABE25DB14C0FE0A005D99E8 /* Matrix4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Matrix4.h; sourceTree = "<group>"; };
+		FABE25DC14C0FE0A005D99E8 /* Plane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Plane.cpp; sourceTree = "<group>"; };
+		FABE25DD14C0FE0A005D99E8 /* Plane.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Plane.h; sourceTree = "<group>"; };
+		FABE25DE14C0FE0A005D99E8 /* Polygon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Polygon.cpp; sourceTree = "<group>"; };
+		FABE25DF14C0FE0A005D99E8 /* Polygon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Polygon.h; sourceTree = "<group>"; };
+		FABE25E014C0FE0A005D99E8 /* Quaternion.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Quaternion.cpp; sourceTree = "<group>"; };
+		FABE25E114C0FE0A005D99E8 /* Quaternion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Quaternion.h; sourceTree = "<group>"; };
+		FABE25E414C0FE0A005D99E8 /* Vector2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector2.cpp; sourceTree = "<group>"; };
+		FABE25E514C0FE0A005D99E8 /* Vector2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector2.h; sourceTree = "<group>"; };
+		FABE25E614C0FE0A005D99E8 /* Vector3.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector3.cpp; sourceTree = "<group>"; };
+		FABE25E714C0FE0A005D99E8 /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
+		FABE25E814C0FE0A005D99E8 /* Vector4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Vector4.cpp; sourceTree = "<group>"; };
+		FABE25E914C0FE0A005D99E8 /* Vector4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector4.h; sourceTree = "<group>"; };
+		FABE265214C0FE5A005D99E8 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
+		FABE265314C0FE5A005D99E8 /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
+		FABE265714C0FF1B005D99E8 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		FABE265D14C0FF68005D99E8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FABE24EB14C0FD10005D99E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FABE265E14C0FF68005D99E8 /* QuartzCore.framework in Frameworks */,
+				FABE265814C0FF1B005D99E8 /* OpenGLES.framework in Frameworks */,
+				FABE24F314C0FD10005D99E8 /* UIKit.framework in Frameworks */,
+				FABE24F514C0FD10005D99E8 /* Foundation.framework in Frameworks */,
+				FABE24F714C0FD10005D99E8 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FABE24E314C0FD0F005D99E8 = {
+			isa = PBXGroup;
+			children = (
+				FABE25B014C0FE0A005D99E8 /* Aurora */,
+				FABE24F814C0FD10005D99E8 /* IOS */,
+				FABE24F114C0FD10005D99E8 /* Frameworks */,
+				FABE24EF14C0FD10005D99E8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FABE24EF14C0FD10005D99E8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FABE24EE14C0FD10005D99E8 /* IOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FABE24F114C0FD10005D99E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FABE265D14C0FF68005D99E8 /* QuartzCore.framework */,
+				FABE265714C0FF1B005D99E8 /* OpenGLES.framework */,
+				FABE24F214C0FD10005D99E8 /* UIKit.framework */,
+				FABE24F414C0FD10005D99E8 /* Foundation.framework */,
+				FABE24F614C0FD10005D99E8 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FABE24F814C0FD10005D99E8 /* IOS */ = {
+			isa = PBXGroup;
+			children = (
+				FABE265214C0FE5A005D99E8 /* GLView.h */,
+				FABE265314C0FE5A005D99E8 /* GLView.mm */,
+				FABE250114C0FD10005D99E8 /* AppDelegate.h */,
+				FABE250214C0FD10005D99E8 /* AppDelegate.m */,
+				FABE24F914C0FD10005D99E8 /* Supporting Files */,
+			);
+			path = IOS;
+			sourceTree = "<group>";
+		};
+		FABE24F914C0FD10005D99E8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FABE24FA14C0FD10005D99E8 /* IOS-Info.plist */,
+				FABE24FB14C0FD10005D99E8 /* InfoPlist.strings */,
+				FABE24FE14C0FD10005D99E8 /* main.m */,
+				FABE250014C0FD10005D99E8 /* IOS-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FABE25B014C0FE0A005D99E8 /* Aurora */ = {
+			isa = PBXGroup;
+			children = (
+				FABE25CF14C0FE0A005D99E8 /* Math */,
+			);
+			path = Aurora;
+			sourceTree = "<group>";
+		};
+		FABE25CF14C0FE0A005D99E8 /* Math */ = {
+			isa = PBXGroup;
+			children = (
+				FABE25D014C0FE0A005D99E8 /* BoundingBox.cpp */,
+				FABE25D114C0FE0A005D99E8 /* BoundingBox.h */,
+				FABE25D214C0FE0A005D99E8 /* BoundingSphere.cpp */,
+				FABE25D314C0FE0A005D99E8 /* BoundingSphere.h */,
+				FABE25D414C0FE0A005D99E8 /* Frustum.cpp */,
+				FABE25D514C0FE0A005D99E8 /* Frustum.h */,
+				FABE25D614C0FE0A005D99E8 /* MathLib.cpp */,
+				FABE25D714C0FE0A005D99E8 /* MathLib.h */,
+				FABE25D814C0FE0A005D99E8 /* Matrix3.cpp */,
+				FABE25D914C0FE0A005D99E8 /* Matrix3.h */,
+				FABE25DA14C0FE0A005D99E8 /* Matrix4.cpp */,
+				FABE25DB14C0FE0A005D99E8 /* Matrix4.h */,
+				FABE25DC14C0FE0A005D99E8 /* Plane.cpp */,
+				FABE25DD14C0FE0A005D99E8 /* Plane.h */,
+				FABE25DE14C0FE0A005D99E8 /* Polygon.cpp */,
+				FABE25DF14C0FE0A005D99E8 /* Polygon.h */,
+				FABE25E014C0FE0A005D99E8 /* Quaternion.cpp */,
+				FABE25E114C0FE0A005D99E8 /* Quaternion.h */,
+				FABE25E414C0FE0A005D99E8 /* Vector2.cpp */,
+				FABE25E514C0FE0A005D99E8 /* Vector2.h */,
+				FABE25E614C0FE0A005D99E8 /* Vector3.cpp */,
+				FABE25E714C0FE0A005D99E8 /* Vector3.h */,
+				FABE25E814C0FE0A005D99E8 /* Vector4.cpp */,
+				FABE25E914C0FE0A005D99E8 /* Vector4.h */,
+			);
+			path = Math;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FABE24ED14C0FD10005D99E8 /* IOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FABE250614C0FD10005D99E8 /* Build configuration list for PBXNativeTarget "IOS" */;
+			buildPhases = (
+				FABE24EA14C0FD10005D99E8 /* Sources */,
+				FABE24EB14C0FD10005D99E8 /* Frameworks */,
+				FABE24EC14C0FD10005D99E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IOS;
+			productName = IOS;
+			productReference = FABE24EE14C0FD10005D99E8 /* IOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FABE24E514C0FD0F005D99E8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = FABE24E814C0FD0F005D99E8 /* Build configuration list for PBXProject "IOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FABE24E314C0FD0F005D99E8;
+			productRefGroup = FABE24EF14C0FD10005D99E8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FABE24ED14C0FD10005D99E8 /* IOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FABE24EC14C0FD10005D99E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FABE24FD14C0FD10005D99E8 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FABE24EA14C0FD10005D99E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FABE24FF14C0FD10005D99E8 /* main.m in Sources */,
+				FABE250314C0FD10005D99E8 /* AppDelegate.m in Sources */,
+				FABE262F14C0FE0A005D99E8 /* BoundingBox.cpp in Sources */,
+				FABE263014C0FE0A005D99E8 /* BoundingSphere.cpp in Sources */,
+				FABE263114C0FE0A005D99E8 /* Frustum.cpp in Sources */,
+				FABE263214C0FE0A005D99E8 /* MathLib.cpp in Sources */,
+				FABE263314C0FE0A005D99E8 /* Matrix3.cpp in Sources */,
+				FABE263414C0FE0A005D99E8 /* Matrix4.cpp in Sources */,
+				FABE263514C0FE0A005D99E8 /* Plane.cpp in Sources */,
+				FABE263614C0FE0A005D99E8 /* Polygon.cpp in Sources */,
+				FABE263714C0FE0A005D99E8 /* Quaternion.cpp in Sources */,
+				FABE263914C0FE0A005D99E8 /* Vector2.cpp in Sources */,
+				FABE263A14C0FE0A005D99E8 /* Vector3.cpp in Sources */,
+				FABE263B14C0FE0A005D99E8 /* Vector4.cpp in Sources */,
+				FABE265414C0FE5A005D99E8 /* GLView.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FABE24FB14C0FD10005D99E8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FABE24FC14C0FD10005D99E8 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FABE250414C0FD10005D99E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FABE250514C0FD10005D99E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FABE250714C0FD10005D99E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IOS/IOS-Prefix.pch";
+				HEADER_SEARCH_PATHS = "./**";
+				INFOPLIST_FILE = "IOS/IOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FABE250814C0FD10005D99E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "IOS/IOS-Prefix.pch";
+				HEADER_SEARCH_PATHS = "./**";
+				INFOPLIST_FILE = "IOS/IOS-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FABE24E814C0FD0F005D99E8 /* Build configuration list for PBXProject "IOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FABE250414C0FD10005D99E8 /* Debug */,
+				FABE250514C0FD10005D99E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FABE250614C0FD10005D99E8 /* Build configuration list for PBXNativeTarget "IOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FABE250714C0FD10005D99E8 /* Debug */,
+				FABE250814C0FD10005D99E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FABE24E514C0FD0F005D99E8 /* Project object */;
+}

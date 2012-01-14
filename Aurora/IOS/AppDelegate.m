@@ -1,26 +1,24 @@
-//
-//  AppDelegate.m
-//  IOSSupport
-//
-//  Created by MacBook on 1/12/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
-//
-
 #import "AppDelegate.h"
 
 @implementation AppDelegate
 
+@synthesize window = _window;
+@synthesize mview = _mview;
+
 - (void)dealloc
 {
-    [window release];
+    [_window release];
     [super dealloc];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    self.mview = [[[GLView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    
+    [self.window addSubview:self.mview];
     [self.window makeKeyAndVisible];
     return YES;
 }
