@@ -1,5 +1,5 @@
-#ifndef OPENGLRenderManager_H
-#define OPENGLRenderManager_H
+#ifndef OPENGLES1RenderManager_H
+#define OPENGLES1RenderManager_H
 
 #include <Aurora/Graphics/RenderManager.h>
 

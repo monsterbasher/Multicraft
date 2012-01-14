@@ -9,6 +9,10 @@
 #include <Aurora/System/psp/PspSystemManager.h>
 #endif
 
+#ifdef AURORA_IOS
+#include <Aurora/System/ios/IOSSystemManager.h>
+#endif
+
 namespace Aurora
 {
 	namespace System
@@ -25,6 +29,10 @@ namespace Aurora
 
 #ifdef AURORA_PSP
 				_systemManager = new PspSystemManager();
+#endif
+                
+#ifdef AURORA_IOS
+				_systemManager = new IOSSystemManager();
 #endif
 
 			}

@@ -9,6 +9,10 @@
 #include <Aurora/Utils/psp/PspGameLoader.h>
 #endif
 
+#ifdef AURORA_IOS
+#include <Aurora/Utils/ios/IOSGameLoader.h>
+#endif
+
 namespace Aurora
 {
 	namespace Utils
@@ -29,6 +33,10 @@ namespace Aurora
 			#ifdef AURORA_PSP
 			_loader = new PspGameLoader(gameManager);
 			#endif
+            
+            #ifdef AURORA_IOS
+			_loader = new IOSGameLoader(gameManager);
+            #endif
 
 			return _loader;
 		}

@@ -672,7 +672,7 @@ namespace Aurora
 				fread(mesh->meshVertices,sizeof(TexturesPSPVertex),mesh->vertexCount,binaryFile);
 
 				//write all indieces
-				mesh->indices = new int[mesh->indicesCount];
+				mesh->indices = new unsigned short[mesh->indicesCount];
 				int *test = new int[mesh->indicesCount];
 				fread(test,sizeof(int),mesh->indicesCount,binaryFile);
 		

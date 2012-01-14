@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FAB35A1D14C1EB3C00AD6619 /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB35A1A14C1EB3C00AD6619 /* GameManager.cpp */; };
+		FAB35A2114C1EC6900AD6619 /* GameLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB35A1F14C1EC6900AD6619 /* GameLoader.cpp */; };
+		FAB35A2514C1EC7200AD6619 /* IOSGameLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB35A2314C1EC7200AD6619 /* IOSGameLoader.cpp */; };
+		FAB35A3614C1EE5800AD6619 /* SystemManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB35A3014C1EE5800AD6619 /* SystemManager.cpp */; };
+		FAB35A3B14C1EEA600AD6619 /* Clock.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB35A3814C1EEA600AD6619 /* Clock.cpp */; };
+		FAB35A3C14C1EEA600AD6619 /* IOSSystemManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB35A3914C1EEA600AD6619 /* IOSSystemManager.cpp */; };
 		FABE24F314C0FD10005D99E8 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABE24F214C0FD10005D99E8 /* UIKit.framework */; };
 		FABE24F514C0FD10005D99E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABE24F414C0FD10005D99E8 /* Foundation.framework */; };
 		FABE24F714C0FD10005D99E8 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABE24F614C0FD10005D99E8 /* CoreGraphics.framework */; };
@@ -41,6 +47,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FAB35A1A14C1EB3C00AD6619 /* GameManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameManager.cpp; sourceTree = "<group>"; };
+		FAB35A1B14C1EB3C00AD6619 /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
+		FAB35A1C14C1EB3C00AD6619 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
+		FAB35A1F14C1EC6900AD6619 /* GameLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameLoader.cpp; sourceTree = "<group>"; };
+		FAB35A2014C1EC6900AD6619 /* GameLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameLoader.h; sourceTree = "<group>"; };
+		FAB35A2314C1EC7200AD6619 /* IOSGameLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IOSGameLoader.cpp; sourceTree = "<group>"; };
+		FAB35A2414C1EC7200AD6619 /* IOSGameLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSGameLoader.h; sourceTree = "<group>"; };
+		FAB35A2714C1EE5800AD6619 /* Clock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Clock.h; sourceTree = "<group>"; };
+		FAB35A3014C1EE5800AD6619 /* SystemManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SystemManager.cpp; sourceTree = "<group>"; };
+		FAB35A3114C1EE5800AD6619 /* SystemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemManager.h; sourceTree = "<group>"; };
+		FAB35A3814C1EEA600AD6619 /* Clock.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Clock.cpp; sourceTree = "<group>"; };
+		FAB35A3914C1EEA600AD6619 /* IOSSystemManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IOSSystemManager.cpp; sourceTree = "<group>"; };
+		FAB35A3A14C1EEA600AD6619 /* IOSSystemManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSSystemManager.h; sourceTree = "<group>"; };
 		FABE24EE14C0FD10005D99E8 /* IOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FABE24F214C0FD10005D99E8 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FABE24F414C0FD10005D99E8 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -121,6 +140,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FAB35A2214C1EC7200AD6619 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				FAB35A2314C1EC7200AD6619 /* IOSGameLoader.cpp */,
+				FAB35A2414C1EC7200AD6619 /* IOSGameLoader.h */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		FAB35A2614C1EE5800AD6619 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				FAB35A3714C1EEA600AD6619 /* ios */,
+				FAB35A2714C1EE5800AD6619 /* Clock.h */,
+				FAB35A3014C1EE5800AD6619 /* SystemManager.cpp */,
+				FAB35A3114C1EE5800AD6619 /* SystemManager.h */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		FAB35A3714C1EEA600AD6619 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				FAB35A3814C1EEA600AD6619 /* Clock.cpp */,
+				FAB35A3914C1EEA600AD6619 /* IOSSystemManager.cpp */,
+				FAB35A3A14C1EEA600AD6619 /* IOSSystemManager.h */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
 		FABE24E314C0FD0F005D99E8 = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +226,7 @@
 		FABE25B014C0FE0A005D99E8 /* Aurora */ = {
 			isa = PBXGroup;
 			children = (
+				FAB35A2614C1EE5800AD6619 /* System */,
 				FABE269214C10123005D99E8 /* Utils */,
 				FABE266314C10113005D99E8 /* Graphics */,
 				FABE25CF14C0FE0A005D99E8 /* Math */,
@@ -256,6 +306,12 @@
 		FABE269214C10123005D99E8 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				FAB35A2214C1EC7200AD6619 /* ios */,
+				FAB35A1F14C1EC6900AD6619 /* GameLoader.cpp */,
+				FAB35A2014C1EC6900AD6619 /* GameLoader.h */,
+				FAB35A1A14C1EB3C00AD6619 /* GameManager.cpp */,
+				FAB35A1B14C1EB3C00AD6619 /* GameManager.h */,
+				FAB35A1C14C1EB3C00AD6619 /* GameState.h */,
 				FABE269B14C10123005D99E8 /* PlatformConfigurator.h */,
 			);
 			path = Utils;
@@ -347,6 +403,12 @@
 				FABE268E14C10113005D99E8 /* Sprite3D.cpp in Sources */,
 				FABE268F14C10113005D99E8 /* TextureManager.cpp in Sources */,
 				FABE269014C10113005D99E8 /* TrueTypeFont.cpp in Sources */,
+				FAB35A1D14C1EB3C00AD6619 /* GameManager.cpp in Sources */,
+				FAB35A2114C1EC6900AD6619 /* GameLoader.cpp in Sources */,
+				FAB35A2514C1EC7200AD6619 /* IOSGameLoader.cpp in Sources */,
+				FAB35A3614C1EE5800AD6619 /* SystemManager.cpp in Sources */,
+				FAB35A3B14C1EEA600AD6619 /* Clock.cpp in Sources */,
+				FAB35A3C14C1EEA600AD6619 /* IOSSystemManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

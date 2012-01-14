@@ -118,7 +118,7 @@ namespace Aurora
 			std::vector<ObjFace> mNormalFace;
 
 			TexturesPSPVertex * meshVertices;
-			int *indices;
+			unsigned short *indices;
 			int triangleCount;
 			int vertexCount;
 			int indicesCount;
