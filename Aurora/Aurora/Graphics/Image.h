@@ -1,7 +1,11 @@
-#ifndef Image_H
-#define Image_H
+#ifndef IMAGE_H
+#define IMAGE_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <vector>
 #include <string>
+#include <string.h>
 
 namespace Aurora
 {

@@ -654,7 +654,7 @@ namespace Aurora
 					memcpy(&mesh->meshVertices[v],&temp[v],sizeof(TexturesPSPVertex));
 				}
 
-				mesh->indices = new int[tempIndices.size()];
+				mesh->indices = new unsigned short[tempIndices.size()];
 				for(int v = 0;v < tempIndices.size();v++)
 				{
 					memcpy(&mesh->indices[v],&tempIndices[v],sizeof(int));
@@ -753,7 +753,7 @@ namespace Aurora
 				glTexCoordPointer(2, GL_FLOAT, GLsizei(sizeof(TexturesPSPVertex)), &mesh->meshVertices[0].u);
 				glVertexPointer(3, GL_FLOAT, GLsizei(sizeof(TexturesPSPVertex)), &mesh->meshVertices[0].x);
 
-				glDrawElements(GL_TRIANGLES, GLsizei(mesh->indicesCount), GL_UNSIGNED_INT, &mesh->indices[0]);
+				glDrawElements(GL_TRIANGLES, GLsizei(mesh->indicesCount), GL_UNSIGNED_SHORT, &mesh->indices[0]);
 
 				glDisableClientState(GL_VERTEX_ARRAY);
 				glDisableClientState(GL_TEXTURE_COORD_ARRAY);

@@ -3,13 +3,18 @@
 
 #include <Aurora/Graphics/Sprite.h>
 #include <Aurora/Graphics/Image.h>
+#include <Aurora/Graphics/TextureManager.h>
 
 void SimpleTest::Init()
 {
 	_renderManager = RenderManager::Instance();
 	_systemManager = SystemManager::Instance();
 
-	//Sprite *itemSprite = new Sprite("Assets/Minecraft/gui/items.png",0,0,16,16);
+	itemImage = TextureManager::Instance()->loadImageFromFile("Assets/Minecraft/gui/items.png");
+    
+    itemSprite = new Sprite("Assets/Minecraft/gui/items.png",0,0,16,16);
+	itemSprite->Scale(3.0f,3.0f);
+	itemSprite->SetPosition(100,100);
 
 	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
 
@@ -93,11 +98,12 @@ void SimpleTest::Update(GameManager* sManager)
 void SimpleTest::Draw(GameManager* sManager)
 {
 	RenderManager::Instance()->StartFrame();
-	RenderManager::Instance()->SetPerspective();
-	RenderManager::Instance()->ClearScreen();
 
 	//change ortho for text
 	RenderManager::Instance()->SetOrtho();
+    
+    RenderManager::Instance()->drawSprite(itemSprite);
+    
 	RenderManager::Instance()->SetTextOrtho();
 	RenderManager::Instance()->drawText(font,1,267,"Multicraft",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 

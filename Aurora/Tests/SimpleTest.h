@@ -5,6 +5,8 @@
 #include <Aurora/Utils/GameState.h>
 #include <Aurora/System/SystemManager.h>
 #include <Aurora/System/Clock.h>
+#include <Aurora/Graphics/Sprite.h>
+#include <Aurora/Graphics/Sprite3D.h>
 
 using namespace Aurora;
 using namespace Aurora::Graphics;
@@ -16,6 +18,9 @@ class SimpleTest : public GameState
 {
 	private:
 
+    Image* itemImage;
+	Sprite* itemSprite;
+    
 	TrueTypeFont* font;
 
 	Camera *cam;

@@ -44,6 +44,10 @@
 		FABE268E14C10113005D99E8 /* Sprite3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE267B14C10113005D99E8 /* Sprite3D.cpp */; };
 		FABE268F14C10113005D99E8 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE267F14C10113005D99E8 /* TextureManager.cpp */; };
 		FABE269014C10113005D99E8 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE268114C10113005D99E8 /* TrueTypeFont.cpp */; };
+		FAF37C4814C2011200931646 /* Demo_ObjLoading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF37C3B14C2011200931646 /* Demo_ObjLoading.cpp */; };
+		FAF37C4B14C2011200931646 /* ExampleGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF37C4114C2011200931646 /* ExampleGame.cpp */; };
+		FAF37C4D14C2011200931646 /* SimpleTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF37C4514C2011200931646 /* SimpleTest.cpp */; };
+		FAF37C4F14C2042000931646 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = FAF37C4E14C2042000931646 /* Assets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -122,6 +126,13 @@
 		FABE268214C10113005D99E8 /* TrueTypeFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrueTypeFont.h; sourceTree = "<group>"; };
 		FABE268314C10113005D99E8 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		FABE269B14C10123005D99E8 /* PlatformConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformConfigurator.h; sourceTree = "<group>"; };
+		FAF37C3B14C2011200931646 /* Demo_ObjLoading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Demo_ObjLoading.cpp; sourceTree = "<group>"; };
+		FAF37C3C14C2011200931646 /* Demo_ObjLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo_ObjLoading.h; sourceTree = "<group>"; };
+		FAF37C4114C2011200931646 /* ExampleGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExampleGame.cpp; sourceTree = "<group>"; };
+		FAF37C4214C2011200931646 /* ExampleGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExampleGame.h; sourceTree = "<group>"; };
+		FAF37C4514C2011200931646 /* SimpleTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleTest.cpp; sourceTree = "<group>"; };
+		FAF37C4614C2011200931646 /* SimpleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTest.h; sourceTree = "<group>"; };
+		FAF37C4E14C2042000931646 /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Assets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +184,8 @@
 		FABE24E314C0FD0F005D99E8 = {
 			isa = PBXGroup;
 			children = (
+				FAF37C4E14C2042000931646 /* Assets */,
+				FAF37C3814C2011200931646 /* Tests */,
 				FABE25B014C0FE0A005D99E8 /* Aurora */,
 				FABE24F814C0FD10005D99E8 /* IOS */,
 				FABE24F114C0FD10005D99E8 /* Frameworks */,
@@ -317,6 +330,19 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		FAF37C3814C2011200931646 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FAF37C3B14C2011200931646 /* Demo_ObjLoading.cpp */,
+				FAF37C3C14C2011200931646 /* Demo_ObjLoading.h */,
+				FAF37C4114C2011200931646 /* ExampleGame.cpp */,
+				FAF37C4214C2011200931646 /* ExampleGame.h */,
+				FAF37C4514C2011200931646 /* SimpleTest.cpp */,
+				FAF37C4614C2011200931646 /* SimpleTest.h */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -368,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FABE24FD14C0FD10005D99E8 /* InfoPlist.strings in Resources */,
+				FAF37C4F14C2042000931646 /* Assets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -409,6 +436,9 @@
 				FAB35A3614C1EE5800AD6619 /* SystemManager.cpp in Sources */,
 				FAB35A3B14C1EEA600AD6619 /* Clock.cpp in Sources */,
 				FAB35A3C14C1EEA600AD6619 /* IOSSystemManager.cpp in Sources */,
+				FAF37C4814C2011200931646 /* Demo_ObjLoading.cpp in Sources */,
+				FAF37C4B14C2011200931646 /* ExampleGame.cpp in Sources */,
+				FAF37C4D14C2011200931646 /* SimpleTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,8 +505,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "libc++";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				CLANG_CXX_LIBRARY = "compiler-default";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOS/IOS-Prefix.pch";
 				HEADER_SEARCH_PATHS = "./**";
@@ -492,8 +522,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
-				CLANG_CXX_LIBRARY = "libc++";
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				CLANG_CXX_LIBRARY = "compiler-default";
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOS/IOS-Prefix.pch";
 				HEADER_SEARCH_PATHS = "./**";

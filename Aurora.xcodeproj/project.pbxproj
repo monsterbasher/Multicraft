@@ -10,11 +10,9 @@
 		FA803F071486CD060068EF79 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = FA803F061486CD060068EF79 /* Assets */; };
 		FA833BC51480D83D00491033 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA833BC31480D83D00491033 /* InfoPlist.strings */; };
 		FA833BCB1480D83D00491033 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FA833BC91480D83D00491033 /* Credits.rtf */; };
-		FA854270148445960086FCCE /* sfml-graphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA85426D148445960086FCCE /* sfml-graphics.framework */; };
 		FA854271148445960086FCCE /* sfml-system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA85426E148445960086FCCE /* sfml-system.framework */; };
 		FA854272148445960086FCCE /* sfml-window.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA85426F148445960086FCCE /* sfml-window.framework */; };
 		FA854274148445B60086FCCE /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA854273148445B60086FCCE /* OpenGL.framework */; };
-		FA85427E148447540086FCCE /* sfml-graphics.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA85426D148445960086FCCE /* sfml-graphics.framework */; };
 		FA85427F148447540086FCCE /* sfml-system.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA85426E148445960086FCCE /* sfml-system.framework */; };
 		FA854280148447540086FCCE /* sfml-window.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA85426F148445960086FCCE /* sfml-window.framework */; };
 		FA9656E114BE32E70082CBB1 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA96567014BE32E70082CBB1 /* Camera.cpp */; };
@@ -61,6 +59,8 @@
 		FA96571E14BE32F50082CBB1 /* ServerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA96571714BE32F50082CBB1 /* ServerTest.cpp */; };
 		FA96571F14BE32F50082CBB1 /* SimpleTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA96571914BE32F50082CBB1 /* SimpleTest.cpp */; };
 		FA96572114BE32FC0082CBB1 /* Starter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA96572014BE32FC0082CBB1 /* Starter.cpp */; };
+		FAF37C3014C1FED300931646 /* sfml-graphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF37C2F14C1FED300931646 /* sfml-graphics.framework */; };
+		FAF37C3214C1FF5E00931646 /* sfml-graphics.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FAF37C2F14C1FED300931646 /* sfml-graphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -70,7 +70,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FA85427E148447540086FCCE /* sfml-graphics.framework in CopyFiles */,
+				FAF37C3214C1FF5E00931646 /* sfml-graphics.framework in CopyFiles */,
 				FA85427F148447540086FCCE /* sfml-system.framework in CopyFiles */,
 				FA854280148447540086FCCE /* sfml-window.framework in CopyFiles */,
 			);
@@ -85,7 +85,6 @@
 		FA833BC41480D83D00491033 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		FA833BC81480D83D00491033 /* Aurora-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Aurora-Prefix.pch"; sourceTree = "<group>"; };
 		FA833BCA1480D83D00491033 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
-		FA85426D148445960086FCCE /* sfml-graphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-graphics.framework"; path = "Aurora/libs/sfml/mac/sfml-graphics.framework"; sourceTree = "<group>"; };
 		FA85426E148445960086FCCE /* sfml-system.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-system.framework"; path = "Aurora/libs/sfml/mac/sfml-system.framework"; sourceTree = "<group>"; };
 		FA85426F148445960086FCCE /* sfml-window.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-window.framework"; path = "Aurora/libs/sfml/mac/sfml-window.framework"; sourceTree = "<group>"; };
 		FA854273148445B60086FCCE /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -184,6 +183,7 @@
 		FA96571914BE32F50082CBB1 /* SimpleTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SimpleTest.cpp; sourceTree = "<group>"; };
 		FA96571A14BE32F50082CBB1 /* SimpleTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleTest.h; sourceTree = "<group>"; };
 		FA96572014BE32FC0082CBB1 /* Starter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Starter.cpp; sourceTree = "<group>"; };
+		FAF37C2F14C1FED300931646 /* sfml-graphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-graphics.framework"; path = "Aurora/libs/sfml/mac/sfml-graphics.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,8 +191,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAF37C3014C1FED300931646 /* sfml-graphics.framework in Frameworks */,
 				FA854274148445B60086FCCE /* OpenGL.framework in Frameworks */,
-				FA854270148445960086FCCE /* sfml-graphics.framework in Frameworks */,
 				FA854271148445960086FCCE /* sfml-system.framework in Frameworks */,
 				FA854272148445960086FCCE /* sfml-window.framework in Frameworks */,
 			);
@@ -222,8 +222,8 @@
 		FA833BB91480D83C00491033 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FAF37C2F14C1FED300931646 /* sfml-graphics.framework */,
 				FA854273148445B60086FCCE /* OpenGL.framework */,
-				FA85426D148445960086FCCE /* sfml-graphics.framework */,
 				FA85426E148445960086FCCE /* sfml-system.framework */,
 				FA85426F148445960086FCCE /* sfml-window.framework */,
 			);
@@ -596,7 +596,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "./**";
+				USER_HEADER_SEARCH_PATHS = ./Aurora/;
 			};
 			name = Debug;
 		};
@@ -616,21 +616,30 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
-				USER_HEADER_SEARCH_PATHS = "./**";
+				USER_HEADER_SEARCH_PATHS = ./Aurora/;
 			};
 			name = Release;
 		};
 		FA833BD51480D83D00491033 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Aurora/libs/sfml/mac\"",
 				);
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Aurora/Aurora-Prefix.pch";
+				GCC_REUSE_STRINGS = NO;
+				GCC_USE_STANDARD_INCLUDE_SEARCHING = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "Aurora/Aurora-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "./Aurora/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -638,14 +647,23 @@
 		FA833BD61480D83D00491033 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "compiler-default";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Aurora/libs/sfml/mac\"",
 				);
+				GCC_C_LANGUAGE_STANDARD = "compiler-default";
+				GCC_INPUT_FILETYPE = automatic;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Aurora/Aurora-Prefix.pch";
+				GCC_REUSE_STRINGS = NO;
+				GCC_USE_STANDARD_INCLUDE_SEARCHING = YES;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				INFOPLIST_FILE = "Aurora/Aurora-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				USER_HEADER_SEARCH_PATHS = "./Aurora/**";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

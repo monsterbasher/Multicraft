@@ -14,7 +14,7 @@ class ExampleGameManager : public GameManager
 {
 private:
 
-	Demo_ObjLoading* exampleState;
+	SimpleTest* exampleState;
 
 public:
 
@@ -27,7 +27,7 @@ public:
 	void Init()
 	{
 		//init whatever you need
-		exampleState = new Demo_ObjLoading();
+		exampleState = new SimpleTest();
 		exampleState->Init();
 
 		ChangeState(exampleState);

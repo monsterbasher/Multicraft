@@ -1,5 +1,44 @@
 #import "GLView.h"
 
+#include <Aurora/Utils/GameLoader.h>
+#include <Aurora/Utils/GameManager.h>
+
+#include "Tests/ExampleGame.h"
+#include "Tests/Demo_ObjLoading.h"
+#include "Tests/SimpleTest.h"
+
+class ExampleGameManager : public GameManager
+{
+private:
+    
+	SimpleTest* exampleState;
+    
+public:
+    
+	void Configure()
+	{
+		//init render manager properties
+		RenderManager::Instance()->setSesize(320,480);
+	}
+    
+	void Init()
+	{
+		//init whatever you need
+		exampleState = new SimpleTest();
+		exampleState->Init();
+        
+		ChangeState(exampleState);
+	}
+    
+	void CleanUp()
+	{
+		exampleState->CleanUp();
+		delete exampleState;
+	}
+};
+
+ExampleGameManager *_gmanager;
+
 #define GL_RENDERBUFFER 0x8d41
 
 @implementation GLView
@@ -9,12 +48,29 @@
     return [CAEAGLLayer class];
 }
 
+void setupAppDirectory()
+{
+	const int BUFFER_SIZE = 2048;
+	
+	CFBundleRef mainBundle = CFBundleGetMainBundle();
+	CFURLRef mainBundleURL = CFBundleCopyBundleURL(mainBundle);
+	
+	char* bundlePath = new char[BUFFER_SIZE];
+	
+	CFURLGetFileSystemRepresentation(mainBundleURL, false, (UInt8*)  bundlePath, BUFFER_SIZE - 1);
+	chdir(bundlePath);
+	delete[] bundlePath;
+}
+
 - (id) initWithFrame: (CGRect) frame
 {
     if (self = [super initWithFrame:frame])
     {
         CAEAGLLayer* eaglLayer = (CAEAGLLayer*) self.layer;
         eaglLayer.opaque = YES;
+        
+        //change active directory to where my app is
+        setupAppDirectory();
 
         //EAGLRenderingAPI api = kEAGLRenderingAPIOpenGLES2;
         //m_context = [[EAGLContext alloc] initWithAPI:api];
@@ -36,6 +92,15 @@
             NSLog(@"Using OpenGL ES 2.0");
            // m_renderingEngine = CreateRenderer2();
         }*/
+        
+        //init game stuff
+        _gmanager = new ExampleGameManager();
+        
+        _gmanager->Configure();
+        
+        Aurora::Graphics::RenderManager::Instance()->Init();
+        
+        _gmanager->Init();
         
         [m_context
             renderbufferStorage:GL_RENDERBUFFER
@@ -79,7 +144,13 @@
         //m_renderingEngine->UpdateAnimation(elapsedSeconds);
     }
     
-    //m_renderingEngine->Render();
+    if (_gmanager != NULL) 
+    {
+        _gmanager->HandleEvents();
+        _gmanager->Update();
+        _gmanager->Draw();
+    }
+    
     [m_context presentRenderbuffer:GL_RENDERBUFFER];
 }
 

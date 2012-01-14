@@ -9,6 +9,10 @@
 #include <Aurora/Graphics/psp/GuRenderManager.h>
 #endif
 
+#ifdef AURORA_IOS
+#include <Aurora/Graphics/ios/OpenGLES1RenderManager.h>
+#endif
+
 
 namespace Aurora
 {
@@ -26,6 +30,10 @@ namespace Aurora
 
 #ifdef AURORA_PSP
 				_renderManager = new GuRenderManager();
+#endif
+                
+#ifdef AURORA_IOS
+				_renderManager = new OpenGLES1RenderManager();
 #endif
 
 			}

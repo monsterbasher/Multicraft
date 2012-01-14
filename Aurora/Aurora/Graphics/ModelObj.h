@@ -1,11 +1,12 @@
 #ifndef OBJMODEL_H
 #define OBJMODEL_H
 
-#include <string>
-#include <string.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
+#include <string>
+#include <string.h>
 
 #include <Aurora/Math/Vector3.h>
 #include <Aurora/Math/BoundingBox.h>
