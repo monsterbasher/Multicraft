@@ -1,4 +1,5 @@
 #import <QuartzCore/QuartzCore.h>
+#include <sys/time.h>
 
 @interface GLView : UIView
 {

@@ -28,6 +28,16 @@
 		FABE265414C0FE5A005D99E8 /* GLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = FABE265314C0FE5A005D99E8 /* GLView.mm */; };
 		FABE265814C0FF1B005D99E8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABE265714C0FF1B005D99E8 /* OpenGLES.framework */; };
 		FABE265E14C0FF68005D99E8 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FABE265D14C0FF68005D99E8 /* QuartzCore.framework */; };
+		FABE268414C10113005D99E8 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE266414C10113005D99E8 /* Camera.cpp */; };
+		FABE268514C10113005D99E8 /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE266614C10113005D99E8 /* Image.cpp */; };
+		FABE268614C10113005D99E8 /* OpenGLES1RenderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE266914C10113005D99E8 /* OpenGLES1RenderManager.cpp */; };
+		FABE268714C10113005D99E8 /* ModelObj.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE266B14C10113005D99E8 /* ModelObj.cpp */; };
+		FABE268B14C10113005D99E8 /* RenderManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE267514C10113005D99E8 /* RenderManager.cpp */; };
+		FABE268C14C10113005D99E8 /* SplashScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE267714C10113005D99E8 /* SplashScreen.cpp */; };
+		FABE268D14C10113005D99E8 /* Sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE267914C10113005D99E8 /* Sprite.cpp */; };
+		FABE268E14C10113005D99E8 /* Sprite3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE267B14C10113005D99E8 /* Sprite3D.cpp */; };
+		FABE268F14C10113005D99E8 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE267F14C10113005D99E8 /* TextureManager.cpp */; };
+		FABE269014C10113005D99E8 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE268114C10113005D99E8 /* TrueTypeFont.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +79,30 @@
 		FABE265314C0FE5A005D99E8 /* GLView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GLView.mm; sourceTree = "<group>"; };
 		FABE265714C0FF1B005D99E8 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		FABE265D14C0FF68005D99E8 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FABE266414C10113005D99E8 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		FABE266514C10113005D99E8 /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		FABE266614C10113005D99E8 /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
+		FABE266714C10113005D99E8 /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		FABE266914C10113005D99E8 /* OpenGLES1RenderManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLES1RenderManager.cpp; sourceTree = "<group>"; };
+		FABE266A14C10113005D99E8 /* OpenGLES1RenderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenGLES1RenderManager.h; sourceTree = "<group>"; };
+		FABE266B14C10113005D99E8 /* ModelObj.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelObj.cpp; sourceTree = "<group>"; };
+		FABE266C14C10113005D99E8 /* ModelObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelObj.h; sourceTree = "<group>"; };
+		FABE267514C10113005D99E8 /* RenderManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RenderManager.cpp; sourceTree = "<group>"; };
+		FABE267614C10113005D99E8 /* RenderManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RenderManager.h; sourceTree = "<group>"; };
+		FABE267714C10113005D99E8 /* SplashScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SplashScreen.cpp; sourceTree = "<group>"; };
+		FABE267814C10113005D99E8 /* SplashScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SplashScreen.h; sourceTree = "<group>"; };
+		FABE267914C10113005D99E8 /* Sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite.cpp; sourceTree = "<group>"; };
+		FABE267A14C10113005D99E8 /* Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite.h; sourceTree = "<group>"; };
+		FABE267B14C10113005D99E8 /* Sprite3D.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sprite3D.cpp; sourceTree = "<group>"; };
+		FABE267C14C10113005D99E8 /* Sprite3D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sprite3D.h; sourceTree = "<group>"; };
+		FABE267D14C10113005D99E8 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		FABE267E14C10113005D99E8 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		FABE267F14C10113005D99E8 /* TextureManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TextureManager.cpp; sourceTree = "<group>"; };
+		FABE268014C10113005D99E8 /* TextureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextureManager.h; sourceTree = "<group>"; };
+		FABE268114C10113005D99E8 /* TrueTypeFont.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TrueTypeFont.cpp; sourceTree = "<group>"; };
+		FABE268214C10113005D99E8 /* TrueTypeFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrueTypeFont.h; sourceTree = "<group>"; };
+		FABE268314C10113005D99E8 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		FABE269B14C10123005D99E8 /* PlatformConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformConfigurator.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +177,8 @@
 		FABE25B014C0FE0A005D99E8 /* Aurora */ = {
 			isa = PBXGroup;
 			children = (
+				FABE269214C10123005D99E8 /* Utils */,
+				FABE266314C10113005D99E8 /* Graphics */,
 				FABE25CF14C0FE0A005D99E8 /* Math */,
 			);
 			path = Aurora;
@@ -177,6 +213,52 @@
 				FABE25E914C0FE0A005D99E8 /* Vector4.h */,
 			);
 			path = Math;
+			sourceTree = "<group>";
+		};
+		FABE266314C10113005D99E8 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				FABE266814C10113005D99E8 /* ios */,
+				FABE266414C10113005D99E8 /* Camera.cpp */,
+				FABE266514C10113005D99E8 /* Camera.h */,
+				FABE266614C10113005D99E8 /* Image.cpp */,
+				FABE266714C10113005D99E8 /* Image.h */,
+				FABE266B14C10113005D99E8 /* ModelObj.cpp */,
+				FABE266C14C10113005D99E8 /* ModelObj.h */,
+				FABE267514C10113005D99E8 /* RenderManager.cpp */,
+				FABE267614C10113005D99E8 /* RenderManager.h */,
+				FABE267714C10113005D99E8 /* SplashScreen.cpp */,
+				FABE267814C10113005D99E8 /* SplashScreen.h */,
+				FABE267914C10113005D99E8 /* Sprite.cpp */,
+				FABE267A14C10113005D99E8 /* Sprite.h */,
+				FABE267B14C10113005D99E8 /* Sprite3D.cpp */,
+				FABE267C14C10113005D99E8 /* Sprite3D.h */,
+				FABE267D14C10113005D99E8 /* stb_image.h */,
+				FABE267E14C10113005D99E8 /* stb_truetype.h */,
+				FABE267F14C10113005D99E8 /* TextureManager.cpp */,
+				FABE268014C10113005D99E8 /* TextureManager.h */,
+				FABE268114C10113005D99E8 /* TrueTypeFont.cpp */,
+				FABE268214C10113005D99E8 /* TrueTypeFont.h */,
+				FABE268314C10113005D99E8 /* Vertex.h */,
+			);
+			path = Graphics;
+			sourceTree = "<group>";
+		};
+		FABE266814C10113005D99E8 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				FABE266914C10113005D99E8 /* OpenGLES1RenderManager.cpp */,
+				FABE266A14C10113005D99E8 /* OpenGLES1RenderManager.h */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		FABE269214C10123005D99E8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				FABE269B14C10123005D99E8 /* PlatformConfigurator.h */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +337,16 @@
 				FABE263A14C0FE0A005D99E8 /* Vector3.cpp in Sources */,
 				FABE263B14C0FE0A005D99E8 /* Vector4.cpp in Sources */,
 				FABE265414C0FE5A005D99E8 /* GLView.mm in Sources */,
+				FABE268414C10113005D99E8 /* Camera.cpp in Sources */,
+				FABE268514C10113005D99E8 /* Image.cpp in Sources */,
+				FABE268614C10113005D99E8 /* OpenGLES1RenderManager.cpp in Sources */,
+				FABE268714C10113005D99E8 /* ModelObj.cpp in Sources */,
+				FABE268B14C10113005D99E8 /* RenderManager.cpp in Sources */,
+				FABE268C14C10113005D99E8 /* SplashScreen.cpp in Sources */,
+				FABE268D14C10113005D99E8 /* Sprite.cpp in Sources */,
+				FABE268E14C10113005D99E8 /* Sprite3D.cpp in Sources */,
+				FABE268F14C10113005D99E8 /* TextureManager.cpp in Sources */,
+				FABE269014C10113005D99E8 /* TrueTypeFont.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,11 +412,16 @@
 		FABE250714C0FD10005D99E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOS/IOS-Prefix.pch";
 				HEADER_SEARCH_PATHS = "./**";
 				INFOPLIST_FILE = "IOS/IOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -332,11 +429,16 @@
 		FABE250814C0FD10005D99E8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "compiler-default";
+				CLANG_CXX_LIBRARY = "libc++";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IOS/IOS-Prefix.pch";
 				HEADER_SEARCH_PATHS = "./**";
 				INFOPLIST_FILE = "IOS/IOS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos5.0;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

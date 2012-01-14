@@ -2,7 +2,7 @@
 #define SPLASHSCREEN_H_
 
 #include <Aurora/Graphics/Sprite.h>
-#include <Aurora/System/Clock.h>
+//#include <Aurora/System/Clock.h>
 
 namespace Aurora
 {
@@ -16,7 +16,7 @@ namespace Aurora
 			float _timer;
 			float _dt;
 			Sprite* _sprite;
-			System::Clock _mTimer;
+			//System::Clock _mTimer;
 
 		public:
 

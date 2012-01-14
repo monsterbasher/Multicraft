@@ -14,7 +14,7 @@ namespace Aurora
 			_finishTime = splashTime;
 			_timer = 0.0f;
 			_dt = 0.0f;
-			_mTimer.Reset();
+			//_mTimer.Reset();
 		}
 
 		SplashScreen::~SplashScreen()
@@ -25,10 +25,10 @@ namespace Aurora
 
 		void SplashScreen::ShowSplash()
 		{
-			_dt = _mTimer.getTime();
+			_dt = 0.0f;//mTimer.getTime();
 			while(_timer < _finishTime)
 			{
-				_dt = _mTimer.getTime();
+				//_dt = _mTimer.getTime();
 
 				RenderManager::Instance()->StartFrame();
 
