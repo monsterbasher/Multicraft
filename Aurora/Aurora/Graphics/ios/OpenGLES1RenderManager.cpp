@@ -41,6 +41,13 @@ namespace Aurora
 			0.000000f, 0.000000f,  1.000000f, 0.000000f,  1.000000f, 1.000000f, 
 			0.000000f, 0.000000f,  1.000000f, 1.000000f,  0.000000f, 1.000000f, 
 		};
+        
+        DeviceOrientation OpenGLES1RenderManager::_deviceOrientation = DeviceOrientationUnknown;
+        
+        void OpenGLES1RenderManager::setDeviceOrientation(DeviceOrientation orientation)
+        {
+            _deviceOrientation = orientation;
+        }
 
 		OpenGLES1RenderManager::OpenGLES1RenderManager()
 		{
@@ -103,7 +110,25 @@ namespace Aurora
 			glMatrixMode(GL_PROJECTION);	
 			glLoadIdentity();
             
-			glOrthof(0, _width, _height, 0, _zOtrhoMin, _zOtrhoMax);
+            if (_deviceOrientation == DeviceOrientationLandscapeRight)
+            {
+                glRotatef(90, 0, 0, 1);
+                glOrthof(0, _height, _width, 0, _zOtrhoMin, _zOtrhoMax);
+                
+            }else if (_deviceOrientation == DeviceOrientationLandscapeLeft)
+            {
+                glRotatef(-90, 0, 0, 1);
+                glOrthof(0, _height, _width, 0, _zOtrhoMin, _zOtrhoMax);
+                
+            }else if (_deviceOrientation == DeviceOrientationPortraitUpsideDown)
+            {
+                glRotatef(180, 0, 0, 1);
+                glOrthof(0, _width, _height, 0, _zOtrhoMin, _zOtrhoMax);
+                
+            }else
+            {
+                glOrthof(0, _width, _height, 0, _zOtrhoMin, _zOtrhoMax);
+            }
             
 			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
@@ -113,14 +138,35 @@ namespace Aurora
 		{
             glViewport(0, 0, _width, _height);
             
-			glMatrixMode(GL_PROJECTION);	
-			glLoadIdentity();
+            glMatrixMode(GL_PROJECTION);	
+            glLoadIdentity();
             
-			glOrthof(0, _width, 0, _height, _zOtrhoMin, _zOtrhoMax);
+            if (_deviceOrientation == DeviceOrientationLandscapeRight)
+            {
+                glRotatef(90, 0, 0, 1);
+                glOrthof(0, _height, 0, _width, _zOtrhoMin, _zOtrhoMax);
+                glTranslatef(0, -(_width / 2), 0);
+                
+            }else if (_deviceOrientation == DeviceOrientationLandscapeLeft)
+            {
+                glRotatef(-90, 0, 0, 1);
+                glOrthof(0, _height, 0, _width, _zOtrhoMin, _zOtrhoMax);
+                glTranslatef(0, -(_width / 2), 0);
+                
+            }else if (_deviceOrientation == DeviceOrientationPortraitUpsideDown)
+            {
+                glRotatef(180, 0, 0, 1);
+                glOrthof(0, _width, 0, _height, _zOtrhoMin, _zOtrhoMax);
+                
+            }else
+            {
+                glOrthof(0, _width, 0, _height, _zOtrhoMin, _zOtrhoMax);
+            }
             
-			glMatrixMode(GL_MODELVIEW);
-			glLoadIdentity();
-		}
+            
+            glMatrixMode(GL_MODELVIEW);
+            glLoadIdentity();
+        }
 
 		void OpenGLES1RenderManager::SetOrtho(float left,float right,float bottom,float top,float zmin,float zmax)
 		{
@@ -129,11 +175,123 @@ namespace Aurora
 			glMatrixMode(GL_PROJECTION);	
 			glLoadIdentity();
             
-			glOrthof(left, right, bottom, top, _zOtrhoMin, _zOtrhoMax);
+            if (_deviceOrientation == DeviceOrientationLandscapeRight)
+            {
+                glRotatef(90, 0, 0, 1);
+                glOrthof(left, bottom, right, top, _zOtrhoMin, _zOtrhoMax);
+                
+            }else if (_deviceOrientation == DeviceOrientationLandscapeLeft)
+            {
+                glRotatef(-90, 0, 0, 1);
+                glOrthof(left, bottom, right, top, _zOtrhoMin, _zOtrhoMax);
+                
+            }else if (_deviceOrientation == DeviceOrientationPortraitUpsideDown)
+            {
+                glRotatef(180, 0, 0, 1);
+                glOrthof(left, right, bottom, top, _zOtrhoMin, _zOtrhoMax);
+                
+            }else
+            {
+                glOrthof(left, right, bottom, top, _zOtrhoMin, _zOtrhoMax);
+            }
             
 			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
 		}
+        
+        void OpenGLES1RenderManager::__gluMakeIdentityf(GLfloat m[16])
+        {
+            m[0+4*0] = 1; m[0+4*1] = 0; m[0+4*2] = 0; m[0+4*3] = 0;
+            m[1+4*0] = 0; m[1+4*1] = 1; m[1+4*2] = 0; m[1+4*3] = 0;
+            m[2+4*0] = 0; m[2+4*1] = 0; m[2+4*2] = 1; m[2+4*3] = 0;
+            m[3+4*0] = 0; m[3+4*1] = 0; m[3+4*2] = 0; m[3+4*3] = 1;
+        }
+        
+        void OpenGLES1RenderManager::__normalize(GLfloat v[3])
+        {
+            GLfloat r;
+            
+            r=(GLfloat)sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+            if (r==0.0f)
+            {
+                return;
+            }
+            
+            v[0]/=r;
+            v[1]/=r;
+            v[2]/=r;
+        }
+        
+        void OpenGLES1RenderManager::__cross(GLfloat v1[3], GLfloat v2[3], GLfloat result[3])
+        {
+            result[0] = v1[1]*v2[2] - v1[2]*v2[1];
+            result[1] = v1[2]*v2[0] - v1[0]*v2[2];
+            result[2] = v1[0]*v2[1] - v1[1]*v2[0];
+        }
+        
+        void OpenGLES1RenderManager::gluPerspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar)
+        {
+            GLfloat m[4][4];
+            GLfloat sine, cotangent, deltaZ;
+            GLfloat radians = fovy / 2 * 3.14 / 180;
+            
+            deltaZ = zFar - zNear;
+            sine = sin(radians);
+            if ((deltaZ == 0) || (sine == 0) || (aspect == 0))
+            {
+                return;
+            }
+            cotangent = cos(radians) / sine;
+            
+            __gluMakeIdentityf(&m[0][0]);
+            m[0][0] = cotangent / aspect;
+            m[1][1] = cotangent;
+            m[2][2] = -(zFar + zNear) / deltaZ;
+            m[2][3] = -1;
+            m[3][2] = -2 * zNear * zFar / deltaZ;
+            m[3][3] = 0;
+            glMultMatrixf(&m[0][0]);
+        }
+        
+        void OpenGLES1RenderManager::gluLookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez, GLfloat centerx,
+                       GLfloat centery, GLfloat centerz, GLfloat upx, GLfloat upy,GLfloat upz)
+        {
+            GLfloat forward[3], side[3], up[3];
+            GLfloat m[4][4];
+            
+            forward[0] = centerx - eyex;
+            forward[1] = centery - eyey;
+            forward[2] = centerz - eyez;
+            
+            up[0] = upx;
+            up[1] = upy;
+            up[2] = upz;
+            
+            __normalize(forward);
+            
+            /* Side = forward x up */
+            __cross(forward, up, side);
+            __normalize(side);
+            
+            /* Recompute up as: up = side x forward */
+            __cross(side, forward, up);
+            
+            __gluMakeIdentityf(&m[0][0]);
+            m[0][0] = side[0];
+            m[1][0] = side[1];
+            m[2][0] = side[2];
+            
+            m[0][1] = up[0];
+            m[1][1] = up[1];
+            m[2][1] = up[2];
+            
+            m[0][2] = -forward[0];
+            m[1][2] = -forward[1];
+            m[2][2] = -forward[2];
+            
+            glMultMatrixf(&m[0][0]);
+            glTranslatef(-eyex, -eyey, -eyez);
+        }
 
 		void OpenGLES1RenderManager::SetPerspective()
 		{
@@ -141,7 +299,18 @@ namespace Aurora
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
             
-//TODO			//gluPerspective(_pov,(GLfloat)_width/(GLfloat)_height,_zMin,_zMax);
+			gluPerspective(_pov,(GLfloat)_width/(GLfloat)_height,_zMin,_zMax);
+            
+            if (_deviceOrientation == DeviceOrientationLandscapeRight)
+            {
+                glRotatef(90, 0, 0, 1);
+            }else if (_deviceOrientation == DeviceOrientationLandscapeLeft)
+            {
+                glRotatef(-90, 0, 0, 1);
+            }else if (_deviceOrientation == DeviceOrientationPortraitUpsideDown)
+            {
+                glRotatef(180, 0, 0, 1);
+            }
             
 			glMatrixMode(GL_MODELVIEW);	
 			glLoadIdentity();
@@ -153,7 +322,18 @@ namespace Aurora
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
             
-//TODO			//gluPerspective(pov,aspect,zmin,zmax);
+			gluPerspective(pov,aspect,zmin,zmax);
+            
+            if (_deviceOrientation == DeviceOrientationLandscapeRight)
+            {
+                glRotatef(90, 0, 0, 1);
+            }else if (_deviceOrientation == DeviceOrientationLandscapeLeft)
+            {
+                glRotatef(-90, 0, 0, 1);
+            }else if (_deviceOrientation == DeviceOrientationPortraitUpsideDown)
+            {
+                glRotatef(180, 0, 0, 1);
+            }
             
 			glMatrixMode(GL_MODELVIEW);	
 			glLoadIdentity();
@@ -192,9 +372,9 @@ namespace Aurora
 		{
             if(_currentCam != 0)
 			{
-				//gluLookAt(_currentCam->m_vPosition.x + _currentCam->m_vOffset.x,_currentCam->m_vPosition.y + _currentCam->m_vOffset.y,//_currentCam->m_vPosition.z + _currentCam->m_vOffset.z,
-                    //      _currentCam->m_vView.x,_currentCam->m_vView.y,_currentCam->m_vView.z,
-                    //      _currentCam->m_vUpVector.x,_currentCam->m_vUpVector.y,_currentCam->m_vUpVector.z);
+				gluLookAt(_currentCam->m_vPosition.x + _currentCam->m_vOffset.x,_currentCam->m_vPosition.y + _currentCam->m_vOffset.y,_currentCam->m_vPosition.z + _currentCam->m_vOffset.z,
+                    _currentCam->m_vView.x,_currentCam->m_vView.y,_currentCam->m_vView.z,
+                    _currentCam->m_vUpVector.x,_currentCam->m_vUpVector.y,_currentCam->m_vUpVector.z);
 			}
 		}
 

@@ -14,7 +14,7 @@ void SimpleTest::Init()
     
     itemSprite = new Sprite("Assets/Minecraft/gui/items.png",0,0,16,16);
 	itemSprite->Scale(3.0f,3.0f);
-	itemSprite->SetPosition(100,100);
+	itemSprite->SetPosition(24,24);
 
 	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
 

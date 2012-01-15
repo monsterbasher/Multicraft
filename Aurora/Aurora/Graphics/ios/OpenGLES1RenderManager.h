@@ -10,6 +10,17 @@ namespace Aurora
 {
 	namespace Graphics
 	{
+        enum DeviceOrientation
+        {
+            DeviceOrientationUnknown,
+            DeviceOrientationPortrait,
+            DeviceOrientationPortraitUpsideDown,
+            DeviceOrientationLandscapeLeft,
+            DeviceOrientationLandscapeRight,
+            DeviceOrientationFaceUp,
+            DeviceOrientationFaceDown,
+        };
+        
 		class OpenGLES1RenderManager : public RenderManager
 		{
         private:
@@ -17,6 +28,20 @@ namespace Aurora
             GLuint m_framebuffer;
             GLuint m_colorRenderbuffer;
             GLuint m_depthRenderbuffer;
+            
+            static DeviceOrientation _deviceOrientation;
+            
+        private:
+            
+            void __gluMakeIdentityf(GLfloat m[16]);
+            void __normalize(GLfloat v[3]);
+            void __cross(GLfloat v1[3], GLfloat v2[3], GLfloat result[3]);
+
+
+            void gluPerspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar);
+            void gluLookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez, GLfloat centerx,
+                      GLfloat centery, GLfloat centerz, GLfloat upx, GLfloat upy,GLfloat upz);
+
 
 		protected:
 
@@ -65,6 +90,10 @@ namespace Aurora
 			void drawCube(unsigned int color,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation);
 			void DrawCubeTextured(Image* texture,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation);
 			void DrawModelObj(ModelObj *model,Math::Vector3 position,Math::Vector3 scale,Math::Vector3 rotation);
+            
+        public:
+            
+            static void setDeviceOrientation(DeviceOrientation orientation);
 		};
 	}
 }

@@ -54,7 +54,7 @@ void Demo_ObjLoading::HandleEvents(GameManager* sManager)
 
 	//camera
 	//rotate
-	if(_systemManager->keyHold(Key::Left))
+	/*if(_systemManager->keyHold(Key::Left))
 	{
 		cam->RotateView(2.0f * dt,0,1,0);
 	}
@@ -87,7 +87,7 @@ void Demo_ObjLoading::HandleEvents(GameManager* sManager)
 	if(_systemManager->keyHold(Key::D))
 	{
 		cam->Strafe(6.0f * dt);
-	}
+	}*/
 }
 void Demo_ObjLoading::Update(GameManager* sManager)
 {

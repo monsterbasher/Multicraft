@@ -1,5 +1,6 @@
 #import "GLView.h"
 
+#include <Aurora/Graphics/ios/OpenGLES1RenderManager.h>
 #include <Aurora/Utils/GameLoader.h>
 #include <Aurora/Utils/GameManager.h>
 
@@ -11,7 +12,7 @@ class ExampleGameManager : public GameManager
 {
 private:
     
-	SimpleTest* exampleState;
+	Demo_ObjLoading* exampleState;
     
 public:
     
@@ -24,7 +25,7 @@ public:
 	void Init()
 	{
 		//init whatever you need
-		exampleState = new SimpleTest();
+		exampleState = new Demo_ObjLoading();
 		exampleState->Init();
         
 		ChangeState(exampleState);
@@ -100,6 +101,8 @@ void setupAppDirectory()
         
         Aurora::Graphics::RenderManager::Instance()->Init();
         
+        OpenGLES1RenderManager::setDeviceOrientation(DeviceOrientationPortrait);
+        
         _gmanager->Init();
         
         [m_context
@@ -132,13 +135,16 @@ void setupAppDirectory()
 - (void) didRotate: (NSNotification*) notification
 {	
     UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
-    //m_renderingEngine->OnRotate((DeviceOrientation) orientation);
+    
+    OpenGLES1RenderManager::setDeviceOrientation((DeviceOrientation) orientation);
+
     [self drawView: nil];
 }
 
 - (void) drawView: (CADisplayLink*) displayLink
 {
-    if (displayLink != nil) {
+    if (displayLink != nil)
+    {
         float elapsedSeconds = displayLink.timestamp - m_timestamp;
         m_timestamp = displayLink.timestamp;
         //m_renderingEngine->UpdateAnimation(elapsedSeconds);
