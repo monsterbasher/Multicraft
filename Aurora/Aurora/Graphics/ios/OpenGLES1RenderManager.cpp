@@ -43,10 +43,28 @@ namespace Aurora
 		};
         
         DeviceOrientation OpenGLES1RenderManager::_deviceOrientation = DeviceOrientationUnknown;
+        int OpenGLES1RenderManager::deviceRotationAngle = 0;
         
         void OpenGLES1RenderManager::setDeviceOrientation(DeviceOrientation orientation)
         {
             _deviceOrientation = orientation;
+            
+            if (_deviceOrientation == DeviceOrientationLandscapeRight)
+            {
+                deviceRotationAngle = 90;
+                
+            }else if (_deviceOrientation == DeviceOrientationLandscapeLeft)
+            {
+                deviceRotationAngle = 270;
+                
+            }else if (_deviceOrientation == DeviceOrientationPortraitUpsideDown)
+            {
+                deviceRotationAngle = 180;
+                
+            }else
+            {
+                deviceRotationAngle = 0;
+            }
         }
 
 		OpenGLES1RenderManager::OpenGLES1RenderManager()
@@ -670,8 +688,8 @@ namespace Aurora
 
 		void OpenGLES1RenderManager::StartRenderToTexture(Image* texture)
 		{
-//TODO       glViewport(0, 0, texture->_width, texture->_height);
-			/*glMatrixMode(GL_PROJECTION);
+            glViewport(0, 0, texture->_width, texture->_height);
+			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
             
 			gluPerspective(_pov, texture->_width/texture->_height,_zMin,_zMax);
@@ -680,9 +698,9 @@ namespace Aurora
 			glLoadIdentity();
             
 			// for GL_DRAW_BUFFER and GL_READ_BUFFER
-			glPushAttrib(GL_COLOR_BUFFER_BIT | GL_PIXEL_MODE_BIT); 
-			glDrawBuffer(GL_BACK);
-			glReadBuffer(GL_BACK);*/
+//todo		//glPushAttrib(GL_COLOR_BUFFER_BIT | GL_PIXEL_MODE_BIT); 
+			//glDrawBuffer(GL_BACK);
+			//glReadBuffer(GL_BACK);
             
 			//now render all stuff you want
 		}

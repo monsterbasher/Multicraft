@@ -31,6 +31,10 @@ namespace Aurora
             
             static DeviceOrientation _deviceOrientation;
             
+        public:
+            
+            static int deviceRotationAngle;
+            
         private:
             
             void __gluMakeIdentityf(GLfloat m[16]);
@@ -94,6 +98,7 @@ namespace Aurora
         public:
             
             static void setDeviceOrientation(DeviceOrientation orientation);
+
 		};
 	}
 }

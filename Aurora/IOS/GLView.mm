@@ -1,5 +1,6 @@
 #import "GLView.h"
 
+#include <Aurora/System/ios/IOSSystemManager.h>
 #include <Aurora/Graphics/ios/OpenGLES1RenderManager.h>
 #include <Aurora/Utils/GameLoader.h>
 #include <Aurora/Utils/GameManager.h>
@@ -39,8 +40,7 @@ public:
 };
 
 ExampleGameManager *_gmanager;
-
-#define GL_RENDERBUFFER 0x8d41
+IOSSystemManager *_imanager;
 
 @implementation GLView
 
@@ -104,6 +104,7 @@ void setupAppDirectory()
         OpenGLES1RenderManager::setDeviceOrientation(DeviceOrientationPortrait);
         
         _gmanager->Init();
+        _imanager = (Aurora::System::IOSSystemManager*)Aurora::System::SystemManager::Instance();
         
         [m_context
             renderbufferStorage:GL_RENDERBUFFER
@@ -128,6 +129,8 @@ void setupAppDirectory()
          selector:@selector(didRotate:)
          name:UIDeviceOrientationDidChangeNotification
          object:nil];
+        
+        [self setMultipleTouchEnabled:YES];
     }
     return self;
 }
@@ -162,25 +165,45 @@ void setupAppDirectory()
 
 - (void) touchesBegan: (NSSet*) touches withEvent: (UIEvent*) event
 {
-    UITouch* touch = [touches anyObject];
-    CGPoint location  = [touch locationInView: self];
-    //m_renderingEngine->OnFingerDown(ivec2(location.x, location.y));
+    //NSSet *allTouches = [event allTouches];
+    for (UITouch *touch in touches)
+    {
+        CGPoint location  = [touch locationInView: self];
+
+        _imanager->TouchesBegan([touch hash], location.x, location.y);
+    }
 }
 
 - (void) touchesEnded: (NSSet*) touches withEvent: (UIEvent*) event
 {
-    UITouch* touch = [touches anyObject];
-    CGPoint location  = [touch locationInView: self];
-    //m_renderingEngine->OnFingerUp(ivec2(location.x, location.y));
+    for (UITouch *touch in touches)
+    {
+        CGPoint location  = [touch locationInView: self];
+		
+        _imanager->TouchesEnded([touch hash], location.x, location.y);
+    }
 }
 
 - (void) touchesMoved: (NSSet*) touches withEvent: (UIEvent*) event
 {
-    UITouch* touch = [touches anyObject];
-    CGPoint previous  = [touch previousLocationInView: self];
-    CGPoint current = [touch locationInView: self];
-    //m_renderingEngine->OnFingerMove(ivec2(previous.x, previous.y),
-    //                                ivec2(current.x, current.y));
+    //NSSet *allTouches = [event allTouches];
+    for (UITouch *touch in touches)
+    {
+        CGPoint previous  = [touch previousLocationInView: self];
+        CGPoint location  = [touch locationInView: self];
+		
+        _imanager->TouchesMoved([touch hash], location.x, location.y, previous.x, previous.y);
+    }
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for (UITouch *touch in touches)
+    {
+        CGPoint location  = [touch locationInView: self];
+		
+        _imanager->TouchesEnded([touch hash], location.x, location.y);
+    }
 }
 
 @end

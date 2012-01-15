@@ -84,19 +84,19 @@ void ExampleState::HandleEvents(GameManager* sManager)
 	//rotate
 	if(_systemManager->keyHold(Key::Left))
 	{
-		cam->RotateView(2.0f * dt,0,1,0);
+		cam->RotateView(1.0f * dt,0,1,0);
 	}
 	if(_systemManager->keyHold(Key::Right))
 	{
-		cam->RotateView(-(2.0f * dt),0,1,0);
+		cam->RotateView(-(1.0f * dt),0,1,0);
 	}
 	if(_systemManager->keyHold(Key::Up))
 	{
-		cam->PitchView(2.0f * dt);
+		cam->PitchView(1.0f * dt);
 	}
 	if(_systemManager->keyHold(Key::Down))
 	{
-		cam->PitchView(-(2.0f * dt));
+		cam->PitchView(-(1.0f * dt));
 	}
 
 	//move

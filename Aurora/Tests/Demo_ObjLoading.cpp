@@ -14,8 +14,8 @@ void Demo_ObjLoading::Init()
 	//objModel->LoadObj("Assets/Models/Obj/companion_cube/companion_cube.obj");
 	//objModel->LoadObj("Assets/Models/Obj/apc_obj/apc.obj");
 	//objModel->LoadObj("Assets/Models/Obj/tanker_obj/tanker.obj");
-	objModel->LoadObj("Assets/Models/Obj/portal_gun/portal_gun.obj");
-	//objModel->LoadObj("Assets/Models/Obj/room1/room1.obj");
+	//objModel->LoadObj("Assets/Models/Obj/portal_gun/portal_gun.obj");
+	objModel->LoadObj("Assets/Models/Obj/room1/room1.obj");
 
 	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
 
@@ -54,40 +54,40 @@ void Demo_ObjLoading::HandleEvents(GameManager* sManager)
 
 	//camera
 	//rotate
-	/*if(_systemManager->keyHold(Key::Left))
+	if(_systemManager->keyHold(Key::Left))
 	{
-		cam->RotateView(2.0f * dt,0,1,0);
+		cam->RotateView(1.0f * dt,0,1,0);
 	}
 	if(_systemManager->keyHold(Key::Right))
 	{
-		cam->RotateView(-(2.0f * dt),0,1,0);
+		cam->RotateView(-(1.0f * dt),0,1,0);
 	}
 	if(_systemManager->keyHold(Key::Up))
 	{
-		cam->PitchView(2.0f * dt);
+		cam->PitchView(1.0f * dt);
 	}
 	if(_systemManager->keyHold(Key::Down))
 	{
-		cam->PitchView(-(2.0f * dt));
+		cam->PitchView(-(1.0f * dt));
 	}
 
 	//move
 	if(_systemManager->keyHold(Key::W))
 	{
-		cam->Move(6.0f * dt);
+		cam->Move(4.0f * 0.015f);
 	}
 	if(_systemManager->keyHold(Key::S))
 	{
-		cam->Move(-(6.0f * dt));
+		cam->Move(-(4.0f * dt));
 	}
 	if(_systemManager->keyHold(Key::A))
 	{
-		cam->Strafe(-(6.0f * dt));
+		cam->Strafe(-(4.0f * dt));
 	}
 	if(_systemManager->keyHold(Key::D))
 	{
-		cam->Strafe(6.0f * dt);
-	}*/
+		cam->Strafe(4.0f * dt);
+	}
 }
 void Demo_ObjLoading::Update(GameManager* sManager)
 {
@@ -103,7 +103,7 @@ void Demo_ObjLoading::Draw(GameManager* sManager)
 	RenderManager::Instance()->UpdateCurrentCamera();
 
 	//draw 3d model
-	RenderManager::Instance()->DrawModelObj(objModel,Vector3(0,0,-3),Vector3(1,1,1),Vector3(0,0,0));
+	RenderManager::Instance()->DrawModelObj(objModel,Vector3(0,0,0),Vector3(1,1,1),Vector3(0,0,0));
 	
 
 	//change ortho for text
