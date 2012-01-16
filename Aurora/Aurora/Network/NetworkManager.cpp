@@ -9,6 +9,10 @@
 #include <Aurora/Network/psp/PspNetworkManager.h>
 #endif
 
+#ifdef AURORA_IOS
+#include <Aurora/Network/ios/IOSNetworkManager.h>
+#endif
+
 namespace Aurora
 {
 	namespace Network
@@ -32,6 +36,10 @@ namespace Aurora
 #ifdef AURORA_PSP
 				_networkManager = new PspNetworkManager();
 #endif
+                
+#ifdef AURORA_IOS
+                _networkManager = new IOSNetworkManager();
+#endif                
 
 			}
 

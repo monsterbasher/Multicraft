@@ -23,7 +23,7 @@ void ClientTest::Init()
 
 	//server address
 	//192.168.1.102
-	_serverAddress = Network::IPAddress("192.168.1.102");
+	_serverAddress = Network::IPAddress("172.27.0.125");//"192.168.1.102");
 
 	//init connection
 	if (_serverAddress.IsValid())

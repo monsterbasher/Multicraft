@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA8375AC14C3F55A001DA3A2 /* ClientTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA8375A814C3F55A001DA3A2 /* ClientTest.cpp */; };
+		FA8375AD14C3F55A001DA3A2 /* ServerTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA8375AA14C3F55A001DA3A2 /* ServerTest.cpp */; };
+		FA8375B214C3F703001DA3A2 /* IOSNetworkManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA8375B014C3F703001DA3A2 /* IOSNetworkManager.cpp */; };
+		FA8375B514C3F712001DA3A2 /* NetworkManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA8375B314C3F712001DA3A2 /* NetworkManager.cpp */; };
+		FA8581A114C3920A00D987B7 /* Http.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA85818414C3920A00D987B7 /* Http.cpp */; };
+		FA8581A214C3920A00D987B7 /* IPAddress.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA85818614C3920A00D987B7 /* IPAddress.cpp */; };
+		FA8581A414C3920A00D987B7 /* Packet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA85818A14C3920A00D987B7 /* Packet.cpp */; };
+		FA8581A714C3920A00D987B7 /* Selector.inl in Resources */ = {isa = PBXBuildFile; fileRef = FA85819314C3920A00D987B7 /* Selector.inl */; };
+		FA8581A814C3920A00D987B7 /* SelectorBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA85819414C3920A00D987B7 /* SelectorBase.cpp */; };
+		FA8581A914C3920A00D987B7 /* SocketTCP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA85819714C3920A00D987B7 /* SocketTCP.cpp */; };
+		FA8581AA14C3920A00D987B7 /* SocketUDP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA85819914C3920A00D987B7 /* SocketUDP.cpp */; };
+		FA8581AB14C3920A00D987B7 /* SocketHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA85819C14C3920A00D987B7 /* SocketHelper.cpp */; };
 		FAB35A1D14C1EB3C00AD6619 /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB35A1A14C1EB3C00AD6619 /* GameManager.cpp */; };
 		FAB35A2114C1EC6900AD6619 /* GameLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB35A1F14C1EC6900AD6619 /* GameLoader.cpp */; };
 		FAB35A2514C1EC7200AD6619 /* IOSGameLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB35A2314C1EC7200AD6619 /* IOSGameLoader.cpp */; };
@@ -51,6 +63,31 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA8375A814C3F55A001DA3A2 /* ClientTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ClientTest.cpp; sourceTree = "<group>"; };
+		FA8375A914C3F55A001DA3A2 /* ClientTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientTest.h; sourceTree = "<group>"; };
+		FA8375AA14C3F55A001DA3A2 /* ServerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ServerTest.cpp; sourceTree = "<group>"; };
+		FA8375AB14C3F55A001DA3A2 /* ServerTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerTest.h; sourceTree = "<group>"; };
+		FA8375B014C3F703001DA3A2 /* IOSNetworkManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IOSNetworkManager.cpp; sourceTree = "<group>"; };
+		FA8375B114C3F703001DA3A2 /* IOSNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IOSNetworkManager.h; sourceTree = "<group>"; };
+		FA8375B314C3F712001DA3A2 /* NetworkManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkManager.cpp; sourceTree = "<group>"; };
+		FA8375B414C3F712001DA3A2 /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
+		FA85818414C3920A00D987B7 /* Http.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Http.cpp; sourceTree = "<group>"; };
+		FA85818514C3920A00D987B7 /* Http.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Http.hpp; sourceTree = "<group>"; };
+		FA85818614C3920A00D987B7 /* IPAddress.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IPAddress.cpp; sourceTree = "<group>"; };
+		FA85818714C3920A00D987B7 /* IPAddress.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = IPAddress.hpp; sourceTree = "<group>"; };
+		FA85818A14C3920A00D987B7 /* Packet.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Packet.cpp; sourceTree = "<group>"; };
+		FA85818B14C3920A00D987B7 /* Packet.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Packet.hpp; sourceTree = "<group>"; };
+		FA85819214C3920A00D987B7 /* Selector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Selector.hpp; sourceTree = "<group>"; };
+		FA85819314C3920A00D987B7 /* Selector.inl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Selector.inl; sourceTree = "<group>"; };
+		FA85819414C3920A00D987B7 /* SelectorBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SelectorBase.cpp; sourceTree = "<group>"; };
+		FA85819514C3920A00D987B7 /* SelectorBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SelectorBase.hpp; sourceTree = "<group>"; };
+		FA85819614C3920A00D987B7 /* SocketHelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketHelper.hpp; sourceTree = "<group>"; };
+		FA85819714C3920A00D987B7 /* SocketTCP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketTCP.cpp; sourceTree = "<group>"; };
+		FA85819814C3920A00D987B7 /* SocketTCP.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketTCP.hpp; sourceTree = "<group>"; };
+		FA85819914C3920A00D987B7 /* SocketUDP.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketUDP.cpp; sourceTree = "<group>"; };
+		FA85819A14C3920A00D987B7 /* SocketUDP.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketUDP.hpp; sourceTree = "<group>"; };
+		FA85819C14C3920A00D987B7 /* SocketHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketHelper.cpp; sourceTree = "<group>"; };
+		FA85819D14C3920A00D987B7 /* SocketHelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketHelper.hpp; sourceTree = "<group>"; };
 		FAB35A1A14C1EB3C00AD6619 /* GameManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameManager.cpp; sourceTree = "<group>"; };
 		FAB35A1B14C1EB3C00AD6619 /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		FAB35A1C14C1EB3C00AD6619 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
@@ -151,6 +188,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FA8375AF14C3F703001DA3A2 /* ios */ = {
+			isa = PBXGroup;
+			children = (
+				FA8375B014C3F703001DA3A2 /* IOSNetworkManager.cpp */,
+				FA8375B114C3F703001DA3A2 /* IOSNetworkManager.h */,
+			);
+			path = ios;
+			sourceTree = "<group>";
+		};
+		FA85818314C3920A00D987B7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				FA8375AF14C3F703001DA3A2 /* ios */,
+				FA85818414C3920A00D987B7 /* Http.cpp */,
+				FA85818514C3920A00D987B7 /* Http.hpp */,
+				FA8375B314C3F712001DA3A2 /* NetworkManager.cpp */,
+				FA8375B414C3F712001DA3A2 /* NetworkManager.h */,
+				FA85818614C3920A00D987B7 /* IPAddress.cpp */,
+				FA85818714C3920A00D987B7 /* IPAddress.hpp */,
+				FA85818A14C3920A00D987B7 /* Packet.cpp */,
+				FA85818B14C3920A00D987B7 /* Packet.hpp */,
+				FA85819214C3920A00D987B7 /* Selector.hpp */,
+				FA85819314C3920A00D987B7 /* Selector.inl */,
+				FA85819414C3920A00D987B7 /* SelectorBase.cpp */,
+				FA85819514C3920A00D987B7 /* SelectorBase.hpp */,
+				FA85819614C3920A00D987B7 /* SocketHelper.hpp */,
+				FA85819714C3920A00D987B7 /* SocketTCP.cpp */,
+				FA85819814C3920A00D987B7 /* SocketTCP.hpp */,
+				FA85819914C3920A00D987B7 /* SocketUDP.cpp */,
+				FA85819A14C3920A00D987B7 /* SocketUDP.hpp */,
+				FA85819B14C3920A00D987B7 /* Unix */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		FA85819B14C3920A00D987B7 /* Unix */ = {
+			isa = PBXGroup;
+			children = (
+				FA85819C14C3920A00D987B7 /* SocketHelper.cpp */,
+				FA85819D14C3920A00D987B7 /* SocketHelper.hpp */,
+			);
+			path = Unix;
+			sourceTree = "<group>";
+		};
 		FAB35A2214C1EC7200AD6619 /* ios */ = {
 			isa = PBXGroup;
 			children = (
@@ -239,6 +320,7 @@
 		FABE25B014C0FE0A005D99E8 /* Aurora */ = {
 			isa = PBXGroup;
 			children = (
+				FA85818314C3920A00D987B7 /* Network */,
 				FAB35A2614C1EE5800AD6619 /* System */,
 				FABE269214C10123005D99E8 /* Utils */,
 				FABE266314C10113005D99E8 /* Graphics */,
@@ -333,6 +415,10 @@
 		FAF37C3814C2011200931646 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				FA8375A814C3F55A001DA3A2 /* ClientTest.cpp */,
+				FA8375A914C3F55A001DA3A2 /* ClientTest.h */,
+				FA8375AA14C3F55A001DA3A2 /* ServerTest.cpp */,
+				FA8375AB14C3F55A001DA3A2 /* ServerTest.h */,
 				FAF37C3B14C2011200931646 /* Demo_ObjLoading.cpp */,
 				FAF37C3C14C2011200931646 /* Demo_ObjLoading.h */,
 				FAF37C4114C2011200931646 /* ExampleGame.cpp */,
@@ -395,6 +481,7 @@
 			files = (
 				FABE24FD14C0FD10005D99E8 /* InfoPlist.strings in Resources */,
 				FAF37C4F14C2042000931646 /* Assets in Resources */,
+				FA8581A714C3920A00D987B7 /* Selector.inl in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -439,6 +526,17 @@
 				FAF37C4814C2011200931646 /* Demo_ObjLoading.cpp in Sources */,
 				FAF37C4B14C2011200931646 /* ExampleGame.cpp in Sources */,
 				FAF37C4D14C2011200931646 /* SimpleTest.cpp in Sources */,
+				FA8581A114C3920A00D987B7 /* Http.cpp in Sources */,
+				FA8581A214C3920A00D987B7 /* IPAddress.cpp in Sources */,
+				FA8581A414C3920A00D987B7 /* Packet.cpp in Sources */,
+				FA8581A814C3920A00D987B7 /* SelectorBase.cpp in Sources */,
+				FA8581A914C3920A00D987B7 /* SocketTCP.cpp in Sources */,
+				FA8581AA14C3920A00D987B7 /* SocketUDP.cpp in Sources */,
+				FA8581AB14C3920A00D987B7 /* SocketHelper.cpp in Sources */,
+				FA8375AC14C3F55A001DA3A2 /* ClientTest.cpp in Sources */,
+				FA8375AD14C3F55A001DA3A2 /* ServerTest.cpp in Sources */,
+				FA8375B214C3F703001DA3A2 /* IOSNetworkManager.cpp in Sources */,
+				FA8375B514C3F712001DA3A2 /* NetworkManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -65,6 +65,10 @@ namespace Aurora
 
 #endif
 
+#ifdef AURORA_UNIX_MAC
+    #include <Aurora/Network/Unix/SocketHelper.hpp>
+#endif
+
 #ifdef AURORA_PSP
     #include <Aurora/Network/Unix/SocketHelper.hpp>
 #endif

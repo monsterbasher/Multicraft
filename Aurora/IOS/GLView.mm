@@ -8,12 +8,14 @@
 #include "Tests/ExampleGame.h"
 #include "Tests/Demo_ObjLoading.h"
 #include "Tests/SimpleTest.h"
+#include "Tests/ClientTest.h"
+#include "Tests/ServerTest.h"
 
 class ExampleGameManager : public GameManager
 {
 private:
     
-	Demo_ObjLoading* exampleState;
+	ExampleState* exampleState;
     
 public:
     
@@ -26,7 +28,7 @@ public:
 	void Init()
 	{
 		//init whatever you need
-		exampleState = new Demo_ObjLoading();
+		exampleState = new ExampleState();
 		exampleState->Init();
         
 		ChangeState(exampleState);

@@ -49,11 +49,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "IOS/GLView.mm"
-         timestampString = "348336098.818552"
+         timestampString = "348387330.646762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "62"
-         endingLineNumber = "62"
+         startingLineNumber = "64"
+         endingLineNumber = "64"
          landmarkName = "setupAppDirectory()"
          landmarkType = "7">
       </FileBreakpoint>
@@ -63,11 +63,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "IOS/GLView.mm"
-         timestampString = "348346711.051859"
+         timestampString = "348387330.646762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "106"
-         endingLineNumber = "106"
+         startingLineNumber = "108"
+         endingLineNumber = "108"
          landmarkName = "-initWithFrame:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -175,11 +175,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "IOS/GLView.mm"
-         timestampString = "348355833.198409"
+         timestampString = "348387330.646762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "168"
-         endingLineNumber = "168"
+         startingLineNumber = "170"
+         endingLineNumber = "170"
          landmarkName = "-touchesBegan:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -189,11 +189,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "IOS/GLView.mm"
-         timestampString = "348355833.198409"
+         timestampString = "348387330.646762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "189"
-         endingLineNumber = "189"
+         startingLineNumber = "191"
+         endingLineNumber = "191"
          landmarkName = "-touchesMoved:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -329,11 +329,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "IOS/GLView.mm"
-         timestampString = "348355833.198409"
+         timestampString = "348387330.646762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "181"
-         endingLineNumber = "181"
+         startingLineNumber = "183"
+         endingLineNumber = "183"
          landmarkName = "-touchesEnded:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -343,11 +343,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "IOS/GLView.mm"
-         timestampString = "348355833.198409"
+         timestampString = "348387330.646762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "201"
-         endingLineNumber = "201"
+         startingLineNumber = "203"
+         endingLineNumber = "203"
          landmarkName = "-touchesCancelled:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -357,11 +357,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "IOS/GLView.mm"
-         timestampString = "348355857.829313"
+         timestampString = "348387330.646762"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "169"
-         endingLineNumber = "169"
+         startingLineNumber = "171"
+         endingLineNumber = "171"
          landmarkName = "-touchesBegan:withEvent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -377,6 +377,20 @@
          startingLineNumber = "32"
          endingLineNumber = "32"
          landmarkName = "Clock::getTime()"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         isPathRelative = "1"
+         filePath = "Tests/ClientTest.cpp"
+         timestampString = "348387389.926654"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "146"
+         endingLineNumber = "146"
+         landmarkName = "ClientTest::Draw(GameManager* sManager)"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
