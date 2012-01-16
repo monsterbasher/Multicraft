@@ -1,7 +1,7 @@
 #ifndef GAMEENGINE_H
 #define GAMEENGINE_H
 
-#include <vector.h>
+#include <vector>
 
 namespace Aurora
 {

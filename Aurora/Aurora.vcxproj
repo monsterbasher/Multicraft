@@ -124,6 +124,8 @@
     <ClCompile Include="Tests\EnetClientTest.cpp" />
     <ClCompile Include="Tests\EnetServerTest.cpp" />
     <ClCompile Include="Tests\ExampleGame.cpp" />
+    <ClCompile Include="Tests\NetworkControllerClient.cpp" />
+    <ClCompile Include="Tests\NetworkControllerServer.cpp" />
     <ClCompile Include="Tests\ServerTest.cpp" />
     <ClCompile Include="Tests\SimpleTest.cpp" />
   </ItemGroup>
@@ -178,6 +180,8 @@
     <ClInclude Include="Tests\EnetClientTest.h" />
     <ClInclude Include="Tests\EnetServerTest.h" />
     <ClInclude Include="Tests\ExampleGame.h" />
+    <ClInclude Include="Tests\NetworkControllerClient.h" />
+    <ClInclude Include="Tests\NetworkControllerServer.h" />
     <ClInclude Include="Tests\ServerTest.h" />
     <ClInclude Include="Tests\SimpleTest.h" />
   </ItemGroup>

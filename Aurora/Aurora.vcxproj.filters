@@ -46,6 +46,9 @@
     <Filter Include="Tests\Pgraphics">
       <UniqueIdentifier>{5c3469d2-0451-4cf7-bc78-168685495b38}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\NetworkController">
+      <UniqueIdentifier>{fa4e59fb-63a4-4a3e-a9a6-53752f2dbfe4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Starter.cpp" />
@@ -183,6 +186,12 @@
     </ClCompile>
     <ClCompile Include="Tests\EnetServerTest.cpp">
       <Filter>Tests\Enet</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\NetworkControllerClient.cpp">
+      <Filter>Tests\NetworkController</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\NetworkControllerServer.cpp">
+      <Filter>Tests\NetworkController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -341,6 +350,12 @@
     </ClInclude>
     <ClInclude Include="Tests\EnetClientTest.h">
       <Filter>Tests\Enet</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\NetworkControllerClient.h">
+      <Filter>Tests\NetworkController</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\NetworkControllerServer.h">
+      <Filter>Tests\NetworkController</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
