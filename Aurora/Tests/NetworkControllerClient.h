@@ -10,6 +10,9 @@
 #include <Aurora/Network/SocketUDP.hpp>
 #include <Aurora/Network/Packet.hpp>
 
+#include <string>
+#include <map>
+
 using namespace Aurora;
 using namespace Aurora::Graphics;
 using namespace Aurora::Utils;
@@ -18,9 +21,36 @@ using namespace Aurora::Math;
 
 enum NetworControllerState
 {
+	IDLE,
 	SEARCHING,
 	CONNECTED,
-	NOTCONNECTED
+	NOTCONNECTED,
+	NOTBIND
+};
+
+class NetworkInputControllerClient
+{
+	private:
+
+	NetworControllerState _controllerState;
+
+	std::map<std::string,Network::IPAddress> _foundServers;
+
+	int _serverListeningPort;
+	Network::SocketUDP _serverSearcherSocket;
+
+	public:
+
+	NetworkInputControllerClient(int listenPort);
+
+	int NumberOfFoundServers();
+	NetworControllerState GetControllerState();
+	
+	bool IsConnectedToServer();
+	
+	void Start();
+	void Stop();
+	void Update(float dt);
 };
 
 class NetworkControllerClient : public GameState
@@ -38,11 +68,7 @@ class NetworkControllerClient : public GameState
 	float dt;
 
 	//network variables
-	std::vector<Network::IPAddress> _foundServers;
-	NetworControllerState _controllerState;
-	Network::IPAddress _serverAddress;
-	Network::SocketUDP _serverSearcherSocket;
-	int _serverPort;
+	NetworkInputControllerClient* networkInput;
 	std::string serverMessage;
 
 	public:

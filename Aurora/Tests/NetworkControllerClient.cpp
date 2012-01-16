@@ -5,6 +5,90 @@
 #include <Aurora/Graphics/Image.h>
 #include <Aurora/Network/NetworkManager.h>
 
+
+NetworkInputControllerClient::NetworkInputControllerClient(int listenPort)
+{
+	//listening port
+	_serverListeningPort = listenPort;
+
+	//set searching servers socket to non blocking
+	_serverSearcherSocket.SetBlocking(false);
+
+	//bind it to correct port
+	if(!_serverSearcherSocket.Bind(_serverListeningPort))
+	{
+		_controllerState = NOTBIND;
+	}else
+	{
+		_controllerState = IDLE;
+	}
+
+	//clear servers info
+	_foundServers.clear();
+}
+
+int NetworkInputControllerClient::NumberOfFoundServers()
+{
+	return _foundServers.size();
+}
+
+NetworControllerState NetworkInputControllerClient::GetControllerState()
+{
+	return _controllerState;
+}
+
+bool NetworkInputControllerClient::IsConnectedToServer()
+{
+	return false;
+}
+
+void NetworkInputControllerClient::Start()
+{
+	//clear servers info
+	_foundServers.clear();
+
+	//switch to search mode
+	_controllerState = SEARCHING;
+}
+
+void NetworkInputControllerClient::Stop()
+{
+
+}
+
+void NetworkInputControllerClient::Update(float dt)
+{
+	if (_controllerState == SEARCHING)
+	{
+		Network::IPAddress senderIP;
+		unsigned short senderPort;
+		Network::Packet receivedPacket;
+
+		if (_serverSearcherSocket.Receive(receivedPacket,senderIP,senderPort) == Network::Socket::Done)
+		{
+			//check if it's "Hello World" message from broadcasting server
+			int packetType = -1;
+			receivedPacket >> packetType;
+
+			if (packetType == 20)//server broadcast
+			{
+				std::string serverName = "";
+				receivedPacket >> packetType >> serverName;
+
+				//check if we found already this server
+				if (_foundServers.find(serverName) == _foundServers.end())
+				{
+					//add new one
+					_foundServers.insert(std::pair<std::string,Network::IPAddress>(serverName,senderIP));
+				}
+			}
+		}
+	}
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+
 void NetworkControllerClient::Init()
 {
 	_renderManager = RenderManager::Instance();
@@ -22,15 +106,8 @@ void NetworkControllerClient::Init()
 	Network::NetworkManager::Instance()->Init();
 
 	//controller init
-	_controllerState = SEARCHING;
-	_serverPort = 2634;
-
-	_serverSearcherSocket.SetBlocking(false);
-	if(!_serverSearcherSocket.Bind(_serverPort))
-	{
-		int erroror = 1;
-	}
-	
+	networkInput = new NetworkInputControllerClient(2634);
+	networkInput->Start();
 
 	serverMessage = "";
 }
@@ -102,36 +179,7 @@ void NetworkControllerClient::HandleEvents(GameManager* sManager)
 
 void NetworkControllerClient::Update(GameManager* sManager)
 {
-	//switch states
-	if (_controllerState == SEARCHING)
-	{
-		char buffer[128];
-		std::size_t received;
-		Network::IPAddress sender;
-		unsigned short port;
-
-		if (_serverSearcherSocket.Receive(buffer, sizeof(buffer), received, sender, port) == Network::Socket::Done)
-		{
-			int test = 1;
-			std::string bufferMessage = buffer;
-			if (bufferMessage == "ServerHere")
-			{
-				bool serverInList = false;
-				for (int i = 0 ; i < _foundServers.size();i++)
-				{
-					if (_foundServers[i].ToString() == sender.ToString())
-					{
-						serverInList = true;
-					}
-				}
-
-				if (!serverInList)
-				{
-					_foundServers.push_back(sender);
-				}
-			}
-		}
-	}
+	networkInput->Update(dt);
 
 	//delta time
 	dt = _clock.getTime();
@@ -156,16 +204,16 @@ void NetworkControllerClient::Draw(GameManager* sManager)
 	RenderManager::Instance()->drawText(font,1,13,deltaTime,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
 	//draw client message
-	if (_controllerState == CONNECTED)
+	if (networkInput->GetControllerState() == CONNECTED)
 	{
 		RenderManager::Instance()->drawText(font,1,30,"Connected to server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 	}
-	else if (_controllerState == SEARCHING)
+	else if (networkInput->GetControllerState() == SEARCHING)
 	{
 		RenderManager::Instance()->drawText(font,1,30,"Searching server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
 		char serverNumber[50];
-		sprintf(serverNumber,"Servers found: %d",_foundServers.size());
+		sprintf(serverNumber,"Servers found: %d",networkInput->NumberOfFoundServers());
 		RenderManager::Instance()->drawText(font,1,45,serverNumber,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 	}
 	else

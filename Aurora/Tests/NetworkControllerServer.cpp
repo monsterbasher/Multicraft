@@ -103,8 +103,11 @@ void NetworkControllerServer::Update(GameManager* sManager)
 	_broadcastTimer += dt;
 	if (_broadcastTimer > 2)
 	{
-		char Buffer[] = "ServerHere";
-		if(_broadcastSocket.Send(Buffer,sizeof(Buffer),_broadcadtAddress,_boradcastPort) != Network::Socket::Done)
+		Network::Packet sendPacket;
+		std::string serverName = "Drakon1";
+		sendPacket << 20 << serverName;
+
+		if(_broadcastSocket.Send(sendPacket,_broadcadtAddress,_boradcastPort) != Network::Socket::Done)
 		{
 			//error
 			int errorSending = 1;
