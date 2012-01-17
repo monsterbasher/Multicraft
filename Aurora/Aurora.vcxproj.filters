@@ -184,6 +184,12 @@
     <ClCompile Include="Tests\NetworkControllerServer.cpp">
       <Filter>Tests\NetworkController</Filter>
     </ClCompile>
+    <ClCompile Include="Aurora\Network\NetworkInputControllerClient.cpp">
+      <Filter>Aurora\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\Network\NetworkInputControllerServer.cpp">
+      <Filter>Aurora\Network</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aurora\Graphics\Vertex.h">
@@ -341,6 +347,12 @@
     </ClInclude>
     <ClInclude Include="Tests\NetworkControllerServer.h">
       <Filter>Tests\NetworkController</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Network\NetworkInputControllerClient.h">
+      <Filter>Aurora\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Network\NetworkInputControllerServer.h">
+      <Filter>Aurora\Network</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

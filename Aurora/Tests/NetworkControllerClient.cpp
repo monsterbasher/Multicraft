@@ -1,182 +1,4 @@
 #include "NetworkControllerClient.h"
-#include <stdio.h>
-
-#include <Aurora/Graphics/Sprite.h>
-#include <Aurora/Graphics/Image.h>
-#include <Aurora/Network/NetworkManager.h>
-
-
-NetworkInputControllerClient::NetworkInputControllerClient(std::string clientName,int listenPort)
-{
-	//name
-	_clientName = clientName;
-
-	//listening port
-	_serverListeningPort = listenPort;
-
-	//set searching servers socket to non blocking
-	_serverSearcherSocket.SetBlocking(false);
-
-	//bind it to correct port
-	if(!_serverSearcherSocket.Bind(_serverListeningPort))
-	{
-		_controllerState = NOTBIND;
-	}else
-	{
-		_controllerState = IDLE;
-	}
-
-	//clear servers info
-	_foundServers.clear();
-}
-
-int NetworkInputControllerClient::NumberOfFoundServers()
-{
-	return _foundServers.size();
-}
-
-NetworControllerState NetworkInputControllerClient::GetControllerState()
-{
-	return _controllerState;
-}
-
-bool NetworkInputControllerClient::IsConnectedToServer()
-{
-	return _controllerState == CONNECTED;
-}
-
-void NetworkInputControllerClient::Start()
-{
-	//clear servers info
-	_foundServers.clear();
-
-	//switch to search mode
-	_controllerState = SEARCHING;
-}
-
-void NetworkInputControllerClient::Stop()
-{
-
-}
-
-std::string NetworkInputControllerClient::GetServerNameAtPos(int pos)
-{
-	return _foundServers[pos].Name;
-}
-
-void NetworkInputControllerClient::ConnectToServer(std::string serverName)
-{
-	for (unsigned int i = 0; i < _foundServers.size();i++)
-	{
-		if (_foundServers[i].Name == serverName)
-		{
-			_defaulServerAddress = _foundServers[i].Address;
-		}		
-	}
-
-	_controllerState = CONNECTING;
-}
-
-void NetworkInputControllerClient::Update(float dt)
-{
-	if (_controllerState == SEARCHING)
-	{
-		Network::IPAddress senderIP;
-		unsigned short senderPort;
-		Network::Packet receivedPacket;
-
-		if (_serverSearcherSocket.Receive(receivedPacket,senderIP,senderPort) == Network::Socket::Done)
-		{
-			//check if it's "Hello World" message from broadcasting server
-			int packetType = -1;
-			receivedPacket >> packetType;
-
-			if (packetType == 20)//server broadcast
-			{
-				std::string serverName = "";
-				receivedPacket >> serverName;
-
-				//if there is no servers make first one default
-				if (_foundServers.size() == 0)
-				{
-					_defaulServerAddress = senderIP;
-				}
-
-				//check if we found already this server
-				bool serverFound = false;
-				for (unsigned int i = 0; i < _foundServers.size();i++)
-				{
-					if (_foundServers[i].Name == serverName)
-					{
-						serverFound = true;
-					}
-				}
-
-				if (!serverFound)
-				{
-					//add new one
-					NetworkInputServerInfo serverInfo;
-					serverInfo.Address = senderIP;
-					serverInfo.Name = serverName;
-
-					_foundServers.push_back(serverInfo);
-				}
-			}
-		}
-	}
-	else if (_controllerState == CONNECTING)
-	{
-		//try to connect to server
-		if (_clientSocket.Connect(_serverListeningPort, _defaulServerAddress) != Network::Socket::Done)
-			_controllerState = NOTCONNECTED;
-		else
-		{
-			_controllerState = WAITING;
-
-			//send our name there :>
-			Network::Packet namePacket;
-			namePacket << 21 << _clientName;//21 login client with name packet
-			
-			_clientSocket.Send(namePacket);
-
-			_clientSocket.SetBlocking(false);
-		}
-	}
-	else if (_controllerState == WAITING)
-	{
-		//we are waiting for acknowledge message of fuck off message
-		Network::Packet messagePacket;
-		if (_clientSocket.Receive(messagePacket) == Network::Socket::Done)
-		{
-			int packetType = -1;
-			messagePacket >> packetType;
-
-			if (packetType == 22)//welcome  on server client
-			{
-				_controllerState = CONNECTED;
-			}
-			else if (packetType == 23)//fuck off
-			{
-				_controllerState = NOTCONNECTED;
-				_clientSocket.Close();
-				_serverSearcherSocket.Close();
-			}else
-			{
-				//??
-				_controllerState = NOTCONNECTED;
-				_clientSocket.Close();
-				_serverSearcherSocket.Close();
-			}
-		}
-	}
-	else if (_controllerState == CONNECTED)
-	{
-
-	}
-}
-
-
-///////////////////////////////////////////////////////////////////////////////////////
 
 void NetworkControllerClient::Init()
 {
@@ -190,16 +12,18 @@ void NetworkControllerClient::Init()
 	Network::NetworkManager::Instance()->Init();
 	//controller init
 #ifdef AURORA_PC
-	networkInput = new NetworkInputControllerClient("Client_PC",2634);
+	networkInput = new Network::NetworkInputControllerClient("Client_PC",2634);
 #endif
 
 #ifdef AURORA_PSP
-	networkInput = new NetworkInputControllerClient("Client_PSP",2634);
+	networkInput = new Network::NetworkInputControllerClient("Client_PSP",2634);
 #endif
 
 #ifdef AURORA_IOS
-	networkInput = new NetworkInputControllerClient("Client_IOS",2634);
+	networkInput = new Network::NetworkInputControllerClient("Client_IOS",2634);
 #endif
+
+	_address = Network::IPAddress::GetLocalAddress();
 
 	networkInput->Start();
 
@@ -237,7 +61,7 @@ void NetworkControllerClient::Update(GameManager* sManager)
 	networkInput->Update(dt);
 
 	//for test purpose we connect to the first found server
-	if (networkInput->GetControllerState() == SEARCHING && networkInput->NumberOfFoundServers() > 0)
+	if (networkInput->GetControllerState() == Network::SEARCHING && networkInput->NumberOfFoundServers() > 0)
 	{
 		serverName = networkInput->GetServerNameAtPos(0);
 		networkInput->ConnectToServer(serverName);
@@ -262,13 +86,13 @@ void NetworkControllerClient::Draw(GameManager* sManager)
 	RenderManager::Instance()->drawText(font,1,13,deltaTime,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
 	//draw client message
-	if (networkInput->GetControllerState() == CONNECTED)
+	if (networkInput->GetControllerState() == Network::CONNECTED)
 	{
 		char serverN[50];
 		sprintf(serverN,"Connected to server: %s",serverName.c_str());
 		RenderManager::Instance()->drawText(font,1,30,serverN,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 	}
-	else if (networkInput->GetControllerState() == SEARCHING)
+	else if (networkInput->GetControllerState() == Network::SEARCHING)
 	{
 		RenderManager::Instance()->drawText(font,1,30,"Searching for server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
@@ -276,11 +100,11 @@ void NetworkControllerClient::Draw(GameManager* sManager)
 		sprintf(serverNumber,"Servers found: %d",networkInput->NumberOfFoundServers());
 		RenderManager::Instance()->drawText(font,1,45,serverNumber,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 	}
-	else if (networkInput->GetControllerState() == CONNECTING)
+	else if (networkInput->GetControllerState() == Network::CONNECTING)
 	{
 		RenderManager::Instance()->drawText(font,1,30,"Connecting to server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 	}
-	else if (networkInput->GetControllerState() == WAITING)
+	else if (networkInput->GetControllerState() == Network::WAITING)
 	{
 		RenderManager::Instance()->drawText(font,1,30,"Waiting for login to server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 	}
@@ -289,6 +113,8 @@ void NetworkControllerClient::Draw(GameManager* sManager)
 		RenderManager::Instance()->drawText(font,1,30,"Not connected to server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 	}
 
+	RenderManager::Instance()->drawText(font,1,60,_address.ToString().c_str(),Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+	
 
 	RenderManager::Instance()->EndFrame();
 }

@@ -31,6 +31,8 @@ Aurora/Network/Packet.o \
 Aurora/Network/SelectorBase.o \
 Aurora/Network/SocketTCP.o \
 Aurora/Network/SocketUDP.o \
+Aurora/Network/NetworkInputControllerClient.o \
+Aurora/Network/NetworkInputControllerServer.o \
 Aurora/System/SystemManager.o \
 Aurora/System/psp/Clock.o \
 Aurora/System/psp/PspSystemManager.o \
@@ -43,6 +45,8 @@ Tests/Demo_ObjLoading.o \
 Tests/ServerTest.o \
 Tests/ClientTest.o \
 Tests/SimpleTest.o \
+Tests/NetworkControllerClient.o \
+Tests/NetworkControllerServer.o \
 Starter.o
 
 INCDIR = $(PSPPATH)/include

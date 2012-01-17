@@ -105,6 +105,8 @@
     <ClCompile Include="Aurora\Math\Vector4.cpp" />
     <ClCompile Include="Aurora\Network\Http.cpp" />
     <ClCompile Include="Aurora\Network\IPAddress.cpp" />
+    <ClCompile Include="Aurora\Network\NetworkInputControllerClient.cpp" />
+    <ClCompile Include="Aurora\Network\NetworkInputControllerServer.cpp" />
     <ClCompile Include="Aurora\Network\NetworkManager.cpp" />
     <ClCompile Include="Aurora\Network\Packet.cpp" />
     <ClCompile Include="Aurora\Network\pc\PcNetworkManager.cpp" />
@@ -156,6 +158,8 @@
     <ClInclude Include="Aurora\Math\Vector4.h" />
     <ClInclude Include="Aurora\Network\Http.hpp" />
     <ClInclude Include="Aurora\Network\IPAddress.hpp" />
+    <ClInclude Include="Aurora\Network\NetworkInputControllerClient.h" />
+    <ClInclude Include="Aurora\Network\NetworkInputControllerServer.h" />
     <ClInclude Include="Aurora\Network\NetworkManager.h" />
     <ClInclude Include="Aurora\Network\Packet.hpp" />
     <ClInclude Include="Aurora\Network\pc\PcNetworkManager.h" />
