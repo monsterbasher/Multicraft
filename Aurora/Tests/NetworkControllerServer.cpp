@@ -12,6 +12,7 @@ NetworkInputClientInfo::NetworkInputClientInfo(std::string name,Network::IPAddre
 	_clientIp = ip;
 	_clientSocket = socket;
 	_packetNew = false;
+	_logged = false;
 }
 
 void NetworkInputClientInfo::MarkPackedReaded()
@@ -105,7 +106,24 @@ bool NetworkInputServer::ContainsClientWithAddress(Network::IPAddress address)
 	return addressFound;
 }
 
+void NetworkInputServer::RemoveClientWithSocket(Network::SocketTCP socket)
+{
+	int foundNumber = -1;
 
+	for (unsigned int i = 0;i < _connectedClients.size();i++)
+	{
+		if (_connectedClients[i]->GetSocket() == socket)
+		{
+			foundNumber = i;
+		}
+	}
+
+	if (foundNumber != -1)
+	{
+		delete _connectedClients[foundNumber];
+		_connectedClients.erase(_connectedClients.begin() + foundNumber);
+	}
+}
 
 void NetworkInputServer::Update(float dt)
 {
@@ -143,41 +161,71 @@ void NetworkInputServer::Update(float dt)
 				{
 					Network::IPAddress clientAddress;
 					Network::SocketTCP clientSocket;
-
+					
+					//accept new connection
 					_serverSocket.Accept(clientSocket, &clientAddress);
 
-					if (!ContainsClientWithAddress(clientAddress))//we don't have client with this address
-					{
-						//so we add new client with uknow name right now
-						NetworkInputClientInfo *newClient = new NetworkInputClientInfo("",clientAddress,clientSocket);
-						_connectedClients.push_back(newClient);
+					//add to list of clients - default state is not logged
+					NetworkInputClientInfo* newClient = new NetworkInputClientInfo("",clientAddress,clientSocket);
+					_connectedClients.push_back(newClient);
+					
+					//add this socket to selector
+					_selector.Add(clientSocket);
 
-						_selector.Add(clientSocket);
-					}
 				}else //there is message from client
 				{
 					Network::Packet receivedPacket;
 					if(socket.Receive(receivedPacket) == Network::Socket::Done)
 					{
-						//find clinet that it's from 
-						NetworkInputClientInfo *client = GetClientBySocket(socket);
-						if(client != 0)
-						{
-							//ok let's check what that packet is
-							int packetType = -1;
-							receivedPacket >> packetType;
+						//check message type
+						int packetType = -1;
+						receivedPacket >> packetType;
 
-							if(packetType == 21)//clients name :>
+						//21 - client login attempt with name
+						//22 - send client that he's welcome
+						//23 - send client to fuck off
+
+						if(packetType == 21)//client login attempt
+						{
+							//check if there is client with the same socket
+							NetworkInputClientInfo *client = GetClientBySocket(socket);
+							if (client != 0)
 							{
+								//now lets check if there is already player with the same name
 								std::string newName = "";
 								receivedPacket >> newName;
-								client->SetName(newName);
-							}
 
+								NetworkInputClientInfo *client2 = GetClientByName(newName);
+								if (client2 == 0)//no clients with the same name
+								{
+									//we leave this client 
+									client->SetName(newName);
+									client->SetLogged(true);
+
+									//send login on message
+									Network::Packet sendPacket;
+									sendPacket << 22;
+									socket.Send(sendPacket);
+								}else
+								{
+									//there is already client with the same name
+
+									//send fuck off message
+									Network::Packet sendPacket;
+									sendPacket << 23;
+									socket.Send(sendPacket);
+
+									RemoveClientWithSocket(socket);
+
+									_selector.Remove(socket);
+								}
+							}
 						}
 					}
 				}
 			}
+			//end client support
+
 		}
 	}
 }
@@ -305,11 +353,14 @@ void NetworkControllerServer::Draw(GameManager* sManager)
 	int startPos = 45;
 	for(int i = 0; i < _inputServer->GetClientsCount(); i++)
 	{
-		char clinetsInfo[50];
-		sprintf(clinetsInfo,"Client %d with name: %s",i,_inputServer->GetClientByNumber(0)->GetName().c_str());
-		RenderManager::Instance()->drawText(font,1,startPos,clinetsInfo,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
-		
-		startPos += 15;
+		if (_inputServer->GetClientByNumber(i)->IsLogged())
+		{
+			char clinetsInfo[50];
+			sprintf(clinetsInfo,"Client %d with name: %s",i,_inputServer->GetClientByNumber(i)->GetName().c_str());
+			RenderManager::Instance()->drawText(font,1,startPos,clinetsInfo,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+
+			startPos += 15;
+		}		
 	}	
 
 	RenderManager::Instance()->EndFrame();

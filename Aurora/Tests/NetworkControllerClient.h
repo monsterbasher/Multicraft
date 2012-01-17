@@ -27,6 +27,7 @@ enum NetworControllerState
 	CONNECTING,
 	CONNECTED,
 	NOTCONNECTED,
+	WAITING,
 	NOTBIND
 };
 

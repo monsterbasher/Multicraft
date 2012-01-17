@@ -131,13 +131,42 @@ void NetworkInputControllerClient::Update(float dt)
 			_controllerState = NOTCONNECTED;
 		else
 		{
-			_controllerState = CONNECTED;
+			_controllerState = WAITING;
 
 			//send our name there :>
 			Network::Packet namePacket;
-			namePacket << 21 << _clientName;//21 clientName packet
+			namePacket << 21 << _clientName;//21 login client with name packet
 			
 			_clientSocket.Send(namePacket);
+
+			_clientSocket.SetBlocking(false);
+		}
+	}
+	else if (_controllerState == WAITING)
+	{
+		//we are waiting for acknowledge message of fuck off message
+		Network::Packet messagePacket;
+		if (_clientSocket.Receive(messagePacket) == Network::Socket::Done)
+		{
+			int packetType = -1;
+			messagePacket >> packetType;
+
+			if (packetType == 22)//welcome  on server client
+			{
+				_controllerState = CONNECTED;
+			}
+			else if (packetType == 23)//fuck off
+			{
+				_controllerState = NOTCONNECTED;
+				_clientSocket.Close();
+				_serverSearcherSocket.Close();
+			}else
+			{
+				//??
+				_controllerState = NOTCONNECTED;
+				_clientSocket.Close();
+				_serverSearcherSocket.Close();
+			}
 		}
 	}
 	else if (_controllerState == CONNECTED)
@@ -160,7 +189,18 @@ void NetworkControllerClient::Init()
 
 	Network::NetworkManager::Instance()->Init();
 	//controller init
-	networkInput = new NetworkInputControllerClient("Client1",2634);
+#ifdef AURORA_PC
+	networkInput = new NetworkInputControllerClient("Client_PC",2634);
+#endif
+
+#ifdef AURORA_PSP
+	networkInput = new NetworkInputControllerClient("Client_PSP",2634);
+#endif
+
+#ifdef AURORA_IOS
+	networkInput = new NetworkInputControllerClient("Client_IOS",2634);
+#endif
+
 	networkInput->Start();
 
 	serverName = "";
@@ -239,6 +279,10 @@ void NetworkControllerClient::Draw(GameManager* sManager)
 	else if (networkInput->GetControllerState() == CONNECTING)
 	{
 		RenderManager::Instance()->drawText(font,1,30,"Connecting to server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+	}
+	else if (networkInput->GetControllerState() == WAITING)
+	{
+		RenderManager::Instance()->drawText(font,1,30,"Waiting for login to server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 	}
 	else
 	{

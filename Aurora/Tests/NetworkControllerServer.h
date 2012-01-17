@@ -31,6 +31,7 @@ private:
 	Network::Packet _packet;
 
 	bool _packetNew;
+	bool _logged;
 
 	void MarkPackedNew();
 
@@ -45,7 +46,10 @@ public:
 	Network::SocketTCP GetSocket();
 
 	void SetPacket(Network::Packet packet);
-	void MarkPackedReaded();	
+	void MarkPackedReaded();
+
+	bool IsLogged() { return _logged;}
+	void SetLogged(bool login) { _logged = login; }
 };
 
 class NetworkInputServer
@@ -77,6 +81,8 @@ public:
 
 	bool ContainsClientWithAddress(Network::IPAddress address);
 	int GetClientsCount();
+
+	void RemoveClientWithSocket(Network::SocketTCP socket);
 
 	NetworkInputClientInfo* GetClientByNumber(int i);
 	NetworkInputClientInfo* GetClientByName(std::string name);
