@@ -19,6 +19,8 @@
 		FA8581A914C3920A00D987B7 /* SocketTCP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA85819714C3920A00D987B7 /* SocketTCP.cpp */; };
 		FA8581AA14C3920A00D987B7 /* SocketUDP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA85819914C3920A00D987B7 /* SocketUDP.cpp */; };
 		FA8581AB14C3920A00D987B7 /* SocketHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA85819C14C3920A00D987B7 /* SocketHelper.cpp */; };
+		FAA79FA614C4BF1100E5D3D3 /* NetworkControllerClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAA79FA214C4BF1100E5D3D3 /* NetworkControllerClient.cpp */; };
+		FAA79FA714C4BF1100E5D3D3 /* NetworkControllerServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAA79FA414C4BF1100E5D3D3 /* NetworkControllerServer.cpp */; };
 		FAB35A1D14C1EB3C00AD6619 /* GameManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB35A1A14C1EB3C00AD6619 /* GameManager.cpp */; };
 		FAB35A2114C1EC6900AD6619 /* GameLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB35A1F14C1EC6900AD6619 /* GameLoader.cpp */; };
 		FAB35A2514C1EC7200AD6619 /* IOSGameLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAB35A2314C1EC7200AD6619 /* IOSGameLoader.cpp */; };
@@ -88,6 +90,10 @@
 		FA85819A14C3920A00D987B7 /* SocketUDP.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketUDP.hpp; sourceTree = "<group>"; };
 		FA85819C14C3920A00D987B7 /* SocketHelper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SocketHelper.cpp; sourceTree = "<group>"; };
 		FA85819D14C3920A00D987B7 /* SocketHelper.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SocketHelper.hpp; sourceTree = "<group>"; };
+		FAA79FA214C4BF1100E5D3D3 /* NetworkControllerClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkControllerClient.cpp; sourceTree = "<group>"; };
+		FAA79FA314C4BF1100E5D3D3 /* NetworkControllerClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkControllerClient.h; sourceTree = "<group>"; };
+		FAA79FA414C4BF1100E5D3D3 /* NetworkControllerServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkControllerServer.cpp; sourceTree = "<group>"; };
+		FAA79FA514C4BF1100E5D3D3 /* NetworkControllerServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkControllerServer.h; sourceTree = "<group>"; };
 		FAB35A1A14C1EB3C00AD6619 /* GameManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameManager.cpp; sourceTree = "<group>"; };
 		FAB35A1B14C1EB3C00AD6619 /* GameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameManager.h; sourceTree = "<group>"; };
 		FAB35A1C14C1EB3C00AD6619 /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
@@ -415,6 +421,10 @@
 		FAF37C3814C2011200931646 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				FAA79FA214C4BF1100E5D3D3 /* NetworkControllerClient.cpp */,
+				FAA79FA314C4BF1100E5D3D3 /* NetworkControllerClient.h */,
+				FAA79FA414C4BF1100E5D3D3 /* NetworkControllerServer.cpp */,
+				FAA79FA514C4BF1100E5D3D3 /* NetworkControllerServer.h */,
 				FA8375A814C3F55A001DA3A2 /* ClientTest.cpp */,
 				FA8375A914C3F55A001DA3A2 /* ClientTest.h */,
 				FA8375AA14C3F55A001DA3A2 /* ServerTest.cpp */,
@@ -537,6 +547,8 @@
 				FA8375AD14C3F55A001DA3A2 /* ServerTest.cpp in Sources */,
 				FA8375B214C3F703001DA3A2 /* IOSNetworkManager.cpp in Sources */,
 				FA8375B514C3F712001DA3A2 /* NetworkManager.cpp in Sources */,
+				FAA79FA614C4BF1100E5D3D3 /* NetworkControllerClient.cpp in Sources */,
+				FAA79FA714C4BF1100E5D3D3 /* NetworkControllerServer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
