@@ -10,12 +10,14 @@
 #include "Tests/SimpleTest.h"
 #include "Tests/ClientTest.h"
 #include "Tests/ServerTest.h"
+#include "Tests/NetworkControllerServer.h"
+#include "Tests/NetworkControllerClient.h"
 
 class ExampleGameManager : public GameManager
 {
 private:
     
-	ExampleState* exampleState;
+	NetworkControllerClient* exampleState;
     
 public:
     
@@ -28,7 +30,7 @@ public:
 	void Init()
 	{
 		//init whatever you need
-		exampleState = new ExampleState();
+		exampleState = new NetworkControllerClient();
 		exampleState->Init();
         
 		ChangeState(exampleState);
