@@ -37,9 +37,6 @@
     <Filter Include="Aurora\Network\pc">
       <UniqueIdentifier>{cbc257d7-5c93-47d9-a47e-2feec9a8cccc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tests\Enet">
-      <UniqueIdentifier>{36012380-d05b-4df3-915b-ae5179ff8489}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tests\Sockets">
       <UniqueIdentifier>{12c7ed1f-5452-4f77-a2ae-af60d9dc788d}</UniqueIdentifier>
     </Filter>
@@ -180,12 +177,6 @@
     </ClCompile>
     <ClCompile Include="Tests\ExampleGame.cpp">
       <Filter>Tests\Pgraphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\EnetClientTest.cpp">
-      <Filter>Tests\Enet</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\EnetServerTest.cpp">
-      <Filter>Tests\Enet</Filter>
     </ClCompile>
     <ClCompile Include="Tests\NetworkControllerClient.cpp">
       <Filter>Tests\NetworkController</Filter>
@@ -344,12 +335,6 @@
     </ClInclude>
     <ClInclude Include="Tests\ExampleGame.h">
       <Filter>Tests\Pgraphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\EnetServerTest.h">
-      <Filter>Tests\Enet</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\EnetClientTest.h">
-      <Filter>Tests\Enet</Filter>
     </ClInclude>
     <ClInclude Include="Tests\NetworkControllerClient.h">
       <Filter>Tests\NetworkController</Filter>
