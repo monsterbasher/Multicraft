@@ -8,6 +8,7 @@
 
 #include <Aurora/Network/IPAddress.hpp>
 #include <Aurora/Network/SocketUDP.hpp>
+#include <Aurora/Network/SocketTCP.hpp>
 #include <Aurora/Network/Packet.hpp>
 
 #include <string>
@@ -23,29 +24,45 @@ enum NetworControllerState
 {
 	IDLE,
 	SEARCHING,
+	CONNECTING,
 	CONNECTED,
 	NOTCONNECTED,
 	NOTBIND
 };
 
+
+class NetworkInputServerInfo
+{
+public:
+
+	std::string Name;
+	Network::IPAddress Address;
+};
+
 class NetworkInputControllerClient
 {
-	private:
+private:
 
 	NetworControllerState _controllerState;
 
-	std::map<std::string,Network::IPAddress> _foundServers;
+	std::vector<NetworkInputServerInfo> _foundServers;
 
 	int _serverListeningPort;
 	Network::SocketUDP _serverSearcherSocket;
+	
+	std::string _clientName;
+	Network::SocketTCP _clientSocket;
+	Network::IPAddress _defaulServerAddress;
 
-	public:
+public:
 
-	NetworkInputControllerClient(int listenPort);
+	NetworkInputControllerClient(std::string clientName,int listenPort);
 
 	int NumberOfFoundServers();
 	NetworControllerState GetControllerState();
 	
+	std::string GetServerNameAtPos(int pos);
+	void ConnectToServer(std::string serverName);
 	bool IsConnectedToServer();
 	
 	void Start();
@@ -55,11 +72,9 @@ class NetworkInputControllerClient
 
 class NetworkControllerClient : public GameState
 {
-	private:
+private:
 
 	TrueTypeFont* font;
-
-	Camera *cam;
 
 	RenderManager* _renderManager;
 	SystemManager* _systemManager;
@@ -69,9 +84,10 @@ class NetworkControllerClient : public GameState
 
 	//network variables
 	NetworkInputControllerClient* networkInput;
-	std::string serverMessage;
 
-	public:
+	std::string serverName;
+
+public:
 
 	void Init();
 	void Enter();

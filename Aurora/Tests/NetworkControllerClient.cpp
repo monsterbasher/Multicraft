@@ -6,8 +6,11 @@
 #include <Aurora/Network/NetworkManager.h>
 
 
-NetworkInputControllerClient::NetworkInputControllerClient(int listenPort)
+NetworkInputControllerClient::NetworkInputControllerClient(std::string clientName,int listenPort)
 {
+	//name
+	_clientName = clientName;
+
 	//listening port
 	_serverListeningPort = listenPort;
 
@@ -39,7 +42,7 @@ NetworControllerState NetworkInputControllerClient::GetControllerState()
 
 bool NetworkInputControllerClient::IsConnectedToServer()
 {
-	return false;
+	return _controllerState == CONNECTED;
 }
 
 void NetworkInputControllerClient::Start()
@@ -54,6 +57,24 @@ void NetworkInputControllerClient::Start()
 void NetworkInputControllerClient::Stop()
 {
 
+}
+
+std::string NetworkInputControllerClient::GetServerNameAtPos(int pos)
+{
+	return _foundServers[pos].Name;
+}
+
+void NetworkInputControllerClient::ConnectToServer(std::string serverName)
+{
+	for (unsigned int i = 0; i < _foundServers.size();i++)
+	{
+		if (_foundServers[i].Name == serverName)
+		{
+			_defaulServerAddress = _foundServers[i].Address;
+		}		
+	}
+
+	_controllerState = CONNECTING;
 }
 
 void NetworkInputControllerClient::Update(float dt)
@@ -73,16 +94,55 @@ void NetworkInputControllerClient::Update(float dt)
 			if (packetType == 20)//server broadcast
 			{
 				std::string serverName = "";
-				receivedPacket >> packetType >> serverName;
+				receivedPacket >> serverName;
+
+				//if there is no servers make first one default
+				if (_foundServers.size() == 0)
+				{
+					_defaulServerAddress = senderIP;
+				}
 
 				//check if we found already this server
-				if (_foundServers.find(serverName) == _foundServers.end())
+				bool serverFound = false;
+				for (unsigned int i = 0; i < _foundServers.size();i++)
+				{
+					if (_foundServers[i].Name == serverName)
+					{
+						serverFound = true;
+					}
+				}
+
+				if (!serverFound)
 				{
 					//add new one
-					_foundServers.insert(std::pair<std::string,Network::IPAddress>(serverName,senderIP));
+					NetworkInputServerInfo serverInfo;
+					serverInfo.Address = senderIP;
+					serverInfo.Name = serverName;
+
+					_foundServers.push_back(serverInfo);
 				}
 			}
 		}
+	}
+	else if (_controllerState == CONNECTING)
+	{
+		//try to connect to server
+		if (_clientSocket.Connect(_serverListeningPort, _defaulServerAddress) != Network::Socket::Done)
+			_controllerState = NOTCONNECTED;
+		else
+		{
+			_controllerState = CONNECTED;
+
+			//send our name there :>
+			Network::Packet namePacket;
+			namePacket << 21 << _clientName;//21 clientName packet
+			
+			_clientSocket.Send(namePacket);
+		}
+	}
+	else if (_controllerState == CONNECTED)
+	{
+
 	}
 }
 
@@ -96,20 +156,14 @@ void NetworkControllerClient::Init()
 
 	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
 
-	cam = new Camera();
-	cam->PositionCamera(0,0,0,0,0,-5,0,1,0);
-
-	_renderManager->setCurrentCam(cam);
-
 	dt = 0.0f;
 
 	Network::NetworkManager::Instance()->Init();
-
 	//controller init
-	networkInput = new NetworkInputControllerClient(2634);
+	networkInput = new NetworkInputControllerClient("Client1",2634);
 	networkInput->Start();
 
-	serverMessage = "";
+	serverName = "";
 }
 
 void NetworkControllerClient::Enter()
@@ -136,50 +190,18 @@ void NetworkControllerClient::Resume()
 void NetworkControllerClient::HandleEvents(GameManager* sManager)
 {
 	_systemManager->Update();
-
-	serverMessage = "";
-
-	//camera
-	//rotate
-	if(_systemManager->keyHold(Key::Left))
-	{
-		serverMessage = "Left";
-	}
-	if(_systemManager->keyHold(Key::Right))
-	{
-		serverMessage = "Right";
-	}
-	if(_systemManager->keyHold(Key::Up))
-	{
-		serverMessage = "Up";
-	}
-	if(_systemManager->keyHold(Key::Down))
-	{
-		serverMessage = "Down";
-	}
-
-	//move
-	if(_systemManager->keyHold(Key::W))
-	{
-		serverMessage = "W";
-	}
-	if(_systemManager->keyHold(Key::S))
-	{
-		serverMessage = "S";
-	}
-	if(_systemManager->keyHold(Key::A))
-	{
-		serverMessage = "A";
-	}
-	if(_systemManager->keyHold(Key::D))
-	{
-		serverMessage = "D";
-	}
 }
 
 void NetworkControllerClient::Update(GameManager* sManager)
 {
 	networkInput->Update(dt);
+
+	//for test purpose we connect to the first found server
+	if (networkInput->GetControllerState() == SEARCHING && networkInput->NumberOfFoundServers() > 0)
+	{
+		serverName = networkInput->GetServerNameAtPos(0);
+		networkInput->ConnectToServer(serverName);
+	}
 
 	//delta time
 	dt = _clock.getTime();
@@ -188,13 +210,9 @@ void NetworkControllerClient::Update(GameManager* sManager)
 void NetworkControllerClient::Draw(GameManager* sManager)
 {
 	RenderManager::Instance()->StartFrame();
-	RenderManager::Instance()->SetPerspective();
 	RenderManager::Instance()->ClearScreen();
 
-	//RenderManager::Instance()->UpdateCurrentCamera();
-
 	//change ortho for text
-	RenderManager::Instance()->SetOrtho();
 	RenderManager::Instance()->SetTextOrtho();
 	RenderManager::Instance()->drawText(font,1,267,"Multicraft",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
@@ -206,15 +224,21 @@ void NetworkControllerClient::Draw(GameManager* sManager)
 	//draw client message
 	if (networkInput->GetControllerState() == CONNECTED)
 	{
-		RenderManager::Instance()->drawText(font,1,30,"Connected to server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+		char serverN[50];
+		sprintf(serverN,"Connected to server: %s",serverName.c_str());
+		RenderManager::Instance()->drawText(font,1,30,serverN,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 	}
 	else if (networkInput->GetControllerState() == SEARCHING)
 	{
-		RenderManager::Instance()->drawText(font,1,30,"Searching server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+		RenderManager::Instance()->drawText(font,1,30,"Searching for server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
 		char serverNumber[50];
 		sprintf(serverNumber,"Servers found: %d",networkInput->NumberOfFoundServers());
 		RenderManager::Instance()->drawText(font,1,45,serverNumber,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+	}
+	else if (networkInput->GetControllerState() == CONNECTING)
+	{
+		RenderManager::Instance()->drawText(font,1,30,"Connecting to server!",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 	}
 	else
 	{
