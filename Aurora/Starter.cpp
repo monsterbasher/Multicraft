@@ -6,17 +6,16 @@
 #include "Tests/ServerTest.h"
 #include "Tests/ClientTest.h"
 #include "Tests/SimpleTest.h"
-#include "Tests/EnetServerTest.h"
-#include "Tests/EnetClientTest.h"
 #include "Tests/NetworkControllerServer.h"
 #include "Tests/NetworkControllerClient.h"
+#include "Tests/cAudioTest.h"
 
 
 class ExampleGameManager : public GameManager
 {
 private:
 
-	NetworkControllerServer* exampleState;
+	cAudioTest* exampleState;
 
 public:
 
@@ -29,7 +28,7 @@ public:
 	void Init()
 	{
 		//init whatever you need
-		exampleState = new NetworkControllerServer();
+		exampleState = new cAudioTest();
 		exampleState->Init();
 
 		ChangeState(exampleState);

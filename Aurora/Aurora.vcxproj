@@ -19,13 +19,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -50,13 +50,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\libs\sfml\include;.\libs\glew\include\GL;.\;.\libs\lua-5.1.4\src;.\libs\boost-1.39.0;.\libs\luabind;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\libs\sfml\include;.\libs\glew\include\GL;.\libs\lua-5.1.4\src;.\libs\boost-1.39.0;.\libs\luabind;.\libs\cAudio\include;.\libs\cAudio\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>.\libs\sfml\lib;.\libs\glew\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-main-d.lib;glu32.lib;opengl32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\libs\sfml\lib;.\libs\glew\lib;.\lib\windows\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-main-d.lib;glu32.lib;opengl32.lib;ws2_32.lib;cAudio_d.lib;Ogg_d.lib;Vorbis_d.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,15 +68,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\libs\sfml\include;.\libs\glew\include\GL;.\;.\libs\lua-5.1.4\src;.\libs\boost-1.39.0;.\libs\luabind;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\libs\sfml\include;.\libs\glew\include\GL;.\libs\lua-5.1.4\src;.\libs\boost-1.39.0;.\libs\luabind;.\libs\cAudio\Headers;.\libs\cAudio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>.\libs\sfml\lib;.\libs\glew\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;sfml-system-s.lib;sfml-window-s.lib;sfml-main.lib;glu32.lib;opengl32.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\libs\sfml\lib;.\libs\glew\lib;.\libs\cAudio\lib\windows\release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;sfml-system-s.lib;sfml-window-s.lib;sfml-main.lib;glu32.lib;opengl32.lib;ws2_32.lib;cAudio.lib;Ogg.lib;Vorbis.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -121,6 +121,7 @@
     <ClCompile Include="Aurora\Utils\GameManager.cpp" />
     <ClCompile Include="Aurora\Utils\pc\WinGameLoader.cpp" />
     <ClCompile Include="Starter.cpp" />
+    <ClCompile Include="Tests\cAudioTest.cpp" />
     <ClCompile Include="Tests\ClientTest.cpp" />
     <ClCompile Include="Tests\Demo_ObjLoading.cpp" />
     <ClCompile Include="Tests\ExampleGame.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="Aurora\Utils\GameState.h" />
     <ClInclude Include="Aurora\Utils\pc\WinGameLoader.h" />
     <ClInclude Include="Aurora\Utils\PlatformConfigurator.h" />
+    <ClInclude Include="Tests\cAudioTest.h" />
     <ClInclude Include="Tests\ClientTest.h" />
     <ClInclude Include="Tests\Demo_ObjLoading.h" />
     <ClInclude Include="Tests\ExampleGame.h" />

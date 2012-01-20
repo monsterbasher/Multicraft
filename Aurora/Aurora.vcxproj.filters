@@ -46,6 +46,9 @@
     <Filter Include="Tests\NetworkController">
       <UniqueIdentifier>{fa4e59fb-63a4-4a3e-a9a6-53752f2dbfe4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\Music">
+      <UniqueIdentifier>{1c113c31-7c3b-4add-8a76-4b33cbaee17d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Starter.cpp" />
@@ -189,6 +192,9 @@
     </ClCompile>
     <ClCompile Include="Aurora\Network\NetworkInputControllerServer.cpp">
       <Filter>Aurora\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\cAudioTest.cpp">
+      <Filter>Tests\Music</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -353,6 +359,9 @@
     </ClInclude>
     <ClInclude Include="Aurora\Network\NetworkInputControllerServer.h">
       <Filter>Aurora\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\cAudioTest.h">
+      <Filter>Tests\Music</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
