@@ -46,7 +46,7 @@
 </toolChain>
 </folderInfo>
 <sourceEntries>
-<entry excluding="Aurora/Network/Win32|Aurora/Network/pc|Aurora-Prefix.pch|Aurora-Info.plist|Aurora/System/pc|Aurora/Graphics/pc|src/Aurora/Utils/win|src/Aurora/Graphics/win|libs|Aurora.vcxproj.user|Aurora.vcxproj.filters|Aurora.vcxproj" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+<entry excluding="IOS.xcodeproj|IOS|en.lproj|Aurora/Network/Win32|Aurora/Network/pc|Aurora-Prefix.pch|Aurora-Info.plist|Aurora/System/pc|Aurora/Graphics/pc|src/Aurora/Utils/win|src/Aurora/Graphics/win|libs|Aurora.vcxproj.user|Aurora.vcxproj.filters|Aurora.vcxproj" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 </sourceEntries>
 </configuration>
 </storageModule>

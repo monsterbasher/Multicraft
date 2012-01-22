@@ -22,6 +22,11 @@ Aurora/Graphics/Sprite.o \
 Aurora/Graphics/Sprite3D.o \
 Aurora/Graphics/TrueTypeFont.o \
 Aurora/Graphics/ModelObj.o \
+Aurora/Audio/AudioManager.o \
+Aurora/Audio/psp/Sound.o \
+Aurora/Audio/psp/PspAudioManager.o \
+Aurora/Audio/psp/Audio.o \
+Aurora/Audio/psp/AudioMPEG.o \
 Aurora/Network/Unix/SocketHelper.o \
 Aurora/Network/psp/PspNetworkManager.o \
 Aurora/Network/NetworkManager.o \
@@ -47,12 +52,12 @@ Tests/ClientTest.o \
 Tests/SimpleTest.o \
 Tests/NetworkControllerClient.o \
 Tests/NetworkControllerServer.o \
-Tests/pspAudioTest.o \
+Tests/AudioTest.o \
 Starter.o
 
 INCDIR = $(PSPPATH)/include
 INCDIR += ./
-CFLAGS = -g -G0 -Wall -mpreferred-stack-boundary=4 #-enable-newlib-hw-fp -ffast-math
+CFLAGS = -g -G0 -Wall -mpreferred-stack-boundary=4 -DSANE #-enable-newlib-hw-fp -ffast-math
 CXXFLAGS = $(CFLAGS) -fno-exceptions -fno-rtti
 ASFLAGS = $(CFLAGS)
 
@@ -62,7 +67,7 @@ PSP_LARGE_MEMORY = 1
 
 LIBDIR += 
 LDFLAGS =
-LIBS= -lpng -lz -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpspnet -lEnet
+LIBS= -lpng -lz -lpspaudio -lpspaudiocodec -lpspgum -lpspgu -lstdc++ -lpsprtc -lpspctrl -lm -lpspvfpu -lpspsdk -lpsppower -lpspnet 
 
 EXTRA_TARGETS = EBOOT.PBP
 PSP_EBOOT_TITLE = Aurora
