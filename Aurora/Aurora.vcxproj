@@ -55,7 +55,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>.\libs\sfml\lib;.\libs\glew\lib;.\lib\windows\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>.\libs\sfml\lib;.\libs\glew\lib;.\libs\cAudio\lib\windows\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glew32s.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-main-d.lib;glu32.lib;opengl32.lib;ws2_32.lib;cAudio_d.lib;Ogg_d.lib;Vorbis_d.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -80,6 +80,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Aurora\Audio\AudioManager.cpp" />
+    <ClCompile Include="Aurora\Audio\caudio\Sound.cpp" />
+    <ClCompile Include="Aurora\Audio\caudio\cAudioManager.cpp" />
     <ClCompile Include="Aurora\Graphics\Camera.cpp" />
     <ClCompile Include="Aurora\Graphics\Image.cpp" />
     <ClCompile Include="Aurora\Graphics\ModelObj.cpp" />
@@ -121,7 +124,7 @@
     <ClCompile Include="Aurora\Utils\GameManager.cpp" />
     <ClCompile Include="Aurora\Utils\pc\WinGameLoader.cpp" />
     <ClCompile Include="Starter.cpp" />
-    <ClCompile Include="Tests\cAudioTest.cpp" />
+    <ClCompile Include="Tests\AudioTest.cpp" />
     <ClCompile Include="Tests\ClientTest.cpp" />
     <ClCompile Include="Tests\Demo_ObjLoading.cpp" />
     <ClCompile Include="Tests\ExampleGame.cpp" />
@@ -131,6 +134,9 @@
     <ClCompile Include="Tests\SimpleTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Aurora\Audio\AudioManager.h" />
+    <ClInclude Include="Aurora\Audio\caudio\cAudioManager.h" />
+    <ClInclude Include="Aurora\Audio\Sound.h" />
     <ClInclude Include="Aurora\Graphics\Camera.h" />
     <ClInclude Include="Aurora\Graphics\Image.h" />
     <ClInclude Include="Aurora\Graphics\ModelObj.h" />
@@ -178,7 +184,7 @@
     <ClInclude Include="Aurora\Utils\GameState.h" />
     <ClInclude Include="Aurora\Utils\pc\WinGameLoader.h" />
     <ClInclude Include="Aurora\Utils\PlatformConfigurator.h" />
-    <ClInclude Include="Tests\cAudioTest.h" />
+    <ClInclude Include="Tests\AudioTest.h" />
     <ClInclude Include="Tests\ClientTest.h" />
     <ClInclude Include="Tests\Demo_ObjLoading.h" />
     <ClInclude Include="Tests\ExampleGame.h" />

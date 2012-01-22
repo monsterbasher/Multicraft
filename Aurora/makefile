@@ -47,6 +47,7 @@ Tests/ClientTest.o \
 Tests/SimpleTest.o \
 Tests/NetworkControllerClient.o \
 Tests/NetworkControllerServer.o \
+Tests/pspAudioTest.o \
 Starter.o
 
 INCDIR = $(PSPPATH)/include

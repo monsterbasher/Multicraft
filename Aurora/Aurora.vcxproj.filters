@@ -40,14 +40,20 @@
     <Filter Include="Tests\Sockets">
       <UniqueIdentifier>{12c7ed1f-5452-4f77-a2ae-af60d9dc788d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tests\Pgraphics">
-      <UniqueIdentifier>{5c3469d2-0451-4cf7-bc78-168685495b38}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tests\NetworkController">
       <UniqueIdentifier>{fa4e59fb-63a4-4a3e-a9a6-53752f2dbfe4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Tests\Music">
       <UniqueIdentifier>{1c113c31-7c3b-4add-8a76-4b33cbaee17d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tests\Graphics">
+      <UniqueIdentifier>{5c3469d2-0451-4cf7-bc78-168685495b38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Aurora\Audio">
+      <UniqueIdentifier>{e48b2c17-e7cc-4ece-9e1e-2e932aed33f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Aurora\Audio\caudio">
+      <UniqueIdentifier>{380b6478-15df-41e6-8b1f-12744698346c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -176,10 +182,10 @@
       <Filter>Tests\Sockets</Filter>
     </ClCompile>
     <ClCompile Include="Tests\Demo_ObjLoading.cpp">
-      <Filter>Tests\Pgraphics</Filter>
+      <Filter>Tests\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Tests\ExampleGame.cpp">
-      <Filter>Tests\Pgraphics</Filter>
+      <Filter>Tests\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Tests\NetworkControllerClient.cpp">
       <Filter>Tests\NetworkController</Filter>
@@ -193,8 +199,17 @@
     <ClCompile Include="Aurora\Network\NetworkInputControllerServer.cpp">
       <Filter>Aurora\Network</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\cAudioTest.cpp">
+    <ClCompile Include="Tests\AudioTest.cpp">
       <Filter>Tests\Music</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\Audio\AudioManager.cpp">
+      <Filter>Aurora\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\Audio\caudio\cAudioManager.cpp">
+      <Filter>Aurora\Audio\caudio</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\Audio\caudio\Sound.cpp">
+      <Filter>Aurora\Audio\caudio</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -343,10 +358,10 @@
       <Filter>Tests\Sockets</Filter>
     </ClInclude>
     <ClInclude Include="Tests\Demo_ObjLoading.h">
-      <Filter>Tests\Pgraphics</Filter>
+      <Filter>Tests\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Tests\ExampleGame.h">
-      <Filter>Tests\Pgraphics</Filter>
+      <Filter>Tests\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Tests\NetworkControllerClient.h">
       <Filter>Tests\NetworkController</Filter>
@@ -360,8 +375,17 @@
     <ClInclude Include="Aurora\Network\NetworkInputControllerServer.h">
       <Filter>Aurora\Network</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\cAudioTest.h">
+    <ClInclude Include="Tests\AudioTest.h">
       <Filter>Tests\Music</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Audio\AudioManager.h">
+      <Filter>Aurora\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Audio\caudio\cAudioManager.h">
+      <Filter>Aurora\Audio\caudio</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Audio\Sound.h">
+      <Filter>Aurora\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

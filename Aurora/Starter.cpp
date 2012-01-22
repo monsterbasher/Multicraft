@@ -8,14 +8,14 @@
 #include "Tests/SimpleTest.h"
 #include "Tests/NetworkControllerServer.h"
 #include "Tests/NetworkControllerClient.h"
-#include "Tests/cAudioTest.h"
+#include "Tests/AudioTest.h"
 
 
 class ExampleGameManager : public GameManager
 {
 private:
 
-	cAudioTest* exampleState;
+	AudioTest* exampleState;
 
 public:
 
@@ -28,7 +28,7 @@ public:
 	void Init()
 	{
 		//init whatever you need
-		exampleState = new cAudioTest();
+		exampleState = new AudioTest();
 		exampleState->Init();
 
 		ChangeState(exampleState);
