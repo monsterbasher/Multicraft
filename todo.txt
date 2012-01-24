@@ -1,0 +1,76 @@
+Games:
+- make Zuber 2d game example from his assets and finish my 2d editor
+- make 3d room for portal tests, add shooting portals and render to texture for now
+- start to move multicraft code to new framework
+
+
+Demos/Tests
+- create simple system for switching and restarting demos
+
+- simple empty demo
+- loading and showing text from .ttf font
+- loading and showing image
+- loading image and creatig sprite from it
+- loading image and creating 3d sprite from it
+- loading .obj model with rotation
+- loading .md2 model with rotation
+- loading .md2 model with animation
+- loading .md3 model with rotation
+- loading .md3 model with animation
+- loading .md5 model with rotation
+- loading .md5 model with animation
+- loading .mdl model with rotation
+- loading .mdl model with animation
+- checking for player input and drawing some info
+- 3d camera using inputs
+- network virtual controller
+- loading music file and streaming it
+- loading sounds intoo memory and playing it
+- render to texture demo
+
+
+Framework:
+- add .md2 model format (quake2)
+- add .md3 model format (quake3)
+- add .md5 model format (doom3)
+- add .mdl model format (half-life)
+- port my code for loading .bsp maps (quake3 format)
+
+- add frustum/aabb checking for camera
+- optimize using of matrices in each render manager
+- add option to convert textures colors in fly ex. from 8888 to 4444 etc.
+
+- add 2d physic engines (jellyengine, box2d) and binaries for all platforms
+- add 3d physic engine (bullet) and binaries for all platforms
+
+- add VFS(virtual file system) from previous framework
+- add encryption to it
+- create some normal app to add files to it - not only c# but also c++
+- add option to add files to it at runtime
+- each filenema would be hashed - and info about file stored in map<hash,fileInfo>
+
+
+PSP:
+- change way sound manager loading sounds. Add way to distinguish sound formats and use proper method to load it.
+- add code to swizzle textures / must be done in cleaver way because of function that can read pixels
+
+
+IOS:
+- OpenGL ES 2.0 renderer
+- compile cAudio libraries for this platform 
+
+
+
+MACOSX:
+- compile cAudio libraries for this platform 
+
+
+LINUX:
+- compile cAudio libraries for this platform 
+- update build script
+- write better instrusctions how to compile framework on linux
+
+
+Others:
+- add Android support
+- add Google NaCli support (when OpenGL ES 2.0 renderer will be ready)
