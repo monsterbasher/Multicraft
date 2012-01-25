@@ -25,15 +25,17 @@ namespace Aurora
 			bool encrypted;
 			bool compressed;
 
-			int packPosition;
-			int fileSize;
+			int fileInPackPosition;
+
+			int originalSize;
 			int compressedSize;
+			int encryptedSize;
 		};
 
 		class VFSPack
 		{
 		public:
-			VFSPack(){};
+			VFSPack(){ _encryptionKey = NULL; }
 			VFSPack(std::string fileName);
 			virtual ~VFSPack();
 
@@ -43,24 +45,24 @@ namespace Aurora
 			static void vFread(void *ptr, size_t size, size_t n,VFSFile &vFile);
 
 			void CreateNewPack(std::string filename);
-			void AddFile(std::string filePath,bool compressed);
+			void AddFile(std::string filePath,bool compressed,bool encryption);
 			bool SavePack();
 
-
+			void SetEncryptKey(std::string key);
 		private:
 			//all files in pack
 
 			std::map<long,PackFileInfo> _packedFiles;
 
 			///
-
+			unsigned char *_encryptionKey;
 			std::string archiveFilename;
 
 			void CalcMD5(std::string text, unsigned char *out);
 			unsigned long hashString(unsigned char *str);
 
 			//compression and decompression
-			int CompressString(char* src, char** destination, int* destLength);
+			int CompressString(char* src,int srcLen, char** destination, int* destLength);
 			int DecompressString(char* src, int srcLen, char** destination, int* destLen,int dupa);
 		};
 

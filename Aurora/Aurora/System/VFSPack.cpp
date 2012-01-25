@@ -1,5 +1,7 @@
 #include <Aurora/System/VFSPack.h>
 #include <Aurora/Utils/md5.h>
+#include <Aurora/Utils/Crypto.h>
+
 #include <zlib.h>
 
 namespace Aurora
@@ -10,6 +12,7 @@ namespace Aurora
 		VFSPack::VFSPack(std::string fileName)
 		{
 			archiveFilename = fileName;
+			_encryptionKey = NULL;
 		}
 
 		VFSPack::~VFSPack()
@@ -49,7 +52,7 @@ namespace Aurora
 			archiveFilename = filename;
 		}
 
-		void VFSPack::AddFile(std::string filePath,bool compressed)
+		void VFSPack::AddFile(std::string filePath,bool compressed,bool encryption)
 		{
 			//add file info only if file really exists
 			FILE *file = fopen(filePath.c_str(),"rb");
@@ -66,18 +69,27 @@ namespace Aurora
 			PackFileInfo fileInfo;
 			fileInfo.hash = hashString((unsigned char *)filePath.c_str());
 			fileInfo.filename = filePath;
-			fileInfo.fileSize = fileSize;
+
+			fileInfo.compressed = compressed;
+			fileInfo.encrypted = encryption;
+
+			fileInfo.originalSize = fileSize;
+			fileInfo.compressedSize = 0;
+			fileInfo.encryptedSize = 0;			
 
 			//add to collection
 			_packedFiles.insert(std::pair<long,PackFileInfo>(fileInfo.hash,fileInfo));
 		}
+
 
 		bool VFSPack::SavePack()
 		{
 			//create file and write header
 			FILE* file = fopen(archiveFilename.c_str(),"wb");
 
-			int filePosition = 0;
+			int fileInPackPosition = 0;
+			int fileInPackHeaderSize = (sizeof(int) * 4) + (sizeof(bool) * 2) + sizeof(long);
+			int fileInPackFinalSize = 0;
 
 			//write pack version
 			int packVersion = 1;
@@ -91,6 +103,9 @@ namespace Aurora
 			int filesCount = _packedFiles.size();
 			fwrite(&filesCount,sizeof(int),1,file);
 
+			//pack header size
+			fileInPackPosition = sizeof(int) * 3;
+
 			std::map<long,PackFileInfo>::iterator it;
 
 			// show content:
@@ -100,8 +115,8 @@ namespace Aurora
 				//encrypt and compress if it needed
 				FILE *fileToPack = fopen(it->second.filename.c_str(),"rb");
 
-				char* buffer = (char*) malloc (sizeof(char)*it->second.fileSize);
-				fread (buffer,1,it->second.fileSize,fileToPack);
+				char* buffer = (char*) malloc (sizeof(char)*it->second.originalSize);
+				fread (buffer,1,it->second.originalSize,fileToPack);
 
 				fclose(fileToPack);
 
@@ -110,12 +125,97 @@ namespace Aurora
 				//compress
 
 				//now write it to pack 
-				fwrite(buffer,1,it->second.fileSize,file);
-				free(buffer);
+				//first info about file
+				fwrite(&it->second.hash,sizeof(long),1,file);
+
+				fwrite(&it->second.encrypted,sizeof(bool),1,file);
+				fwrite(&it->second.compressed,sizeof(bool),1,file);
+
+				fwrite(&fileInPackPosition,sizeof(int),1,file);
+				fwrite(&it->second.originalSize,sizeof(int),1,file);
+
+				//if not compressed and not encrypted
+				if (!it->second.compressed && !it->second.encrypted)
+				{
+					fwrite(&it->second.compressedSize,sizeof(int),1,file);
+					fwrite(&it->second.encryptedSize,sizeof(int),1,file);
+
+					fwrite(buffer,1,it->second.originalSize,file);
+					
+					//clean buffer
+					free(buffer);
+
+					fileInPackFinalSize = it->second.originalSize;
+				}
+				else if (it->second.compressed && !it->second.encrypted)
+				{
+					//compress only
+					char* compressBuffer;
+					int compressSize = 0;
+
+					CompressString(buffer,it->second.originalSize,&compressBuffer,&compressSize);
+
+					it->second.compressedSize = compressSize;
+					fwrite(&it->second.compressedSize,sizeof(int),1,file);
+					fwrite(&it->second.encryptedSize,sizeof(int),1,file);
+
+					//write compressed data
+					fwrite(compressBuffer,1,compressSize,file);
+
+					//clean buffer
+					free(buffer);
+					free(compressBuffer);
+
+					fileInPackFinalSize = compressSize;
+				}
+				else if (!it->second.compressed && it->second.encrypted)
+				{
+					//encrypt only
+					char* encryptBuffer;
+					int encryptSize = 0;
+
+					Utils::aesEncrypt(_encryptionKey,buffer,it->second.originalSize,&encryptBuffer,&encryptSize);
+
+					it->second.encryptedSize = encryptSize;
+					fwrite(&it->second.compressedSize,sizeof(int),1,file);
+					fwrite(&it->second.encryptedSize,sizeof(int),1,file);
+
+					//write compressed data
+					fwrite(encryptBuffer,1,encryptSize,file);
+
+					//clean buffer
+					free(buffer);
+					free(encryptBuffer);
+
+					fileInPackFinalSize = encryptSize;
+				}
+				else if (it->second.compressed && it->second.encrypted)
+				{
+					//compress and encrypt
+				}
+
+				//add size of fileInPack header and correct buffer size
+				fileInPackPosition+=fileInPackHeaderSize + fileInPackFinalSize;
 			}				
 
 			fclose (file);
 			return false;
+		}
+
+		void VFSPack::SetEncryptKey(std::string key)
+		{
+			if (_encryptionKey != NULL)
+			{
+				free(_encryptionKey);
+			}
+
+			int test = key.length();
+			char *test2 = (char *)key.c_str();
+
+			_encryptionKey = new unsigned char[test];//(unsigned char *)malloc(test);
+			memset((void*)_encryptionKey,0,test);
+			memcpy((void*)_encryptionKey, (void*)test2, test); 
+			//strncpy((char*)_encryptionKey,key.c_str(),test);
 		}
 
 		unsigned long VFSPack::hashString(unsigned char *str)
@@ -222,10 +322,9 @@ namespace Aurora
 			md5_finish(&state, out);
 		}
 
-		int VFSPack::CompressString(char* src, char** destination, int* destLength)
+		int VFSPack::CompressString(char* src,int srcLen,char** destination, int* destLength)
 		{
 			//Define the source, destination, source length, and destination length
-			int srcLen=strlen(src);
 			int destLen=compressBound(srcLen);
 			char *dest=new char[destLen];
 			//Decompress the string in src and place it in dest

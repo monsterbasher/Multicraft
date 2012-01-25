@@ -31,8 +31,9 @@ void SimpleTest::Init()
 	VFSPack _packedFiles;
 
 	_packedFiles.CreateNewPack("pack.bin");
-	_packedFiles.AddFile("Assets/Minecraft/gui/items.png",false);
-	_packedFiles.AddFile("Assets/Minecraft/font.ttf",false);
+	_packedFiles.SetEncryptKey("1qaz2wsx3edc4rfv");
+	_packedFiles.AddFile("Assets/Minecraft/gui/items.png",false,true);
+	_packedFiles.AddFile("Assets/Minecraft/font.ttf",false,true);
 	_packedFiles.SavePack();
 }
 

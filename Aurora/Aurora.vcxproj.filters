@@ -220,6 +220,12 @@
     <ClCompile Include="Aurora\System\VFSPack.cpp">
       <Filter>Aurora\System</Filter>
     </ClCompile>
+    <ClCompile Include="Aurora\Utils\AES.cpp">
+      <Filter>Aurora\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\Utils\Crypto.cpp">
+      <Filter>Aurora\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aurora\Graphics\Vertex.h">
@@ -404,6 +410,12 @@
     </ClInclude>
     <ClInclude Include="Aurora\System\VFSPack.h">
       <Filter>Aurora\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Utils\AES.h">
+      <Filter>Aurora\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Utils\Crypto.h">
+      <Filter>Aurora\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -122,6 +122,8 @@
     <ClCompile Include="Aurora\System\SystemManager.cpp" />
     <ClCompile Include="Aurora\System\VFSFile.cpp" />
     <ClCompile Include="Aurora\System\VFSPack.cpp" />
+    <ClCompile Include="Aurora\Utils\AES.cpp" />
+    <ClCompile Include="Aurora\Utils\Crypto.cpp" />
     <ClCompile Include="Aurora\Utils\GameLoader.cpp" />
     <ClCompile Include="Aurora\Utils\GameManager.cpp" />
     <ClCompile Include="Aurora\Utils\md5.c" />
@@ -184,6 +186,8 @@
     <ClInclude Include="Aurora\System\SystemManager.h" />
     <ClInclude Include="Aurora\System\VFSFile.h" />
     <ClInclude Include="Aurora\System\VFSPack.h" />
+    <ClInclude Include="Aurora\Utils\AES.h" />
+    <ClInclude Include="Aurora\Utils\Crypto.h" />
     <ClInclude Include="Aurora\Utils\GameLoader.h" />
     <ClInclude Include="Aurora\Utils\GameManager.h" />
     <ClInclude Include="Aurora\Utils\GameState.h" />
