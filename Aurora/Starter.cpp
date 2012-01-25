@@ -15,7 +15,7 @@ class ExampleGameManager : public GameManager
 {
 private:
 
-	AudioTest* exampleState;
+	SimpleTest* exampleState;
 
 public:
 
@@ -28,7 +28,7 @@ public:
 	void Init()
 	{
 		//init whatever you need
-		exampleState = new AudioTest();
+		exampleState = new SimpleTest();
 		exampleState->Init();
 
 		ChangeState(exampleState);

@@ -211,6 +211,15 @@
     <ClCompile Include="Aurora\Audio\caudio\Sound.cpp">
       <Filter>Aurora\Audio\caudio</Filter>
     </ClCompile>
+    <ClCompile Include="Aurora\Utils\md5.c">
+      <Filter>Aurora\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\System\VFSFile.cpp">
+      <Filter>Aurora\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\System\VFSPack.cpp">
+      <Filter>Aurora\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aurora\Graphics\Vertex.h">
@@ -386,6 +395,15 @@
     </ClInclude>
     <ClInclude Include="Aurora\Audio\Sound.h">
       <Filter>Aurora\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Utils\md5.h">
+      <Filter>Aurora\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\System\VFSFile.h">
+      <Filter>Aurora\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\System\VFSPack.h">
+      <Filter>Aurora\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -50,13 +50,13 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>.\;.\libs\sfml\include;.\libs\glew\include\GL;.\libs\lua-5.1.4\src;.\libs\boost-1.39.0;.\libs\luabind;.\libs\cAudio\include;.\libs\cAudio\Headers;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.\;.\libs\sfml\include;.\libs\glew\include\GL;.\libs\lua-5.1.4\src;.\libs\boost-1.39.0;.\libs\luabind;.\libs\cAudio\include;.\libs\cAudio\Headers;.\libs\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>.\libs\sfml\lib;.\libs\glew\lib;.\libs\cAudio\lib\windows\debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-main-d.lib;glu32.lib;opengl32.lib;ws2_32.lib;cAudio_d.lib;Ogg_d.lib;Vorbis_d.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\libs\sfml\lib;.\libs\glew\lib;.\libs\cAudio\lib\windows\debug;.\libs\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-main-d.lib;glu32.lib;opengl32.lib;ws2_32.lib;cAudio_d.lib;Ogg_d.lib;Vorbis_d.lib;OpenAL32.lib;zdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -120,8 +120,11 @@
     <ClCompile Include="Aurora\System\pc\Clock.cpp" />
     <ClCompile Include="Aurora\System\pc\PcSystemManager.cpp" />
     <ClCompile Include="Aurora\System\SystemManager.cpp" />
+    <ClCompile Include="Aurora\System\VFSFile.cpp" />
+    <ClCompile Include="Aurora\System\VFSPack.cpp" />
     <ClCompile Include="Aurora\Utils\GameLoader.cpp" />
     <ClCompile Include="Aurora\Utils\GameManager.cpp" />
+    <ClCompile Include="Aurora\Utils\md5.c" />
     <ClCompile Include="Aurora\Utils\pc\WinGameLoader.cpp" />
     <ClCompile Include="Starter.cpp" />
     <ClCompile Include="Tests\AudioTest.cpp" />
@@ -179,9 +182,12 @@
     <ClInclude Include="Aurora\System\Clock.h" />
     <ClInclude Include="Aurora\System\pc\PcSystemManager.h" />
     <ClInclude Include="Aurora\System\SystemManager.h" />
+    <ClInclude Include="Aurora\System\VFSFile.h" />
+    <ClInclude Include="Aurora\System\VFSPack.h" />
     <ClInclude Include="Aurora\Utils\GameLoader.h" />
     <ClInclude Include="Aurora\Utils\GameManager.h" />
     <ClInclude Include="Aurora\Utils\GameState.h" />
+    <ClInclude Include="Aurora\Utils\md5.h" />
     <ClInclude Include="Aurora\Utils\pc\WinGameLoader.h" />
     <ClInclude Include="Aurora\Utils\PlatformConfigurator.h" />
     <ClInclude Include="Tests\AudioTest.h" />

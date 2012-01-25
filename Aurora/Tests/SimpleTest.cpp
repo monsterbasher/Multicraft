@@ -5,6 +5,8 @@
 #include <Aurora/Graphics/Image.h>
 #include <Aurora/Graphics/TextureManager.h>
 
+#include <Aurora/System/VFSPack.h>
+
 void SimpleTest::Init()
 {
 	_renderManager = RenderManager::Instance();
@@ -24,6 +26,14 @@ void SimpleTest::Init()
 	_renderManager->setCurrentCam(cam);
 
 	dt = 0.0f;
+
+	//vfs pack test
+	VFSPack _packedFiles;
+
+	_packedFiles.CreateNewPack("pack.bin");
+	_packedFiles.AddFile("Assets/Minecraft/gui/items.png",false);
+	_packedFiles.AddFile("Assets/Minecraft/font.ttf",false);
+	_packedFiles.SavePack();
 }
 
 void SimpleTest::Enter()
@@ -98,6 +108,7 @@ void SimpleTest::Update(GameManager* sManager)
 void SimpleTest::Draw(GameManager* sManager)
 {
 	RenderManager::Instance()->StartFrame();
+	RenderManager::Instance()->ClearScreen();
 
 	//change ortho for text
 	RenderManager::Instance()->SetOrtho();
