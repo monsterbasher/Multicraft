@@ -214,9 +214,6 @@
     <ClCompile Include="Aurora\Utils\md5.c">
       <Filter>Aurora\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Aurora\System\VFSFile.cpp">
-      <Filter>Aurora\System</Filter>
-    </ClCompile>
     <ClCompile Include="Aurora\System\VFSPack.cpp">
       <Filter>Aurora\System</Filter>
     </ClCompile>
@@ -225,6 +222,9 @@
     </ClCompile>
     <ClCompile Include="Aurora\Utils\Crypto.cpp">
       <Filter>Aurora\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\System\VFSFile.cpp">
+      <Filter>Aurora\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

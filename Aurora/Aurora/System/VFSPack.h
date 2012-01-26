@@ -36,27 +36,10 @@ namespace Aurora
 
 		class VFSPack
 		{
-		public:
-			VFSPack(){ _encryptionKey = NULL; }
-			VFSPack(std::string fileName);
-			virtual ~VFSPack();
-
-			VFSFile GetData(std::string filename);
-
-			//reading elements from virtual file
-			static void vFread(void *ptr, size_t size, size_t n,VFSFile &vFile);
-
-			void CreateNewPack(std::string filename);
-			void AddFile(std::string filePath,bool compressed,bool encryption);
-			bool SavePack();
-
-			void SetEncryptKey(std::string key);
 		private:
 			//all files in pack
-
 			std::map<long,PackFileInfo> _packedFiles;
-
-			///
+			
 			unsigned char *_encryptionKey;
 			std::string archiveFilename;
 
@@ -66,6 +49,25 @@ namespace Aurora
 			//compression and decompression
 			int CompressString(char* src,int srcLen, char** destination, int* destLength);
 			int DecompressString(char* src, int srcLen, char** destination, int* destLen,int dupa);
+
+
+		public:
+			VFSPack(){ _encryptionKey = NULL; }
+			VFSPack(std::string fileName);
+			virtual ~VFSPack();
+
+			VFSFile GetData(std::string filename);
+			
+			void CreateNewPack(std::string filename);
+			void AddFile(std::string filePath,bool compressed,bool encryption);
+			bool SavePack();
+			bool LoadPack(std::string filename);
+
+			void SetEncryptKey(std::string key);
+
+			//reading elements from virtual file
+			static void vFread(void *ptr, size_t size, size_t n,VFSFile &vFile);
+		
 		};
 
 	}

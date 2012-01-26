@@ -15,6 +15,8 @@ namespace Aurora
 			int GetLength() {return mLength;}
 			void Rewind() {offset = 0; }
 
+			void SaveToDisk(const char* filename);
+
 			int offset;
 
 		private:

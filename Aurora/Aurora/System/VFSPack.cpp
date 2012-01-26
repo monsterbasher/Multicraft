@@ -203,11 +203,12 @@ namespace Aurora
 				}
 
 				fwrite(it->second.buffer,sizeof(char),bufferSize,file);
+				free(it->second.buffer);
 			}
 
 
 			fclose (file);
-			return false;
+			return true;
 		}
 
 		void VFSPack::SetEncryptKey(std::string key)
@@ -238,77 +239,127 @@ namespace Aurora
 			return hash;
 		}
 
+		bool VFSPack::LoadPack(std::string filename)
+		{
+			archiveFilename = filename;
+			_packedFiles.clear();
+
+			FILE *file = fopen(filename.c_str(),"rb");
+			if (file == NULL) return false;
+						
+			int packVersion = 0;
+			fread(&packVersion,sizeof(int),1,file);
+
+			//write some options flags
+			int flags = 0;
+			fread(&flags,sizeof(int),1,file);
+
+			//write files count
+			int filesCount = 0;
+			fread(&filesCount,sizeof(int),1,file);
+
+			//load info of every file
+			for(int i = 0;i < filesCount;i++)
+			{
+				PackFileInfo fileInfo;
+
+				fread(&fileInfo.hash,sizeof(long),1,file);
+
+				fread(&fileInfo.encrypted,sizeof(bool),1,file);
+				fread(&fileInfo.compressed,sizeof(bool),1,file);
+
+				fread(&fileInfo.fileInPackPosition,sizeof(int),1,file);
+				fread(&fileInfo.originalSize,sizeof(int),1,file);
+				fread(&fileInfo.compressedSize,sizeof(int),1,file);
+				fread(&fileInfo.encryptedSize,sizeof(int),1,file);
+
+				_packedFiles.insert(std::pair<long,PackFileInfo>(fileInfo.hash,fileInfo));
+			}
+
+			fclose(file);
+
+			return true;
+		}
+
 		VFSFile VFSPack::GetData(std::string filename)
 		{
-			unsigned char md5[16];
-			CalcMD5(filename, md5);
+			long hash = hashString((unsigned char *)filename.c_str());
 
-			FILE * File = fopen(archiveFilename .c_str(), "rb");
-
-			/*if (!File)
+			if(_packedFiles.find(hash) != _packedFiles.end())
 			{
-			  return NULL;
-			}*/
+				//file exist
+				int bufferSize = 0;
+				char *buffer;
 
-			int Version;
-			int Flags;
-			int FilesCount;
-
-			fread(&Version, sizeof(int), 1, File);
-			fread(&Flags, sizeof(int), 1, File);
-			fread(&FilesCount, sizeof(int), 1, File);
-
-			//if (Version != 1) throw "Unsupported version.";
-
-			int Pos = -1, OLength, Length;
-
-			for (int i = 0; i < FilesCount; i++)
-			{
-				unsigned char fmd5[16];
-
-				fread(fmd5, 1, 16, File);
-
-				bool ok = true;
-				for (int j = 0; j < 16; j++)
+				if (!_packedFiles[hash].compressed && !_packedFiles[hash].encrypted)
 				{
-					  if (fmd5[j] != md5[j])
-					  {
-							ok = false;
-							break;
-					  }
+					bufferSize = _packedFiles[hash].originalSize;
+				}
+				else if (_packedFiles[hash].compressed && !_packedFiles[hash].encrypted)
+				{
+					bufferSize = _packedFiles[hash].compressedSize;
+				}
+				else if (!_packedFiles[hash].compressed && _packedFiles[hash].encrypted)
+				{
+					bufferSize = _packedFiles[hash].encryptedSize;
+				}
+				else if (_packedFiles[hash].compressed && _packedFiles[hash].encrypted)
+				{
+					bufferSize = _packedFiles[hash].encryptedSize;
 				}
 
-				fread(&Pos, sizeof(int), 1, File);
-				fread(&OLength, sizeof(int), 1, File);
-				fread(&Length, sizeof(int), 1, File);
+				buffer = (char *)malloc(bufferSize);
 
-				if (ok)
+				//load buffer from pack
+				FILE *file = fopen(archiveFilename.c_str(),"rb");
+			
+				fseek(file, _packedFiles[hash].fileInPackPosition, 0);
+				fread(buffer,1,bufferSize,file);
+
+				fclose(file);
+
+				//we have our file
+				if (!_packedFiles[hash].compressed && !_packedFiles[hash].encrypted)
 				{
-					  break;
+					 return VFSFile(buffer, bufferSize);
 				}
-				else
+				else if (_packedFiles[hash].compressed && !_packedFiles[hash].encrypted)
 				{
-					  Pos = -1;
+					char* decompressedBuffer;
+					DecompressString(buffer,bufferSize,&decompressedBuffer,&_packedFiles[hash].originalSize,_packedFiles[hash].originalSize);
+
+					free(buffer);
+
+					return VFSFile(decompressedBuffer, _packedFiles[hash].originalSize);
+				}
+				else if (!_packedFiles[hash].compressed && _packedFiles[hash].encrypted)
+				{
+					char* decryptedBuffer;
+					int decryptedSize;
+
+					Utils::aesDecrypt(_encryptionKey,buffer,bufferSize,&decryptedBuffer,&decryptedSize);
+
+					free(buffer);
+
+					return VFSFile(decryptedBuffer,decryptedSize);
+				}
+				else if (_packedFiles[hash].compressed && _packedFiles[hash].encrypted)
+				{
+					char* decompressedBuffer;
+					char* decryptedBuffer;
+					int decryptedSize;
+
+					Utils::aesDecrypt(_encryptionKey,buffer,bufferSize,&decryptedBuffer,&decryptedSize);
+					DecompressString(decryptedBuffer,decryptedSize,&decompressedBuffer,&_packedFiles[hash].originalSize,_packedFiles[hash].originalSize);
+
+					free(buffer);
+					free(decryptedBuffer);
+
+					return VFSFile(decompressedBuffer, _packedFiles[hash].originalSize);
 				}
 			}
 
-			//if (Pos==-1) throw "File not found.";
-
-			fseek(File, Pos, 0);
-
-			//read file
-			char * data = new char[Length];
-			fread(data, Length, 1, File);
-			fclose(File);
-
-			char* decompressed;
-			int result;
-
-			result = DecompressString(data, Length, &decompressed, &OLength,OLength);
-
-			fclose(File);
-
-			return VFSFile(decompressed, OLength);
+			return VFSFile(0, 0);
 		}
 
 		void VFSPack::vFread(void *ptr, size_t size, size_t n,VFSFile &vFile)

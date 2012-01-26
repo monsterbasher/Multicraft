@@ -35,6 +35,11 @@ void SimpleTest::Init()
 	_packedFiles.AddFile("Assets/Minecraft/gui/items.png",true,true);
 	_packedFiles.AddFile("Assets/Minecraft/font.ttf",true,true);
 	_packedFiles.SavePack();
+
+	_packedFiles.LoadPack("pack.bin");
+
+	VFSFile myFile = _packedFiles.GetData("Assets/Minecraft/gui/items.png");
+	myFile.SaveToDisk("items.png");
 }
 
 void SimpleTest::Enter()

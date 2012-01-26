@@ -1,5 +1,7 @@
 #include <Aurora/System/VFSFile.h>
 
+#include <stdio.h>
+
 namespace Aurora
 {
 	namespace System
@@ -15,6 +17,15 @@ namespace Aurora
 		VFSFile::~VFSFile()
 		{
 			delete[] mData;
+		}
+
+		void VFSFile::SaveToDisk(const char* filename)
+		{
+			FILE* file = fopen(filename,"wb");
+
+			fwrite(mData,1,mLength,file);
+
+			fclose(file);
 		}
 
 	}
