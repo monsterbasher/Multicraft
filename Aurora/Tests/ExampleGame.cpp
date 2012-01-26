@@ -69,8 +69,8 @@ void ExampleState::HandleEvents(GameManager* sManager)
 
 	if(_systemManager->platformUseMouse())
 	{
-		spriteX = mouseX;
-		spriteY = mouseY;
+		spriteX = (float)mouseX;
+		spriteY = (float)mouseY;
 	}else if(_systemManager->platformUseJoypad())
 	{
 		//if(analogX > 0.3f || analogX < -0.3f)
@@ -129,7 +129,7 @@ void ExampleState::Draw(GameManager* sManager)
 {
 	RenderManager::Instance()->StartFrame();
 
-	RenderManager::Instance()->SetPerspective(53,renderToImage->_width/renderToImage->_height,0.1f,256.0f);
+	RenderManager::Instance()->SetPerspective(53.0f,(float)renderToImage->_width/(float)renderToImage->_height,0.1f,256.0f);
 	RenderManager::Instance()->StartRenderToTexture(renderToImage);	
 	RenderManager::Instance()->ClearScreen();
 

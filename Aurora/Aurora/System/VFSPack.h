@@ -25,6 +25,8 @@ namespace Aurora
 			bool encrypted;
 			bool compressed;
 
+			char* buffer;
+
 			int fileInPackPosition;
 
 			int originalSize;

@@ -240,7 +240,7 @@ namespace Aurora
 
 		NetworkInputClientInfo *NetworkInputControllerServer::GetClientByName(std::string name)
 		{
-			for (int i = 0;i < _connectedClients.size();i++)
+			for (unsigned int i = 0;i < _connectedClients.size();i++)
 			{
 				if (_connectedClients[i]->GetName() == name)
 				{
@@ -253,7 +253,7 @@ namespace Aurora
 
 		NetworkInputClientInfo* NetworkInputControllerServer::GetClientBySocket(Network::SocketTCP socket)
 		{
-			for (int i = 0;i < _connectedClients.size();i++)
+			for (unsigned int i = 0;i < _connectedClients.size();i++)
 			{
 				if (_connectedClients[i]->GetSocket() == socket)
 				{
@@ -266,7 +266,7 @@ namespace Aurora
 
 		NetworkInputClientInfo* NetworkInputControllerServer::GetClientByAddress(Network::IPAddress address)
 		{
-			for (int i = 0;i < _connectedClients.size();i++)
+			for (unsigned int i = 0;i < _connectedClients.size();i++)
 			{
 				if (_connectedClients[i]->GetAddress() == address)
 				{

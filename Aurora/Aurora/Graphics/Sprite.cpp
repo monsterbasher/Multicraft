@@ -42,10 +42,10 @@ namespace Aurora
 
 			if( vertices )
 			{
-				vertices[0] = getVertex(0.0f,0.0f,-img->_width/2,-img->_height/2,0.0f);
-				vertices[1] = getVertex(0.0f,hPercent,-img->_width/2, img->_height/2,0.0f);
-				vertices[2] = getVertex(wPercent,0.0f,img->_width/2,-img->_height/2,0.0f);
-				vertices[3] = getVertex(wPercent,hPercent,img->_width/2, img->_height/2,0.0f);
+				vertices[0] = getVertex(0.0f,0.0f,-img->_width/2.0f,-img->_height/2.0f,0.0f);
+				vertices[1] = getVertex(0.0f,hPercent,-img->_width/2.0f, img->_height/2.0f,0.0f);
+				vertices[2] = getVertex(wPercent,0.0f,img->_width/2.0f,-img->_height/2.0f,0.0f);
+				vertices[3] = getVertex(wPercent,hPercent,img->_width/2.0f, img->_height/2.0f,0.0f);
 			}
 		}
 
@@ -69,10 +69,10 @@ namespace Aurora
 
 			if( vertices )
 			{
-				vertices[0] = getVertex(wstart,hstart,-width/2,-height/2,0.0f);
-				vertices[1] = getVertex(wstart,hPercent,-width/2, height/2,0.0f);
-				vertices[2] = getVertex(wPercent,hstart,width/2,-height/2,0.0f);
-				vertices[3] = getVertex(wPercent,hPercent,width/2, height/2,0.0f);
+				vertices[0] = getVertex(wstart,hstart,-width/2.0f,-height/2.0f,0.0f);
+				vertices[1] = getVertex(wstart,hPercent,-width/2.0f, height/2.0f,0.0f);
+				vertices[2] = getVertex(wPercent,hstart,width/2.0f,-height/2.0f,0.0f);
+				vertices[3] = getVertex(wPercent,hPercent,width/2.0f, height/2.0f,0.0f);
 			}
 
 		}

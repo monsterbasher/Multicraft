@@ -76,7 +76,7 @@ void NetworkControllerServer::Draw(GameManager* sManager)
 		{
 			char clinetsInfo[50];
 			sprintf(clinetsInfo,"Client %d with name: %s",i,_inputServer->GetClientByNumber(i)->GetName().c_str());
-			RenderManager::Instance()->drawText(font,1,startPos,clinetsInfo,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
+			RenderManager::Instance()->drawText(font,1.0f,(float)startPos,clinetsInfo,Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 
 			startPos += 15;
 		}		

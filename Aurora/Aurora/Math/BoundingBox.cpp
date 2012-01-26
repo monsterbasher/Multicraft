@@ -102,29 +102,29 @@ namespace Aurora
 		{
 			Vector3 result(0,0,0);
 
-			int x = min.x - pt.x;
-			if(x == 0)
-				result.x = -1;
+			float x = min.x - pt.x;
+			if(x == 0.0f)
+				result.x = -1.0f;
 
 			x = max.x - pt.x;
-			if(x == 0)
-				result.x = 1;
+			if(x == 0.0f)
+				result.x = 1.0f;
 
-			int y =  min.y - pt.y;
-			if(y == 0)
-				result.y = -1;
+			float y =  min.y - pt.y;
+			if(y == 0.0f)
+				result.y = -1.0f;
 
 			y = max.y - pt.y;
-			if(y == 0)
-				result.y = 1;
+			if(y == 0.0f)
+				result.y = 1.0f;
 
-			int z =  min.z - pt.z;
-			if(z == 0)
-				result.z = -1;
+			float z =  min.z - pt.z;
+			if(z == 0.0f)
+				result.z = -1.0f;
 
 			z = max.z - pt.z;
-			if(z == 0)
-				result.z = 1;
+			if(z == 0.0f)
+				result.z = 1.0f;
 
 
 			return result;
