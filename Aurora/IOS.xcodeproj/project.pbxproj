@@ -58,6 +58,22 @@
 		FABE268E14C10113005D99E8 /* Sprite3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE267B14C10113005D99E8 /* Sprite3D.cpp */; };
 		FABE268F14C10113005D99E8 /* TextureManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE267F14C10113005D99E8 /* TextureManager.cpp */; };
 		FABE269014C10113005D99E8 /* TrueTypeFont.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FABE268114C10113005D99E8 /* TrueTypeFont.cpp */; };
+		FAF2162A14D2846F000CF668 /* AudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF2161A14D2846F000CF668 /* AudioManager.cpp */; };
+		FAF2162B14D2846F000CF668 /* cAudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF2161D14D2846F000CF668 /* cAudioManager.cpp */; };
+		FAF2162C14D2846F000CF668 /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF2161F14D2846F000CF668 /* Sound.cpp */; };
+		FAF2163814D28492000CF668 /* AES.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF2163214D28492000CF668 /* AES.cpp */; };
+		FAF2163914D28492000CF668 /* Crypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF2163414D28492000CF668 /* Crypto.cpp */; };
+		FAF2163A14D28492000CF668 /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = FAF2163614D28492000CF668 /* md5.c */; };
+		FAF2163F14D284A4000CF668 /* VFSFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF2163B14D284A4000CF668 /* VFSFile.cpp */; };
+		FAF2164014D284A4000CF668 /* VFSPack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF2163D14D284A4000CF668 /* VFSPack.cpp */; };
+		FAF2164514D284E3000CF668 /* NetworkInputControllerClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF2164114D284E3000CF668 /* NetworkInputControllerClient.cpp */; };
+		FAF2164614D284E3000CF668 /* NetworkInputControllerServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF2164314D284E3000CF668 /* NetworkInputControllerServer.cpp */; };
+		FAF2164914D28562000CF668 /* AudioTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF2164714D28562000CF668 /* AudioTest.cpp */; };
+		FAF21E9F14D28C2C000CF668 /* libcAudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF21E9C14D28C2C000CF668 /* libcAudio.a */; };
+		FAF21EA014D28C2C000CF668 /* libOgg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF21E9D14D28C2C000CF668 /* libOgg.a */; };
+		FAF21EA114D28C2C000CF668 /* libVorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF21E9E14D28C2C000CF668 /* libVorbis.a */; };
+		FAF21EA314D28C41000CF668 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF21EA214D28C41000CF668 /* OpenAL.framework */; };
+		FAF21EA514D28C74000CF668 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = FAF21EA414D28C74000CF668 /* libz.dylib */; };
 		FAF37C4814C2011200931646 /* Demo_ObjLoading.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF37C3B14C2011200931646 /* Demo_ObjLoading.cpp */; };
 		FAF37C4B14C2011200931646 /* ExampleGame.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF37C4114C2011200931646 /* ExampleGame.cpp */; };
 		FAF37C4D14C2011200931646 /* SimpleTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FAF37C4514C2011200931646 /* SimpleTest.cpp */; };
@@ -169,6 +185,33 @@
 		FABE268214C10113005D99E8 /* TrueTypeFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrueTypeFont.h; sourceTree = "<group>"; };
 		FABE268314C10113005D99E8 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 		FABE269B14C10123005D99E8 /* PlatformConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformConfigurator.h; sourceTree = "<group>"; };
+		FAF2161A14D2846F000CF668 /* AudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioManager.cpp; sourceTree = "<group>"; };
+		FAF2161B14D2846F000CF668 /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
+		FAF2161D14D2846F000CF668 /* cAudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cAudioManager.cpp; sourceTree = "<group>"; };
+		FAF2161E14D2846F000CF668 /* cAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cAudioManager.h; sourceTree = "<group>"; };
+		FAF2161F14D2846F000CF668 /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
+		FAF2162914D2846F000CF668 /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
+		FAF2163214D28492000CF668 /* AES.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AES.cpp; sourceTree = "<group>"; };
+		FAF2163314D28492000CF668 /* AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AES.h; sourceTree = "<group>"; };
+		FAF2163414D28492000CF668 /* Crypto.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Crypto.cpp; sourceTree = "<group>"; };
+		FAF2163514D28492000CF668 /* Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crypto.h; sourceTree = "<group>"; };
+		FAF2163614D28492000CF668 /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = md5.c; sourceTree = "<group>"; };
+		FAF2163714D28492000CF668 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		FAF2163B14D284A4000CF668 /* VFSFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VFSFile.cpp; sourceTree = "<group>"; };
+		FAF2163C14D284A4000CF668 /* VFSFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VFSFile.h; sourceTree = "<group>"; };
+		FAF2163D14D284A4000CF668 /* VFSPack.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VFSPack.cpp; sourceTree = "<group>"; };
+		FAF2163E14D284A4000CF668 /* VFSPack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VFSPack.h; sourceTree = "<group>"; };
+		FAF2164114D284E3000CF668 /* NetworkInputControllerClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkInputControllerClient.cpp; sourceTree = "<group>"; };
+		FAF2164214D284E3000CF668 /* NetworkInputControllerClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkInputControllerClient.h; sourceTree = "<group>"; };
+		FAF2164314D284E3000CF668 /* NetworkInputControllerServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkInputControllerServer.cpp; sourceTree = "<group>"; };
+		FAF2164414D284E3000CF668 /* NetworkInputControllerServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkInputControllerServer.h; sourceTree = "<group>"; };
+		FAF2164714D28562000CF668 /* AudioTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioTest.cpp; sourceTree = "<group>"; };
+		FAF2164814D28562000CF668 /* AudioTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioTest.h; sourceTree = "<group>"; };
+		FAF21E9C14D28C2C000CF668 /* libcAudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcAudio.a; path = libs/cAudio/lib/ios/libcAudio.a; sourceTree = "<group>"; };
+		FAF21E9D14D28C2C000CF668 /* libOgg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOgg.a; path = libs/cAudio/lib/ios/libOgg.a; sourceTree = "<group>"; };
+		FAF21E9E14D28C2C000CF668 /* libVorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libVorbis.a; path = libs/cAudio/lib/ios/libVorbis.a; sourceTree = "<group>"; };
+		FAF21EA214D28C41000CF668 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		FAF21EA414D28C74000CF668 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		FAF37C3B14C2011200931646 /* Demo_ObjLoading.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Demo_ObjLoading.cpp; sourceTree = "<group>"; };
 		FAF37C3C14C2011200931646 /* Demo_ObjLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Demo_ObjLoading.h; sourceTree = "<group>"; };
 		FAF37C4114C2011200931646 /* ExampleGame.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ExampleGame.cpp; sourceTree = "<group>"; };
@@ -183,6 +226,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAF21EA514D28C74000CF668 /* libz.dylib in Frameworks */,
+				FAF21EA314D28C41000CF668 /* OpenAL.framework in Frameworks */,
+				FAF21E9F14D28C2C000CF668 /* libcAudio.a in Frameworks */,
+				FAF21EA014D28C2C000CF668 /* libOgg.a in Frameworks */,
+				FAF21EA114D28C2C000CF668 /* libVorbis.a in Frameworks */,
 				FABE265E14C0FF68005D99E8 /* QuartzCore.framework in Frameworks */,
 				FABE265814C0FF1B005D99E8 /* OpenGLES.framework in Frameworks */,
 				FABE24F314C0FD10005D99E8 /* UIKit.framework in Frameworks */,
@@ -207,6 +255,10 @@
 			isa = PBXGroup;
 			children = (
 				FA8375AF14C3F703001DA3A2 /* ios */,
+				FAF2164114D284E3000CF668 /* NetworkInputControllerClient.cpp */,
+				FAF2164214D284E3000CF668 /* NetworkInputControllerClient.h */,
+				FAF2164314D284E3000CF668 /* NetworkInputControllerServer.cpp */,
+				FAF2164414D284E3000CF668 /* NetworkInputControllerServer.h */,
 				FA85818414C3920A00D987B7 /* Http.cpp */,
 				FA85818514C3920A00D987B7 /* Http.hpp */,
 				FA8375B314C3F712001DA3A2 /* NetworkManager.cpp */,
@@ -251,6 +303,10 @@
 			isa = PBXGroup;
 			children = (
 				FAB35A3714C1EEA600AD6619 /* ios */,
+				FAF2163B14D284A4000CF668 /* VFSFile.cpp */,
+				FAF2163C14D284A4000CF668 /* VFSFile.h */,
+				FAF2163D14D284A4000CF668 /* VFSPack.cpp */,
+				FAF2163E14D284A4000CF668 /* VFSPack.h */,
 				FAB35A2714C1EE5800AD6619 /* Clock.h */,
 				FAB35A3014C1EE5800AD6619 /* SystemManager.cpp */,
 				FAB35A3114C1EE5800AD6619 /* SystemManager.h */,
@@ -291,6 +347,11 @@
 		FABE24F114C0FD10005D99E8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FAF21EA414D28C74000CF668 /* libz.dylib */,
+				FAF21EA214D28C41000CF668 /* OpenAL.framework */,
+				FAF21E9C14D28C2C000CF668 /* libcAudio.a */,
+				FAF21E9D14D28C2C000CF668 /* libOgg.a */,
+				FAF21E9E14D28C2C000CF668 /* libVorbis.a */,
 				FABE265D14C0FF68005D99E8 /* QuartzCore.framework */,
 				FABE265714C0FF1B005D99E8 /* OpenGLES.framework */,
 				FABE24F214C0FD10005D99E8 /* UIKit.framework */,
@@ -326,6 +387,7 @@
 		FABE25B014C0FE0A005D99E8 /* Aurora */ = {
 			isa = PBXGroup;
 			children = (
+				FAF2161914D2846F000CF668 /* Audio */,
 				FA85818314C3920A00D987B7 /* Network */,
 				FAB35A2614C1EE5800AD6619 /* System */,
 				FABE269214C10123005D99E8 /* Utils */,
@@ -408,6 +470,12 @@
 			isa = PBXGroup;
 			children = (
 				FAB35A2214C1EC7200AD6619 /* ios */,
+				FAF2163214D28492000CF668 /* AES.cpp */,
+				FAF2163314D28492000CF668 /* AES.h */,
+				FAF2163414D28492000CF668 /* Crypto.cpp */,
+				FAF2163514D28492000CF668 /* Crypto.h */,
+				FAF2163614D28492000CF668 /* md5.c */,
+				FAF2163714D28492000CF668 /* md5.h */,
 				FAB35A1F14C1EC6900AD6619 /* GameLoader.cpp */,
 				FAB35A2014C1EC6900AD6619 /* GameLoader.h */,
 				FAB35A1A14C1EB3C00AD6619 /* GameManager.cpp */,
@@ -418,9 +486,32 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		FAF2161914D2846F000CF668 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				FAF2161C14D2846F000CF668 /* caudio */,
+				FAF2161A14D2846F000CF668 /* AudioManager.cpp */,
+				FAF2161B14D2846F000CF668 /* AudioManager.h */,
+				FAF2162914D2846F000CF668 /* Sound.h */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		FAF2161C14D2846F000CF668 /* caudio */ = {
+			isa = PBXGroup;
+			children = (
+				FAF2161D14D2846F000CF668 /* cAudioManager.cpp */,
+				FAF2161E14D2846F000CF668 /* cAudioManager.h */,
+				FAF2161F14D2846F000CF668 /* Sound.cpp */,
+			);
+			path = caudio;
+			sourceTree = "<group>";
+		};
 		FAF37C3814C2011200931646 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				FAF2164714D28562000CF668 /* AudioTest.cpp */,
+				FAF2164814D28562000CF668 /* AudioTest.h */,
 				FAA79FA214C4BF1100E5D3D3 /* NetworkControllerClient.cpp */,
 				FAA79FA314C4BF1100E5D3D3 /* NetworkControllerClient.h */,
 				FAA79FA414C4BF1100E5D3D3 /* NetworkControllerServer.cpp */,
@@ -549,6 +640,17 @@
 				FA8375B514C3F712001DA3A2 /* NetworkManager.cpp in Sources */,
 				FAA79FA614C4BF1100E5D3D3 /* NetworkControllerClient.cpp in Sources */,
 				FAA79FA714C4BF1100E5D3D3 /* NetworkControllerServer.cpp in Sources */,
+				FAF2162A14D2846F000CF668 /* AudioManager.cpp in Sources */,
+				FAF2162B14D2846F000CF668 /* cAudioManager.cpp in Sources */,
+				FAF2162C14D2846F000CF668 /* Sound.cpp in Sources */,
+				FAF2163814D28492000CF668 /* AES.cpp in Sources */,
+				FAF2163914D28492000CF668 /* Crypto.cpp in Sources */,
+				FAF2163A14D28492000CF668 /* md5.c in Sources */,
+				FAF2163F14D284A4000CF668 /* VFSFile.cpp in Sources */,
+				FAF2164014D284A4000CF668 /* VFSPack.cpp in Sources */,
+				FAF2164514D284E3000CF668 /* NetworkInputControllerClient.cpp in Sources */,
+				FAF2164614D284E3000CF668 /* NetworkInputControllerServer.cpp in Sources */,
+				FAF2164914D28562000CF668 /* AudioTest.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,6 +724,10 @@
 				HEADER_SEARCH_PATHS = "./**";
 				INFOPLIST_FILE = "IOS/IOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/libs/cAudio/lib/ios\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos5.0;
 				WRAPPER_EXTENSION = app;
@@ -639,6 +745,10 @@
 				HEADER_SEARCH_PATHS = "./**";
 				INFOPLIST_FILE = "IOS/IOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/libs/cAudio/lib/ios\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos5.0;
 				WRAPPER_EXTENSION = app;
