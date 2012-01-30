@@ -14,6 +14,7 @@ namespace Aurora
 			bool _stream;
 			bool _looped;
 			bool _paused;
+            bool _loaded;
 
 			std::string _name;
 			std::string _filePath;
@@ -25,6 +26,7 @@ namespace Aurora
 			bool IsPlaying();
 			bool IsLooped() { return _looped; }
 			bool IsStreaming() { return _stream; }
+            bool IsLoaded() { return _loaded; }
 
 			std::string GetName(){return _name; }
 			std::string GetFilePath(){ return _filePath; }

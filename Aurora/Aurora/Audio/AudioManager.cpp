@@ -2,7 +2,7 @@
 #include <Aurora/Utils/PlatformConfigurator.h>
 
 #ifdef AURORA_PC
-#include <Aurora/Audio/caudio/cAudioManager.h>
+#include <Aurora/Audio/sfml/sfmlAudioManager.h>
 #endif
 
 #ifdef AURORA_PSP
@@ -30,7 +30,7 @@ namespace Aurora
 			if(_audioManager == 0)
 			{
 #ifdef AURORA_PC
-				_audioManager = new cAudioManager();
+				_audioManager = new sfmlAudioManager();
 #endif
 
 #ifdef AURORA_PSP

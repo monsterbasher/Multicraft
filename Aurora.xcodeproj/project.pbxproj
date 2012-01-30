@@ -8,18 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		FA0704B814D2121300BF365D /* AudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0704A814D2121300BF365D /* AudioManager.cpp */; };
-		FA0704B914D2121300BF365D /* cAudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0704AB14D2121300BF365D /* cAudioManager.cpp */; };
-		FA0704BA14D2121300BF365D /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0704AD14D2121300BF365D /* Sound.cpp */; };
 		FA0704C414D2126C00BF365D /* VFSFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0704C014D2126C00BF365D /* VFSFile.cpp */; };
 		FA0704C514D2126C00BF365D /* VFSPack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0704C214D2126C00BF365D /* VFSPack.cpp */; };
 		FA0704CA14D2128400BF365D /* AES.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0704C614D2128400BF365D /* AES.cpp */; };
 		FA0704CB14D2128400BF365D /* Crypto.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA0704C814D2128400BF365D /* Crypto.cpp */; };
 		FA0704CE14D212E100BF365D /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = FA0704CC14D212E100BF365D /* md5.c */; };
-		FA0704DE14D2160000BF365D /* libcAudio.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0704DB14D2160000BF365D /* libcAudio.a */; };
-		FA0704DF14D2160000BF365D /* libOgg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0704DC14D2160000BF365D /* libOgg.a */; };
-		FA0704E014D2160000BF365D /* libVorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0704DD14D2160000BF365D /* libVorbis.a */; };
 		FA0704E314D2163B00BF365D /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0704E214D2163B00BF365D /* OpenAL.framework */; };
 		FA803F071486CD060068EF79 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = FA803F061486CD060068EF79 /* Assets */; };
+		FA80704714D6698100BB32DB /* AudioTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA80704114D6698100BB32DB /* AudioTest.cpp */; };
+		FA80704814D6698100BB32DB /* NetworkControllerClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA80704314D6698100BB32DB /* NetworkControllerClient.cpp */; };
+		FA80704914D6698100BB32DB /* NetworkControllerServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA80704514D6698100BB32DB /* NetworkControllerServer.cpp */; };
+		FA80704F14D669A700BB32DB /* NetworkInputControllerClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA80704D14D669A700BB32DB /* NetworkInputControllerClient.cpp */; };
+		FA80705014D669A700BB32DB /* NetworkInputControllerServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA80704E14D669A700BB32DB /* NetworkInputControllerServer.cpp */; };
+		FA80705614D66A3600BB32DB /* sfmlAudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA80705314D66A3600BB32DB /* sfmlAudioManager.cpp */; };
+		FA80705714D66A3600BB32DB /* Sound.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA80705514D66A3600BB32DB /* Sound.cpp */; };
+		FA80705A14D66A6F00BB32DB /* sfml-audio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA80705814D66A6F00BB32DB /* sfml-audio.framework */; };
+		FA80705B14D66A6F00BB32DB /* sndfile.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA80705914D66A6F00BB32DB /* sndfile.framework */; };
+		FA80705C14D66A9600BB32DB /* sfml-audio.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA80705814D66A6F00BB32DB /* sfml-audio.framework */; };
+		FA80705D14D66A9600BB32DB /* sndfile.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FA80705914D66A6F00BB32DB /* sndfile.framework */; };
 		FA833BC51480D83D00491033 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FA833BC31480D83D00491033 /* InfoPlist.strings */; };
 		FA833BCB1480D83D00491033 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FA833BC91480D83D00491033 /* Credits.rtf */; };
 		FA854271148445960086FCCE /* sfml-system.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA85426E148445960086FCCE /* sfml-system.framework */; };
@@ -82,6 +88,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				FA80705C14D66A9600BB32DB /* sfml-audio.framework in CopyFiles */,
+				FA80705D14D66A9600BB32DB /* sndfile.framework in CopyFiles */,
 				FAF37C3214C1FF5E00931646 /* sfml-graphics.framework in CopyFiles */,
 				FA85427F148447540086FCCE /* sfml-system.framework in CopyFiles */,
 				FA854280148447540086FCCE /* sfml-window.framework in CopyFiles */,
@@ -93,9 +101,6 @@
 /* Begin PBXFileReference section */
 		FA0704A814D2121300BF365D /* AudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioManager.cpp; sourceTree = "<group>"; };
 		FA0704A914D2121300BF365D /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
-		FA0704AB14D2121300BF365D /* cAudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cAudioManager.cpp; sourceTree = "<group>"; };
-		FA0704AC14D2121300BF365D /* cAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cAudioManager.h; sourceTree = "<group>"; };
-		FA0704AD14D2121300BF365D /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
 		FA0704B714D2121300BF365D /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 		FA0704C014D2126C00BF365D /* VFSFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = VFSFile.cpp; sourceTree = "<group>"; };
 		FA0704C114D2126C00BF365D /* VFSFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VFSFile.h; sourceTree = "<group>"; };
@@ -107,11 +112,23 @@
 		FA0704C914D2128400BF365D /* Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crypto.h; sourceTree = "<group>"; };
 		FA0704CC14D212E100BF365D /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = md5.c; sourceTree = "<group>"; };
 		FA0704CD14D212E100BF365D /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
-		FA0704DB14D2160000BF365D /* libcAudio.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcAudio.a; path = Aurora/libs/cAudio/lib/mac/libcAudio.a; sourceTree = "<group>"; };
-		FA0704DC14D2160000BF365D /* libOgg.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libOgg.a; path = Aurora/libs/cAudio/lib/mac/libOgg.a; sourceTree = "<group>"; };
-		FA0704DD14D2160000BF365D /* libVorbis.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libVorbis.a; path = Aurora/libs/cAudio/lib/mac/libVorbis.a; sourceTree = "<group>"; };
 		FA0704E214D2163B00BF365D /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		FA803F061486CD060068EF79 /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Assets; path = Aurora/Assets; sourceTree = "<group>"; };
+		FA80704114D6698100BB32DB /* AudioTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioTest.cpp; sourceTree = "<group>"; };
+		FA80704214D6698100BB32DB /* AudioTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioTest.h; sourceTree = "<group>"; };
+		FA80704314D6698100BB32DB /* NetworkControllerClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkControllerClient.cpp; sourceTree = "<group>"; };
+		FA80704414D6698100BB32DB /* NetworkControllerClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkControllerClient.h; sourceTree = "<group>"; };
+		FA80704514D6698100BB32DB /* NetworkControllerServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkControllerServer.cpp; sourceTree = "<group>"; };
+		FA80704614D6698100BB32DB /* NetworkControllerServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkControllerServer.h; sourceTree = "<group>"; };
+		FA80704B14D669A700BB32DB /* NetworkInputControllerClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkInputControllerClient.h; sourceTree = "<group>"; };
+		FA80704C14D669A700BB32DB /* NetworkInputControllerServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkInputControllerServer.h; sourceTree = "<group>"; };
+		FA80704D14D669A700BB32DB /* NetworkInputControllerClient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkInputControllerClient.cpp; sourceTree = "<group>"; };
+		FA80704E14D669A700BB32DB /* NetworkInputControllerServer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = NetworkInputControllerServer.cpp; sourceTree = "<group>"; };
+		FA80705314D66A3600BB32DB /* sfmlAudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sfmlAudioManager.cpp; sourceTree = "<group>"; };
+		FA80705414D66A3600BB32DB /* sfmlAudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sfmlAudioManager.h; sourceTree = "<group>"; };
+		FA80705514D66A3600BB32DB /* Sound.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Sound.cpp; sourceTree = "<group>"; };
+		FA80705814D66A6F00BB32DB /* sfml-audio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "sfml-audio.framework"; path = "Aurora/libs/sfml/mac/sfml-audio.framework"; sourceTree = "<group>"; };
+		FA80705914D66A6F00BB32DB /* sndfile.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = sndfile.framework; path = Aurora/libs/sfml/mac/sndfile.framework; sourceTree = "<group>"; };
 		FA833BB61480D83C00491033 /* Aurora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Aurora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA833BC21480D83D00491033 /* Aurora-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Aurora-Info.plist"; sourceTree = "<group>"; };
 		FA833BC41480D83D00491033 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -223,10 +240,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA80705A14D66A6F00BB32DB /* sfml-audio.framework in Frameworks */,
+				FA80705B14D66A6F00BB32DB /* sndfile.framework in Frameworks */,
 				FA0704E314D2163B00BF365D /* OpenAL.framework in Frameworks */,
-				FA0704DE14D2160000BF365D /* libcAudio.a in Frameworks */,
-				FA0704DF14D2160000BF365D /* libOgg.a in Frameworks */,
-				FA0704E014D2160000BF365D /* libVorbis.a in Frameworks */,
 				FAF37C3014C1FED300931646 /* sfml-graphics.framework in Frameworks */,
 				FA854274148445B60086FCCE /* OpenGL.framework in Frameworks */,
 				FA854271148445960086FCCE /* sfml-system.framework in Frameworks */,
@@ -240,7 +256,7 @@
 		FA0704A714D2121300BF365D /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				FA0704AA14D2121300BF365D /* caudio */,
+				FA80705214D66A3600BB32DB /* sfml */,
 				FA0704A814D2121300BF365D /* AudioManager.cpp */,
 				FA0704A914D2121300BF365D /* AudioManager.h */,
 				FA0704B714D2121300BF365D /* Sound.h */,
@@ -248,14 +264,14 @@
 			path = Audio;
 			sourceTree = "<group>";
 		};
-		FA0704AA14D2121300BF365D /* caudio */ = {
+		FA80705214D66A3600BB32DB /* sfml */ = {
 			isa = PBXGroup;
 			children = (
-				FA0704AB14D2121300BF365D /* cAudioManager.cpp */,
-				FA0704AC14D2121300BF365D /* cAudioManager.h */,
-				FA0704AD14D2121300BF365D /* Sound.cpp */,
+				FA80705314D66A3600BB32DB /* sfmlAudioManager.cpp */,
+				FA80705414D66A3600BB32DB /* sfmlAudioManager.h */,
+				FA80705514D66A3600BB32DB /* Sound.cpp */,
 			);
-			path = caudio;
+			path = sfml;
 			sourceTree = "<group>";
 		};
 		FA833BAB1480D83C00491033 = {
@@ -279,10 +295,9 @@
 		FA833BB91480D83C00491033 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FA80705814D66A6F00BB32DB /* sfml-audio.framework */,
+				FA80705914D66A6F00BB32DB /* sndfile.framework */,
 				FA0704E214D2163B00BF365D /* OpenAL.framework */,
-				FA0704DB14D2160000BF365D /* libcAudio.a */,
-				FA0704DC14D2160000BF365D /* libOgg.a */,
-				FA0704DD14D2160000BF365D /* libVorbis.a */,
 				FAF37C2F14C1FED300931646 /* sfml-graphics.framework */,
 				FA854273148445B60086FCCE /* OpenGL.framework */,
 				FA85426E148445960086FCCE /* sfml-system.framework */,
@@ -400,6 +415,10 @@
 		FA9656A814BE32E70082CBB1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				FA80704B14D669A700BB32DB /* NetworkInputControllerClient.h */,
+				FA80704C14D669A700BB32DB /* NetworkInputControllerServer.h */,
+				FA80704D14D669A700BB32DB /* NetworkInputControllerClient.cpp */,
+				FA80704E14D669A700BB32DB /* NetworkInputControllerServer.cpp */,
 				FA9656B114BE32E70082CBB1 /* pc */,
 				FA9656C014BE32E70082CBB1 /* Unix */,
 				FA9656A914BE32E70082CBB1 /* Http.cpp */,
@@ -498,6 +517,12 @@
 		FA96571014BE32F50082CBB1 /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				FA80704114D6698100BB32DB /* AudioTest.cpp */,
+				FA80704214D6698100BB32DB /* AudioTest.h */,
+				FA80704314D6698100BB32DB /* NetworkControllerClient.cpp */,
+				FA80704414D6698100BB32DB /* NetworkControllerClient.h */,
+				FA80704514D6698100BB32DB /* NetworkControllerServer.cpp */,
+				FA80704614D6698100BB32DB /* NetworkControllerServer.h */,
 				FA96571114BE32F50082CBB1 /* ClientTest.cpp */,
 				FA96571214BE32F50082CBB1 /* ClientTest.h */,
 				FA96571314BE32F50082CBB1 /* Demo_ObjLoading.cpp */,
@@ -621,13 +646,18 @@
 				FA96571F14BE32F50082CBB1 /* SimpleTest.cpp in Sources */,
 				FA96572114BE32FC0082CBB1 /* Starter.cpp in Sources */,
 				FA0704B814D2121300BF365D /* AudioManager.cpp in Sources */,
-				FA0704B914D2121300BF365D /* cAudioManager.cpp in Sources */,
-				FA0704BA14D2121300BF365D /* Sound.cpp in Sources */,
 				FA0704C414D2126C00BF365D /* VFSFile.cpp in Sources */,
 				FA0704C514D2126C00BF365D /* VFSPack.cpp in Sources */,
 				FA0704CA14D2128400BF365D /* AES.cpp in Sources */,
 				FA0704CB14D2128400BF365D /* Crypto.cpp in Sources */,
 				FA0704CE14D212E100BF365D /* md5.c in Sources */,
+				FA80704714D6698100BB32DB /* AudioTest.cpp in Sources */,
+				FA80704814D6698100BB32DB /* NetworkControllerClient.cpp in Sources */,
+				FA80704914D6698100BB32DB /* NetworkControllerServer.cpp in Sources */,
+				FA80704F14D669A700BB32DB /* NetworkInputControllerClient.cpp in Sources */,
+				FA80705014D669A700BB32DB /* NetworkInputControllerServer.cpp in Sources */,
+				FA80705614D66A3600BB32DB /* sfmlAudioManager.cpp in Sources */,
+				FA80705714D66A3600BB32DB /* Sound.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
