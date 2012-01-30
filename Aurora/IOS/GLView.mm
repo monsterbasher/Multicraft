@@ -48,6 +48,8 @@ public:
 ExampleGameManager *_gmanager;
 IOSSystemManager *_imanager;
 
+#define GL_RENDERBUFFER 0x8d41
+
 @implementation GLView
 
 + (Class) layerClass

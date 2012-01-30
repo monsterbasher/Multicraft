@@ -44,7 +44,7 @@ namespace Aurora
 
             void gluPerspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar);
             void gluLookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez, GLfloat centerx,
-                      GLfloat centery, GLfloat centerz, GLfloat upx, GLfloat upy,GLfloat upz);
+            GLfloat centery, GLfloat centerz, GLfloat upx, GLfloat upy,GLfloat upz);
 
 
 		protected:
