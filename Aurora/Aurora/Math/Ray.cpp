@@ -1,5 +1,9 @@
 #include <Aurora/Math/Ray.h>
-#include <algorithm>
+//#include <algorithm>
+
+#define MAX(x, y) (((x) > (y)) ? (x) : (y))
+#define MIN(x, y) (((x) < (y)) ? (x) : (y))
+
 
 namespace Aurora
 {
@@ -59,8 +63,8 @@ namespace Aurora
 					num4 = num5;
 					num5 = num6;
 				}
-				num = std::max(num4, num);
-				num2 = std::min(num5, num2);
+				num = MAX(num4, num);
+				num2 = MIN(num5, num2);
 				if (num > num2)
 				{
 					return;
@@ -84,8 +88,8 @@ namespace Aurora
 					num8 = num9;
 					num9 = num10;
 				}
-				num = std::max(num8, num);
-				num2 = std::min(num9, num2);
+				num = MAX(num8, num);
+				num2 = MIN(num9, num2);
 				if (num > num2)
 				{
 					return;
@@ -109,8 +113,8 @@ namespace Aurora
 					num12 = num13;
 					num13 = num14;
 				}
-				num = std::max(num12, num);
-				num2 = std::min(num13, num2);
+				num = MAX(num12, num);
+				num2 = MIN(num13, num2);
 				if (num > num2)
 				{
 					return;
