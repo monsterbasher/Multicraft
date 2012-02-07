@@ -55,8 +55,8 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>.\libs\sfml\lib;.\libs\glew\lib;.\libs\cAudio\lib\windows\debug;.\libs\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glew32s.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-main-d.lib;glu32.lib;opengl32.lib;ws2_32.lib;cAudio_d.lib;Ogg_d.lib;Vorbis_d.lib;OpenAL32.lib;zdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>.\libs\sfml\lib;.\libs\glew\lib;.\libs\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-main-d.lib;sfml-audio-s-d.lib;glu32.lib;opengl32.lib;ws2_32.lib;zdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -81,8 +81,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Aurora\Audio\AudioManager.cpp" />
-    <ClCompile Include="Aurora\Audio\caudio\Sound.cpp" />
-    <ClCompile Include="Aurora\Audio\caudio\cAudioManager.cpp" />
+    <ClCompile Include="Aurora\Audio\sfml\sfmlAudioManager.cpp" />
+    <ClCompile Include="Aurora\Audio\sfml\Sound.cpp" />
     <ClCompile Include="Aurora\Graphics\Camera.cpp" />
     <ClCompile Include="Aurora\Graphics\Image.cpp" />
     <ClCompile Include="Aurora\Graphics\ModelObj.cpp" />
@@ -133,6 +133,7 @@
     <ClCompile Include="Tests\ClientTest.cpp" />
     <ClCompile Include="Tests\Demo_ObjLoading.cpp" />
     <ClCompile Include="Tests\ExampleGame.cpp" />
+    <ClCompile Include="Tests\FrustumTest.cpp" />
     <ClCompile Include="Tests\NetworkControllerClient.cpp" />
     <ClCompile Include="Tests\NetworkControllerServer.cpp" />
     <ClCompile Include="Tests\ServerTest.cpp" />
@@ -140,7 +141,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aurora\Audio\AudioManager.h" />
-    <ClInclude Include="Aurora\Audio\caudio\cAudioManager.h" />
+    <ClInclude Include="Aurora\Audio\sfml\sfmlAudioManager.h" />
     <ClInclude Include="Aurora\Audio\Sound.h" />
     <ClInclude Include="Aurora\Graphics\Camera.h" />
     <ClInclude Include="Aurora\Graphics\Image.h" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Tests\ClientTest.h" />
     <ClInclude Include="Tests\Demo_ObjLoading.h" />
     <ClInclude Include="Tests\ExampleGame.h" />
+    <ClInclude Include="Tests\FrustumTest.h" />
     <ClInclude Include="Tests\NetworkControllerClient.h" />
     <ClInclude Include="Tests\NetworkControllerServer.h" />
     <ClInclude Include="Tests\ServerTest.h" />

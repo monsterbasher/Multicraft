@@ -16,6 +16,7 @@ namespace Aurora
 			void _createTexture(unsigned char* pixels,int width,int height,unsigned int &texId);
 			void _createEmptyTexture( Image* image, ImageLocation location );
 			void _createModelObjVertices(ModelObj* model);
+			void _extractFrustumPlanes(Frustum *frustum);
 
 		public:
 

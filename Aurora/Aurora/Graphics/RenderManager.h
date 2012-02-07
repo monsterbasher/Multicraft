@@ -10,6 +10,8 @@
 
 #include <Aurora/Math/Vector3.h>
 #include <Aurora/Math/Vector2.h>
+#include <Aurora/Math/Plane.h>
+#include <Aurora/Math/Frustum.h>
 
 namespace Aurora
 {
@@ -44,6 +46,7 @@ namespace Aurora
 			virtual void _createTexture(unsigned char* pixels,int width,int height,unsigned int &texId) = 0;
 			virtual void _createEmptyTexture( Image* image, ImageLocation location ) = 0;
 			virtual void _createModelObjVertices(ModelObj* model) = 0;
+			virtual void _extractFrustumPlanes(Frustum *frustum) = 0;
 
 		public:
 

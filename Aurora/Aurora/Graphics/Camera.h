@@ -4,6 +4,7 @@
 #include <Aurora/Math/MathLib.h>
 #include <Aurora/Math/Vector3.h>
 #include <Aurora/Math/Matrix4.h>
+#include <Aurora/Math/Frustum.h>
 
 using namespace Aurora::Math;
 
@@ -35,6 +36,8 @@ namespace Aurora
 			Vector3 vVector;
 
 			float upDownAngle;
+
+			Frustum camFrustum;
 
 		public:
 

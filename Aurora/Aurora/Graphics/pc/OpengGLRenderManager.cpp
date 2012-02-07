@@ -169,6 +169,92 @@ namespace Aurora
 			}
 		}
 
+		void OpengGLRenderManager::_extractFrustumPlanes(Frustum *frustum)
+		{
+			float projectionMatrix[16];	//projection matrix
+			float viewMatrix[16];		//model view matrix
+			float mvpMatrix[16];	//model-view-projection matrix
+
+			glGetFloatv(GL_PROJECTION, projectionMatrix);
+			glGetFloatv(GL_MODELVIEW, viewMatrix);
+
+			mvpMatrix[ 0] = viewMatrix[ 0] * projectionMatrix[ 0] + viewMatrix[ 1] * projectionMatrix[ 4] + viewMatrix[ 2] * projectionMatrix[ 8] + viewMatrix[ 3] * projectionMatrix[12];
+			mvpMatrix[ 1] = viewMatrix[ 0] * projectionMatrix[ 1] + viewMatrix[ 1] * projectionMatrix[ 5] + viewMatrix[ 2] * projectionMatrix[ 9] + viewMatrix[ 3] * projectionMatrix[13];
+			mvpMatrix[ 2] = viewMatrix[ 0] * projectionMatrix[ 2] + viewMatrix[ 1] * projectionMatrix[ 6] + viewMatrix[ 2] * projectionMatrix[10] + viewMatrix[ 3] * projectionMatrix[14];
+			mvpMatrix[ 3] = viewMatrix[ 0] * projectionMatrix[ 3] + viewMatrix[ 1] * projectionMatrix[ 7] + viewMatrix[ 2] * projectionMatrix[11] + viewMatrix[ 3] * projectionMatrix[15];
+
+			mvpMatrix[ 4] = viewMatrix[ 4] * projectionMatrix[ 0] + viewMatrix[ 5] * projectionMatrix[ 4] + viewMatrix[ 6] * projectionMatrix[ 8] + viewMatrix[ 7] * projectionMatrix[12];
+			mvpMatrix[ 5] = viewMatrix[ 4] * projectionMatrix[ 1] + viewMatrix[ 5] * projectionMatrix[ 5] + viewMatrix[ 6] * projectionMatrix[ 9] + viewMatrix[ 7] * projectionMatrix[13];
+			mvpMatrix[ 6] = viewMatrix[ 4] * projectionMatrix[ 2] + viewMatrix[ 5] * projectionMatrix[ 6] + viewMatrix[ 6] * projectionMatrix[10] + viewMatrix[ 7] * projectionMatrix[14];
+			mvpMatrix[ 7] = viewMatrix[ 4] * projectionMatrix[ 3] + viewMatrix[ 5] * projectionMatrix[ 7] + viewMatrix[ 6] * projectionMatrix[11] + viewMatrix[ 7] * projectionMatrix[15];
+
+			mvpMatrix[ 8] = viewMatrix[ 8] * projectionMatrix[ 0] + viewMatrix[ 9] * projectionMatrix[ 4] + viewMatrix[10] * projectionMatrix[ 8] + viewMatrix[11] * projectionMatrix[12];
+			mvpMatrix[ 9] = viewMatrix[ 8] * projectionMatrix[ 1] + viewMatrix[ 9] * projectionMatrix[ 5] + viewMatrix[10] * projectionMatrix[ 9] + viewMatrix[11] * projectionMatrix[13];
+			mvpMatrix[10] = viewMatrix[ 8] * projectionMatrix[ 2] + viewMatrix[ 9] * projectionMatrix[ 6] + viewMatrix[10] * projectionMatrix[10] + viewMatrix[11] * projectionMatrix[14];
+			mvpMatrix[11] = viewMatrix[ 8] * projectionMatrix[ 3] + viewMatrix[ 9] * projectionMatrix[ 7] + viewMatrix[10] * projectionMatrix[11] + viewMatrix[11] * projectionMatrix[15];
+
+			mvpMatrix[12] = viewMatrix[12] * projectionMatrix[ 0] + viewMatrix[13] * projectionMatrix[ 4] + viewMatrix[14] * projectionMatrix[ 8] + viewMatrix[15] * projectionMatrix[12];
+			mvpMatrix[13] = viewMatrix[12] * projectionMatrix[ 1] + viewMatrix[13] * projectionMatrix[ 5] + viewMatrix[14] * projectionMatrix[ 9] + viewMatrix[15] * projectionMatrix[13];
+			mvpMatrix[14] = viewMatrix[12] * projectionMatrix[ 2] + viewMatrix[13] * projectionMatrix[ 6] + viewMatrix[14] * projectionMatrix[10] + viewMatrix[15] * projectionMatrix[14];
+			mvpMatrix[15] = viewMatrix[12] * projectionMatrix[ 3] + viewMatrix[13] * projectionMatrix[ 7] + viewMatrix[14] * projectionMatrix[11] + viewMatrix[15] * projectionMatrix[15];
+
+			Plane *pPlane = 0;
+
+			//left plane
+			pPlane = &frustum->planes[Frustum::FRUSTUM_PLANE_LEFT];
+			pPlane->set(
+				mvpMatrix[ 3] + mvpMatrix[ 0],
+				mvpMatrix[ 7] + mvpMatrix[ 4],
+				mvpMatrix[11] + mvpMatrix[ 8],
+				mvpMatrix[15] + mvpMatrix[12]);
+			pPlane->normalize();
+
+			//right plane
+			pPlane = &frustum->planes[Frustum::FRUSTUM_PLANE_RIGHT];
+			pPlane->set(
+				mvpMatrix[ 3] - mvpMatrix[ 0],
+				mvpMatrix[ 7] - mvpMatrix[ 4],
+				mvpMatrix[11] - mvpMatrix[ 8],
+				mvpMatrix[15] - mvpMatrix[12]);
+			pPlane->normalize();
+
+			// Top clipping plane.
+			pPlane = &frustum->planes[Frustum::FRUSTUM_PLANE_TOP];
+			pPlane->set(
+				mvpMatrix[ 3] - mvpMatrix[ 1],
+				mvpMatrix[ 7] - mvpMatrix[ 5],
+				mvpMatrix[11] - mvpMatrix[ 9],
+				mvpMatrix[15] - mvpMatrix[13]);
+			pPlane->normalize();
+
+			// Bottom clipping plane.
+			pPlane = &frustum->planes[Frustum::FRUSTUM_PLANE_BOTTOM];
+			pPlane->set(
+				mvpMatrix[ 3] + mvpMatrix[ 1],
+				mvpMatrix[ 7] + mvpMatrix[ 5],
+				mvpMatrix[11] + mvpMatrix[ 9],
+				mvpMatrix[15] + mvpMatrix[13]);
+			pPlane->normalize();
+
+			// Far clipping plane.
+			pPlane = &frustum->planes[Frustum::FRUSTUM_PLANE_FAR];
+			pPlane->set(
+				mvpMatrix[ 3] - mvpMatrix[ 2],
+				mvpMatrix[ 7] - mvpMatrix[ 6],
+				mvpMatrix[11] - mvpMatrix[10],
+				mvpMatrix[15] - mvpMatrix[14]);
+			pPlane->normalize();
+
+			// Near clipping plane.
+			pPlane = &frustum->planes[Frustum::FRUSTUM_PLANE_NEAR];
+			pPlane->set(
+				mvpMatrix[ 3] + mvpMatrix[ 2],
+				mvpMatrix[ 7] + mvpMatrix[ 6],
+				mvpMatrix[11] + mvpMatrix[10],
+				mvpMatrix[15] + mvpMatrix[14]);
+			pPlane->normalize();
+		}
+
 		void OpengGLRenderManager::UpdateCurrentCamera()
 		{
 			if(_currentCam != 0)
@@ -744,7 +830,7 @@ namespace Aurora
 			{
 				ObjMesh *mesh = model->mMeshes[i];
 
-				glBindTexture(GL_TEXTURE_2D, model->mMaterials[mesh->mMaterial]->texturID);
+				//glBindTexture(GL_TEXTURE_2D, model->mMaterials[mesh->mMaterial]->texturID);
 				glEnable(GL_TEXTURE_2D);
 								
 				glEnableClientState(GL_VERTEX_ARRAY);

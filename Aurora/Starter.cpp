@@ -9,13 +9,14 @@
 #include "Tests/NetworkControllerServer.h"
 #include "Tests/NetworkControllerClient.h"
 #include "Tests/AudioTest.h"
+#include "Tests/FrustumTest.h"
 
 
 class ExampleGameManager : public GameManager
 {
 private:
 
-	SimpleTest* exampleState;
+	FrustumTest* exampleState;
 
 public:
 
@@ -28,7 +29,7 @@ public:
 	void Init()
 	{
 		//init whatever you need
-		exampleState = new SimpleTest();
+		exampleState = new FrustumTest();
 		exampleState->Init();
 
 		ChangeState(exampleState);

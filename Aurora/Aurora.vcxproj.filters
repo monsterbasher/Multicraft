@@ -52,8 +52,8 @@
     <Filter Include="Aurora\Audio">
       <UniqueIdentifier>{e48b2c17-e7cc-4ece-9e1e-2e932aed33f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Aurora\Audio\caudio">
-      <UniqueIdentifier>{380b6478-15df-41e6-8b1f-12744698346c}</UniqueIdentifier>
+    <Filter Include="Aurora\Audio\sfml">
+      <UniqueIdentifier>{3a3ef0a6-3b59-4997-aa2c-d6cb4a477388}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -205,12 +205,6 @@
     <ClCompile Include="Aurora\Audio\AudioManager.cpp">
       <Filter>Aurora\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Aurora\Audio\caudio\cAudioManager.cpp">
-      <Filter>Aurora\Audio\caudio</Filter>
-    </ClCompile>
-    <ClCompile Include="Aurora\Audio\caudio\Sound.cpp">
-      <Filter>Aurora\Audio\caudio</Filter>
-    </ClCompile>
     <ClCompile Include="Aurora\Utils\md5.c">
       <Filter>Aurora\Utils</Filter>
     </ClCompile>
@@ -225,6 +219,15 @@
     </ClCompile>
     <ClCompile Include="Aurora\System\VFSFile.cpp">
       <Filter>Aurora\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\Audio\sfml\sfmlAudioManager.cpp">
+      <Filter>Aurora\Audio\sfml</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\Audio\sfml\Sound.cpp">
+      <Filter>Aurora\Audio\sfml</Filter>
+    </ClCompile>
+    <ClCompile Include="Tests\FrustumTest.cpp">
+      <Filter>Tests\Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -396,9 +399,6 @@
     <ClInclude Include="Aurora\Audio\AudioManager.h">
       <Filter>Aurora\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Aurora\Audio\caudio\cAudioManager.h">
-      <Filter>Aurora\Audio\caudio</Filter>
-    </ClInclude>
     <ClInclude Include="Aurora\Audio\Sound.h">
       <Filter>Aurora\Audio</Filter>
     </ClInclude>
@@ -416,6 +416,12 @@
     </ClInclude>
     <ClInclude Include="Aurora\Utils\Crypto.h">
       <Filter>Aurora\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Audio\sfml\sfmlAudioManager.h">
+      <Filter>Aurora\Audio\sfml</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\FrustumTest.h">
+      <Filter>Tests\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
