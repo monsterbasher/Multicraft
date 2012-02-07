@@ -22,6 +22,8 @@ LOCAL_SRC_FILES := \
 	../../Aurora/Math/Vector2.cpp \
 	../../Aurora/Math/Vector3.cpp \
 	../../Aurora/Math/Vector4.cpp \
+	../../Aurora/Graphics/Camera.cpp \
+	../../Aurora/Graphics/Image.cpp \
 	
     
 
