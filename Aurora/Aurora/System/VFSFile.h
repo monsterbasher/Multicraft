@@ -1,27 +1,44 @@
 #ifndef VFSFILE_H_
 #define VFSFILE_H_
 
+#include <Aurora/System/File.h>
+
+#define CVFMin(x, y)				(((x)<(y))?(x):(y))
+
 namespace Aurora
 {
 	namespace System
 	{
-		class VFSFile
+		class VFSPack;
+
+		class VFSFile : public File
 		{
+		private:
+			
+			void* _data;
+
+			int _dataSize;
+			int _offset;
+
+		protected:
+
+			VFSFile();
+			VFSFile(std::string fileName,std::string loadFileName);
+			VFSFile(std::string fileName,std::string loadFileName,void* data, int dataSize);
+
 		public:
-			VFSFile(void* data, int length);
 			virtual ~VFSFile();
 
-			void* GetData() {return mData;}
-			int GetLength() {return mLength;}
-			void Rewind() {offset = 0; }
+			bool Open();
+			void Close();
 
-			void SaveToDisk(const char* filename);
+			void Read(void *data,unsigned int size,int count);
+			unsigned char* GetData(int &dataSize);
 
-			int offset;
+			void Rewind() { _offset = 0; }
 
-		private:
-			void* mData;
-			int mLength;
+			//void SaveToDisk(const char* filename);
+			friend class VFSPack;
 		};
 	}
 }

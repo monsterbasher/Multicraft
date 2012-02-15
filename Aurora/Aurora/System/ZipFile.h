@@ -1,6 +1,8 @@
 #ifndef ZIPFILE_H 
 #define ZIPFILE_H 
 
+#include <Aurora/System/File.h>
+
 #include <unzip.h>
 #include <string>
 
@@ -8,34 +10,28 @@ namespace Aurora
 {
 	namespace System
 	{
-		class ZipFile
+		class ZipPack;
+
+		class ZipFile : public File
 		{
 		private:
 
 			unzFile _zipFile;
 
-			std::string _fileName;
+		protected:
 
-			bool _loaded;
-
-		private:
-
-			void _ListFilesInsideZip();
+			ZipFile();
+			ZipFile(std::string fileName,std::string loadFileName);
 
 		public:
 
-			ZipFile(std::string filename);
+			bool Open();
+			void Close();
 
-			bool OpenZip();
-			void CloseZip();
+			void Read(void *data,unsigned int size,int count);
+			unsigned char* GetData(int &dataSize);
 
-			unsigned char* GetFileData(std::string fileInZip,int &dataSize);
-
-			bool OpenFile(std::string fileInZip);
-			void ReadFromFile(void *data,unsigned int size,int count);
-			void CloseFile();
-
-			bool IsLoaded() {return _loaded;}
+			friend class ZipPack;
 		};
 	}
 }

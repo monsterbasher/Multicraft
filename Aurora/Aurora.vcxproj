@@ -126,7 +126,9 @@
     <ClCompile Include="Aurora\System\VFSFile.cpp" />
     <ClCompile Include="Aurora\System\VFSPack.cpp" />
     <ClCompile Include="Aurora\System\ZipFile.cpp" />
+    <ClCompile Include="Aurora\System\ZipPack.cpp" />
     <ClCompile Include="Aurora\Utils\AES.cpp" />
+    <ClCompile Include="Aurora\Utils\Compression.cpp" />
     <ClCompile Include="Aurora\Utils\Crypto.cpp" />
     <ClCompile Include="Aurora\Utils\GameLoader.cpp" />
     <ClCompile Include="Aurora\Utils\GameManager.cpp" />
@@ -141,6 +143,7 @@
     <ClCompile Include="Tests\ClientTest.cpp" />
     <ClCompile Include="Tests\Demo_ObjLoading.cpp" />
     <ClCompile Include="Tests\ExampleGame.cpp" />
+    <ClCompile Include="Tests\FrustumTest.cpp" />
     <ClCompile Include="Tests\NetworkControllerClient.cpp" />
     <ClCompile Include="Tests\NetworkControllerServer.cpp" />
     <ClCompile Include="Tests\ServerTest.cpp" />
@@ -199,7 +202,9 @@
     <ClInclude Include="Aurora\System\VFSFile.h" />
     <ClInclude Include="Aurora\System\VFSPack.h" />
     <ClInclude Include="Aurora\System\ZipFile.h" />
+    <ClInclude Include="Aurora\System\ZipPack.h" />
     <ClInclude Include="Aurora\Utils\AES.h" />
+    <ClInclude Include="Aurora\Utils\Compression.h" />
     <ClInclude Include="Aurora\Utils\Crypto.h" />
     <ClInclude Include="Aurora\Utils\GameLoader.h" />
     <ClInclude Include="Aurora\Utils\GameManager.h" />
@@ -216,6 +221,7 @@
     <ClInclude Include="Tests\ClientTest.h" />
     <ClInclude Include="Tests\Demo_ObjLoading.h" />
     <ClInclude Include="Tests\ExampleGame.h" />
+    <ClInclude Include="Tests\FrustumTest.h" />
     <ClInclude Include="Tests\NetworkControllerClient.h" />
     <ClInclude Include="Tests\NetworkControllerServer.h" />
     <ClInclude Include="Tests\ServerTest.h" />

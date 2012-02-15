@@ -1,8 +1,7 @@
 #include <Aurora/System/VFSPack.h>
 #include <Aurora/Utils/md5.h>
 #include <Aurora/Utils/Crypto.h>
-
-#include <zlib.h>
+#include <Aurora/Utils/Compression.h>
 
 namespace Aurora
 {
@@ -108,7 +107,7 @@ namespace Aurora
 					//compress only
 					int compressSize = 0;
 
-					CompressString(buffer,it->second.originalSize,&it->second.buffer,&compressSize);
+					Utils::CompressString(buffer,it->second.originalSize,&it->second.buffer,&compressSize);
 
 					it->second.compressedSize = compressSize;
 					
@@ -134,7 +133,7 @@ namespace Aurora
 					int encryptSize = 0;
 					char* tempBuffer;
 
-					CompressString(buffer,it->second.originalSize,&tempBuffer,&compressSize);
+					Utils::CompressString(buffer,it->second.originalSize,&tempBuffer,&compressSize);
 					Utils::aesEncrypt(_encryptionKey,tempBuffer,compressSize,&it->second.buffer,&encryptSize);
 
 					it->second.compressedSize = compressSize;
@@ -281,9 +280,21 @@ namespace Aurora
 			return true;
 		}
 
-		VFSFile VFSPack::GetData(std::string filename)
+		bool VFSPack::FileExists(std::string fileName)
 		{
-			long hash = hashString((unsigned char *)filename.c_str());
+			long hash = hashString((unsigned char *)fileName.c_str());
+
+			if(_packedFiles.find(hash) != _packedFiles.end())
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		VFSFile* VFSPack::GetFile(std::string filename,std::string loadFileName)
+		{
+			long hash = hashString((unsigned char *)loadFileName.c_str());
 
 			if(_packedFiles.find(hash) != _packedFiles.end())
 			{
@@ -321,16 +332,16 @@ namespace Aurora
 				//we have our file
 				if (!_packedFiles[hash].compressed && !_packedFiles[hash].encrypted)
 				{
-					 return VFSFile(buffer, bufferSize);
+					 return new VFSFile(filename,loadFileName,buffer, bufferSize);
 				}
 				else if (_packedFiles[hash].compressed && !_packedFiles[hash].encrypted)
 				{
 					char* decompressedBuffer;
-					DecompressString(buffer,bufferSize,&decompressedBuffer,&_packedFiles[hash].originalSize,_packedFiles[hash].originalSize);
+					Utils::DecompressString(buffer,bufferSize,&decompressedBuffer,&_packedFiles[hash].originalSize,_packedFiles[hash].originalSize);
 
 					free(buffer);
 
-					return VFSFile(decompressedBuffer, _packedFiles[hash].originalSize);
+					return new VFSFile(filename,loadFileName,decompressedBuffer, _packedFiles[hash].originalSize);
 				}
 				else if (!_packedFiles[hash].compressed && _packedFiles[hash].encrypted)
 				{
@@ -341,7 +352,7 @@ namespace Aurora
 
 					free(buffer);
 
-					return VFSFile(decryptedBuffer,decryptedSize);
+					return new VFSFile(filename,loadFileName,decryptedBuffer,decryptedSize);
 				}
 				else if (_packedFiles[hash].compressed && _packedFiles[hash].encrypted)
 				{
@@ -350,28 +361,16 @@ namespace Aurora
 					int decryptedSize;
 
 					Utils::aesDecrypt(_encryptionKey,buffer,bufferSize,&decryptedBuffer,&decryptedSize);
-					DecompressString(decryptedBuffer,decryptedSize,&decompressedBuffer,&_packedFiles[hash].originalSize,_packedFiles[hash].originalSize);
+					Utils::DecompressString(decryptedBuffer,decryptedSize,&decompressedBuffer,&_packedFiles[hash].originalSize,_packedFiles[hash].originalSize);
 
 					free(buffer);
 					free(decryptedBuffer);
 
-					return VFSFile(decompressedBuffer, _packedFiles[hash].originalSize);
+					return new VFSFile(filename,loadFileName,decompressedBuffer, _packedFiles[hash].originalSize);
 				}
 			}
 
-			return VFSFile(0, 0);
-		}
-
-		void VFSPack::vFread(void *ptr, size_t size, size_t n,VFSFile &vFile)
-		{
-			int readSize = 0, realSize = size * n;
-
-			readSize = CVFMin(realSize, vFile.GetLength() - vFile.offset);
-			if (readSize > 0)
-			{
-				memcpy(ptr, (char*)vFile.GetData() + vFile.offset, readSize);
-				vFile.offset += readSize;
-			}
+			return new VFSFile(filename,loadFileName, 0 , 0);
 		}
 
 		void VFSPack::CalcMD5(std::string text, unsigned char *out)
@@ -381,31 +380,6 @@ namespace Aurora
 			md5_append(&state, (const md5_byte_t*)text.c_str(), (int)strlen(text.c_str()));
 			md5_finish(&state, out);
 		}
-
-		int VFSPack::CompressString(char* src,int srcLen,char** destination, int* destLength)
-		{
-			//Define the source, destination, source length, and destination length
-			int destLen=compressBound(srcLen);
-			char *dest=new char[destLen];
-			//Decompress the string in src and place it in dest
-			int result=compress((unsigned char *)dest,(uLongf*)&destLen,(const unsigned char *)src,srcLen);
-			//Return the results of the compression
-			*destination = dest;
-			*destLength = destLen;
-			return(result);
-		}
-
-		int VFSPack::DecompressString(char* src, int srcLen, char** destination, int* destLen,int dupa)
-		{
-			//Define the source, destination, source length, and destination length
-			char *dest=new char[dupa];
-			//Decompress the string in src and place it in dest
-			int result=uncompress((unsigned char *)dest,(uLongf*)destLen,(const unsigned char *)src,srcLen);
-			//Return the results of the decompression
-			*destination = dest;
-			return(result);
-		}
-
 	}
 }
 

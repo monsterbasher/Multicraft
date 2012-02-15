@@ -11,15 +11,21 @@ namespace Aurora
 
 		class File
 		{
-		private:
+		protected:
 
 			std::string _fileName;
 			std::string _loadFileName;
 
-		private:
+			bool _loaded;
+
+		protected:
 
 			File();
 			File(std::string fileName,std::string loadFileName);
+
+		public:
+
+			bool IsLoaded() { return _loaded; }
 
 		public:
 

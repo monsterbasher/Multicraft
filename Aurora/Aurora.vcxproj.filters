@@ -262,6 +262,15 @@
     <ClCompile Include="Aurora\System\DiskFile.cpp">
       <Filter>Aurora\System</Filter>
     </ClCompile>
+    <ClCompile Include="Tests\FrustumTest.cpp">
+      <Filter>Tests\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\System\ZipPack.cpp">
+      <Filter>Aurora\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\Utils\Compression.cpp">
+      <Filter>Aurora\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aurora\Graphics\Vertex.h">
@@ -482,6 +491,15 @@
     </ClInclude>
     <ClInclude Include="Aurora\System\DiskFile.h">
       <Filter>Aurora\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Tests\FrustumTest.h">
+      <Filter>Tests\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\System\ZipPack.h">
+      <Filter>Aurora\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Utils\Compression.h">
+      <Filter>Aurora\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

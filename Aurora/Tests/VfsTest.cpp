@@ -12,7 +12,7 @@ void VfsTest::Init()
 	dt = 0.0f;
 
 	//vfs pack test
-	VFSPack _packedFiles;
+	/*VFSPack _packedFiles;
 
 	_packedFiles.CreateNewPack("pack.bin");
 	_packedFiles.SetEncryptKey("1qaz2wsx3edc4rfv");
@@ -23,7 +23,7 @@ void VfsTest::Init()
 	_packedFiles.LoadPack("pack.bin");
 
 	VFSFile myFile = _packedFiles.GetData("Assets/Minecraft/gui/items.png");
-	myFile.SaveToDisk("items.png");
+	myFile.SaveToDisk("items.png");*/
 }
 
 void VfsTest::Enter()

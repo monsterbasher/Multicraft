@@ -9,8 +9,6 @@
 #include <string.h>
 #include <map>
 
-#define CVFMin(x, y)				(((x)<(y))?(x):(y))
-
 namespace Aurora
 {
 	namespace System
@@ -46,17 +44,12 @@ namespace Aurora
 			void CalcMD5(std::string text, unsigned char *out);
 			unsigned long hashString(unsigned char *str);
 
-			//compression and decompression
-			int CompressString(char* src,int srcLen, char** destination, int* destLength);
-			int DecompressString(char* src, int srcLen, char** destination, int* destLen,int dupa);
-
-
 		public:
 			VFSPack(){ _encryptionKey = NULL; }
 			VFSPack(std::string fileName);
 			virtual ~VFSPack();
 
-			VFSFile GetData(std::string filename);
+			VFSFile* GetFile(std::string filename,std::string loadFileName);
 			
 			void CreateNewPack(std::string filename);
 			void AddFile(std::string filePath,bool compressed,bool encryption);
@@ -64,10 +57,7 @@ namespace Aurora
 			bool LoadPack(std::string filename);
 
 			void SetEncryptKey(std::string key);
-
-			//reading elements from virtual file
-			static void vFread(void *ptr, size_t size, size_t n,VFSFile &vFile);
-		
+			bool FileExists(std::string fileName);
 		};
 
 	}
