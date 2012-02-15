@@ -1,45 +1,13 @@
 #include "SimpleTest.h"
-#include <stdio.h>
-
-#include <Aurora/Graphics/Sprite.h>
-#include <Aurora/Graphics/Image.h>
-#include <Aurora/Graphics/TextureManager.h>
-
-#include <Aurora/System/VFSPack.h>
 
 void SimpleTest::Init()
 {
 	_renderManager = RenderManager::Instance();
 	_systemManager = SystemManager::Instance();
 
-	itemImage = TextureManager::Instance()->loadImageFromFile("Assets/Minecraft/gui/items.png");
-    
-    itemSprite = new Sprite("Assets/Minecraft/gui/items.png",0,0,16,16);
-	itemSprite->Scale(3.0f,3.0f);
-	itemSprite->SetPosition(24,24);
-
 	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
 
-	cam = new Camera();
-	cam->PositionCamera(0,0,0,0,0,-5,0,1,0);
-
-	_renderManager->setCurrentCam(cam);
-
 	dt = 0.0f;
-
-	//vfs pack test
-	VFSPack _packedFiles;
-
-	_packedFiles.CreateNewPack("pack.bin");
-	_packedFiles.SetEncryptKey("1qaz2wsx3edc4rfv");
-	_packedFiles.AddFile("Assets/Minecraft/gui/items.png",true,true);
-	_packedFiles.AddFile("Assets/Minecraft/font.ttf",true,true);
-	_packedFiles.SavePack();
-
-	_packedFiles.LoadPack("pack.bin");
-
-	VFSFile myFile = _packedFiles.GetData("Assets/Minecraft/gui/items.png");
-	myFile.SaveToDisk("items.png");
 }
 
 void SimpleTest::Enter()
@@ -116,11 +84,6 @@ void SimpleTest::Draw(GameManager* sManager)
 	RenderManager::Instance()->StartFrame();
 	RenderManager::Instance()->ClearScreen();
 
-	//change ortho for text
-	RenderManager::Instance()->SetOrtho();
-    
-    RenderManager::Instance()->drawSprite(itemSprite);
-    
 	RenderManager::Instance()->SetTextOrtho();
 	RenderManager::Instance()->drawText(font,1,267,"Multicraft",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));
 

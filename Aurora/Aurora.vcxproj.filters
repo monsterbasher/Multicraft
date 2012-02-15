@@ -55,6 +55,15 @@
     <Filter Include="Aurora\Audio\sfml">
       <UniqueIdentifier>{3a3ef0a6-3b59-4997-aa2c-d6cb4a477388}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tests\VFS">
+      <UniqueIdentifier>{ee2c5f8f-50e4-4926-9339-e0df0f414496}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libs">
+      <UniqueIdentifier>{c7c10bb4-c0d8-4ecf-9d20-d7aa83a20a85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Libs\libzip">
+      <UniqueIdentifier>{ef9fa6a6-1a82-43c2-ad79-ad540299d6d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Starter.cpp" />
@@ -226,8 +235,32 @@
     <ClCompile Include="Aurora\Audio\sfml\Sound.cpp">
       <Filter>Aurora\Audio\sfml</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\FrustumTest.cpp">
-      <Filter>Tests\Graphics</Filter>
+    <ClCompile Include="Tests\VfsTest.cpp">
+      <Filter>Tests\VFS</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\System\ZipFile.cpp">
+      <Filter>Aurora\System</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\libzip\ioapi.c">
+      <Filter>Libs\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\libzip\iowin32.c">
+      <Filter>Libs\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\libzip\unzip.c">
+      <Filter>Libs\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="libs\libzip\zip.c">
+      <Filter>Libs\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\System\File.cpp">
+      <Filter>Aurora\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\System\FileManager.cpp">
+      <Filter>Aurora\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Aurora\System\DiskFile.cpp">
+      <Filter>Aurora\System</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -420,8 +453,35 @@
     <ClInclude Include="Aurora\Audio\sfml\sfmlAudioManager.h">
       <Filter>Aurora\Audio\sfml</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\FrustumTest.h">
-      <Filter>Tests\Graphics</Filter>
+    <ClInclude Include="Tests\VfsTest.h">
+      <Filter>Tests\VFS</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\System\ZipFile.h">
+      <Filter>Aurora\System</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\libzip\crypt.h">
+      <Filter>Libs\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\libzip\ioapi.h">
+      <Filter>Libs\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\libzip\iowin32.h">
+      <Filter>Libs\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\libzip\unzip.h">
+      <Filter>Libs\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="libs\libzip\zip.h">
+      <Filter>Libs\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\System\File.h">
+      <Filter>Aurora\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\System\FileManager.h">
+      <Filter>Aurora\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\System\DiskFile.h">
+      <Filter>Aurora\System</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

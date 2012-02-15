@@ -68,7 +68,7 @@ namespace Aurora
 					CASE(1,3) dest[0]=dest[1]=dest[2]=src[0]; break;
 					CASE(1,4) 
 					{
-						dest[0] = dest[1] = dest[2] = 255 - src[0];
+						dest[0] = dest[1] = dest[2] = src[0];
 						if(src[0] == 0)
 							dest[3]=0;
 						else
