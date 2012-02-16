@@ -16,7 +16,7 @@ namespace Aurora
 
 		bool DiskFile::Open()
 		{
-			_filBuf = fopen(_loadFileName.c_str(),"r");
+			_filBuf = fopen(_loadFileName.c_str(),"rb");
 
 			if (_filBuf != 0)
 			{

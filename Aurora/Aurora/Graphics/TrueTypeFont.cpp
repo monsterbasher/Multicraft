@@ -1,6 +1,7 @@
 #include <Aurora/Graphics/RenderManager.h>
 #include <Aurora/Graphics/TrueTypeFont.h>
-#include <stdio.h>
+
+#include <Aurora/System/FileManager.h>
 
 #define STB_TRUETYPE_IMPLEMENTATION
 #include "stb_truetype.h"
@@ -95,30 +96,20 @@ namespace Aurora
 
 		bool TrueTypeFont::loadFont(const char *fontFileName,float fontSize)
 		{
-			// Load font.
-			FILE* fp = fopen(fontFileName, "rb");
-			if (!fp) return false;
-			fseek(fp, 0, SEEK_END);
-			int size = ftell(fp);
-			fseek(fp, 0, SEEK_SET);
+			System::File* file = System::FileManager::Instance()->GetFile(fontFileName);
 
-			unsigned char* ttfBuffer = new unsigned char[size]; 
-			if (!ttfBuffer)
-			{
-				fclose(fp);
+			if(file == 0)
 				return false;
-			}
 
-			fread(ttfBuffer, 1, size, fp);
-			fclose(fp);
-			fp = 0;
+			file->Open();
+
+			int dataSize = 0;
+			unsigned char* ttfBuffer = file->GetData(dataSize);
+
+			file->Close();
+			delete file;
 
 			unsigned char* temp = new unsigned char[256*256];
-			if (!temp)
-			{
-				free(ttfBuffer);
-				return false;
-			}
 
 			stbtt_BakeFontBitmap(ttfBuffer,0, fontSize, temp,256,256, 32,96,(stbtt_bakedchar*)g_cdata);
 

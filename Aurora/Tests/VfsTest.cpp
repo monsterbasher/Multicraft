@@ -4,15 +4,8 @@
 
 void VfsTest::Init()
 {
-	_renderManager = RenderManager::Instance();
-	_systemManager = SystemManager::Instance();
-
-	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
-
-	dt = 0.0f;
-
-	//vfs pack test
-	/*VFSPack _packedFiles;
+	//create pac file
+	VFSPack _packedFiles;
 
 	_packedFiles.CreateNewPack("pack.bin");
 	_packedFiles.SetEncryptKey("1qaz2wsx3edc4rfv");
@@ -20,10 +13,23 @@ void VfsTest::Init()
 	_packedFiles.AddFile("Assets/Minecraft/font.ttf",true,true);
 	_packedFiles.SavePack();
 
-	_packedFiles.LoadPack("pack.bin");
+	//init file manager
+	_fileManager = new FileManager(FileManagerType::PackType);
+	_fileManager->SetMainFile("pack.bin");
+	_fileManager->SetMainFilePassword("1qaz2wsx3edc4rfv");
 
-	VFSFile myFile = _packedFiles.GetData("Assets/Minecraft/gui/items.png");
-	myFile.SaveToDisk("items.png");*/
+	_renderManager = RenderManager::Instance();
+	_systemManager = SystemManager::Instance();
+
+	font = new TrueTypeFont("Assets/Minecraft/font.ttf",16);
+
+	dt = 0.0f;
+
+	itemImage = TextureManager::Instance()->loadImageFromFile("Assets/Minecraft/gui/items.png");
+
+	itemSprite = new Sprite("Assets/Minecraft/gui/items.png",0,0,16,16);
+	itemSprite->Scale(3.0f,3.0f);
+	itemSprite->SetPosition(100,100);
 }
 
 void VfsTest::Enter()
@@ -99,6 +105,11 @@ void VfsTest::Draw(GameManager* sManager)
 {
 	RenderManager::Instance()->StartFrame();
 	RenderManager::Instance()->ClearScreen();
+
+	RenderManager::Instance()->SetOrtho();
+
+	//draw single image 
+	RenderManager::Instance()->drawSprite(itemSprite);
 
 	RenderManager::Instance()->SetTextOrtho();
 	RenderManager::Instance()->drawText(font,1,267,"Multicraft",Aurora::Graphics::ALIGN_LEFT,Aurora::Graphics::RenderManager::RGBA(0xff, 0xff, 0xff, 0xff));

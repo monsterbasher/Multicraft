@@ -65,6 +65,7 @@ namespace Aurora
 
 		unsigned char* VFSFile::GetData(int &dataSize)
 		{
+			dataSize = _dataSize;
 			return (unsigned char*)_data;
 		}
 	

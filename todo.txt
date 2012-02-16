@@ -43,11 +43,11 @@ Framework:
 - add 2d physic engines (jellyengine, box2d) and binaries for all platforms
 - add 3d physic engine (bullet) and binaries for all platforms
 
-- add VFS(virtual file system) from previous framework
-- add encryption to it
++ add VFS(virtual file system) from previous framework
++ add encryption to it
 - create some normal app to add files to it - not only c# but also c++
 - add option to add files to it at runtime
-- each filenema would be hashed - and info about file stored in map<hash,fileInfo>
++ each filenema would be hashed - and info about file stored in map<hash,fileInfo>
 
 
 PSP:
@@ -58,7 +58,6 @@ PSP:
 IOS:
 - OpenGL ES 2.0 renderer
 - compile cAudio libraries for this platform 
-
 
 
 MACOSX:

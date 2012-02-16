@@ -1,4 +1,5 @@
 #include <Aurora/Graphics/Image.h>
+#include <Aurora/System/FileManager.h>
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image.h"
@@ -47,7 +48,23 @@ namespace Aurora
 			}
 
 			int imgWidth, imgHeight, imgChannels;
-			unsigned char* ptr = stbi_load(fileName.c_str(), &imgWidth, &imgHeight, &imgChannels, STBI_rgb_alpha);
+
+			System::File* file = System::FileManager::Instance()->GetFile(_fileName);
+
+			if(file == 0)
+				return false;
+
+			file->Open();
+
+			int dataSize = 0;
+			unsigned char* _buffer = file->GetData(dataSize);
+
+			file->Close();
+			delete file;
+
+			return loadImageFromMemory(fileName,_buffer,dataSize);
+
+			/*unsigned char* ptr = stbi_load(fileName.c_str(), &imgWidth, &imgHeight, &imgChannels, STBI_rgb_alpha);
 
 			if (ptr && imgWidth && imgHeight)
 			{
@@ -67,7 +84,7 @@ namespace Aurora
 			else
 			{
 				return false;//error
-			}
+			}*/
 		}
 
 		bool Image::loadImageFromMemory(std::string newName,void *data,std::size_t size)
@@ -98,6 +115,7 @@ namespace Aurora
 
 					// Free the loaded pixels (they are now in our own pixel buffer)
 					stbi_image_free(ptr);
+					delete [] data;
 
 					return true;
 				}
