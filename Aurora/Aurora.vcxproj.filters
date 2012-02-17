@@ -7,9 +7,6 @@
     <Filter Include="Aurora\Graphics">
       <UniqueIdentifier>{e00ef9e8-de6c-480b-a132-d989000dacf6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Aurora\Graphics\pc">
-      <UniqueIdentifier>{2b47640f-430c-41ac-9746-b80d5c8564ac}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Aurora\Math">
       <UniqueIdentifier>{a3ad1535-ee41-4557-8f14-7749a90e1d4f}</UniqueIdentifier>
     </Filter>
@@ -64,6 +61,9 @@
     <Filter Include="Libs\libzip">
       <UniqueIdentifier>{ef9fa6a6-1a82-43c2-ad79-ad540299d6d4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Aurora\Graphics\opengl">
+      <UniqueIdentifier>{05e388ed-84dc-4970-8229-7a32febaf193}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Starter.cpp" />
@@ -90,9 +90,6 @@
     </ClCompile>
     <ClCompile Include="Aurora\Graphics\TrueTypeFont.cpp">
       <Filter>Aurora\Graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="Aurora\Graphics\pc\OpengGLRenderManager.cpp">
-      <Filter>Aurora\Graphics\pc</Filter>
     </ClCompile>
     <ClCompile Include="Aurora\Math\BoundingBox.cpp">
       <Filter>Aurora\Math</Filter>
@@ -271,6 +268,9 @@
     <ClCompile Include="Aurora\Utils\Compression.cpp">
       <Filter>Aurora\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="Aurora\Graphics\opengl\OpengGLRenderManager.cpp">
+      <Filter>Aurora\Graphics\opengl</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aurora\Graphics\Vertex.h">
@@ -305,9 +305,6 @@
     </ClInclude>
     <ClInclude Include="Aurora\Graphics\TrueTypeFont.h">
       <Filter>Aurora\Graphics</Filter>
-    </ClInclude>
-    <ClInclude Include="Aurora\Graphics\pc\OpenGLRenderManager.h">
-      <Filter>Aurora\Graphics\pc</Filter>
     </ClInclude>
     <ClInclude Include="Aurora\Math\BoundingBox.h">
       <Filter>Aurora\Math</Filter>
@@ -500,6 +497,9 @@
     </ClInclude>
     <ClInclude Include="Aurora\Utils\Compression.h">
       <Filter>Aurora\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Aurora\Graphics\opengl\OpenGLRenderManager.h">
+      <Filter>Aurora\Graphics\opengl</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

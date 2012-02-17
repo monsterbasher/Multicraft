@@ -2,15 +2,19 @@
 #include <Aurora/Utils/PlatformConfigurator.h>
 
 #ifdef AURORA_PC
-#include <Aurora/Graphics/pc/OpenGLRenderManager.h>
+#include <Aurora/Graphics/opengl/OpenGLRenderManager.h>
 #endif
 
 #ifdef AURORA_PSP
-#include <Aurora/Graphics/psp/GuRenderManager.h>
+#include <Aurora/Graphics/gu/GuRenderManager.h>
 #endif
 
 #ifdef AURORA_IOS
-#include <Aurora/Graphics/ios/OpenGLES1RenderManager.h>
+#include <Aurora/Graphics/opengl/OpenGLES1RenderManager.h>
+#endif
+
+#ifdef AURORA_ANDROID
+#include <Aurora/Graphics/opengl/OpenGLES1RenderManager.h>
 #endif
 
 
@@ -33,6 +37,10 @@ namespace Aurora
 #endif
                 
 #ifdef AURORA_IOS
+				_renderManager = new OpenGLES1RenderManager();
+#endif
+
+#ifdef AURORA_ANDROID
 				_renderManager = new OpenGLES1RenderManager();
 #endif
 

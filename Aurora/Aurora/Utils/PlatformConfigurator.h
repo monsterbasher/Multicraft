@@ -3,9 +3,10 @@
 
 #include <climits>
 
-#define AURORA_PC
+//#define AURORA_PC
 //#define AURORA_IOS
-//#define AURORA_UNIX_MAC
+#define AURORA_ANDROID
+#define AURORA_UNIX_MAC
 //#define AURORA_PSP
 
 // 8 bits integer types

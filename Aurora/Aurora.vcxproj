@@ -86,7 +86,7 @@
     <ClCompile Include="Aurora\Graphics\Camera.cpp" />
     <ClCompile Include="Aurora\Graphics\Image.cpp" />
     <ClCompile Include="Aurora\Graphics\ModelObj.cpp" />
-    <ClCompile Include="Aurora\Graphics\pc\OpengGLRenderManager.cpp" />
+    <ClCompile Include="Aurora\Graphics\opengl\OpengGLRenderManager.cpp" />
     <ClCompile Include="Aurora\Graphics\RenderManager.cpp" />
     <ClCompile Include="Aurora\Graphics\SplashScreen.cpp" />
     <ClCompile Include="Aurora\Graphics\Sprite.cpp" />
@@ -157,7 +157,7 @@
     <ClInclude Include="Aurora\Graphics\Camera.h" />
     <ClInclude Include="Aurora\Graphics\Image.h" />
     <ClInclude Include="Aurora\Graphics\ModelObj.h" />
-    <ClInclude Include="Aurora\Graphics\pc\OpenGLRenderManager.h" />
+    <ClInclude Include="Aurora\Graphics\opengl\OpenGLRenderManager.h" />
     <ClInclude Include="Aurora\Graphics\RenderManager.h" />
     <ClInclude Include="Aurora\Graphics\SplashScreen.h" />
     <ClInclude Include="Aurora\Graphics\Sprite.h" />
