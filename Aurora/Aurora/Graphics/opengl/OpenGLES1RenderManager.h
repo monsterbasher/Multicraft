@@ -3,8 +3,15 @@
 
 #include <Aurora/Graphics/RenderManager.h>
 
-#include <OpenGLES/ES1/gl.h>
-#include <OpenGLES/ES1/glext.h>
+#ifdef AURORA_IOS
+	#include <OpenGLES/ES1/gl.h>
+	#include <OpenGLES/ES1/glext.h>
+#endif
+
+#ifdef AURORA_ANDROID
+	#include <GLES/gl.h>
+	#include <GLES/glext.h>
+#endif
 
 namespace Aurora
 {
@@ -41,6 +48,8 @@ namespace Aurora
             void __normalize(GLfloat v[3]);
             void __cross(GLfloat v1[3], GLfloat v2[3], GLfloat result[3]);
 
+			void _generateOpenglBuffers();
+
 
             void gluPerspective(GLfloat fovy, GLfloat aspect, GLfloat zNear, GLfloat zFar);
             void gluLookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez, GLfloat centerx,
@@ -53,6 +62,7 @@ namespace Aurora
 			void _createTexture(unsigned char* pixels,int width,int height,unsigned int &texId);
 			void _createEmptyTexture( Image* image, ImageLocation location );
 			void _createModelObjVertices(ModelObj* model);
+			void _extractFrustumPlanes(Frustum *frustum);
 
 		public:
 

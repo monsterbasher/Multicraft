@@ -1,7 +1,6 @@
-#include <Aurora/Graphics/ios/OpenGLES1RenderManager.h>
+#include <Aurora/Graphics/opengl/OpenGLES1RenderManager.h>
 #include <Aurora/Graphics/TextureManager.h>
 #include "../stb_truetype.h"
-
 
 
 #include <stdio.h>
@@ -83,32 +82,8 @@ namespace Aurora
 
 		void OpenGLES1RenderManager::Init()
 		{
-            // Create & bind the color buffer so that the caller can allocate its space.
-            glGenRenderbuffersOES(1, &m_colorRenderbuffer);
-            glBindRenderbufferOES(GL_RENDERBUFFER_OES, m_colorRenderbuffer);
-            
-            // Create the depth buffer.
-            glGenRenderbuffersOES(1, &m_depthRenderbuffer);
-            glBindRenderbufferOES(GL_RENDERBUFFER_OES, m_depthRenderbuffer);
-            glRenderbufferStorageOES(GL_RENDERBUFFER_OES,GL_DEPTH_COMPONENT16_OES,_width,_height);
-            
-            // Create the framebuffer object; attach the depth and color buffers.
-            glGenFramebuffersOES(1, &m_framebuffer);
-            glBindFramebufferOES(GL_FRAMEBUFFER_OES, m_framebuffer);
-            glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES,
-                                         GL_COLOR_ATTACHMENT0_OES,
-                                         GL_RENDERBUFFER_OES,
-                                         m_colorRenderbuffer);
-            
-            glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES,
-                                         GL_DEPTH_ATTACHMENT_OES,
-                                         GL_RENDERBUFFER_OES,
-                                         m_depthRenderbuffer);
-            
-            // Bind the color buffer for rendering.
-            glBindRenderbufferOES(GL_RENDERBUFFER_OES, m_colorRenderbuffer);
-            
-            
+			_generateOpenglBuffers();
+
             // set opengl values
 			glEnable(GL_DEPTH_TEST);
 			glDepthMask(GL_TRUE);
@@ -119,6 +94,38 @@ namespace Aurora
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             
 			_currentTexture = -1;
+		}
+
+		void OpenGLES1RenderManager::_generateOpenglBuffers()
+		{
+			#ifdef AURORA_IOS
+
+			// Create & bind the color buffer so that the caller can allocate its space.
+			glGenRenderbuffersOES(1, &m_colorRenderbuffer);
+			glBindRenderbufferOES(GL_RENDERBUFFER_OES, m_colorRenderbuffer);
+
+			// Create the depth buffer.
+			glGenRenderbuffersOES(1, &m_depthRenderbuffer);
+			glBindRenderbufferOES(GL_RENDERBUFFER_OES, m_depthRenderbuffer);
+			glRenderbufferStorageOES(GL_RENDERBUFFER_OES,GL_DEPTH_COMPONENT16_OES,_width,_height);
+
+			// Create the framebuffer object; attach the depth and color buffers.
+			glGenFramebuffersOES(1, &m_framebuffer);
+			glBindFramebufferOES(GL_FRAMEBUFFER_OES, m_framebuffer);
+			glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES,
+				GL_COLOR_ATTACHMENT0_OES,
+				GL_RENDERBUFFER_OES,
+				m_colorRenderbuffer);
+
+			glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES,
+				GL_DEPTH_ATTACHMENT_OES,
+				GL_RENDERBUFFER_OES,
+				m_depthRenderbuffer);
+
+			// Bind the color buffer for rendering.
+			glBindRenderbufferOES(GL_RENDERBUFFER_OES, m_colorRenderbuffer);
+
+			#endif
 		}
 
 		void OpenGLES1RenderManager::SetOrtho()
@@ -465,6 +472,11 @@ namespace Aurora
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 				glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 			}
+		}
+		
+		void OpenGLES1RenderManager::_extractFrustumPlanes(Frustum *frustum)
+		{
+		
 		}
 
 		void OpenGLES1RenderManager::drawImage(Image* image)
