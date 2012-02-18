@@ -121,7 +121,7 @@ public :
     Packet& operator >>(char*         Data);
     Packet& operator >>(std::string&  Data);
     Packet& operator >>(wchar_t*      Data);
-    Packet& operator >>(std::wstring& Data);
+    //Packet& operator >>(std::wstring& Data);
 
     ////////////////////////////////////////////////////////////
     /// Operator << overloads to put data into the packet
@@ -139,7 +139,7 @@ public :
     Packet& operator <<(const char*         Data);
     Packet& operator <<(const std::string&  Data);
     Packet& operator <<(const wchar_t*      Data);
-    Packet& operator <<(const std::wstring& Data);
+    //Packet& operator <<(const std::wstring& Data);
 
 private :
 

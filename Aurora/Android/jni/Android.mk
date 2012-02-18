@@ -22,6 +22,15 @@ LOCAL_SRC_FILES := \
 	../../Aurora/Math/Vector2.cpp \
 	../../Aurora/Math/Vector3.cpp \
 	../../Aurora/Math/Vector4.cpp \
+	../../Aurora/Network/Unix/SocketHelper.cpp \
+	../../Aurora/Network/Http.cpp \
+	../../Aurora/Network/IPAddress.cpp \
+	../../Aurora/Network/NetworkInputControllerClient.cpp \
+	../../Aurora/Network/NetworkInputControllerServer.cpp \
+	../../Aurora/Network/Packet.cpp \
+	../../Aurora/Network/SelectorBase.cpp \
+	../../Aurora/Network/SocketUDP.cpp \
+	../../Aurora/Network/SocketTCP.cpp \
 	../../Aurora/Graphics/Camera.cpp \
 	../../Aurora/Graphics/Image.cpp \
 	../../Aurora/Graphics/ModelObj.cpp \

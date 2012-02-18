@@ -264,7 +264,7 @@ Packet& Packet::operator >>(wchar_t* Data)
 
     return *this;
 }
-Packet& Packet::operator >>(std::wstring& Data)
+/*Packet& Packet::operator >>(std::wstring& Data)
 {
     // First extract string length
     Uint32 Length;
@@ -283,7 +283,7 @@ Packet& Packet::operator >>(std::wstring& Data)
     }
 
     return *this;
-}
+}*/
 
 
 ////////////////////////////////////////////////////////////
@@ -379,7 +379,7 @@ Packet& Packet::operator <<(const wchar_t* Data)
 
     return *this;
 }
-Packet& Packet::operator <<(const std::wstring& Data)
+/*Packet& Packet::operator <<(const std::wstring& Data)
 {
     // First insert string length
     Uint32 Length = static_cast<Uint32>(Data.size());
@@ -393,7 +393,7 @@ Packet& Packet::operator <<(const std::wstring& Data)
     }
 
     return *this;
-}
+}*/
 
 
 ////////////////////////////////////////////////////////////
