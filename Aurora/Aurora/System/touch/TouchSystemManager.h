@@ -1,5 +1,5 @@
-#ifndef IOSSYSTEMManager_H
-#define IOSSYSTEMManager_H
+#ifndef TOUCHSYSTEMMANAGER_H
+#define TOUCHSYSTEMMANAGER_H
 
 #include <Aurora/System/SystemManager.h>
 #include <Aurora/Math/Vector2.h>
@@ -20,7 +20,7 @@ namespace Aurora
             
         };
         
-		class IOSSystemManager : public SystemManager
+		class TouchSystemManager : public SystemManager
 		{
 		private:
 
@@ -42,7 +42,7 @@ namespace Aurora
 		public:
 
 
-			IOSSystemManager();
+			TouchSystemManager();
 
 			void Update();
 

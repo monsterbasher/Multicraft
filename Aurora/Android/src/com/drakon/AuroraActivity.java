@@ -12,6 +12,9 @@ public class AuroraActivity extends Activity
     {
         super.onCreate(savedInstanceState);
         
+        //requestWindowFeature(android.view.Window.FEATURE_NO_TITLE); 
+		//getWindow().setFlags(android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN, android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        
         _surface = new AuroraGLSurfaceView(this);
         setContentView(_surface);
     }

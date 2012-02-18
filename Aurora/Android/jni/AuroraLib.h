@@ -8,7 +8,7 @@ extern "C" {
 JNIEXPORT void Java_com_drakon_AuroraActivity_nativePause(JNIEnv * env, jobject javaThis);
 JNIEXPORT void Java_com_drakon_AuroraActivity_nativeResume(JNIEnv * env, jobject javaThis);
 
-JNIEXPORT void Java_com_drakon_AuroraGLSurfaceView_nativeTouchEvent(JNIEnv * env, jobject javaThis,jint action,jint x,jint y);
+JNIEXPORT void Java_com_drakon_AuroraGLSurfaceView_nativeTouchEvent(JNIEnv * env, jobject javaThis,jint action,jint number,jint x,jint y);
 
 JNIEXPORT void Java_com_drakon_AuroraRenderer_nativeInit(JNIEnv * env, jobject javaThis, jstring apkPath, jstring savePath, jint width, jint height);
 JNIEXPORT void Java_com_drakon_AuroraRenderer_nativeResize(JNIEnv* env, jobject javaThis,jint w, jint h );

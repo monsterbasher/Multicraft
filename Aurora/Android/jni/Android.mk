@@ -2,7 +2,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_C_INCLUDES 		:= $(LOCAL_PATH)/../../ $(LOCAL_PATH)/../../libs/libzip
+LOCAL_C_INCLUDES 		:= $(LOCAL_PATH)/../../ $(LOCAL_PATH)/../../Tests/ $(LOCAL_PATH)/../../libs/libzip
 LOCAL_STATIC_LIBRARIES 	:= 
 LOCAL_MODULE 			:= auroraLib
 LOCAL_CFLAGS 			:= -DANDROID_NDK -DAURORA_ANDROID -DUSE_FILE32API
@@ -48,13 +48,18 @@ LOCAL_SRC_FILES := \
 	../../Aurora/System/VFSPack.cpp \
 	../../Aurora/System/ZipFile.cpp \
 	../../Aurora/System/ZipPack.cpp \
+	../../Aurora/System/SystemManager.cpp \
+	../../Aurora/System/touch/TouchSystemManager.cpp \
+	../../Aurora/System/touch/Clock.cpp \
 	../../Aurora/Utils/md5.c \
 	../../Aurora/Utils/AES.cpp \
 	../../Aurora/Utils/Compression.cpp \
 	../../Aurora/Utils/Crypto.cpp \
+	../../Aurora/Utils/GameManager.cpp \
 	../../libs/libzip/ioapi.c \
 	../../libs/libzip/unzip.c \
 	../../libs/libzip/zip.c \
+	../../Tests/SimpleTest.cpp \
 	AuroraLib.cpp
     
 

@@ -10,7 +10,11 @@
 #endif
 
 #ifdef AURORA_IOS
-#include <Aurora/System/ios/IOSSystemManager.h>
+#include <Aurora/System/touch/TouchSystemManager.h>
+#endif
+
+#ifdef AURORA_ANDROID
+#include <Aurora/System/touch/TouchSystemManager.h>
 #endif
 
 namespace Aurora
@@ -32,7 +36,11 @@ namespace Aurora
 #endif
                 
 #ifdef AURORA_IOS
-				_systemManager = new IOSSystemManager();
+				_systemManager = new TouchSystemManager();
+#endif
+
+#ifdef AURORA_ANDROID
+				_systemManager = new TouchSystemManager();
 #endif
 
 			}
@@ -42,21 +50,22 @@ namespace Aurora
 
 		SystemManager::SystemManager()
 		{
-			_platformType = Pc;
+			_platformType = PC;
 		}
 
 		bool SystemManager::platformUseKeyboard()
 		{
-			return _platformType == Pc;
+			return _platformType == PC;
 		}
 
 		bool SystemManager::platformUseMouse()
 		{
-			return _platformType == Pc;
+			return _platformType == PC;
 		}
+		
 		bool SystemManager::platformUseJoypad()
 		{
-			return (_platformType == Psp || _platformType == Ps3);
+			return (_platformType == PSP || _platformType == PS3);
 		}
 
 		PlatformType SystemManager::getPlatformType()

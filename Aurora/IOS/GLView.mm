@@ -1,7 +1,7 @@
 #import "GLView.h"
 
-#include <Aurora/System/ios/IOSSystemManager.h>
-#include <Aurora/Graphics/ios/OpenGLES1RenderManager.h>
+#include <Aurora/System/touch/TouchSystemManager.h>
+#include <Aurora/Graphics/opengl/OpenGLES1RenderManager.h>
 #include <Aurora/Utils/GameLoader.h>
 #include <Aurora/Utils/GameManager.h>
 
@@ -46,7 +46,7 @@ public:
 };
 
 ExampleGameManager *_gmanager;
-IOSSystemManager *_imanager;
+TouchSystemManager *_imanager;
 
 #define GL_RENDERBUFFER 0x8d41
 
@@ -112,7 +112,7 @@ void setupAppDirectory()
         OpenGLES1RenderManager::setDeviceOrientation(DeviceOrientationPortrait);
         
         _gmanager->Init();
-        _imanager = (Aurora::System::IOSSystemManager*)Aurora::System::SystemManager::Instance();
+        _imanager = (Aurora::System::TouchSystemManager*)Aurora::System::SystemManager::Instance();
         
         [m_context
             renderbufferStorage:GL_RENDERBUFFER

@@ -26,7 +26,7 @@ public class AuroraGLSurfaceView extends GLSurfaceView
 			{
 				public boolean onTouch(View v, MotionEvent event)
 				{
-					nativeTouchEvent(event.getAction(),(int)event.getX(),(int)event.getY());
+					nativeTouchEvent(event.getAction(),event.getActionIndex(),(int)event.getX(),(int)event.getY());
 					return true;
 				}
 			});
@@ -37,11 +37,11 @@ public class AuroraGLSurfaceView extends GLSurfaceView
 	{
 		//ndk
 		if(!_customEventListener)
-			nativeTouchEvent(event.getAction(),(int)event.getX(),(int)event.getY());
+			nativeTouchEvent(event.getAction(),event.getActionIndex(),(int)event.getX(),(int)event.getY());
 		
 		return super.onTouchEvent(event);
 	}
 	
 
-	private static native void nativeTouchEvent(int action,int x,int y);
+	private static native void nativeTouchEvent(int action,int number,int x,int y);
 }

@@ -136,9 +136,11 @@ namespace Aurora
 	{
 		enum PlatformType
 		{
-			Pc = 0,
-			Psp = 1,
-			Ps3 = 2
+			PC,
+			PSP,
+			PS3,
+			IosType,
+			AndroidType
 		};
 
 		class SystemManager

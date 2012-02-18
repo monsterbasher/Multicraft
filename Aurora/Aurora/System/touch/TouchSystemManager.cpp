@@ -1,20 +1,24 @@
-#include <Aurora/System/ios/IOSSystemManager.h>
-#include <Aurora/Graphics/ios/OpenGLES1RenderManager.h>
+#include <Aurora/System/touch/TouchSystemManager.h>
+#include <Aurora/Graphics/opengl/OpenGLES1RenderManager.h>
 
 namespace Aurora
 {
 	namespace System
 	{
-			IOSSystemManager::IOSSystemManager() : SystemManager()
+			TouchSystemManager::TouchSystemManager() : SystemManager()
 			{
-				setPlatformType(Pc);
+				#ifdef AURORA_ANDROID
+					setPlatformType(AndroidType);
+				#else
+					setPlatformType(IosType);
+				#endif
                 
                 movePad = false;
                 rotatePad = false;
                 virtualPads = true;
 			}
 
-			void IOSSystemManager::Update()
+			void TouchSystemManager::Update()
 			{
                 //reset all keys
                 for(int i = 0;i < Key::Count;i++)
@@ -88,7 +92,7 @@ namespace Aurora
                 }
 			}
 
-			bool IOSSystemManager::keyPressed(Key::Code keyCode)
+			bool TouchSystemManager::keyPressed(Key::Code keyCode)
 			{
 				bool temp = false;
 				if(_keyStates[keyCode] == true || temp == false)
@@ -101,17 +105,17 @@ namespace Aurora
 				}
 			}
 
-			bool IOSSystemManager::keyHold(Key::Code keyCode)
+			bool TouchSystemManager::keyHold(Key::Code keyCode)
 			{
 				return _keyStates[keyCode];
 			}
 
-			bool IOSSystemManager::mouseButtonDown(Mouse::Button buttonNumber)
+			bool TouchSystemManager::mouseButtonDown(Mouse::Button buttonNumber)
 			{
 				return 0;
 			}
 
-			int IOSSystemManager::getMouseX()
+			int TouchSystemManager::getMouseX()
 			{
                 if (_touches.size() > 0)
                 {
@@ -121,7 +125,7 @@ namespace Aurora
 				return 0;
 			}
 
-			int IOSSystemManager::getMouseY()
+			int TouchSystemManager::getMouseY()
 			{
 				if (_touches.size() > 0)
                 {
@@ -131,7 +135,7 @@ namespace Aurora
                 return 0;
 			}
 
-			float IOSSystemManager::getAnalogX()
+			float TouchSystemManager::getAnalogX()
 			{
                 if (movePad)
                 {
@@ -141,7 +145,7 @@ namespace Aurora
 				return 0.0f;
 			}
 
-			float IOSSystemManager::getAlanogY()
+			float TouchSystemManager::getAlanogY()
 			{
                 if (movePad)
                 {
@@ -151,7 +155,7 @@ namespace Aurora
 				return 0.0f;
 			}
         
-        void IOSSystemManager::TouchesBegan(int hash,float x,float y)
+        void TouchSystemManager::TouchesBegan(int hash,float x,float y)
         {
             
             for (int i = 0; i < _touches.size(); i++)
@@ -232,7 +236,7 @@ namespace Aurora
             }
         }
         
-        void IOSSystemManager::TouchesMoved(int hash,float x,float y,float lastX,float lastY)
+        void TouchSystemManager::TouchesMoved(int hash,float x,float y,float lastX,float lastY)
         {
             for (int i = 0; i < _touches.size(); i++)
             {
@@ -266,7 +270,7 @@ namespace Aurora
             }
         }
         
-        void IOSSystemManager::TouchesEnded(int hash,float x,float y)
+        void TouchSystemManager::TouchesEnded(int hash,float x,float y)
         {
             int number = 0;
             for (int i = 0; i < _touches.size(); i++)

@@ -43,7 +43,6 @@ namespace Aurora
 			{
 				case ZipType:
 				{
-
 					_zipPack = new ZipPack(_mainFileName);
 					_zipPack->Open();
 				}
