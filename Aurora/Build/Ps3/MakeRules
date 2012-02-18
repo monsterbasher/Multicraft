@@ -1,0 +1,36 @@
+#!/usr/bin/make
+# SCE CONFIDENTIAL
+# PLAYSTATION(R)3 Programmer Tool Runtime Library 192.001
+#                 Copyright (C) 2007 Sony Computer Entertainment Inc.
+#                                                All Rights Reserved.
+
+
+# variables -----------------
+
+FPSHADER_ELFS     =  $(patsubst %.cg, %.cgelf, $(FPSHADER_SRCS))
+VPSHADER_ELFS     =  $(patsubst %.cg, %.cgelf, $(VPSHADER_SRCS))
+
+PSGL_CGNV2ELF     =  $(PSGL_TOOLS_DIR)/cgnv2elf
+
+# piggy back deletion of our .cgelf files into the cleanup system
+# by using the user-clean rule instead of the clean-cg rule
+CLEANFILES        += $(FPSHADER_ELFS) $(VPSHADER_ELFS)
+
+TARGET            += $(FPSHADER_ELFS) $(VPSHADER_ELFS)
+
+
+# rules ---------------------
+
+include $(CELL_MK_DIR)/sdk.target.mk
+
+$(FPSHADER_ELFS): %.cgelf: %.fpo
+	$(PSGL_CGNV2ELF) $< $@
+
+$(VPSHADER_ELFS): %.cgelf: %.vpo
+	$(PSGL_CGNV2ELF) $< $@
+
+
+
+
+
+
