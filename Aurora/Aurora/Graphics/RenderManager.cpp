@@ -17,6 +17,10 @@
 #include <Aurora/Graphics/opengl/OpenGLES1RenderManager.h>
 #endif
 
+#ifdef AURORA_PS3
+#include <Aurora/Graphics/opengl/PSGLRenderManager.h>
+#endif
+
 
 namespace Aurora
 {
@@ -42,6 +46,10 @@ namespace Aurora
 
 #ifdef AURORA_ANDROID
 				_renderManager = new OpenGLES1RenderManager();
+#endif
+
+#ifdef AURORA_PS3
+				_renderManager = new PSGLRenderManager();
 #endif
 
 			}

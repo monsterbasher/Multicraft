@@ -950,7 +950,7 @@ AES::AES(void)
 	if (false == tablesInitialized)
 		tablesInitialized = CreateAESTables(true,false);
 	if (false == tablesInitialized)
-		throw "Tables failed to initialize";
+		return;
 	}
 
 // end - AES.cpp

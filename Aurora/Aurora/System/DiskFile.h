@@ -4,6 +4,7 @@
 #include <Aurora/System/File.h>
 #include <string>
 #include <stdlib.h>
+#include <stdio.h>
 
 namespace Aurora
 {

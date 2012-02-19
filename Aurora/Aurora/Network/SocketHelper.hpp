@@ -73,4 +73,8 @@ namespace Aurora
     #include <Aurora/Network/Unix/SocketHelper.hpp>
 #endif
 
+#ifdef AURORA_PS3
+    #include <Aurora/Network/Unix/SocketHelper.hpp>
+#endif
+
 #endif // SFML_SOCKETHELPER_HPP
