@@ -11,6 +11,14 @@ namespace Aurora
 		{
 
 		protected:
+		
+			//psgl only
+			int _getBestRes(const unsigned int *resolutions, unsigned int numResolutions);
+			int _getResSize(const unsigned int resolutionId, int &w, int &h);
+			void _regVideoCallback();
+			void _loadPrxLibs();
+			bool _prepareVideoOut();
+			void _psglInit();
 
 			void _createTexture(Image* image);
 			void _createTexture(unsigned char* pixels,int width,int height,unsigned int &texId);

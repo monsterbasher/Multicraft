@@ -65,11 +65,228 @@ namespace Aurora
 			_zMin = 0.1f;
 			_zMax = 256.0f;
 		}
+		
+		void PSGLRenderManager::_psglInit()
+		{
+			//init video out 
+			while(!_prepareVideoOut())
+			{
+				
+			};
+			
+			//load libs
+			_loadPrxLibs();
+			
+			//register video callback
+			//_regVideoCallback();
+			
+			//initialize psgl
+			PSGLinitOptions initOpts = {
+				enable: PSGL_INIT_MAX_SPUS | PSGL_INIT_INITIALIZE_SPUS | PSGL_INIT_HOST_MEMORY_SIZE,
+				maxSPUs: 1,
+				initializeSPUs: false,
+				persistentMemorySize: 0,
+				transientMemorySize: 0,
+				errorConsole: 0,
+				fifoSize: 0,	
+				hostMemorySize: 128* 1024*1024,  // 128 mbs for host memory 
+			};
 
+			psglInit(&initOpts);
+			
+			//get best or choosen resolution
+			unsigned int resolutions[] = { /*CELL_VIDEO_OUT_RESOLUTION_1080, CELL_VIDEO_OUT_RESOLUTION_960x1080,*/ CELL_VIDEO_OUT_RESOLUTION_720 };
+			int numResolutions = sizeof(resolutions)/sizeof(resolutions[0]);
+			
+			//get best res from given enums
+			int bestResolution = _getBestRes(resolutions,numResolutions);
+			_getResSize(bestResolution,_width,_height);
+			
+			if (bestResolution)
+			{
+				//create the PSGL device based on the selected resolution mode
+				PSGLdeviceParameters params;
+				params.enable = PSGL_DEVICE_PARAMETERS_COLOR_FORMAT | PSGL_DEVICE_PARAMETERS_DEPTH_FORMAT | PSGL_DEVICE_PARAMETERS_MULTISAMPLING_MODE;
+				params.colorFormat = GL_ARGB_SCE;
+				params.depthFormat = GL_DEPTH_COMPONENT24;
+				params.multisamplingMode = GL_MULTISAMPLING_4X_SQUARE_ROTATED_SCE;//GL_MULTISAMPLING_NONE_SCE;
+				
+				params.enable |= PSGL_DEVICE_PARAMETERS_WIDTH_HEIGHT;
+				params.width = _width;
+				params.height = _height;
+				
+				PSGLdevice *device = psglCreateDeviceExtended(&params);
+				
+				if ( !device )
+				{
+					exit(1); 
+				}
+				
+				//create context
+				PSGLcontext *pContext=psglCreateContext();
+				if (pContext==NULL)
+				{
+					exit(-1);
+				}
+				
+				//make current context
+				psglMakeCurrent(pContext, device);
+
+				//check if this is really needed
+				psglLoadShaderLibrary( REMOTE_PATH"/shaders.bin");
+
+				// Reset the context
+				psglResetCurrentContext();
+			  
+				glViewport(0, 0, _width, _height);
+				glScissor(0, 0, _width, _height);
+				glClearColor(0.f, 0.f, 0.f, 1.f);
+				glEnable(GL_DEPTH_TEST);
+
+				//clear screen
+				glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+				psglSwap();
+				
+			}else
+			{
+				psglExit();
+			}
+		}
+		
+		
+		bool PSGLRenderManager::_prepareVideoOut()
+		{
+			CellVideoOutState videoState;
+			cellVideoOutGetState(CELL_VIDEO_OUT_PRIMARY, 0, &videoState);
+			
+			return videoState.state == CELL_VIDEO_OUT_OUTPUT_STATE_ENABLED;
+		}
+		
+		void PSGLRenderManager::_loadPrxLibs()
+		{
+			int ret = cellSysmoduleLoadModule(CELL_SYSMODULE_GCM_SYS);
+			switch( ret )
+			{
+				case CELL_OK:
+				  // The module is successfully loaded,
+				break;
+
+				case CELL_SYSMODULE_ERROR_DUPLICATED:
+				  // The module was already loaded,
+				break;
+
+				case CELL_SYSMODULE_ERROR_UNKNOWN:
+				case CELL_SYSMODULE_ERROR_FATAL:
+				break;
+				exit(1);
+			}
+
+			
+			ret = cellSysmoduleLoadModule(CELL_SYSMODULE_FS);
+			switch( ret )
+			{
+				case CELL_OK:
+				  // The module is successfully loaded,
+				break;
+
+				case CELL_SYSMODULE_ERROR_DUPLICATED:
+				  // The module was already loaded,
+				break;
+
+				case CELL_SYSMODULE_ERROR_UNKNOWN:
+				case CELL_SYSMODULE_ERROR_FATAL:
+				break;
+				exit(1);
+			}
+
+			ret = cellSysmoduleLoadModule(CELL_SYSMODULE_USBD);
+			switch( ret )
+			{
+				case CELL_OK:
+				  // The module is successfully loaded,
+				break;
+
+				case CELL_SYSMODULE_ERROR_DUPLICATED:
+				  // The module was already loaded,
+				break;
+
+				case CELL_SYSMODULE_ERROR_UNKNOWN:
+				case CELL_SYSMODULE_ERROR_FATAL:
+				break;
+				exit(1);
+			}
+
+			ret = cellSysmoduleLoadModule(CELL_SYSMODULE_IO);
+			switch( ret )
+			{
+				case CELL_OK:
+				  // The module is successfully loaded,
+				break;
+
+				case CELL_SYSMODULE_ERROR_DUPLICATED:
+				  // The module was already loaded,
+				break;
+
+				case CELL_SYSMODULE_ERROR_UNKNOWN:
+				case CELL_SYSMODULE_ERROR_FATAL:
+				break;
+				exit(1);
+			}
+		}
+		
+		/*void _videoCallback()
+		{
+			int ret = cellSysutilCheckCallback();
+			if( ret != CELL_OK )
+			{
+				printf( "error...", ret );
+			}
+		}
+		
+		void PSGLRenderManager::_regVideoCallback()
+		{
+			int ret = cellSysutilRegisterCallback(0, _videoCallback, NULL);
+			if( ret != CELL_OK )
+			{
+				exit(1);
+			}
+		}*/
+		
+		int PSGLRenderManager::_getBestRes(const unsigned int *resolutions, unsigned int numResolutions)
+		{
+			unsigned int bestResolution = 0;
+			for (unsigned int i = 0; bestResolution == 0 && i < numResolutions; i++)
+			{
+				if(cellVideoOutGetResolutionAvailability(CELL_VIDEO_OUT_PRIMARY, resolutions[i], CELL_VIDEO_OUT_ASPECT_AUTO, 0))
+				{
+					bestResolution = resolutions[i];
+				}
+			}
+			
+			return bestResolution;
+		}
+		
+		int PSGLRenderManager::_getResSize(const unsigned int resolutionId, int &w, int &h)
+		{
+			switch(resolutionId)
+			{
+				case CELL_VIDEO_OUT_RESOLUTION_480       : w=720;  h=480;  return(1);
+				case CELL_VIDEO_OUT_RESOLUTION_576       : w=720;  h=576;  return(1);
+				case CELL_VIDEO_OUT_RESOLUTION_720       : w=1280; h=720;  return(1);
+				case CELL_VIDEO_OUT_RESOLUTION_1080      : w=1920; h=1080; return(1);
+				case CELL_VIDEO_OUT_RESOLUTION_1600x1080 : w=1600; h=1080; return(1);
+				case CELL_VIDEO_OUT_RESOLUTION_1440x1080 : w=1440; h=1080; return(1);
+				case CELL_VIDEO_OUT_RESOLUTION_1280x1080 : w=1280; h=1080; return(1);
+				case CELL_VIDEO_OUT_RESOLUTION_960x1080  : w=960;  h=1080; return(1);
+			};
+
+			return(0);
+		}
+		
 		void PSGLRenderManager::Init()
 		{
 			// init psgl rendering
-			
+			_psglInit();
 
 			// set opengl values
 			glEnable(GL_DEPTH_TEST);
