@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6ED49785-F41F-4DE8-9E25-9B84C64A1499}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Aurora</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;AURORA_PC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\..\..\;.\..\..\libs\sfml\include;.\..\..\libs\glew\include\GL;.\..\..\libs\lua-5.1.4\src;.\..\..\libs\boost-1.39.0;.\..\..\libs\luabind;.\..\..\libs\zlib\include;.\..\..\libs\libzip;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>.\..\..\libs\sfml\lib;.\..\..\libs\glew\lib;.\..\..\libs\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;sfml-system-s-d.lib;sfml-window-s-d.lib;sfml-main-d.lib;sfml-audio-s-d.lib;glu32.lib;opengl32.lib;ws2_32.lib;zdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;AURORA_PC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>.\..\..\;.\..\..\libs\sfml\include;.\..\..\libs\glew\include\GL;.\..\..\libs\lua-5.1.4\src;.\..\..\libs\boost-1.39.0;.\..\..\libs\luabind;.\..\..\libs\libzip;.\..\..\libs\zlib\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>.\..\..\libs\sfml\lib;.\..\..\libs\glew\lib;.\..\..\libs\zlib\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glew32s.lib;sfml-system-s.lib;sfml-window-s.lib;sfml-main.lib;sfml-audio-s.lib;glu32.lib;opengl32.lib;ws2_32.lib;zdll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\Aurora\Audio\AudioManager.cpp" />
+    <ClCompile Include="..\..\Aurora\Audio\sfml\sfmlAudioManager.cpp" />
+    <ClCompile Include="..\..\Aurora\Audio\sfml\Sound.cpp" />
+    <ClCompile Include="..\..\Aurora\Graphics\Camera.cpp" />
+    <ClCompile Include="..\..\Aurora\Graphics\Image.cpp" />
+    <ClCompile Include="..\..\Aurora\Graphics\ModelObj.cpp" />
+    <ClCompile Include="..\..\Aurora\Graphics\opengl\OpengGLRenderManager.cpp" />
+    <ClCompile Include="..\..\Aurora\Graphics\RenderManager.cpp" />
+    <ClCompile Include="..\..\Aurora\Graphics\SplashScreen.cpp" />
+    <ClCompile Include="..\..\Aurora\Graphics\Sprite.cpp" />
+    <ClCompile Include="..\..\Aurora\Graphics\Sprite3D.cpp" />
+    <ClCompile Include="..\..\Aurora\Graphics\SpriteAnimation.cpp" />
+    <ClCompile Include="..\..\Aurora\Graphics\TextureManager.cpp" />
+    <ClCompile Include="..\..\Aurora\Graphics\TrueTypeFont.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\BoundingBox.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\BoundingBox2D.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\BoundingSphere.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\Frustum.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\MathLib.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\Matrix3.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\Matrix4.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\Plane.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\Polygon.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\Quaternion.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\Ray.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\Vector2.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\Vector3.cpp" />
+    <ClCompile Include="..\..\Aurora\Math\Vector4.cpp" />
+    <ClCompile Include="..\..\Aurora\Network\Http.cpp" />
+    <ClCompile Include="..\..\Aurora\Network\IPAddress.cpp" />
+    <ClCompile Include="..\..\Aurora\Network\NetworkInputControllerClient.cpp" />
+    <ClCompile Include="..\..\Aurora\Network\NetworkInputControllerServer.cpp" />
+    <ClCompile Include="..\..\Aurora\Network\NetworkManager.cpp" />
+    <ClCompile Include="..\..\Aurora\Network\Packet.cpp" />
+    <ClCompile Include="..\..\Aurora\Network\pc\PcNetworkManager.cpp" />
+    <ClCompile Include="..\..\Aurora\Network\SelectorBase.cpp" />
+    <ClCompile Include="..\..\Aurora\Network\SocketTCP.cpp" />
+    <ClCompile Include="..\..\Aurora\Network\SocketUDP.cpp" />
+    <ClCompile Include="..\..\Aurora\Network\Win32\SocketHelper.cpp" />
+    <ClCompile Include="..\..\Aurora\System\DiskFile.cpp" />
+    <ClCompile Include="..\..\Aurora\System\File.cpp" />
+    <ClCompile Include="..\..\Aurora\System\FileManager.cpp" />
+    <ClCompile Include="..\..\Aurora\System\pc\Clock.cpp" />
+    <ClCompile Include="..\..\Aurora\System\pc\PcSystemManager.cpp" />
+    <ClCompile Include="..\..\Aurora\System\SystemManager.cpp" />
+    <ClCompile Include="..\..\Aurora\System\VFSFile.cpp" />
+    <ClCompile Include="..\..\Aurora\System\VFSPack.cpp" />
+    <ClCompile Include="..\..\Aurora\System\ZipFile.cpp" />
+    <ClCompile Include="..\..\Aurora\System\ZipPack.cpp" />
+    <ClCompile Include="..\..\Aurora\Utils\AES.cpp" />
+    <ClCompile Include="..\..\Aurora\Utils\Compression.cpp" />
+    <ClCompile Include="..\..\Aurora\Utils\Crypto.cpp" />
+    <ClCompile Include="..\..\Aurora\Utils\GameLoader.cpp" />
+    <ClCompile Include="..\..\Aurora\Utils\GameManager.cpp" />
+    <ClCompile Include="..\..\Aurora\Utils\md5.c" />
+    <ClCompile Include="..\..\Aurora\Utils\pc\WinGameLoader.cpp" />
+    <ClCompile Include="..\..\libs\libzip\ioapi.c" />
+    <ClCompile Include="..\..\libs\libzip\iowin32.c" />
+    <ClCompile Include="..\..\libs\libzip\unzip.c" />
+    <ClCompile Include="..\..\libs\libzip\zip.c" />
+    <ClCompile Include="..\..\Starter.cpp" />
+    <ClCompile Include="..\..\Tests\AudioTest.cpp" />
+    <ClCompile Include="..\..\Tests\ClientTest.cpp" />
+    <ClCompile Include="..\..\Tests\Demo_ObjLoading.cpp" />
+    <ClCompile Include="..\..\Tests\ExampleGame.cpp" />
+    <ClCompile Include="..\..\Tests\FrustumTest.cpp" />
+    <ClCompile Include="..\..\Tests\NetworkControllerClient.cpp" />
+    <ClCompile Include="..\..\Tests\NetworkControllerServer.cpp" />
+    <ClCompile Include="..\..\Tests\ServerTest.cpp" />
+    <ClCompile Include="..\..\Tests\SimpleTest.cpp" />
+    <ClCompile Include="..\..\Tests\VfsTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Aurora\Audio\AudioManager.h" />
+    <ClInclude Include="..\..\Aurora\Audio\sfml\sfmlAudioManager.h" />
+    <ClInclude Include="..\..\Aurora\Audio\Sound.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\Camera.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\Image.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\ModelObj.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\opengl\OpenGLRenderManager.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\RenderManager.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\SplashScreen.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\Sprite.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\Sprite3D.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\SpriteAnimation.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\stb_image.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\stb_truetype.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\TextureManager.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\TrueTypeFont.h" />
+    <ClInclude Include="..\..\Aurora\Graphics\Vertex.h" />
+    <ClInclude Include="..\..\Aurora\Math\BoundingBox.h" />
+    <ClInclude Include="..\..\Aurora\Math\BoundingBox2D.h" />
+    <ClInclude Include="..\..\Aurora\Math\BoundingSphere.h" />
+    <ClInclude Include="..\..\Aurora\Math\Frustum.h" />
+    <ClInclude Include="..\..\Aurora\Math\MathLib.h" />
+    <ClInclude Include="..\..\Aurora\Math\Matrix3.h" />
+    <ClInclude Include="..\..\Aurora\Math\Matrix4.h" />
+    <ClInclude Include="..\..\Aurora\Math\Plane.h" />
+    <ClInclude Include="..\..\Aurora\Math\Polygon.h" />
+    <ClInclude Include="..\..\Aurora\Math\Quaternion.h" />
+    <ClInclude Include="..\..\Aurora\Math\Ray.h" />
+    <ClInclude Include="..\..\Aurora\Math\Vector2.h" />
+    <ClInclude Include="..\..\Aurora\Math\Vector3.h" />
+    <ClInclude Include="..\..\Aurora\Math\Vector4.h" />
+    <ClInclude Include="..\..\Aurora\Network\Http.hpp" />
+    <ClInclude Include="..\..\Aurora\Network\IPAddress.hpp" />
+    <ClInclude Include="..\..\Aurora\Network\NetworkInputControllerClient.h" />
+    <ClInclude Include="..\..\Aurora\Network\NetworkInputControllerServer.h" />
+    <ClInclude Include="..\..\Aurora\Network\NetworkManager.h" />
+    <ClInclude Include="..\..\Aurora\Network\Packet.hpp" />
+    <ClInclude Include="..\..\Aurora\Network\pc\PcNetworkManager.h" />
+    <ClInclude Include="..\..\Aurora\Network\Selector.hpp" />
+    <ClInclude Include="..\..\Aurora\Network\SelectorBase.hpp" />
+    <ClInclude Include="..\..\Aurora\Network\SocketHelper.hpp" />
+    <ClInclude Include="..\..\Aurora\Network\SocketTCP.hpp" />
+    <ClInclude Include="..\..\Aurora\Network\SocketUDP.hpp" />
+    <ClInclude Include="..\..\Aurora\Network\Win32\SocketHelper.hpp" />
+    <ClInclude Include="..\..\Aurora\System\Clock.h" />
+    <ClInclude Include="..\..\Aurora\System\DiskFile.h" />
+    <ClInclude Include="..\..\Aurora\System\File.h" />
+    <ClInclude Include="..\..\Aurora\System\FileManager.h" />
+    <ClInclude Include="..\..\Aurora\System\pc\PcSystemManager.h" />
+    <ClInclude Include="..\..\Aurora\System\SystemManager.h" />
+    <ClInclude Include="..\..\Aurora\System\VFSFile.h" />
+    <ClInclude Include="..\..\Aurora\System\VFSPack.h" />
+    <ClInclude Include="..\..\Aurora\System\ZipFile.h" />
+    <ClInclude Include="..\..\Aurora\System\ZipPack.h" />
+    <ClInclude Include="..\..\Aurora\Utils\AES.h" />
+    <ClInclude Include="..\..\Aurora\Utils\Compression.h" />
+    <ClInclude Include="..\..\Aurora\Utils\Crypto.h" />
+    <ClInclude Include="..\..\Aurora\Utils\GameLoader.h" />
+    <ClInclude Include="..\..\Aurora\Utils\GameManager.h" />
+    <ClInclude Include="..\..\Aurora\Utils\GameState.h" />
+    <ClInclude Include="..\..\Aurora\Utils\md5.h" />
+    <ClInclude Include="..\..\Aurora\Utils\pc\WinGameLoader.h" />
+    <ClInclude Include="..\..\Aurora\Utils\PlatformConfigurator.h" />
+    <ClInclude Include="..\..\libs\libzip\crypt.h" />
+    <ClInclude Include="..\..\libs\libzip\ioapi.h" />
+    <ClInclude Include="..\..\libs\libzip\iowin32.h" />
+    <ClInclude Include="..\..\libs\libzip\unzip.h" />
+    <ClInclude Include="..\..\libs\libzip\zip.h" />
+    <ClInclude Include="..\..\Tests\AudioTest.h" />
+    <ClInclude Include="..\..\Tests\ClientTest.h" />
+    <ClInclude Include="..\..\Tests\Demo_ObjLoading.h" />
+    <ClInclude Include="..\..\Tests\ExampleGame.h" />
+    <ClInclude Include="..\..\Tests\FrustumTest.h" />
+    <ClInclude Include="..\..\Tests\NetworkControllerClient.h" />
+    <ClInclude Include="..\..\Tests\NetworkControllerServer.h" />
+    <ClInclude Include="..\..\Tests\ServerTest.h" />
+    <ClInclude Include="..\..\Tests\SimpleTest.h" />
+    <ClInclude Include="..\..\Tests\VfsTest.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\Aurora\Network\Selector.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
