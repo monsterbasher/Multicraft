@@ -64,9 +64,6 @@
     <Filter Include="Aurora\Graphics\opengl">
       <UniqueIdentifier>{05e388ed-84dc-4970-8229-7a32febaf193}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tests\CatacombSnach">
-      <UniqueIdentifier>{c42794e1-b7b4-4502-9d1e-5ee2faefa122}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Starter.cpp" />
@@ -274,23 +271,8 @@
     <ClCompile Include="Aurora\Graphics\opengl\OpengGLRenderManager.cpp">
       <Filter>Aurora\Graphics\opengl</Filter>
     </ClCompile>
-    <ClCompile Include="Tests\CatacombSnach\Entity.cpp">
-      <Filter>Tests\CatacombSnach</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\CatacombSnach\Level.cpp">
-      <Filter>Tests\CatacombSnach</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\CatacombSnach\LevelMap.cpp">
-      <Filter>Tests\CatacombSnach</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\CatacombSnach\Player.cpp">
-      <Filter>Tests\CatacombSnach</Filter>
-    </ClCompile>
     <ClCompile Include="Aurora\Math\BoundingBox2D.cpp">
       <Filter>Aurora\Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Tests\CatacombSnach\TestState.cpp">
-      <Filter>Tests\CatacombSnach</Filter>
     </ClCompile>
     <ClCompile Include="Aurora\Graphics\SpriteAnimation.cpp">
       <Filter>Aurora\Graphics</Filter>
@@ -525,23 +507,8 @@
     <ClInclude Include="Aurora\Graphics\opengl\OpenGLRenderManager.h">
       <Filter>Aurora\Graphics\opengl</Filter>
     </ClInclude>
-    <ClInclude Include="Tests\CatacombSnach\Entity.h">
-      <Filter>Tests\CatacombSnach</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\CatacombSnach\Level.h">
-      <Filter>Tests\CatacombSnach</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\CatacombSnach\LevelMap.h">
-      <Filter>Tests\CatacombSnach</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\CatacombSnach\Player.h">
-      <Filter>Tests\CatacombSnach</Filter>
-    </ClInclude>
     <ClInclude Include="Aurora\Math\BoundingBox2D.h">
       <Filter>Aurora\Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Tests\CatacombSnach\TestState.h">
-      <Filter>Tests\CatacombSnach</Filter>
     </ClInclude>
     <ClInclude Include="Aurora\Graphics\SpriteAnimation.h">
       <Filter>Aurora\Graphics</Filter>

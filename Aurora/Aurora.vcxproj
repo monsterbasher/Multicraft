@@ -142,11 +142,6 @@
     <ClCompile Include="libs\libzip\zip.c" />
     <ClCompile Include="Starter.cpp" />
     <ClCompile Include="Tests\AudioTest.cpp" />
-    <ClCompile Include="Tests\CatacombSnach\Entity.cpp" />
-    <ClCompile Include="Tests\CatacombSnach\Level.cpp" />
-    <ClCompile Include="Tests\CatacombSnach\LevelMap.cpp" />
-    <ClCompile Include="Tests\CatacombSnach\Player.cpp" />
-    <ClCompile Include="Tests\CatacombSnach\TestState.cpp" />
     <ClCompile Include="Tests\ClientTest.cpp" />
     <ClCompile Include="Tests\Demo_ObjLoading.cpp" />
     <ClCompile Include="Tests\ExampleGame.cpp" />
@@ -227,11 +222,6 @@
     <ClInclude Include="libs\libzip\unzip.h" />
     <ClInclude Include="libs\libzip\zip.h" />
     <ClInclude Include="Tests\AudioTest.h" />
-    <ClInclude Include="Tests\CatacombSnach\Entity.h" />
-    <ClInclude Include="Tests\CatacombSnach\Level.h" />
-    <ClInclude Include="Tests\CatacombSnach\LevelMap.h" />
-    <ClInclude Include="Tests\CatacombSnach\Player.h" />
-    <ClInclude Include="Tests\CatacombSnach\TestState.h" />
     <ClInclude Include="Tests\ClientTest.h" />
     <ClInclude Include="Tests\Demo_ObjLoading.h" />
     <ClInclude Include="Tests\ExampleGame.h" />
