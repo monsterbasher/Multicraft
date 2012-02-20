@@ -595,6 +595,33 @@ namespace Aurora
 			glDisable(GL_BLEND);
 			glPopMatrix();
 		}
+        
+        void OpenGLES1RenderManager::drawSprite(Sprite* sprite,float posx,float posy)
+        {
+            glPushMatrix();
+            
+			glTranslatef(posx,posy,0.0f);
+            
+			bindTexture(sprite->imageName);
+			glEnable(GL_TEXTURE_2D);
+			glEnable(GL_BLEND);
+			glColor4f(1.0f, 1.0f, 1.0f,1.0f);
+            
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+            
+			glVertexPointer(3, GL_FLOAT, GLsizei(sizeof(TexturedVertex)), &sprite->vertices[0].x);
+			glTexCoordPointer(2, GL_FLOAT, GLsizei(sizeof(TexturedVertex)), &sprite->vertices[0].u);
+            
+			glDrawArrays(GL_TRIANGLE_STRIP,0,4);
+            
+			glDisableClientState(GL_VERTEX_ARRAY);
+			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+            
+			glDisable(GL_TEXTURE_2D);
+			glDisable(GL_BLEND);
+			glPopMatrix();
+        }
 
 		void OpenGLES1RenderManager::drawSprite3D(Sprite3D* sprite)
 		{

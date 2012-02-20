@@ -13,6 +13,7 @@
 #include <Aurora/Math/Vector2.h>
 #include <Aurora/Math/Plane.h>
 #include <Aurora/Math/Frustum.h>
+#include <Aurora/Utils/PlatformConfigurator.h>
 
 namespace Aurora
 {

@@ -44,6 +44,8 @@
 #include <stdlib.h>
 #include "zlib.h"
 
+#define USE_FILE32API
+
 #if defined(USE_FILE32API)
 #define fopen64 fopen
 #define ftello64 ftell
