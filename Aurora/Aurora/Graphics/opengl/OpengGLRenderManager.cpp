@@ -452,6 +452,33 @@ namespace Aurora
 			glPopMatrix();
 		}
 
+		void OpengGLRenderManager::drawSprite(Sprite* sprite,float posx,float posy)
+		{
+			glPushMatrix();
+
+			glTranslatef(posx,posy,0.0f);
+
+			bindTexture(sprite->imageName);
+			glEnable(GL_TEXTURE_2D);
+			glEnable(GL_BLEND);
+			glColor3f(1,1,1);
+
+			glEnableClientState(GL_VERTEX_ARRAY);
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+			glVertexPointer(3, GL_FLOAT, GLsizei(sizeof(TexturedVertex)), &sprite->vertices[0].x);
+			glTexCoordPointer(2, GL_FLOAT, GLsizei(sizeof(TexturedVertex)), &sprite->vertices[0].u);
+
+			glDrawArrays(GL_TRIANGLE_STRIP,0,4);
+
+			glDisableClientState(GL_VERTEX_ARRAY);
+			glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+
+			glDisable(GL_TEXTURE_2D);
+			glDisable(GL_BLEND);
+			glPopMatrix();
+		}
+
 		void OpengGLRenderManager::drawSprite3D(Sprite3D* sprite)
 		{
 			glPushMatrix();
@@ -471,7 +498,7 @@ namespace Aurora
 				{
 					unsigned int colour = sprite->colours[posx + posy*sprite->height];
 					if(colour != 0)
-						drawCube(colour,Math::Vector3(x,y,0),Math::Vector3(1,1,1),Math::Vector3(0,0,0));
+						drawCube(colour,Math::Vector3(x,y,0.0f),Math::Vector3(1.0f,1.0f,1.0f),Math::Vector3(0.0f,0.0f,0.0f));
 					posx++;
 				}
 				posx = 0;
@@ -481,7 +508,7 @@ namespace Aurora
 			glPopMatrix();
 		}
 
-		float g_tabStops2[4] = {150, 210, 270, 330};
+		float g_tabStops2[4] = {150.0f, 210.0f, 270.0f, 330.0f};
 
 		void OpengGLRenderManager::drawText(TrueTypeFont* font,float x, float y, const char *text, int align, unsigned int col)
 		{
@@ -735,13 +762,13 @@ namespace Aurora
 
 				//copy temp vertices and indieces
 				mesh->meshVertices = new TexturesPSPVertex[temp.size()];
-				for(int v = 0;v < temp.size();v++)
+				for(unsigned int v = 0;v < temp.size();v++)
 				{
 					memcpy(&mesh->meshVertices[v],&temp[v],sizeof(TexturesPSPVertex));
 				}
 
 				mesh->indices = new unsigned short[tempIndices.size()];
-				for(int v = 0;v < tempIndices.size();v++)
+				for(unsigned int v = 0;v < tempIndices.size();v++)
 				{
 					memcpy(&mesh->indices[v],&tempIndices[v],sizeof(int));
 				}

@@ -100,5 +100,15 @@ namespace Aurora
 		{
 			_currentCam = cam;
 		}
+
+		void RenderManager::drawSpriteAnimation(SpriteAnimation* spriteAnimation)
+		{
+			if(spriteAnimation->_framesCount > 0)
+			{
+				if(spriteAnimation->_currentFrame < spriteAnimation->_framesCount)
+					drawSprite(spriteAnimation->_spriteFrames[spriteAnimation->_currentFrame],spriteAnimation->_position.x,spriteAnimation->_position.x);
+				
+			}
+		}
 	}
 }

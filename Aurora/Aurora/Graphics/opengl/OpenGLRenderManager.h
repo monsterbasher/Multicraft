@@ -42,6 +42,7 @@ namespace Aurora
 			void drawImage(Image* image,int posx,int posy,int width,int height);
 
 			void drawSprite(Sprite* sprite);
+			void drawSprite(Sprite* sprite,float posx,float posy);
 			void drawSprite3D(Sprite3D* sprite);
 
 			void SetTextOrtho();

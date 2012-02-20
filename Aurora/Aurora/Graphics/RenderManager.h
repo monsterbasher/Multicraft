@@ -4,6 +4,7 @@
 #include <Aurora/Graphics/Camera.h>
 #include <Aurora/Graphics/Image.h>
 #include <Aurora/Graphics/Sprite.h>
+#include <Aurora/Graphics/SpriteAnimation.h>
 #include <Aurora/Graphics/Sprite3D.h>
 #include <Aurora/Graphics/TrueTypeFont.h>
 #include <Aurora/Graphics/ModelObj.h>
@@ -114,6 +115,9 @@ namespace Aurora
 			virtual void drawImage(Image* image,int posx,int posy,int width,int height) = 0;
 
 			virtual void drawSprite(Sprite* sprite) = 0;
+			virtual void drawSprite(Sprite* sprite,float posx,float posy) = 0;
+
+			void drawSpriteAnimation(SpriteAnimation* spriteAnimation);
 
 			virtual void drawText(TrueTypeFont* font,float x, float y, const char *text, int align, unsigned int col) = 0;
 

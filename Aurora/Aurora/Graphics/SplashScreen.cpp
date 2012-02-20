@@ -32,7 +32,7 @@ namespace Aurora
 
 				RenderManager::Instance()->StartFrame();
 
-				_sprite->Draw();
+				//implemet this
 
 				RenderManager::Instance()->EndFrame();
 

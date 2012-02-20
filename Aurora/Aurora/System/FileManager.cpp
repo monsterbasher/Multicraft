@@ -133,6 +133,11 @@ namespace Aurora
 
 		FileManager* FileManager::Instance()
 		{
+			if (_instance == 0)
+			{
+				_instance = new FileManager();
+			}
+
 			return _instance;
 		}
 

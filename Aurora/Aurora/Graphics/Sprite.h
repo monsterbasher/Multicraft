@@ -28,7 +28,6 @@ namespace Aurora
 
 			void SetPosition(float x,float y);
 			void Scale(float x,float y);
-			void Draw();
 			void RemoveImage();
 		};
 
