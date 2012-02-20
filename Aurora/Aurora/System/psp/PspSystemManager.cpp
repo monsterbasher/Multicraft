@@ -8,7 +8,7 @@ namespace Aurora
 	{
 			PspSystemManager::PspSystemManager() : SystemManager()
 			{
-				setPlatformType(Psp);
+				setPlatformType(PSPType);
 			}
 			
 			PspCtrlButtons PspSystemManager::keyToPspButton(Key::Code keyCode)

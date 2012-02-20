@@ -1,6 +1,7 @@
 #include <Aurora/System/VFSFile.h>
 
 #include <stdio.h>
+#include <string.h>
 
 namespace Aurora
 {

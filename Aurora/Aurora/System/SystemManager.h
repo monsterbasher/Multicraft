@@ -136,9 +136,9 @@ namespace Aurora
 	{
 		enum PlatformType
 		{
-			PC,
-			PSP,
-			PS3,
+			PCType,
+			PSPType,
+			PS3Type,
 			IosType,
 			AndroidType
 		};

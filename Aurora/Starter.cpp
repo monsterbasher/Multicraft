@@ -16,7 +16,7 @@ class ExampleGameManager : public GameManager
 {
 private:
 
-	VfsTest* exampleState;
+	SimpleTest* exampleState;
 
 public:
 
@@ -29,7 +29,7 @@ public:
 	void Init()
 	{
 		//init whatever you need
-		exampleState = new VfsTest();
+		exampleState = new SimpleTest();
 		exampleState->Init();
 
 		ChangeState(exampleState);

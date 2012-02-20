@@ -1,4 +1,4 @@
-#include <Aurora/Graphics/psp/GuRenderManager.h>
+#include <Aurora/Graphics/gu/GuRenderManager.h>
 #include <Aurora/Graphics/TextureManager.h>
 
 #include <pspge.h>
@@ -364,6 +364,11 @@ namespace Aurora
 				sceGumMatrixMode(GU_MODEL);
 				sceGumLoadIdentity();
 			}
+		}
+		
+		void GuRenderManager::_extractFrustumPlanes(Frustum *frustum)
+		{
+			//implement this
 		}
 
 		void GuRenderManager::_createTexture(Image* image)

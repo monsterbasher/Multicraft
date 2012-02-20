@@ -26,7 +26,7 @@
  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  */
 
-#include <Aurora/Graphics/psp/vram.h>
+#include <Aurora/Graphics/gu/vram.h>
 #include <stdio.h>
 
 // Configure the memory to be managed

@@ -46,9 +46,7 @@ namespace Aurora
 			{
 				delete [] _pixels;
 			}
-
-			int imgWidth, imgHeight, imgChannels;
-
+			
 			System::File* file = System::FileManager::Instance()->GetFile(_fileName);
 
 			if(file == 0)
@@ -64,7 +62,8 @@ namespace Aurora
 
 			return loadImageFromMemory(fileName,_buffer,dataSize);
 
-			/*unsigned char* ptr = stbi_load(fileName.c_str(), &imgWidth, &imgHeight, &imgChannels, STBI_rgb_alpha);
+			/*int imgWidth, imgHeight, imgChannels;
+			unsigned char* ptr = stbi_load(fileName.c_str(), &imgWidth, &imgHeight, &imgChannels, STBI_rgb_alpha);
 
 			if (ptr && imgWidth && imgHeight)
 			{

@@ -1,0 +1,74 @@
+DEBUGFLAGS = -O2 -DNDEBUG
+CC       = g++
+CFLAGS   = -Wall -I./ -I./libs/glew/include/GL -I./libs/cAudio/Headers -I./libs/cAudio/include $(DEBUGFLAGS)
+LDFLAGS  = -L./libs/cAudio/lib/linux
+EXECPATH = ./
+
+EXEC = aurora
+OBJS  = Aurora/Math/MathLib.o \
+Aurora/Math/Vector2.o \
+Aurora/Math/Vector3.o \
+Aurora/Math/Vector4.o \
+Aurora/Math/Matrix3.o \
+Aurora/Math/Matrix4.o \
+Aurora/Math/Quaternion.o \
+Aurora/Math/BoundingBox.o \
+Aurora/Math/BoundingSphere.o \
+Aurora/Math/Plane.o \
+Aurora/Math/Ray.o \
+Aurora/Math/Frustum.o \
+Aurora/Math/Polygon.o \
+Aurora/Graphics/RenderManager.o \
+Aurora/Graphics/pc/OpengGLRenderManager.o \
+Aurora/Graphics/TextureManager.o \
+Aurora/Graphics/Camera.o \
+Aurora/Graphics/Image.o \
+Aurora/Graphics/Sprite.o \
+Aurora/Graphics/Sprite3D.o \
+Aurora/Graphics/TrueTypeFont.o \
+Aurora/Graphics/ModelObj.o \
+Aurora/Audio/AudioManager.o \
+Aurora/Audio/caudio/Sound.o \
+Aurora/Audio/caudio/cAudioManager.o \
+Aurora/Network/Unix/SocketHelper.o \
+Aurora/Network/pc/PcNetworkManager.o \
+Aurora/Network/NetworkManager.o \
+Aurora/Network/Http.o \
+Aurora/Network/IPAddress.o \
+Aurora/Network/Packet.o \
+Aurora/Network/SelectorBase.o \
+Aurora/Network/SocketTCP.o \
+Aurora/Network/SocketUDP.o \
+Aurora/Network/NetworkInputControllerClient.o \
+Aurora/Network/NetworkInputControllerServer.o \
+Aurora/System/SystemManager.o \
+Aurora/System/VFSFile.o \
+Aurora/System/VFSPack.o \
+Aurora/System/pc/Clock.o \
+Aurora/System/pc/PcSystemManager.o \
+Aurora/Utils/GameLoader.o \
+Aurora/Utils/GameManager.o \
+Aurora/Utils/AES.o \
+Aurora/Utils/Crypto.o \
+Aurora/Utils/md5.o \
+Aurora/Utils/pc/WinGameLoader.o \
+Tests/AudioTest.o \
+Tests/ClientTest.o \
+Tests/Demo_ObjLoading.o \
+Tests/ExampleGame.o \
+Tests/NetworkControllerClient.o \
+Tests/NetworkControllerServer.o \
+Tests/ServerTest.o \
+Tests/SimpleTest.o \
+Starter.o
+
+all: $(EXEC)
+
+aurora: $(OBJS)
+	$(CC) $(LDFLAGS) -o $(EXECPATH)/$@ $(OBJS) -lsfml-graphics -lsfml-window -lsfml-system -lGLU  -lGL -lcAudio  -lVorbis  -lOgg -lopenal
+
+%.o: %.cpp
+	$(CC) -o $@ -c $< $(CFLAGS)
+
+clean:
+	@rm -rf *.o

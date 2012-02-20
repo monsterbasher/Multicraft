@@ -50,22 +50,22 @@ namespace Aurora
 
 		SystemManager::SystemManager()
 		{
-			_platformType = PC;
+			_platformType = PCType;
 		}
 
 		bool SystemManager::platformUseKeyboard()
 		{
-			return _platformType == PC;
+			return _platformType == PCType;
 		}
 
 		bool SystemManager::platformUseMouse()
 		{
-			return _platformType == PC;
+			return _platformType == PCType;
 		}
 		
 		bool SystemManager::platformUseJoypad()
 		{
-			return (_platformType == PSP || _platformType == PS3);
+			return (_platformType == PSPType || _platformType == PS3Type);
 		}
 
 		PlatformType SystemManager::getPlatformType()

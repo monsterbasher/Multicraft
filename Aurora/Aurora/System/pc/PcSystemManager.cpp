@@ -7,7 +7,7 @@ namespace Aurora
 	{
 			PcSystemManager::PcSystemManager() : SystemManager()
 			{
-				setPlatformType(Pc);
+				setPlatformType(PC);
 			}
 
 			void PcSystemManager::Update()

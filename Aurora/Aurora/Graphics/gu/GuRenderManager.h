@@ -3,7 +3,7 @@
 
 #include <Aurora/Graphics/RenderManager.h>
 #include <Aurora/Graphics/Vertex.h>
-#include <Aurora/Graphics/psp/vram.h>
+#include <Aurora/Graphics/gu/vram.h>
 
 namespace Aurora
 {
@@ -28,6 +28,7 @@ namespace Aurora
 			void _createTexture(unsigned char* pixels,int width,int height,unsigned int &texId);
 			void _createEmptyTexture( Image* image, ImageLocation location );
 			void _createModelObjVertices(ModelObj* model);
+			void _extractFrustumPlanes(Frustum *frustum);
 
 		public:
 

@@ -14,7 +14,7 @@ void VfsTest::Init()
 	_packedFiles.SavePack();
 
 	//init file manager
-	_fileManager = new FileManager(FileManagerType::PackType);
+	_fileManager = new FileManager(PackType);
 	_fileManager->SetMainFile("pack.bin");
 	_fileManager->SetMainFilePassword("1qaz2wsx3edc4rfv");
 
